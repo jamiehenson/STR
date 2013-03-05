@@ -1,0 +1,79 @@
+using UnityEngine;
+using System.Collections;
+
+public class WeaponHandler : MonoBehaviour {
+	public static int wepType;
+	public static float wepSpeed = 0;
+	public static Transform wepPrefab;
+	public static float wepRate;
+    public static string wepName;
+	public Transform beamPrefabChina;
+	public Transform cannonPrefabChina;
+	public Transform minePrefabChina;
+	public Transform beamPrefabUSA;
+	public Transform cannonPrefabUSA;
+	public Transform minePrefabUSA;
+	public Transform beamPrefabRussia;
+	public Transform cannonPrefabRussia;
+	public Transform minePrefabRussia;
+	
+	void Update() {		
+		switch(wepType) {
+			case 1: 
+				if (PlayerManager.activeChar == "china") {	
+					wepPrefab = beamPrefabChina;
+					wepSpeed = 4000;
+	                wepRate = 0.05f;
+	            }
+	            if (PlayerManager.activeChar == "usa") {	
+					wepPrefab = beamPrefabUSA;
+					wepSpeed = 1000;
+	                wepRate = 0.15f;
+	            }
+	            if (PlayerManager.activeChar == "russia") {	
+					wepPrefab = beamPrefabRussia;
+					wepSpeed = 2000;
+	                wepRate = 0.10f;
+	            }
+                wepName = "Beam";
+				break;
+			case 2:
+				if (PlayerManager.activeChar == "china") {	
+					wepPrefab = cannonPrefabChina;
+					wepSpeed = 800;
+	                wepRate = 0.2f;
+	            }
+				if (PlayerManager.activeChar == "usa") {	
+					wepPrefab = cannonPrefabUSA;
+					wepSpeed = 800;
+	                wepRate = 0.2f;
+	            }
+	            if (PlayerManager.activeChar == "russia") {	
+					wepPrefab = cannonPrefabRussia;
+					wepSpeed = 800;
+	                wepRate = 0.2f;
+	            }
+                wepName = "Cannon";
+				break;
+			case 3: 
+				if (PlayerManager.activeChar == "china") {	
+					wepPrefab = minePrefabChina;
+					wepSpeed = 400;
+	                wepRate = 3f;
+	            }
+	            if (PlayerManager.activeChar == "usa") {	
+	            	wepPrefab = minePrefabUSA;
+					wepSpeed = 400;
+	                wepRate = 3f;
+	            }
+	            if (PlayerManager.activeChar == "russia") {	
+	            	wepPrefab = minePrefabRussia;
+					wepSpeed = 400;
+	                wepRate = 3f;
+	            }
+                wepName = "Mine";
+				break;
+			default: break;
+		}
+	}
+}

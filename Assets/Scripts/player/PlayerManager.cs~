@@ -1,0 +1,80 @@
+using UnityEngine;
+using System.Collections;
+
+public class PlayerManager : MonoBehaviour {
+	// Player stats
+	public static float hitPoints;
+	public static float airSupply;
+	public static float energyLevel;
+	public static float startHP, startEnergy, startAir;
+	public static float energyBank = 0;
+	public static int selectedWepDrain;
+	public static int gear = 1;
+	
+	// Character-centric player stats
+	public static string activeChar;
+	public static int wepType;
+	public static float damageMultiplier;
+	public static float energyMultiplier;
+    // Replaced armorMultiplier by armorWeaknessMultiplier to indicate higher being WORSE
+	public static float armorWeaknessMultiplier;
+
+	public static void InitialiseStats()
+	{
+		switch(activeChar) {
+			case "china":
+				startHP = 200;
+				startEnergy = 800;
+				startAir = 400;
+				damageMultiplier = 0.5f;
+				energyMultiplier = 1f;
+				break;
+			case "usa":
+				startHP = 800;
+				startEnergy = 200;
+				startAir = 400;
+				damageMultiplier = 1.5f;
+				energyMultiplier = 1.5f;
+				break;
+			case "russia":
+				startHP = 400;
+				startEnergy = 400;
+				startAir = 600;
+				damageMultiplier = 1.0f;
+				energyMultiplier = 1.25f;
+				break;
+			default: 
+				break;
+		}
+		hitPoints = startHP;
+		energyLevel = startEnergy;
+		airSupply = startAir;
+	}
+	
+	void Update() {
+		wepType = WeaponHandler.wepType;
+		switch(wepType) {
+		case 1: 
+			selectedWepDrain = 6;
+			break;
+		case 2: 
+			selectedWepDrain = 15;
+			break;
+		case 3: 
+			selectedWepDrain = 70;
+			break;
+		default:
+			break;
+		}
+		
+		// Decrement oxygen supply
+		if (airSupply > 0 && Time.timeScale != 0) airSupply -= 0.02f;
+		
+		// Recharge power supply
+		if (energyLevel > 0 && energyLevel <= startEnergy && Time.timeScale != 0) energyLevel += (startEnergy/800);
+		
+		if (hitPoints < 0) hitPoints = 0;
+		if (airSupply < 0) airSupply = 0;
+	}
+	
+}
