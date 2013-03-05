@@ -50,6 +50,8 @@ public class AsteroidCollisions : MonoBehaviour {
         if (collidedName.StartsWith("Enemy") && !collidedName.StartsWith("EnemyBullet")) collidedNamePrefix = "Enemy";
         else if (collidedName.StartsWith("Character")) collidedNamePrefix = "Character";
         else if (collidedName.StartsWith("beam")) collidedNamePrefix = "Beam";
+        else if (collidedName.StartsWith("cannon")) collidedNamePrefix = "Cannon";
+        else if (collidedName.StartsWith("mine")) collidedNamePrefix = "Mine";
         else collidedNamePrefix = collidedName; 
 
         switch (collidedNamePrefix) {
@@ -80,25 +82,32 @@ public class AsteroidCollisions : MonoBehaviour {
                 PlayerCollisions.WeaponBoom(gameObject, 2);
                 iTween.MoveBy(gameObject, new Vector3(collided.rigidbody.velocity.x/10,collided.rigidbody.velocity.y/10,0), 4f);
                 iTween.RotateAdd(gameObject, new Vector3(50,50), 5f);
-                if (Network.isServer) Network.Destroy(collided);
+                
                 health = health - (WeaponHandler.cannonDamage);
                 break;
             case "Mine":
                 // Do what we want for mine
-                for (int i = 0; i < 70; i++) {
-                    Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
-                    fragment.name = "Mine Fragment";
-                    Physics.IgnoreCollision(fragment.collider, gameObject.collider);
-                    fragment.rigidbody.AddForce((Random.insideUnitSphere.normalized * 2) * force);
+                if (Network.isClient)
+                {
+                    for (int i = 0; i < 1; i++)
+                    {
+
+                        Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
+                        fragment.name = "MineFragment";
+                        Physics.IgnoreCollision(fragment.collider, gameObject.collider);
+                        fragment.rigidbody.AddForce((Random.insideUnitSphere.normalized * 2) * force);
+                    }
+                    for (int i = 0; i < 1; i++)
+                    {
+                        Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
+                        fragment.name = "Mine Fragment";
+                        Physics.IgnoreCollision(fragment.collider, gameObject.collider);
+                        fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * force);
+                    }
+                    networkView.RPC("destroyAfterExplosion", RPCMode.Server);
                 }
-                for (int i = 0; i < 50; i++) {
-                    Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
-                    fragment.name = "Mine Fragment";
-                    Physics.IgnoreCollision(fragment.collider, gameObject.collider);
-                    fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * force);
-                }
-                Destroy(collided);
                 health = health - (WeaponHandler.mineDamage);
+                
                 break;
             case "Mine Fragment":
                 health = health - (WeaponHandler.mineFragmentDamage);

@@ -50,7 +50,7 @@ public class HudOn : MonoBehaviour {
 			wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2Off");
 			wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
 			wepName = beamTitle;
-			//weaponHandler.wepType = 1;
+			weaponHandler.wepType = 1;
 		}
 		
 		else if (type == 2) 
@@ -60,7 +60,7 @@ public class HudOn : MonoBehaviour {
 			wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2On");
 			wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
 			wepName = cannonTitle;
-			//weaponHandler.wepType = 2;
+			weaponHandler.wepType = 2;
 		}
 		
 		else if (type == 3 || type == 0) 
@@ -69,7 +69,7 @@ public class HudOn : MonoBehaviour {
 			wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2Off");
 			wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3On");
 			wepName = mineTitle;
-			//weaponHandler.wepType = 3;
+			weaponHandler.wepType = 3;
 		}	
 	}
 		
@@ -198,9 +198,12 @@ public class HudOn : MonoBehaviour {
             default: charName = "TESTER"; break;
         }
 
-       // weaponHandler = GameObject.Find
-        setWeapon (1);
-
+        if (Network.isClient)
+        {
+            int PlayerNumber = int.Parse(GameObject.FindGameObjectWithTag("MainCamera").name.Substring(GameObject.FindGameObjectWithTag("MainCamera").name.Length - 1, 1));
+            weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
+            setWeapon(1);
+        }
 		startHP = PlayerManager.startHP;
 		startEnergy = PlayerManager.startEnergy;
         bankSize = PlayerManager.bankSize;

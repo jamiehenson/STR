@@ -33,7 +33,10 @@ public class FiringHandler : MonoBehaviour {
 		//bulletSpeed = WeaponHandler.wepSpeed;
 		//bulletRate = WeaponHandler.wepRate;
         //bulletName = WeaponHandler.wepName;
-		timer += Time.deltaTime;
+
+
+
+        timer += Time.deltaTime;
 
 		// Is player firing?
 		if (Network.isClient && myCharacter && Input.GetButton("Fire1") && timer >= weaponHandler.wepRate && PlayerManager.energyLevel != 0)
@@ -49,7 +52,7 @@ public class FiringHandler : MonoBehaviour {
 				Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
 				
 				// Send message to fire
-				networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, 1/* weaponHandler.wepType*/);
+                networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, weaponHandler.wepType);
 				// Update fire stats
 				timer = 0;
 				PlayerManager.energyLevel -= PlayerManager.selectedWepDrain;

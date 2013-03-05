@@ -31,7 +31,7 @@ public class WeaponHandler : MonoBehaviour {
     }
 
 	public void Update() {
-        Debug.Log("Change weapon type to: " + wepType);
+
 		switch(wepType) {
 			case 1: 
 				if (PlayerManager.activeChar == "china") {	
@@ -58,7 +58,6 @@ public class WeaponHandler : MonoBehaviour {
 	                wepRate = 0.2f;
 	            }
 				if (PlayerManager.activeChar == "usa") {
-                    Debug.Log("Switch to cannon");
 					wepPrefab = cannonPrefabUSA;
 					wepSpeed = 800;
 	                wepRate = 0.2f;
