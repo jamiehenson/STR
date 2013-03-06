@@ -3,32 +3,24 @@ using System.Collections;
 using System;
 using System.Net;
 
+// Holds constants to be used in Networking
 public class NetworkConstants
 {
-    public static string serverAddress = "10.242.218.237"; //"127.0.0.1";
-    public static int serverPort = 22044;
-	//public static int serverPort = 25000;
+	// MasterServer
+    public static string masterServerAddress = "54.243.193.180";
+	
+	// Server
+    public static int serverPort = 23467;
 	public static int connectionsAllowed = 32;
-
-    public static string remoteIP = "127.0.0.1";
-    public static int remotePort = 25000;
-    public static int listenPort = 25000;
-    public static bool useNAT = false;
-    public static string yourIP = "";
-    public static string yourPort = "";
 	
-	
-	// This is set by menu
-	public static bool usingMasterServer;
-	public static string ipToConnectTo;
-
+	// This can be done better with Network.player.ipAddress. Will be remove when all its uses are removed
     public static string GetIP()
-    {
+	{
+		Log.Warning("GetIP() is called, this can be done better with Network.player.ipAddress");
         string strHostName = "";
         strHostName = System.Net.Dns.GetHostName();
         IPHostEntry ipEntry = System.Net.Dns.GetHostEntry(strHostName);
         IPAddress[] addr = ipEntry.AddressList;
         return addr[addr.Length-1].ToString();
-
     }
 }

@@ -5,9 +5,8 @@ using System.Collections.Generic;
 public class Server : MonoBehaviour {
 
     private int playerCount = 0;
-    public static string gameName = "Spektor0307";
+    public static string gameName = "Spektor0307"; // I think this should be STR ?
     public Transform playerUniversePrefab;
-    //public Transform enemyHolderprefab;
     public static int countUniverse;
     public Transform[] universe;
     private Bridge bridge;
@@ -23,85 +22,95 @@ public class Server : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-
-        MasterServer.ipAddress = "54.243.193.180";
-        MasterServer.port = 23466;
-        Network.natFacilitatorIP = "54.243.193.180";
-        Network.natFacilitatorPort = 50005;
-        
-		Network.InitializeServer(NetworkConstants.connectionsAllowed, 23467, true);
-
-		// If using the MasterServer, then connect to it
-		//if (NetworkConstants.usingMasterServer)
-		//{
-	        //Online Server Code - Do Not Delete
-	        MasterServer.ipAddress = "54.243.193.180";
-	        MasterServer.port = 23466;
-	        Network.natFacilitatorIP = "54.243.193.180";
-	        Network.natFacilitatorPort = 50005;
-	        Debug.Log(MP.serverName);
-	        MasterServer.RegisterHost(gameName, MP.serverName, "This is a test game");
-		//}
+		// Set MasterServer
+        MasterServer.ipAddress = NetworkConstants.masterServerAddress;
+        Network.natFacilitatorIP = NetworkConstants.masterServerAddress;
+		
+		// Initialise as a Server
+		Network.InitializeServer(NetworkConstants.connectionsAllowed, NetworkConstants.serverPort, true);
+		
+		// Register with MasterSever
+	    MasterServer.RegisterHost(gameName, MP.serverName, "This is a test game");
+		
+		// Set bridge
+		bridge = GameObject.Find("Networkbridge(Clone)").GetComponent<Bridge>();
+		
         //Online Server Code - Do not Delete
-
-        // LAN Server
-       // Network.InitializeServer(NetworkConstants.connectionsAllowed, NetworkConstants.serverPort, false);
-        // LAN Server
-        bridge = GameObject.Find("Networkbridge(Clone)").GetComponent<Bridge>();
+        // Network.InitializeServer(NetworkConstants.connectionsAllowed, NetworkConstants.serverPort, false);
     }
-
+	
+	// When connected to MasterServer LogNote
     void OnMasterServerEvent(MasterServerEvent msEvent) {
         if (msEvent == MasterServerEvent.RegistrationSucceeded)
-            Debug.Log("Registered MasterServer");
+            Log.Note("Registered MasterServer");
     }
 
-    // Messages
+    // When sever is initalise, set it up
     void OnServerInitialized() {
-        //Debug.Log("Initialized Server" + MasterServer.ipAddress+ MasterServer.port);
+        Log.Note("Initialized Server" + MasterServer.ipAddress+ MasterServer.port);
+		
+		// Initalise private memeber variables
         countUniverse = 4;
         universe = new Transform[countUniverse+1];
         characterView = new NetworkView[countUniverse+1];
         viewIDNameMapping = new Dictionary<NetworkViewID, string>();
         viewIDChNameMapping = new Dictionary<NetworkViewID, string>();
+		
+		// Initanitate the bridge
         Network.Instantiate(Networkbridge, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 99);
+		
+		// Set up each universe
         for (int i = 1; i <= countUniverse; i++) {
+			// Instaniate in correct position
             Vector3 pos = new Vector3(0 + (i * 10000), 0, 0);
             Transform obj = (Transform)Network.Instantiate(playerUniversePrefab, pos, new Quaternion(0, 0, 0, 0), 99);
             universe[i] = obj;
+			
+			// Rename it to something useful and pass name to clients
             universe[i].transform.Find("Managers/OriginManager").GetComponent<Universe>().origin = pos;
             obj.name = "Universe" + i;
             viewIDNameMapping.Add(obj.networkView.viewID, obj.name);
+			
+			// Instaniate charater in universe
             Vector3 position = new Vector3(pos.x - 8, pos.y, pos.z + 15);
             Transform characterPlayer = (Transform)Network.Instantiate(characterPrefab, position, new Quaternion(0,0,0,0), i);
+			
+			// Rename the character and pass name to clients
             characterPlayer.name = "Character" + i;
-         //   Transform enemyHolder = (Transform)Network.Instantiate(enemyHolderprefab, position, new Quaternion(0, 0, 0, 0), 99);
-          //  enemyHolder.name = "EnemyHolder" + i;
             NetworkView nView = characterPlayer.GetComponent<NetworkView>(); 
             characterView[i] = nView;
             viewIDChNameMapping.Add(characterPlayer.networkView.viewID, characterPlayer.name);
-
         }
     }
 
-
+	// When a player is connected , set it up correctly
     void OnPlayerConnected(NetworkPlayer player) {
         nextPlayerID = nextPlayerID + 1;
+		
+		// Allow it to work with "command" RPCs
         Network.SetReceivingEnabled(player, 99, true);
         Network.SetSendingEnabled(player, 99, true);
+		
+		// Set it to only work with RPC/sync objects in the universe it currently is in
         for (int i = 1; i < countUniverse; i++)
         {
             Network.SetReceivingEnabled(player, i, i == nextPlayerID);
             Network.SetSendingEnabled(player, i, i == nextPlayerID);
         }
-
+		
+		Log.Note("Player has connected" + playerCount++ + "connected from" + player.ipAddress + ":" + player.port);
+		
+		// Send bridge data to send to client when its ready
         bridge.addPlayer(player);
-        Debug.Log("Player has connected" + playerCount++ + "connected from" + player.ipAddress + ":" + player.port);
         bridge.setUniverse(nextPlayerID, player);
         bridge.updateUniverseNames(viewIDNameMapping, player);
         bridge.updateCharacterNames(viewIDChNameMapping, player);
+		
+		// I am not sure this ever gets called, will add message, if not called for a while will comment out and see effect
         if (!startGame)
             if (Network.connections.Length == 1)
             {
+				Log.Warning("Tell Rob event #001 happened.");
                 startGame = true;
                 for (int i = 1; i <= countUniverse; i++)
                 {
@@ -113,13 +122,9 @@ public class Server : MonoBehaviour {
             }
     }
 
-
+	// When player disconnects, log event
     void OnPlayerDisconnected() {
-        Debug.Log("Clean up after player");
+        Log.Note("Clean up after player");
 
-    }
-
-    // Update is called once per frame
-    void Update() {
     }
 }

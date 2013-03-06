@@ -18,22 +18,17 @@ public class OnlineClient : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // Online Server code
+        // Connect to Server
         Network.Connect(MP.hostData[MP.hostnb]);
-        Debug.Log("Online Client: Connected to host");
-        // Online Server code
-		
-		/*if (!NetworkConstants.usingMasterServer)
-		{
-            Network.Connect("54.243.123.199", 23467);
-		}*/
+
+		// This lets setUnivese know that its its first call. There might be a better way to do this.
         characterNum = 99;
     }
 
     // Called in Bridge.cs
     public void setUniverse(int num)
     {
-        Debug.Log("Universe Sent");
+        Log.Note("Universe Sent");
         universeNum = num;
 
         // Get the origin of the set Universe
@@ -44,11 +39,12 @@ public class OnlineClient : MonoBehaviour
         Vector3 camPos = new Vector3(origin.x - (float)4, origin.y, origin.z + 0.1f);
         Camera = (Transform)Instantiate(camPrefab, camPos, new Quaternion(0, 0, 0, 0));
         Camera.name = "Camera " + num;
-
+		
+		// It is the first time this function has been called
         if (characterNum == 99)
         {
             characterNum = universeNum;
-            Debug.Log("Activate initial");
+            Log.Note("Activate initial");
             playerMovement = GameObject.Find("Character" + num).GetComponent<PlayerMovement>();
             playerMovement.activateCharacter(num, num);
             FiringHandler fireHandler = GameObject.Find("Character" + num).GetComponent<FiringHandler>();
@@ -58,7 +54,7 @@ public class OnlineClient : MonoBehaviour
 
     public static void moveUniverse(int universeNum, int character)
     {
-        Debug.Log("Move Universe");
+        Log.Note("Move Universe");
         Vector3 origin = GameObject.Find("Universe" + universeNum + "/Managers/OriginManager").GetComponent<Universe>().origin;
 
         // Set camPos to bgPos + 1000 to z
@@ -70,15 +66,19 @@ public class OnlineClient : MonoBehaviour
         GameObject.Find("Character" + character).GetComponent<Transform>().position = new Vector3(origin.x - 8, origin.y, origin.z + 15);
        
     }
-
+	
+	// When disconnected from server, go back to menu
     void OnDisconnectedFromServer()
     {
-        Application.LoadLevel("networkingmenu");
+        Application.LoadLevel("menu");
     }
-
+	
+	// Update universe name
     public void updateUniverseNames(NetworkViewID ID, string name)
     {
-        Debug.Log("Client Update" + ID + name);
+        Log.Note("Client Update" + ID + name);
+		
+		// Look GameObject with that NetworkViewID and rename it
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Universe"))
         {
             NetworkViewID id = obj.networkView.viewID;
@@ -86,10 +86,13 @@ public class OnlineClient : MonoBehaviour
         }
 
     }
-
+	
+	// Update character name
     public void updateCharacterNames(NetworkViewID ID, string name)
     {
-        Debug.Log("Client Update" + ID + name);
+        Log.Note("Client Update" + ID + name);
+		
+		// Look GameObject with that NetworkViewID and rename it
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Player"))
         {
             NetworkViewID id = obj.networkView.viewID;
