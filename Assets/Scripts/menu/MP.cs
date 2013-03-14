@@ -72,24 +72,27 @@ public class MP : MonoBehaviour
         exitStyle.alignment = TextAnchor.UpperCenter;
 
         GUIStyle field = new GUIStyle();
-        field.normal.background = HudOn.fillTex(10,10,Color.black);
+        //field.normal.background = HudOn.fillTex(10,10,Color.black);
         field.padding = new RectOffset(15, 15, 15, 15);
-        field.normal.textColor = Color.white;
+        field.normal.textColor = Color.black;
         field.alignment = TextAnchor.MiddleCenter;
         field.font = deco;
         field.fontSize = 32;
 
-        if (joinScreen && Camera.main.transform.position.x >= 75)
+        if (joinScreen && PilotName.showBox)
         {
-            playerName = GUI.TextField(new Rect((Screen.width / 2) + 50, (Screen.height / 4) + 40, 300, 50), playerName, 10, field);
+            playerName = GUI.TextField(new Rect((Screen.width / 2) + 50, (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), playerName, 12, field);
             playerName = playerName.ToUpper();
         }
 
-        if (hostScreen && Camera.main.transform.position.x >= 75)
+        if (hostScreen && PilotName.showBox)
         {
-            playerName = GUI.TextField(new Rect((Screen.width / 2) + 50, (Screen.height / 4) + 40, 300, 50), playerName, 10, field);
+            playerName = GUI.TextField(new Rect((Screen.width / 2) + 50, (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), playerName, 12, field);
             playerName = playerName.ToUpper();
-            serverName = GUI.TextField(new Rect((Screen.width / 10), (Screen.height / 4) + 40, 300, 50), serverName, 10, field);
+		}
+		if (hostScreen && PilotName.showBox2)
+		{
+            serverName = GUI.TextField(new Rect((Screen.width / 8), (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), serverName, 12, field);
             serverName = serverName.ToUpper();
         }
 
@@ -107,6 +110,7 @@ public class MP : MonoBehaviour
             GameObject header = GameObject.Find("SBrowserHeader");
             GameObject subheader = GameObject.Find("SBrowserSelect");
             GameObject heading1 = GameObject.Find("SGameName");
+			GameObject serverNameBox = GameObject.Find("SDetailsNameBox2");
 
             // HOST ONLINE GAME
             if (GUI.Button(new Rect(Screen.width / 2 - (butWidth/2), Screen.height / 2 - 60, butWidth, butHeight), "HOST ONLINE GAME"))
@@ -115,6 +119,8 @@ public class MP : MonoBehaviour
                 header.GetComponent<TextMesh>().text = "HOST ONLINE GAME";
                 subheader.GetComponent<TextMesh>().text = "CREATE A SERVER";
                 heading1.GetComponent<TextMesh>().text = "NAME YOUR GAME";
+				serverNameBox.renderer.enabled = true;
+				
                 GameObject browserbg = GameObject.Find("SBrowserBG");
                 iTween.FadeTo(browserbg, charbgAlpha, 4f);
                 iTween.MoveTo(Camera.main.gameObject, new Vector3(75, 0, 0), 4);
@@ -129,6 +135,8 @@ public class MP : MonoBehaviour
                 subheader.GetComponent<TextMesh>().text = "CHOOSE AN ONLINE SERVER TO JOIN";
                 heading1.GetComponent<TextMesh>().text = "AVAILABLE SERVERS";
                 GameObject browserbg = GameObject.Find("SBrowserBG");
+				serverNameBox.renderer.enabled = false;
+				
                 iTween.FadeTo(browserbg, charbgAlpha, 4f);
                 iTween.MoveTo(Camera.main.gameObject, new Vector3(75, 0, 0), 4);
                 goingOn = false;
@@ -141,7 +149,7 @@ public class MP : MonoBehaviour
             }
         }
 
-        if (hostData != null)
+        if (hostData != null && joinScreen)
         {
             float btnYtotal;
             if (hostScreen)  {
@@ -150,13 +158,14 @@ public class MP : MonoBehaviour
             for (int i = 0; i < hostData.Length; i++)
             {
                 if (hostScreen) btnYtotal = btnY * 4 + (btnH * i) + (btnH / 2);
-                else btnYtotal = btnY * 2 + (btnH * i) + (btnH / 2);
+                else btnYtotal = btnY * 2 + (btnH * i) + (btnH / 2) + 30;
                 if (GUI.Button(new Rect(btnX - (btnX*4f) + btnW, btnYtotal, btnW*0.8f, btnH), hostData[i].gameName))
                 {
                     hostnb = i;
                     Application.LoadLevel("OnlineClient");
                 }
             }
-        }
+        }	
+		
     }
 }

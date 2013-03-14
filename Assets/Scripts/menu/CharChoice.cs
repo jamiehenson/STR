@@ -145,7 +145,7 @@ public class CharChoice : MonoBehaviour {
             {
                 StartCoroutine("changeBGTex", "china");
                 SetIndicators("china");
-                header.GetComponent<TextMesh>().text = "ZHANG";
+                header.GetComponent<TextMesh>().text = "DRAGON";
             }
         }
         else if (gameObject.name.Contains("USA")) {
@@ -154,7 +154,7 @@ public class CharChoice : MonoBehaviour {
             {
                 StartCoroutine("changeBGTex", "usa");
                 SetIndicators("usa");
-                header.GetComponent<TextMesh>().text = "JOHNSON";
+                header.GetComponent<TextMesh>().text = "PATRIOT";
             }
         }
         else if (gameObject.name.Contains("Russia")) {
@@ -163,7 +163,7 @@ public class CharChoice : MonoBehaviour {
             {
                 StartCoroutine("changeBGTex", "russia");
                 SetIndicators("russia");
-                header.GetComponent<TextMesh>().text = "MARKOV";
+                header.GetComponent<TextMesh>().text = "SPARTAK";
             }
         }
 		

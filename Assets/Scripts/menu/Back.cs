@@ -32,6 +32,8 @@ public class Back : MonoBehaviour {
             SP.singleplayerStart = false;
             MP.joinScreen = false;
             MP.hostScreen = false;
+			PilotName.showBox = false;
+			PilotName.showBox2 = false;
 		}
 	}
 }
