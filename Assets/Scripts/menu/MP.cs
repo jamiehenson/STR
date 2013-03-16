@@ -35,16 +35,27 @@ public class MP : MonoBehaviour
 
         GameObject nameTitle = GameObject.Find("STRName");
         nameTitle.GetComponent<TextMesh>().text = Names.FetchSTRName();
+		
+		GameObject PopMP = GameObject.Find ("PopMP");
+		iTween.FadeTo(PopMP,0.5f,0.1f);
     }
 
     void OnMouseEnter()
     {
-        iTween.FadeTo(gameObject, 1.0f, 0.5f);
+        GameObject PopMP = GameObject.Find ("PopMP");
+		GameObject MP = GameObject.Find ("Multiplayer button");
+		iTween.FadeTo(MP, 1.0f, 0.5f);
+		iTween.FadeTo(PopMP,1.0f,0.5f);
+		iTween.MoveTo(PopMP,new Vector3(PopMP.transform.position.x,PopMP.transform.position.y,28),0.5f);
     }
 
     void OnMouseExit()
     {
-        iTween.FadeTo(gameObject, 0.3f, 0.5f);
+        GameObject PopMP = GameObject.Find ("PopMP");
+		GameObject MP = GameObject.Find ("Multiplayer button");
+		iTween.FadeTo(MP, 0.3f, 0.5f);
+		iTween.FadeTo(PopMP,0.5f,0.5f);
+		iTween.MoveTo(PopMP,new Vector3(PopMP.transform.position.x,PopMP.transform.position.y,30),0.5f);
     }
 
     void OnMouseUp()
@@ -68,8 +79,14 @@ public class MP : MonoBehaviour
         GUIStyle exitStyle = new GUIStyle();
         exitStyle.font = deco;
         exitStyle.normal.textColor = Color.white;
-        exitStyle.fontSize = 28;
+        exitStyle.fontSize = 32;
         exitStyle.alignment = TextAnchor.UpperCenter;
+		
+		GUIStyle exitStyleBig = new GUIStyle();
+        exitStyleBig.font = deco;
+        exitStyleBig.normal.textColor = Color.white;
+        exitStyleBig.fontSize = 40;
+        exitStyleBig.alignment = TextAnchor.UpperCenter;
 
         GUIStyle field = new GUIStyle();
         //field.normal.background = HudOn.fillTex(10,10,Color.black);
@@ -105,7 +122,7 @@ public class MP : MonoBehaviour
             float charbgAlpha = 0.75f;
 
             GUI.Label(new Rect((Screen.width - credWidth) / 2, (Screen.height - credHeight) / 4, credWidth, credHeight), bg, centeredStyle);
-            GUI.Box(new Rect(Screen.width / 2 - 95, Screen.height / 2 - 130, 200, 140), "WHAT WOULD YOU LIKE TO DO?", exitStyle);
+            GUI.Box(new Rect(Screen.width / 2 - 95, Screen.height / 2 - 130, 200, 140), "WHAT WOULD YOU LIKE TO DO?", exitStyleBig);
 
             GameObject header = GameObject.Find("SBrowserHeader");
             GameObject subheader = GameObject.Find("SBrowserSelect");
@@ -113,7 +130,7 @@ public class MP : MonoBehaviour
 			GameObject serverNameBox = GameObject.Find("SDetailsNameBox2");
 
             // HOST ONLINE GAME
-            if (GUI.Button(new Rect(Screen.width / 2 - (butWidth/2), Screen.height / 2 - 60, butWidth, butHeight), "HOST ONLINE GAME"))
+            if (GUI.Button(new Rect(Screen.width / 2 - (butWidth/2), Screen.height / 2 - 60, butWidth, butHeight), "HOST ONLINE GAME",exitStyle))
             {
                 
                 header.GetComponent<TextMesh>().text = "HOST ONLINE GAME";
@@ -129,7 +146,7 @@ public class MP : MonoBehaviour
             }
 
             //JOIN ONLINE GAME
-            if (GUI.Button(new Rect(Screen.width / 2 - (butWidth/2), Screen.height / 2 - 60 + butHeight + margin, butWidth, butHeight), "JOIN ONLINE GAME"))
+            if (GUI.Button(new Rect(Screen.width / 2 - (butWidth/2), Screen.height / 2 - 60 + butHeight + margin, butWidth, butHeight), "JOIN ONLINE GAME",exitStyle))
             {
                 header.GetComponent<TextMesh>().text = "JOIN ONLINE GAME";
                 subheader.GetComponent<TextMesh>().text = "CHOOSE AN ONLINE SERVER TO JOIN";

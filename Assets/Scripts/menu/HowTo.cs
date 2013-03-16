@@ -5,15 +5,26 @@ public class HowTo : MonoBehaviour {
 	private bool menuHow = false;
 	
 	void Start () {
-		iTween.FadeTo(gameObject, 0.3f, 0.1f);	
+		GameObject PopHow = GameObject.Find ("PopHow");
+		GameObject How = GameObject.Find ("How To Play button");
+		iTween.FadeTo(How, 0.3f, 0.1f);	
+		iTween.FadeTo(PopHow,0.5f,0.1f);
 	}
 
 	void OnMouseEnter() {
-		iTween.FadeTo(gameObject, 1.0f, 0.5f);
+		GameObject PopHow = GameObject.Find ("PopHow");
+		GameObject How = GameObject.Find ("How To Play button");
+		iTween.FadeTo(How, 1.0f, 0.5f);
+		iTween.FadeTo(PopHow,1.0f,0.5f);
+		iTween.MoveTo(PopHow,new Vector3(PopHow.transform.position.x,PopHow.transform.position.y,28),0.5f);
 	}
 	
 	void OnMouseExit() {
-		iTween.FadeTo(gameObject, 0.3f, 0.5f);
+		GameObject PopHow = GameObject.Find ("PopHow");
+		GameObject How = GameObject.Find ("How To Play button");
+		iTween.FadeTo(How, 0.3f, 0.5f);
+		iTween.FadeTo(PopHow,0.5f,0.5f);
+		iTween.MoveTo(PopHow,new Vector3(PopHow.transform.position.x,PopHow.transform.position.y,30),0.5f);
 	}
 	
 	void OnMouseUp ()

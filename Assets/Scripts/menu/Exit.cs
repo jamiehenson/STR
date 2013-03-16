@@ -7,16 +7,27 @@ public class Exit : MonoBehaviour {
     private Texture2D bg;
 	
 	void Start () {
-		iTween.FadeTo(gameObject, 0.3f, 0.1f);
+		GameObject PopExit = GameObject.Find ("PopExit");
+		GameObject Exit = GameObject.Find ("Exit");
+		iTween.FadeTo(Exit, 0.3f, 0.1f);
         bg = (Texture2D)Resources.Load("menu/blank");
+		iTween.FadeTo(PopExit,0.5f,0.1f);
 	}
 
 	void OnMouseEnter() {
-		iTween.FadeTo(gameObject, 1.0f, 0.5f);
+		GameObject Exit = GameObject.Find ("Exit");
+		GameObject PopExit = GameObject.Find ("PopExit");
+		iTween.FadeTo(Exit, 1.0f, 0.5f);
+		iTween.FadeTo(PopExit,1.0f,0.5f);
+		iTween.MoveTo(PopExit,new Vector3(PopExit.transform.position.x,PopExit.transform.position.y,28),0.5f);
 	}
 	
 	void OnMouseExit() {
-		iTween.FadeTo(gameObject, 0.3f, 0.5f);
+		GameObject Exit = GameObject.Find ("Exit");
+		GameObject PopExit = GameObject.Find ("PopExit");
+		iTween.FadeTo(Exit, 0.3f, 0.5f);
+		iTween.FadeTo(PopExit,0.5f,0.5f);
+		iTween.MoveTo(PopExit,new Vector3(PopExit.transform.position.x,PopExit.transform.position.y,30),0.5f);
 	}
 	
 	void OnMouseUp () {
