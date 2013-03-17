@@ -67,18 +67,37 @@ public class FiringHandler : MonoBehaviour {
 		weaponHandler.wepType = bulletType;
 		weaponHandler.Update();
 		
-		// Set up bullet
+		// Place Weapon
 		Vector3 startPos = new Vector3(transform.position.x + 3, transform.position.y, transform.position.z);
 		Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
+		Physics.IgnoreCollision(bullet.collider, transform.collider);
+		
+		// Tell everyone to set up its movement
+		NetworkViewID id = bullet.networkView.viewID;
+		Vector3 forceToApply = fireDirection.normalized * weaponHandler.wepSpeed;
+		networkView.RPC("setupWeapon", RPCMode.All, id, lookAt, forceToApply, bulletType);
+	}
+	
+	[RPC]
+	void setupWeapon(NetworkViewID id, Vector3 lookAt, Vector3 forceToApply, int bulletType)
+	{
+		NetworkView bulletNV = NetworkView.Find (id);
+		if (bulletNV == null) {
+			Log.Warning("During setupWeapon, unable to find player from their ID");
+			return;
+		}
+		
+		GameObject bullet = bulletNV.gameObject;
 		bullet.transform.LookAt(lookAt, Vector3.forward);
 	    bullet.transform.Rotate(new Vector3(90, 0, 90));
 		if (bulletType == 3)
 	    	bullet.transform.Rotate(new Vector3(0, 0, 90));
 		
+		Physics.IgnoreCollision(gameObject.collider, bullet.collider);
+		// Add ignores for all characters if we want frendly fire off
+		
 		// Set up movement
-		Physics.IgnoreCollision(bullet.collider, transform.collider);
-		bullet.rigidbody.AddForce(fireDirection.normalized * weaponHandler.wepSpeed);
-		//Debug.Log("FD " + fireDirection.normalized);
+		bullet.rigidbody.AddForce(forceToApply);
 	    bullet.rigidbody.freezeRotation = true;
 	}
 }
