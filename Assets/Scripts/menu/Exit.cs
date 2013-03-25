@@ -34,24 +34,9 @@ public class Exit : MonoBehaviour {
 		goingOut = true;
 	}
 	
-	void OnGUI() {
-		deco = (Font) Resources.Load ("Belgrad");
-		
-		GUIStyle exitStyle = new GUIStyle();
-    	exitStyle.font = deco;
-		exitStyle.normal.textColor = Color.white;
-		exitStyle.fontSize = 40;
-        exitStyle.alignment = TextAnchor.UpperCenter;
-
-
-        GUIStyle exitStyleBig = new GUIStyle();
-        exitStyleBig.font = deco;
-        exitStyleBig.normal.textColor = Color.white;
-        exitStyleBig.fontSize = 80;
-        exitStyleBig.alignment = TextAnchor.UpperCenter;
-
-		
-		if (goingOut && Camera.main.gameObject.transform.position.x == 0 && Camera.main.gameObject.transform.position.y == 0) {
+	void Update() {
+		if (goingOut) {
+            /*
             if (Input.GetKeyDown("escape") && goingOut == true) goingOut = false;
             GUIStyle centeredStyle = GUI.skin.GetStyle("Label");
             centeredStyle.alignment = TextAnchor.UpperCenter;
@@ -62,11 +47,12 @@ public class Exit : MonoBehaviour {
 			GUI.Box (new Rect (Screen.width/2-95,Screen.height/2-130,200,140), "QUIT STR?",exitStyleBig);
            
             if (GUI.Button (new Rect (Screen.width/2-80,Screen.height/2,200,60), "YES, ABANDON SHIP!",exitStyle)) {
-            	Application.Quit();
+            	
             }
             if (GUI.Button (new Rect (Screen.width/2-80,Screen.height/2+80,200,60), "NO, GIVE ME MORE!",exitStyle)) {
                 goingOut = false;
-            }
+            }*/
+            Application.Quit();
 		}
 	}
 }

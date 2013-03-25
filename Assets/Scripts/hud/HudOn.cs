@@ -11,7 +11,7 @@ public class HudOn : MonoBehaviour {
 	private string charName, wepName, gearReady;
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
 	public int wepType, bankSize;
-	private int hudBarSize = 150;
+	private int hudBarSize = 150, playercount = 4;
 	private GameObject toast;
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
@@ -111,7 +111,7 @@ public class HudOn : MonoBehaviour {
         else if (Input.GetKeyDown("2"))
         {
             setWeapon(2);
-            Debug.Log("Input Change Wapon");
+            Debug.Log("Input Change Weapon");
         }
         else if (Input.GetKeyDown("3")) setWeapon(3);
         //else if (Input.GetAxis("Mouse ScrollWheel") < 0) setWeapon(WeaponHandler.wepType - 1);
@@ -127,30 +127,15 @@ public class HudOn : MonoBehaviour {
 				PlayerManager.energyBank = 0;
 				PlayerManager.bankFull = false;
 				gearReady = "";
+                GameObject vortex = (GameObject)Resources.Load("Player/vortex");
+                for (int i = 0; i < playercount - 1; i++)
+                {
+                    float x = Random.Range(0.1f, 0.5f);
+                    float y = Random.Range(0.1f, 0.5f);
+                    float z = Random.Range(0.1f, 0.5f);
+                    Instantiate(vortex, new Vector3(x, y, z), Quaternion.identity);
+                }
 			}
-		}
-		
-		if (Input.GetKeyDown ("m") && PlayerManager.activeChar == "tester") mortyMode = !mortyMode;
-		
-		if (mortyMode && PlayerManager.activeChar == "tester") {
-			charName = "MORTY";
-			flag = (Texture2D) Resources.Load ("hud/tester2");
-			beamTitle = "BROWN RAIN";
-			cannonTitle = "PLOPLETS";
-			mineTitle = "TURD";
-			hullTitle = "STAMINA";
-			energyTitle = "THRUSTING";
-			bankTitle = "ERECTION";
-		}
-		if (!mortyMode && PlayerManager.activeChar == "tester") {
-			charName = "TESTER";
-			flag = (Texture2D) Resources.Load ("hud/tester");
-			beamTitle = "BEAM"; 
-			cannonTitle = "CANNON";
-			mineTitle = "SPECIAL";
-			hullTitle = "HULL"; 
-			energyTitle = "ENERGY"; 
-			bankTitle = "WARP DRIVE";
 		}
 	}
 
@@ -191,12 +176,7 @@ public class HudOn : MonoBehaviour {
 		wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
         flag = (Texture2D)Resources.Load("hud/" + PlayerManager.activeChar);
 
-        switch (PlayerManager.activeChar) {
-            case "usa": charName = "JOHNSON"; break;
-            case "china": charName = "ZHANG"; break;
-            case "russia": charName = "MARKOV"; break;
-            default: charName = "TESTER"; break;
-        }
+        charName = PlayerManager.playername;
 
         if (Network.isClient)
         {

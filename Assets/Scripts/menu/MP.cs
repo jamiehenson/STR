@@ -89,27 +89,26 @@ public class MP : MonoBehaviour
         exitStyleBig.alignment = TextAnchor.UpperCenter;
 
         GUIStyle field = new GUIStyle();
-        //field.normal.background = HudOn.fillTex(10,10,Color.black);
         field.padding = new RectOffset(15, 15, 15, 15);
         field.normal.textColor = Color.black;
         field.alignment = TextAnchor.MiddleCenter;
         field.font = deco;
-        field.fontSize = 32;
+        field.fontSize = (int)(Screen.height/100)*8;
 
         if (joinScreen && PilotName.showBox)
         {
-            playerName = GUI.TextField(new Rect((Screen.width / 2) + 50, (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), playerName, 12, field);
+            playerName = GUI.TextField(new Rect((Screen.width / 2), (Screen.height / 4) + 20, (Screen.width / 3), (Screen.width / 16)), playerName, 10, field);
             playerName = playerName.ToUpper();
         }
 
         if (hostScreen && PilotName.showBox)
         {
-            playerName = GUI.TextField(new Rect((Screen.width / 2) + 50, (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), playerName, 12, field);
+            playerName = GUI.TextField(new Rect((Screen.width / 2) + 50, (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), playerName, 10, field);
             playerName = playerName.ToUpper();
 		}
 		if (hostScreen && PilotName.showBox2)
 		{
-            serverName = GUI.TextField(new Rect((Screen.width / 8), (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), serverName, 12, field);
+            serverName = GUI.TextField(new Rect((Screen.width / 8), (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), serverName, 10, field);
             serverName = serverName.ToUpper();
         }
 
@@ -128,6 +127,10 @@ public class MP : MonoBehaviour
             GameObject subheader = GameObject.Find("SBrowserSelect");
             GameObject heading1 = GameObject.Find("SGameName");
 			GameObject serverNameBox = GameObject.Find("SDetailsNameBox2");
+            GameObject[] playerdetails = GameObject.FindGameObjectsWithTag("Player Details");
+            GameObject proceed = GameObject.Find("SBrowser - proceed");
+            GameObject proceedtext = GameObject.Find("Proceed text");
+            GameObject refresh = GameObject.Find("Refresh");
 
             // HOST ONLINE GAME
             if (GUI.Button(new Rect(Screen.width / 2 - (butWidth/2), Screen.height / 2 - 60, butWidth, butHeight), "HOST ONLINE GAME",exitStyle))
@@ -137,6 +140,10 @@ public class MP : MonoBehaviour
                 subheader.GetComponent<TextMesh>().text = "CREATE A SERVER";
                 heading1.GetComponent<TextMesh>().text = "NAME YOUR GAME";
 				serverNameBox.renderer.enabled = true;
+                foreach (GameObject component in playerdetails) component.renderer.enabled = false;
+                proceed.renderer.enabled = true;
+                proceedtext.renderer.enabled = true;
+                refresh.renderer.enabled = false;
 				
                 GameObject browserbg = GameObject.Find("SBrowserBG");
                 iTween.FadeTo(browserbg, charbgAlpha, 4f);
@@ -153,6 +160,10 @@ public class MP : MonoBehaviour
                 heading1.GetComponent<TextMesh>().text = "AVAILABLE SERVERS";
                 GameObject browserbg = GameObject.Find("SBrowserBG");
 				serverNameBox.renderer.enabled = false;
+                foreach (GameObject component in playerdetails) component.renderer.enabled = true;
+                proceed.renderer.enabled = false;
+                proceedtext.renderer.enabled = false;
+                refresh.renderer.enabled = true;
 				
                 iTween.FadeTo(browserbg, charbgAlpha, 4f);
                 iTween.MoveTo(Camera.main.gameObject, new Vector3(75, 0, 0), 4);
@@ -179,6 +190,7 @@ public class MP : MonoBehaviour
                 if (GUI.Button(new Rect(btnX - (btnX*4f) + btnW, btnYtotal, btnW*0.8f, btnH), hostData[i].gameName))
                 {
                     hostnb = i;
+                    PlayerManager.playername = playerName;
                     Application.LoadLevel("OnlineClient");
                 }
             }

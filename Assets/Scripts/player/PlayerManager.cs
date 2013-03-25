@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour {
     public static int bankSize = 10000;
     public static bool bankFull;
     public static float speed;
+    public static string playername;
 	
 	// Character-centric player stats
 	public static string activeChar;
