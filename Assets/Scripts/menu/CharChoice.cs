@@ -131,7 +131,8 @@ public class CharChoice : MonoBehaviour {
                 warpingSphere2.renderer.enabled = true;
                 warpingSphere3.renderer.enabled = true;
                 break;
-            default: break;
+            default: 
+                break;
         }
     }
 

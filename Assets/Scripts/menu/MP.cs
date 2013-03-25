@@ -6,7 +6,7 @@ public class MP : MonoBehaviour
     public GameObject SBrowserDetails;
     public GameObject SNewServer;
     public GameObject SAvailableServers;
-    public static bool goingOn = false, joinScreen = false, hostScreen = false;
+    public static bool joinScreen = false, hostScreen = false;
     public static string playerName = "WOOF", serverName = "GAME";
     private Font deco;
     private Texture2D bg;
@@ -60,7 +60,7 @@ public class MP : MonoBehaviour
 
     void OnMouseUp()
     {
-        goingOn = true;
+        hostScreen = true;
     }
     
     void Update () {
@@ -93,26 +93,19 @@ public class MP : MonoBehaviour
         field.normal.textColor = Color.black;
         field.alignment = TextAnchor.MiddleCenter;
         field.font = deco;
-        field.fontSize = (int)(Screen.height/100)*8;
+        field.fontSize = (int)(Screen.height/100)*6;
 
         if (joinScreen && PilotName.showBox)
         {
-            playerName = GUI.TextField(new Rect((Screen.width / 2), (Screen.height / 4) + 20, (Screen.width / 3), (Screen.width / 16)), playerName, 10, field);
+            playerName = GUI.TextField(new Rect((Screen.width / 2), (Screen.height / 4) + 30, (Screen.width / 3), (Screen.width / 16)), playerName, 10, field);
             playerName = playerName.ToUpper();
         }
-
-        if (hostScreen && PilotName.showBox)
+        if (hostScreen && PilotName.showBox2)
         {
-            playerName = GUI.TextField(new Rect((Screen.width / 2) + 50, (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), playerName, 10, field);
-            playerName = playerName.ToUpper();
-		}
-		if (hostScreen && PilotName.showBox2)
-		{
-            serverName = GUI.TextField(new Rect((Screen.width / 8), (Screen.height / 4) + 40, (Screen.width / 3), (Screen.width / 16)), serverName, 10, field);
+            serverName = GUI.TextField(new Rect((Screen.width / 8), (Screen.height / 4) + 30, (Screen.width / 3), (Screen.width / 16)), serverName, 10, field);
             serverName = serverName.ToUpper();
         }
-
-        if (goingOn)
+        if (hostScreen)
         {
             GUIStyle centeredStyle = GUI.skin.GetStyle("Label");
             centeredStyle.alignment = TextAnchor.UpperCenter;
@@ -120,61 +113,31 @@ public class MP : MonoBehaviour
             int credHeight = (Screen.height >= bg.height) ? bg.height : Screen.height;
             float charbgAlpha = 0.75f;
 
-            GUI.Label(new Rect((Screen.width - credWidth) / 2, (Screen.height - credHeight) / 4, credWidth, credHeight), bg, centeredStyle);
-            GUI.Box(new Rect(Screen.width / 2 - 95, Screen.height / 2 - 130, 200, 140), "WHAT WOULD YOU LIKE TO DO?", exitStyleBig);
-
             GameObject header = GameObject.Find("SBrowserHeader");
             GameObject subheader = GameObject.Find("SBrowserSelect");
             GameObject heading1 = GameObject.Find("SGameName");
-			GameObject serverNameBox = GameObject.Find("SDetailsNameBox2");
+            GameObject serverNameBox = GameObject.Find("SDetailsNameBox2");
             GameObject[] playerdetails = GameObject.FindGameObjectsWithTag("Player Details");
             GameObject proceed = GameObject.Find("SBrowser - proceed");
             GameObject proceedtext = GameObject.Find("Proceed text");
             GameObject refresh = GameObject.Find("Refresh");
+            GameObject flagbg = GameObject.Find("SBrowserBG");
 
             // HOST ONLINE GAME
-            if (GUI.Button(new Rect(Screen.width / 2 - (butWidth/2), Screen.height / 2 - 60, butWidth, butHeight), "HOST ONLINE GAME",exitStyle))
-            {
-                
-                header.GetComponent<TextMesh>().text = "HOST ONLINE GAME";
-                subheader.GetComponent<TextMesh>().text = "CREATE A SERVER";
-                heading1.GetComponent<TextMesh>().text = "NAME YOUR GAME";
-				serverNameBox.renderer.enabled = true;
-                foreach (GameObject component in playerdetails) component.renderer.enabled = false;
-                proceed.renderer.enabled = true;
-                proceedtext.renderer.enabled = true;
-                refresh.renderer.enabled = false;
-				
-                GameObject browserbg = GameObject.Find("SBrowserBG");
-                iTween.FadeTo(browserbg, charbgAlpha, 4f);
-                iTween.MoveTo(Camera.main.gameObject, new Vector3(75, 0, 0), 4);
-                goingOn = false;
-                hostScreen = true;
-            }
+            header.GetComponent<TextMesh>().text = "HOST ONLINE GAME";
+            subheader.GetComponent<TextMesh>().text = "CREATE A SERVER";
+            heading1.GetComponent<TextMesh>().text = "NAME YOUR GAME";
+            serverNameBox.renderer.enabled = true;
+            foreach (GameObject component in playerdetails) component.renderer.enabled = false;
+            proceed.renderer.enabled = true;
+            proceedtext.renderer.enabled = true;
+            refresh.renderer.enabled = false;
+            flagbg.renderer.enabled = false;
 
-            //JOIN ONLINE GAME
-            if (GUI.Button(new Rect(Screen.width / 2 - (butWidth/2), Screen.height / 2 - 60 + butHeight + margin, butWidth, butHeight), "JOIN ONLINE GAME",exitStyle))
-            {
-                header.GetComponent<TextMesh>().text = "JOIN ONLINE GAME";
-                subheader.GetComponent<TextMesh>().text = "CHOOSE AN ONLINE SERVER TO JOIN";
-                heading1.GetComponent<TextMesh>().text = "AVAILABLE SERVERS";
-                GameObject browserbg = GameObject.Find("SBrowserBG");
-				serverNameBox.renderer.enabled = false;
-                foreach (GameObject component in playerdetails) component.renderer.enabled = true;
-                proceed.renderer.enabled = false;
-                proceedtext.renderer.enabled = false;
-                refresh.renderer.enabled = true;
-				
-                iTween.FadeTo(browserbg, charbgAlpha, 4f);
-                iTween.MoveTo(Camera.main.gameObject, new Vector3(75, 0, 0), 4);
-                goingOn = false;
-                joinScreen = true;
-            }
-
-            if (GUI.Button(new Rect(Screen.width / 2 - (butWidth / 2), Screen.height / 2 + 40 + butHeight, butWidth, butHeight/2), "CLOSE"))
-            {
-                goingOn = false;
-            }
+            GameObject browserbg = GameObject.Find("SBrowserBG");
+            iTween.FadeTo(browserbg, charbgAlpha, 4f);
+            iTween.MoveTo(Camera.main.gameObject, new Vector3(75, 0, 0), 4);
+            hostScreen = true;
         }
 
         if (hostData != null && joinScreen)
@@ -195,6 +158,5 @@ public class MP : MonoBehaviour
                 }
             }
         }	
-		
     }
 }
