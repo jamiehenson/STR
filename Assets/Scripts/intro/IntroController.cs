@@ -36,4 +36,8 @@ public class IntroController : MonoBehaviour {
 	void Start () {
 		StartCoroutine(Intro());
 	}
+	
+	void Update () {
+		if (Input.anyKeyDown) Application.LoadLevel("menu");
+	}	
 }

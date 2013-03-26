@@ -42,7 +42,6 @@ public class FiringHandler : MonoBehaviour {
 		if (Network.isClient && myCharacter && Input.GetButton("Fire1") && timer >= weaponHandler.wepRate && PlayerManager.energyLevel != 0)
 		{   
             // Can I fire?
-            Debug.Log("Rate " + weaponHandler.wepRate + " " + weaponHandler.wepName + " " + weaponHandler.wepPrefab);
 			if (PlayerManager.energyLevel - PlayerManager.selectedWepDrain >= 0)
 			{
 				// Calculate the position to fire at

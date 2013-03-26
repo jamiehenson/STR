@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TimerKill : MonoBehaviour {
 
-    private float time = 1;
+    public float time = 5;
 
     IEnumerator timedkill() {
         yield return new WaitForSeconds(time);

@@ -20,7 +20,6 @@ public class CameraRotate : MonoBehaviour {
 		if (allowCharRotation) {
 			allowGeneralRotation = false;
 			direction = (behind) ? 1 : -1;
-			
 			if (behind)
         	{
 				iTween.MoveTo(gameObject, new Vector3(startingPos.x,gameObject.transform.position.y,Positions.baseZ), 1);
@@ -63,6 +62,9 @@ public class CameraRotate : MonoBehaviour {
 	
 	void Update () 
     {
-		if (Input.GetKeyDown("r") && allowGeneralRotation) StartCoroutine("rotateCharacter");
+		if (Input.GetKeyDown("r") && allowGeneralRotation) 
+		{
+			StartCoroutine("rotateCharacter");
+		}
 	}
 }
