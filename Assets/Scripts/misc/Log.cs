@@ -16,13 +16,13 @@ public class Log : MonoBehaviour {
 	
 	// Report Warning
 	public static void Warning(string message){
-		Debug.Log("[#"+printCount+" Warning] "+message);
+		Debug.Log("[#"+printCount++ +" Warning] "+message);
 	}
 	
 	// Report Event
 	public static void Note(string message){
 		if (printNotes)
-			Debug.Log ("[#"+printCount+" Note   ] "+message);
+			Debug.Log ("[#"+printCount++ +" Note   ] "+message);
 		else
 		{
 			// Not today Maddie!
