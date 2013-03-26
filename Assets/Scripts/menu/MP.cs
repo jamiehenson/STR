@@ -15,6 +15,7 @@ public class MP : MonoBehaviour
     private bool startServer;
     public static HostData[] hostData;
     public static int hostnb;
+    public GUIStyle serverButton;
 
     private float btnX = Screen.width * 0.1f;
     private float btnY = Screen.height * 0.1f;
@@ -67,7 +68,10 @@ public class MP : MonoBehaviour
         if (refresh)
         {
             MasterServer.RequestHostList(Server.gameName);
-            if (MasterServer.PollHostList().Length > 0) refresh = false;
+            if (MasterServer.PollHostList().Length > 0)
+            {
+                refresh = false;
+            }
             hostData = MasterServer.PollHostList();
         }
     }
@@ -120,7 +124,7 @@ public class MP : MonoBehaviour
             GameObject[] playerdetails = GameObject.FindGameObjectsWithTag("Player Details");
             GameObject proceed = GameObject.Find("SBrowser - proceed");
             GameObject proceedtext = GameObject.Find("Proceed text");
-            GameObject refresh = GameObject.Find("Refresh");
+            GameObject refreshbutton = GameObject.Find("Refresh");
             GameObject flagbg = GameObject.Find("SBrowserBG");
 
             // HOST ONLINE GAME
@@ -131,7 +135,7 @@ public class MP : MonoBehaviour
             foreach (GameObject component in playerdetails) component.renderer.enabled = false;
             proceed.renderer.enabled = true;
             proceedtext.renderer.enabled = true;
-            refresh.renderer.enabled = false;
+            refreshbutton.renderer.enabled = false;
             flagbg.renderer.enabled = false;
 
             GameObject browserbg = GameObject.Find("SBrowserBG");
@@ -148,9 +152,8 @@ public class MP : MonoBehaviour
             }
             for (int i = 0; i < hostData.Length; i++)
             {
-                if (hostScreen) btnYtotal = btnY * 4 + (btnH * i) + (btnH / 2);
-                else btnYtotal = btnY * 2 + (btnH * i) + (btnH / 2) + 30;
-                if (GUI.Button(new Rect(btnX - (btnX*4f) + btnW, btnYtotal, btnW*0.8f, btnH), hostData[i].gameName))
+                btnYtotal = btnY * 2 + (btnH * i) + (btnH / 2) + 30;
+                if (GUI.Button(new Rect(btnX - (btnX*3f) + btnW, btnYtotal, btnW*0.6f, btnH*1.4f), hostData[i].gameName,serverButton))
                 {
                     hostnb = i;
                     PlayerManager.playername = playerName;
