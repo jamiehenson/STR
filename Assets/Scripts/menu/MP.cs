@@ -7,10 +7,9 @@ public class MP : MonoBehaviour
     public GameObject SNewServer;
     public GameObject SAvailableServers;
     public static bool joinScreen = false, hostScreen = false;
-    public static string playerName = "WOOF", serverName = "GAME";
+    public static string playerName = "WOOF", serverName;
     private Font deco;
     private Texture2D bg;
-    private int butWidth = 400, butHeight = 60, margin = 5;
     public static bool refresh;
     private bool startServer;
     public static HostData[] hostData;
@@ -33,6 +32,7 @@ public class MP : MonoBehaviour
         iTween.FadeTo(browserbg, 0, 0.1f);
         bg = (Texture2D) Resources.Load("menu/blank");
         PlayerManager.activeChar = "usa";
+        serverName = System.Environment.UserName;
 
         GameObject nameTitle = GameObject.Find("STRName");
         nameTitle.GetComponent<TextMesh>().text = Names.FetchSTRName();
@@ -113,8 +113,6 @@ public class MP : MonoBehaviour
         {
             GUIStyle centeredStyle = GUI.skin.GetStyle("Label");
             centeredStyle.alignment = TextAnchor.UpperCenter;
-            int credWidth = (Screen.width >= bg.width) ? bg.width : Screen.width;
-            int credHeight = (Screen.height >= bg.height) ? bg.height : Screen.height;
             float charbgAlpha = 0.75f;
 
             GameObject header = GameObject.Find("SBrowserHeader");
@@ -147,9 +145,6 @@ public class MP : MonoBehaviour
         if (hostData != null && joinScreen)
         {
             float btnYtotal;
-            if (hostScreen)  {
-                GUI.Label(new Rect(btnX - (btnX * 4.5f), btnY * 5, btnW * 3, btnH), "AVAILABLE SERVERS:", exitStyle);
-            }
             for (int i = 0; i < hostData.Length; i++)
             {
                 btnYtotal = btnY * 2 + (btnH * i) + (btnH / 2) + 30;
@@ -157,6 +152,7 @@ public class MP : MonoBehaviour
                 {
                     hostnb = i;
                     PlayerManager.playername = playerName;
+                    joinScreen = false;
                     Application.LoadLevel("OnlineClient");
                 }
             }

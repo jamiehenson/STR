@@ -64,7 +64,6 @@ public class OnlineClient : MonoBehaviour
         // Move Spaceship
         Debug.Log("Move Character" + character);
         GameObject.Find("Character" + character).GetComponent<Transform>().position = new Vector3(origin.x - 8, origin.y, origin.z + 15);
-       
     }
 	
 	// When disconnected from server, go back to menu

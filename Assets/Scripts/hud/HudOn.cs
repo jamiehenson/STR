@@ -16,7 +16,6 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
-	private bool mortyMode = false;
     WeaponHandler weaponHandler;
 	
 	private string beamTitle = "BEAM", 
@@ -124,16 +123,44 @@ public class HudOn : MonoBehaviour {
 			PlayerManager.bankFull = true;
 			if (Input.GetKeyDown ("space"))
 			{
-				PlayerManager.energyBank = 0;
-				PlayerManager.bankFull = false;
-				gearReady = "";
+                PlayerManager.energyBank = 0;
+                PlayerManager.bankFull = false;
+                gearReady = "";
+
+                // Destroy existing vortices
+                GameObject[] vortices = GameObject.FindGameObjectsWithTag("vortex");
+                foreach (GameObject existingVortex in vortices) StartCoroutine(Vortex.shrink(existingVortex));
+
                 GameObject vortex = (GameObject)Resources.Load("Player/vortex");
+                float[] xvals = new float[playercount - 1];
+                float[] yvals = new float[playercount - 1];
+                float chunkX = (float) 0.5f / (playercount - 1);
+                float chunkY = (float) 0.8f / (playercount - 1);
                 for (int i = 0; i < playercount - 1; i++)
                 {
-                    float x = Random.Range(0.1f, 0.5f);
-                    float y = Random.Range(0.1f, 0.5f);
-                    float z = Random.Range(0.1f, 0.5f);
-                    Instantiate(vortex, new Vector3(x, y, z), Quaternion.identity);
+                    xvals[i] = Random.Range(0 + (i * chunkX), (i + 1) * chunkX);
+                    yvals[i] = Random.Range(0 + (i * chunkY), (i + 1) * chunkY);
+                }
+
+                for (var i = (playercount-2); i > 0; i--)
+                {
+                    int t = Random.Range(0, i);
+                    float temp = yvals[i];
+                    yvals[i] = yvals[t];
+                    yvals[t] = temp;
+                }
+
+                // Make n-1 new ones
+                for (int i = 0; i < playercount - 1; i++)
+                {
+                    float x = xvals[i];
+                    float y = yvals[i];
+                    Vector3 vortpoint = new Vector3(x, y, 25);
+                    Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
+                    Instantiate(vortex, vort, Quaternion.identity);
+                    vortex.name = "vortex" + (i + 1);
+                    vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
+                    vortex.tag = "vortex";
                 }
 			}
 		}

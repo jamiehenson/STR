@@ -6,21 +6,33 @@ public class Vortex : MonoBehaviour {
     private int i;
     private float growth = 0.015f;
 
-    IEnumerator grow()
+    public static IEnumerator grow(GameObject vortex)
     {
         float x = 0;
-        transform.localScale = new Vector3(0, 0, 0);
+        vortex.transform.localScale = new Vector3(0, 0, 0);
         while (x <= 4)
         {
             x += 0.05f;
-            transform.localScale = new Vector3(x, 0, x);
+            vortex.transform.localScale = new Vector3(x, 0, x);
             yield return new WaitForSeconds(0.01f);
         }
     }
 
+    public static IEnumerator shrink(GameObject vortex)
+    {
+        float x = 1;
+        while (x > 0)
+        {
+            x -= 0.01f;
+            vortex.transform.localScale = new Vector3(x, x, x);
+            yield return new WaitForSeconds(0.01f);
+        }
+        Destroy(vortex);
+    }
+
     void Start()
     {
-        StartCoroutine("grow");
+        StartCoroutine(grow(gameObject));
     }
 
 	void Update () {
@@ -41,4 +53,9 @@ public class Vortex : MonoBehaviour {
             i--;
         }
 	}
+
+    void OnCollisionEnter(Collision collision)
+    {
+        OnlineClient.moveUniverse(1, 1);
+    }
 }

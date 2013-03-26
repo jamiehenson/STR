@@ -75,6 +75,7 @@ public class SP : MonoBehaviour {
             iTween.FadeTo(browserbg, 0.75f, 4f);
             iTween.MoveTo(Camera.main.gameObject, new Vector3(75, 0, 0), 4);
             MP.joinScreen = true;
+            MP.refresh = true;
 		}
 	}
 }

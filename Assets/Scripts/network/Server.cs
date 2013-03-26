@@ -17,8 +17,9 @@ public class Server : MonoBehaviour {
     private Dictionary<NetworkViewID, string> viewIDChNameMapping;
     public NetworkView[] characterView;
     public Commander commander;
-    public bool startGame;
+    public bool startGame, manualGoAhead;
     public static string serverAddress;
+    public GUIStyle buttonStyle;
 
     // Use this for initialization
     void Start() {
@@ -108,23 +109,29 @@ public class Server : MonoBehaviour {
 		
 		// I am not sure this ever gets called, will add message, if not called for a while will comment out and see effect
         if (!startGame)
-            if (Network.connections.Length == 1)
+        {
+            if (manualGoAhead)
             {
-				Log.Warning("Tell Rob event #001 happened.");
+                print("LETS GO");
                 startGame = true;
                 for (int i = 1; i <= countUniverse; i++)
                 {
                     // Enable enemy generation
-                    commander = GameObject.Find("Universe" + i+ "/Managers/EnemyManager").GetComponent<Commander>();
+                    commander = GameObject.Find("Universe" + i + "/Managers/EnemyManager").GetComponent<Commander>();
                     commander.enabled = true;
                 }
-                
             }
+        }
     }
 
 	// When player disconnects, log event
     void OnPlayerDisconnected() {
         Log.Note("Clean up after player");
+    }
 
+    void OnGUI()
+    {
+        int x = 500;
+        if (!manualGoAhead) if (GUI.Button(new Rect((Screen.width / 2) - x/2, (Screen.height / 2) - x/4, x, x/2), "START GAME", buttonStyle)) manualGoAhead = true;
     }
 }
