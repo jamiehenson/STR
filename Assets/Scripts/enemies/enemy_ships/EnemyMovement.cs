@@ -122,8 +122,7 @@ public class EnemyMovement : MonoBehaviour {
     IEnumerator Shoot() {
         while (true) {
             if (inPlane) {
-                Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation,NetworkGroups.Universe[universeNb]
-                );
+                Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation,100+universeNb);
                 GameObject character = GameObject.Find("Character"+universeNb);
                 EnemyBulletSettings ebs = bullet.GetComponent<EnemyBulletSettings>();
                 Vector3 fireDirection = character.transform.position - gameObject.transform.position;

@@ -18,9 +18,9 @@ public class PlayerCollisions : MonoBehaviour {
         int randExplosion = Random.Range(1, 4);
         if (Network.isServer)
         {
-            if (randExplosion == 1) Network.Instantiate(explosionPrefab, gameObject.transform.position, gameObject.transform.rotation, NetworkGroups.Everyone);
-            else if (randExplosion == 2) Network.Instantiate(explosionPrefab2, gameObject.transform.position, gameObject.transform.rotation, NetworkGroups.Everyone);
-            else if (randExplosion == 3) Network.Instantiate(explosionPrefab3, gameObject.transform.position, gameObject.transform.rotation, NetworkGroups.Everyone);
+            if (randExplosion == 1) Network.Instantiate(explosionPrefab, gameObject.transform.position, gameObject.transform.rotation, 0);
+            else if (randExplosion == 2) Network.Instantiate(explosionPrefab2, gameObject.transform.position, gameObject.transform.rotation, 0);
+            else if (randExplosion == 3) Network.Instantiate(explosionPrefab3, gameObject.transform.position, gameObject.transform.rotation, 0);
         }
     }
 
@@ -32,8 +32,8 @@ public class PlayerCollisions : MonoBehaviour {
         Vector3 asteroid = new Vector3(gameObject.transform.position.x - (0.7f*gameObject.transform.localScale.x), gameObject.transform.position.y, gameObject.transform.position.z);
         if (Network.isServer)
         {
-            if (wepType == 1) Network.Instantiate(beamCrackle, asteroid, gameObject.transform.rotation, NetworkGroups.Everyone);
-            if (wepType == 2) Network.Instantiate(cannonCrackle, asteroid, gameObject.transform.rotation, NetworkGroups.Everyone);
+            if (wepType == 1) Network.Instantiate(beamCrackle, asteroid, gameObject.transform.rotation,0);
+            if (wepType == 2) Network.Instantiate(cannonCrackle, asteroid, gameObject.transform.rotation,0);
         }
     }
 

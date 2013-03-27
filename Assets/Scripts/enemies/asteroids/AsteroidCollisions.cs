@@ -117,7 +117,7 @@ public class AsteroidCollisions : MonoBehaviour {
                 break;
         }
         if (health <= 0 && Network.isServer) {
-            Network.Instantiate(explosion, transform.position, transform.rotation,NetworkGroups.Everyone);
+            Network.Instantiate(explosion, transform.position, transform.rotation,300);
             Network.Destroy(gameObject);
             int scoreAddition = (int) (100 * transform.localScale.x);
             HudOn.score += scoreAddition;

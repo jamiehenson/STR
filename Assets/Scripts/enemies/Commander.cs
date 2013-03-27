@@ -104,7 +104,7 @@ public class Commander : MonoBehaviour {
         if (randY) y = Random.Range(Positions.bottomBorder, Positions.topBorder);
         else y = character.transform.position.y;
         Vector3 astPosition = new Vector3(Positions.rightBorder + Positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Positions.baseZ);
-        Transform asteroid = (Transform)Network.Instantiate(asteroidPrefab, astPosition, new Quaternion(0, 0, 0, 0), NetworkGroups.Universe[universeN()]);
+        Transform asteroid = (Transform)Network.Instantiate(asteroidPrefab, astPosition, new Quaternion(0, 0, 0, 0), 100+universeN());
         asteroid.name = "Asteroid" + universeN();
         asteroid.transform.parent = transform.parent.parent.FindChild("Enemies");
         float sf = Random.Range(minAstScale, maxAstScale);
@@ -161,7 +161,7 @@ public class Commander : MonoBehaviour {
             default:
                 break;
         }
-        Transform enemy = (Transform)Network.Instantiate(enemyPrefab, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0),NetworkGroups.Universe[universeN()]);
+        Transform enemy = (Transform)Network.Instantiate(enemyPrefab, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0),100+universeN());
         enemy.name = "Enemy" + universeN();
         enemy.transform.parent = transform.parent.parent.FindChild("Enemies");
         EnemyManager eMan = enemy.GetComponent<EnemyManager>();

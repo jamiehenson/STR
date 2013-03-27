@@ -58,13 +58,13 @@ public class Server : MonoBehaviour {
         viewIDChNameMapping = new Dictionary<NetworkViewID, string>();
 		
 		// Initanitate the bridge
-        Network.Instantiate(Networkbridge, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), NetworkGroups.Everyone);
+        Network.Instantiate(Networkbridge, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 99);
 		
 		// Set up each universe
         for (int i = 1; i <= countUniverse; i++) {
 			// Instaniate in correct position
             Vector3 pos = new Vector3(0 + (i * 10000), 0, 0);
-            Transform obj = (Transform)Network.Instantiate(playerUniversePrefab, pos, new Quaternion(0, 0, 0, 0), NetworkGroups.Everyone);
+            Transform obj = (Transform)Network.Instantiate(playerUniversePrefab, pos, new Quaternion(0, 0, 0, 0), 99);
             universe[i] = obj;
 			
 			// Rename it to something useful and pass name to clients
@@ -74,7 +74,7 @@ public class Server : MonoBehaviour {
 			
 			// Instaniate charater in universe
             Vector3 position = new Vector3(pos.x - 8, pos.y, pos.z + 15);
-            Transform characterPlayer = (Transform)Network.Instantiate(characterPrefab, position, new Quaternion(0,0,0,0), NetworkGroups.Character[i]);
+            Transform characterPlayer = (Transform)Network.Instantiate(characterPrefab, position, new Quaternion(0,0,0,0), i);
 			
 			// Rename the character and pass name to clients
             characterPlayer.name = "Character" + i;
