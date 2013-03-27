@@ -7,5 +7,4 @@ public class NetworkGroups {
 	public static int[] Universe = {100,101,102,103,104};
 	public static int Everyone = 99;
 	public static int Bullets = 200;
-	
 }
