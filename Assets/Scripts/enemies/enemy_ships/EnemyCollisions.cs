@@ -34,16 +34,17 @@ public class EnemyCollisions : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         GameObject collided = other.gameObject;
-        string collidedName = collided.name;
-        switch (collidedName) {
-            case "Beam":
+        // Need to switch from name-based system to tag-based
+        string collidedTag = collided.tag;
+        switch (collidedTag) {
+            case "PlayerBeam":
                 // Do what we want for beam
                 Destroy(collided);
                 PlayerCollisions.WeaponBoom(gameObject, 1);
                 beamSmack.Play();
                 health = health - (WeaponHandler.beamDamage);
                 break;
-            case "Cannon":
+            case "PlayerCannon":
                 // Do what we want for cannon
                 Destroy(collided);
                 PlayerCollisions.WeaponBoom(gameObject, 2);
@@ -51,7 +52,7 @@ public class EnemyCollisions : MonoBehaviour {
                 iTween.MoveBy(gameObject, eManager.speed * (collided.rigidbody.velocity / 7), 1f);
                 health = health - (WeaponHandler.cannonDamage);
                 break;
-            case "Mine":
+            case "PlayerMine":
                 // Do what we want for mine
                 for (int i = 0; i < 40; i++) {
                     Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
@@ -69,12 +70,11 @@ public class EnemyCollisions : MonoBehaviour {
                 beamSmack.Play();
                 health = health - (WeaponHandler.mineDamage);
                 break;
-            case "Mine Fragment":
+            case "MineFrag":
                 beamSmack.Play();
                 health = health - (WeaponHandler.mineFragmentDamage);
                 Destroy(collided);
                 break;
-            case "Player":
             case "Enemy":
                 // Do what we want for hitting anther enemy (not yet perfected)
                 eMove.randPos = eMove.startPos + eMove.randPos;
