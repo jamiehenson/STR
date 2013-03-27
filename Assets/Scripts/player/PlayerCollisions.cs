@@ -62,7 +62,7 @@ public class PlayerCollisions : MonoBehaviour {
             if (Network.isServer)
             {
                 networkView.RPC("destroyObject", RPCMode.All);
-                Destroy(gameObject);
+                Network.Destroy(gameObject);
             }
         }
     }
