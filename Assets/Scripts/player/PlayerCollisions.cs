@@ -39,10 +39,11 @@ public class PlayerCollisions : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision) {
         GameObject collided = collision.collider.gameObject;
-        string collidedName = collided.name;
+        //string collidedName = collided.name;
+        string tag = collided.tag;
 
-        switch (collidedName) {
-            case "EnemyBullet":
+        switch (tag) {
+            case "EnemyWeapon":
                 // Do what we want for EnemyBullet
                 Network.Destroy(collided);
                 smack.Play();
