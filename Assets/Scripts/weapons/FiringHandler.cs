@@ -67,7 +67,7 @@ public class FiringHandler : MonoBehaviour {
 		weaponHandler.Update();
 		
 		// Place Weapon
-		Vector3 startPos = new Vector3(transform.position.x + 3, transform.position.y, transform.position.z);
+		Vector3 startPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
 		Physics.IgnoreCollision(bullet.collider, transform.collider);
 		
