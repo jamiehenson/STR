@@ -42,14 +42,14 @@ public class EnemyCollisions : MonoBehaviour {
         switch (collidedTag) {
             case "PlayerBeam":
                 // Do what we want for beam
-                Destroy(collided);
+                Network.Destroy(collided);
                 PlayerCollisions.WeaponBoom(gameObject, 1);
                 beamSmack.Play();
                 health = health - (WeaponHandler.beamDamage);
                 break;
             case "PlayerCannon":
                 // Do what we want for cannon
-                Destroy(collided);
+                Network.Destroy(collided);
                 PlayerCollisions.WeaponBoom(gameObject, 2);
                 cannonSmack.Play();
                 iTween.MoveBy(gameObject, eManager.speed * (collided.rigidbody.velocity / 7), 1f);
@@ -69,14 +69,14 @@ public class EnemyCollisions : MonoBehaviour {
                     Physics.IgnoreCollision(fragment.collider, gameObject.collider);
                     fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * eManager.force);
                 }
-                Destroy(collided);
+                Network.Destroy(collided);
                 beamSmack.Play();
                 health = health - (WeaponHandler.mineDamage);
                 break;
             case "MineFrag":
                 beamSmack.Play();
                 health = health - (WeaponHandler.mineFragmentDamage);
-                Destroy(collided);
+                Network.Destroy(collided);
                 break;
             case "Enemy":
                 // Do what we want for hitting anther enemy (not yet perfected)

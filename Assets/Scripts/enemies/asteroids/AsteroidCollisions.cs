@@ -47,48 +47,42 @@ public class AsteroidCollisions : MonoBehaviour {
 			return;
 		
         GameObject collided = other.gameObject;
-        string collidedName = collided.name;
-        string collidedNamePrefix;
+        string collidedTag = collided.tag;
 
-        if (collidedName.StartsWith("Enemy") && !collidedName.StartsWith("EnemyBullet")) collidedNamePrefix = "Enemy";
-        else if (collidedName.StartsWith("Character")) collidedNamePrefix = "Character";
-        else if (collidedName.StartsWith("beam")) collidedNamePrefix = "Beam";
-        else if (collidedName.StartsWith("cannon")) collidedNamePrefix = "Cannon";
-        else if (collidedName.StartsWith("mine")) collidedNamePrefix = "Mine";
-        else collidedNamePrefix = collidedName; 
-
-        switch (collidedNamePrefix) {
-            case "EnemyBullet":
-                if (Network.isServer) Network.Destroy(collided);
+        switch (collidedTag) {
+            case "EnemyWeapon":
+                Network.Destroy(collided);
                 break;
             case "Enemy":
                 PlayerCollisions.Boom(collided);
-                if (Network.isServer) Network.Destroy(collided);
+                Network.Destroy(collided);
                 break;
-            case "Character":
+            case "Player":
                 PlayerManager.hitPoints -= asteroidDamage * gameObject.transform.localScale.x;
                 // Explode  asteroid only on the Client (don't network.instantiate it), then destroy from the Server
-                if (Network.isClient)
+                /*if (Network.isClient)
                 {
                     Instantiate(explosion, transform.position, transform.rotation);
                     networkView.RPC("destroyAfterExplosion", RPCMode.Server);
-                }
+                }*/
+                health = 0;
                 break;
-            case "Beam":
+            case "PlayerBeam":
                 // Do what we want for beam
                 PlayerCollisions.WeaponBoom(gameObject, 1);
-                if (Network.isServer) Network.Destroy(collided);
+                Network.Destroy(collided);
                 health = health - (WeaponHandler.beamDamage);
                 break;
-            case "Cannon":
+            case "PlayerCannon":
                 // Do what we want for cannon
                 PlayerCollisions.WeaponBoom(gameObject, 2);
+                Network.Destroy(collided);
                 iTween.MoveBy(gameObject, new Vector3(collided.rigidbody.velocity.x/10,collided.rigidbody.velocity.y/10,0), 4f);
                 iTween.RotateAdd(gameObject, new Vector3(50,50), 5f);
                 
                 health = health - (WeaponHandler.cannonDamage);
                 break;
-            case "Mine":
+            case "PlayerMine":
                 // Do what we want for mine
                 if (Network.isClient)
                 {
@@ -109,20 +103,21 @@ public class AsteroidCollisions : MonoBehaviour {
                     }
                     networkView.RPC("destroyAfterExplosion", RPCMode.Server);
                 }
+                Network.Destroy(collided);
                 health = health - (WeaponHandler.mineDamage);
                 
                 break;
-            case "Mine Fragment":
+            case "MineFrag":
                 health = health - (WeaponHandler.mineFragmentDamage);
-                Destroy(collided);
+                Network.Destroy(collided);
                 break;
             default:
                 break;
         }
         if (health <= 0 && Network.isServer) {
-            Network.Instantiate(explosion, transform.position, transform.rotation,300);
+            Network.Instantiate(explosion, transform.position, transform.rotation,0);
             Network.Destroy(gameObject);
-            int scoreAddition = (int) (100 * transform.localScale.x);
+            int scoreAddition = (int)(100 * transform.localScale.x);
             HudOn.score += scoreAddition;
             StartCoroutine(XP("+" + scoreAddition));
         }
