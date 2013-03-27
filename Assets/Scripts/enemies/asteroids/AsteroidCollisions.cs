@@ -43,6 +43,9 @@ public class AsteroidCollisions : MonoBehaviour {
 
     // Set to destroy all in their path!
     void OnTriggerEnter(Collider other) {
+		if (Network.isClient)
+			return;
+		
         GameObject collided = other.gameObject;
         string collidedName = collided.name;
         string collidedNamePrefix;

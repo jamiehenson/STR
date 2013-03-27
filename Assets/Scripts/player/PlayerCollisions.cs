@@ -38,6 +38,9 @@ public class PlayerCollisions : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision collision) {
+		if (Network.isClient)
+			return;
+		
         GameObject collided = collision.collider.gameObject;
         //string collidedName = collided.name;
         string tag = collided.tag;

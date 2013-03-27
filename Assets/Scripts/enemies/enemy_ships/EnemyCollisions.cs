@@ -33,6 +33,9 @@ public class EnemyCollisions : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
+		if (Network.isClient)
+			return;
+		
         GameObject collided = other.gameObject;
         // Need to switch from name-based system to tag-based
         string collidedTag = collided.tag;

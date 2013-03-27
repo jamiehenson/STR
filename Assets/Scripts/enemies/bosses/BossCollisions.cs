@@ -33,6 +33,9 @@ public class BossCollisions : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
+		if (Network.isClient)
+			return;
+		
         GameObject collided = other.gameObject;
         string collidedName = collided.name;
         switch (collidedName) {
