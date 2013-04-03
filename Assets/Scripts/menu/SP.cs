@@ -4,6 +4,7 @@ using System.Collections;
 public class SP : MonoBehaviour {
 	private bool menuSP = false;
 	public static bool singleplayerStart;
+	private string coPilotName;
 
     private GameObject header;
     private GameObject subheader;
@@ -14,6 +15,9 @@ public class SP : MonoBehaviour {
     private GameObject proceedtext;
     private GameObject refresh;
     private GameObject flagbg;
+	private GameObject serverLimitBox;
+	private GameObject heading2;
+	private GameObject coPilot;
 	
 	void Start () {
 		GameObject PopSP = GameObject.Find ("PopSP");
@@ -31,6 +35,9 @@ public class SP : MonoBehaviour {
         proceedtext = GameObject.Find("Proceed text");
         refresh = GameObject.Find("Refresh");
         flagbg = GameObject.Find("SBrowserBG");
+		serverLimitBox = GameObject.Find("SDetailsLimitBox");
+		heading2 = GameObject.Find("SPlayerLimit");
+		coPilot = GameObject.Find("SCoPilot");
 	}
 
 	void OnMouseEnter() {
@@ -64,6 +71,8 @@ public class SP : MonoBehaviour {
             header.GetComponent<TextMesh>().text = "JOIN ONLINE GAME";
             subheader.GetComponent<TextMesh>().text = "CHOOSE AN ONLINE SERVER TO JOIN";
             heading1.GetComponent<TextMesh>().text = "AVAILABLE SERVERS";
+			coPilot.GetComponent<TextMesh>().text = FetchPlayerName();
+			
             GameObject browserbg = GameObject.Find("SBrowserBG");
             serverNameBox.renderer.enabled = false;
             foreach (GameObject component in playerdetails) component.renderer.enabled = true;
@@ -71,6 +80,9 @@ public class SP : MonoBehaviour {
             proceedtext.renderer.enabled = false;
             refresh.renderer.enabled = true;
             flagbg.renderer.enabled = true;
+			heading2.renderer.enabled = false;
+			serverLimitBox.renderer.enabled = false;
+			coPilot.renderer.enabled = true;
 
             iTween.FadeTo(browserbg, 0.75f, 4f);
             iTween.MoveTo(Camera.main.gameObject, new Vector3(75, 0, 0), 4);
@@ -78,4 +90,65 @@ public class SP : MonoBehaviour {
             MP.refresh = true;
 		}
 	}
+	
+		private string FetchPlayerName() {
+        ArrayList rank = new ArrayList();
+            rank.Add("Pvt. ");
+            rank.Add("Sgt. ");
+            rank.Add("Lt. ");
+            rank.Add("Cpt. ");
+            rank.Add("Maj. ");
+
+		ArrayList player = new ArrayList();
+            player.Add("Andrew");
+            player.Add("Bergmann");
+            player.Add("Bessey");
+            player.Add("Blackmore");
+            player.Add("Briggs");
+            player.Add("Brown");
+            player.Add("Collins");
+            player.Add("Clark");
+            player.Add("Coales");
+            player.Add("Cobbe-Warburton");
+            player.Add("Collins");
+            player.Add("Davies");
+            player.Add("Dennis");
+            player.Add("Diop");
+            player.Add("Domenge");
+            player.Add("Edwards-Jones");
+            player.Add("Ford");
+            player.Add("Ghumran");
+            player.Add("Grant");
+            player.Add("Gulliver");
+            player.Add("Hart");
+            player.Add("Henson");
+            player.Add("Jeufo");
+            player.Add("Jones");
+            player.Add("Joyce");
+            player.Add("Lamb");
+            player.Add("Latimer");
+            player.Add("Lewis");
+            player.Add("Lisle");
+            player.Add("Livingston");
+            player.Add("Lloyd");
+            player.Add("Lockyer");
+            player.Add("Matusiewicz");
+            player.Add("McIntosh");
+            player.Add("Muir");
+            player.Add("Nelson");
+            player.Add("Ogilvie");
+            player.Add("Otrocol");
+            player.Add("Patrichi");
+            player.Add("Reed");
+            player.Add("Simeria");
+            player.Add("Stewart");
+            player.Add("Timms");
+            player.Add("Uttamchandani");
+            player.Add("Webb");
+            player.Add("Whiteley");
+            player.Add("Wybourn");
+		string winner = (string)  rank[(int) Random.Range(0,rank.Count)] + player[(int) Random.Range(0,player.Count)];
+		return winner.ToUpper();
+	}
+	
 }

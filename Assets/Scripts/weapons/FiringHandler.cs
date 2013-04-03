@@ -39,7 +39,7 @@ public class FiringHandler : MonoBehaviour {
         timer += Time.deltaTime;
 
 		// Is player firing?
-		if (Network.isClient && myCharacter && Input.GetButton("Fire1") && timer >= weaponHandler.wepRate && PlayerManager.energyLevel != 0)
+		if (Network.isClient && myCharacter && Input.GetButton("Primary Fire") && timer >= weaponHandler.wepRate && PlayerManager.energyLevel != 0)
 		{   
             // Can I fire?
 			if (PlayerManager.energyLevel - PlayerManager.selectedWepDrain >= 0)

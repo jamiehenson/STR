@@ -11,14 +11,20 @@ public class PlayerManager : MonoBehaviour {
     public static int bankSize = 10000;
     public static bool bankFull;
     public static float speed;
-    public static string playername;
+    private string playername = "b";
+	private int characterNum = 0;
 	
 	// Character-centric player stats
 	public static string activeChar;
 	public static int wepType;
 	public static float damageMultiplier;
 	public static float energyMultiplier;
-
+	
+	private bool myCharacter;
+	public static string playerNameTemp = "";
+	private bool i;	
+	public string[] playerNames = new string[4];
+	
 	public static void InitialiseStats()
 	{
 		switch(activeChar) {              
@@ -88,5 +94,46 @@ public class PlayerManager : MonoBehaviour {
         if (energyLevel <= 0) energyLevel = 1;
 		if (hitPoints < 0) hitPoints = 0;
         if (!bankFull) energyBank += (startEnergy / 1500);
+		if(playerNameTemp != "")
+		{
+			playername = playerNameTemp;
+			print("Name 2 : " + playername);
+			i = false;
+			playerNameTemp = "";
+		}
+		
+		if(Network.isClient && !i) {
+			networkView.RPC("updateName", RPCMode.Server, playername, characterNum);
+		}
+		if(Network.isServer) print ("NameServer: " + playername + ", " + characterNum);
+		
 	}
+
+	[RPC]
+	void updateName(string pn, int num) {
+		playername = pn;
+		characterNum = num;
+	}
+	
+	public string returnName()
+	{
+		return playername;
+	}
+	
+	public static void setName(string pn)
+	{
+		playerNameTemp = pn;
+		Debug.Log ("Name: " + playerNameTemp);
+	}
+	
+	public int returnNum()
+    {
+        return characterNum;
+    }
+	
+	public void activateCharacter(int charNum)
+    {
+		characterNum = charNum;
+		myCharacter = true;
+    }
 }

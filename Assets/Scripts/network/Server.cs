@@ -20,6 +20,7 @@ public class Server : MonoBehaviour {
     public bool startGame, manualGoAhead;
     public static string serverAddress;
     public GUIStyle buttonStyle;
+	private string playersJoined;
 
     // Use this for initialization
     void Start() {
@@ -99,15 +100,20 @@ public class Server : MonoBehaviour {
             Network.SetSendingEnabled(player, i, i == nextPlayerID);
         }
 		
-		Log.Note("Player has connected" + playerCount++ + "connected from" + player.ipAddress + ":" + player.port);
-		
 		// Send bridge data to send to client when its ready
         bridge.addPlayer(player);
         bridge.setUniverse(nextPlayerID, player);
         bridge.updateUniverseNames(viewIDNameMapping, player);
         bridge.updateCharacterNames(viewIDChNameMapping, player);
 		
-		// I am not sure this ever gets called, will add message, if not called for a while will comment out and see effect
+		GameObject activeChar = GameObject.Find("Character" + nextPlayerID);
+		PlayerManager pm = activeChar.GetComponent<PlayerManager>();
+		string playerName = pm.returnName();
+		int characterNum = 0;
+		
+		playersJoined = playersJoined + "Character " + characterNum + ": " + playerName + " has joined the game...\n";
+		Log.Note("Player has connected" + playerCount++ + "connected from" + player.ipAddress + ":" + player.port);
+		
         if (!startGame)
         {
             if (manualGoAhead)
@@ -126,12 +132,16 @@ public class Server : MonoBehaviour {
 
 	// When player disconnects, log event
     void OnPlayerDisconnected() {
-        Log.Note("Clean up after player");
+		//GameObject activeChar = GameObject.Find("Character" + nextPlayerID);
+		//PlayerManager pm = activeChar.GetComponent<PlayerManager>();
+		//string playername = pm.returnName();
+        //playersJoined = playersJoined + "Character " + nextPlayerID + ": " + playername + " has left the game...\n";
     }
 
     void OnGUI()
     {
-        int x = 500;
+        int x = 400;
         if (!manualGoAhead) if (GUI.Button(new Rect((Screen.width / 2) - x/2, (Screen.height / 2) - x/4, x, x/2), "START GAME", buttonStyle)) manualGoAhead = true;
+		GUI.Label(new Rect(Screen.width/4, Screen.height*0.75f, Screen.width/2, 200), playersJoined);
     }
 }

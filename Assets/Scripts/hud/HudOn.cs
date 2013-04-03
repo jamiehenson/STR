@@ -203,7 +203,7 @@ public class HudOn : MonoBehaviour {
 		wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
         flag = (Texture2D)Resources.Load("hud/" + PlayerManager.activeChar);
 
-        charName = PlayerManager.playername;
+        charName = MP.playerName;
 
         if (Network.isClient)
         {
