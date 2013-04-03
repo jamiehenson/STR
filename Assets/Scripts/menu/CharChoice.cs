@@ -73,7 +73,7 @@ public class CharChoice : MonoBehaviour {
         GameObject warpingSphere = GameObject.Find("SDetailsWarpingSphere");
         GameObject warpingSphere2 = GameObject.Find("SDetailsWarpingSphere2");
         GameObject warpingSphere3 = GameObject.Find("SDetailsWarpingSphere3");
-
+		
         switch (character)
         {
             case "china":
