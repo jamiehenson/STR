@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour {
 			else gameObject.transform.Rotate(0,-90,0);
 		}	
       }
+		print ("Rotation: " + rotation + ", Rottoggle: " + rottoggle + ": " + gameObject.transform.rotation);
 	}
 
     [RPC]

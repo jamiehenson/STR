@@ -21,8 +21,8 @@ public class MP : MonoBehaviour
     private float btnW = Screen.width * 0.4f;
     private float btnH = Screen.width * 0.05f;
 	
-	private GameObject header, subheader, heading1, heading2, serverNameBox, serverLimitBox, proceed, proceedtext, refreshbutton, flagbg, coPilot;
-	private GameObject[] playerdetails;
+	private GameObject header, subheader, heading1, heading2, serverNameBox, serverLimitBox, proceed, proceedtext, refreshbutton, flagbg, coPilot, flagBox;
+	private GameObject[] playerdetails, playerballs;
 
     void Start()
     {
@@ -33,11 +33,13 @@ public class MP : MonoBehaviour
         serverNameBox = GameObject.Find("SDetailsNameBox2");
         serverLimitBox = GameObject.Find("SDetailsLimitBox");
         playerdetails = GameObject.FindGameObjectsWithTag("Player Details");
+		playerballs = GameObject.FindGameObjectsWithTag("Player Balls");
         proceed = GameObject.Find("SBrowser - proceed");
         proceedtext = GameObject.Find("Proceed text");
         refreshbutton = GameObject.Find("Refresh");
         flagbg = GameObject.Find("SBrowserBG");
 		coPilot = GameObject.Find ("SCoPilot");
+		flagBox = GameObject.Find("SFlag");
 			
         MasterServer.ipAddress = "54.243.193.180";
         MasterServer.port = 23466;
@@ -158,12 +160,14 @@ public class MP : MonoBehaviour
             serverNameBox.renderer.enabled = true;
 			serverLimitBox.renderer.enabled = true;
             foreach (GameObject component in playerdetails) component.renderer.enabled = false;
+			foreach (GameObject component in playerballs) component.renderer.enabled = false;
             proceed.renderer.enabled = true;
             proceedtext.renderer.enabled = true;
             refreshbutton.renderer.enabled = false;
             flagbg.renderer.enabled = false;
 			heading2.renderer.enabled = true;
 			coPilot.renderer.enabled = false;
+			flagBox.renderer.enabled = false;
 
             GameObject browserbg = GameObject.Find("SBrowserBG");
             iTween.FadeTo(browserbg, charbgAlpha, 4f);

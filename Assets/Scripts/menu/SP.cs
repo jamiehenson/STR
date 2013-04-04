@@ -6,18 +6,9 @@ public class SP : MonoBehaviour {
 	public static bool singleplayerStart;
 	private string coPilotName;
 
-    private GameObject header;
-    private GameObject subheader;
-    private GameObject heading1;
-    private GameObject serverNameBox;
-    private GameObject[] playerdetails;
-    private GameObject proceed;
-    private GameObject proceedtext;
-    private GameObject refresh;
-    private GameObject flagbg;
-	private GameObject serverLimitBox;
-	private GameObject heading2;
-	private GameObject coPilot;
+    private GameObject header,subheader,heading1,serverNameBox,proceed,proceedtext,refresh,flagbg,serverLimitBox,heading2,coPilot,flagBox;
+	private GameObject[] playerdetails;
+	private Object[] flags;
 	
 	void Start () {
 		GameObject PopSP = GameObject.Find ("PopSP");
@@ -38,6 +29,9 @@ public class SP : MonoBehaviour {
 		serverLimitBox = GameObject.Find("SDetailsLimitBox");
 		heading2 = GameObject.Find("SPlayerLimit");
 		coPilot = GameObject.Find("SCoPilot");
+		flagBox = GameObject.Find("SFlag");
+		flagBox.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
+		flags = Resources.LoadAll("menu/flags", typeof(Texture2D));
 	}
 
 	void OnMouseEnter() {
@@ -72,6 +66,7 @@ public class SP : MonoBehaviour {
             subheader.GetComponent<TextMesh>().text = "CHOOSE AN ONLINE SERVER TO JOIN";
             heading1.GetComponent<TextMesh>().text = "AVAILABLE SERVERS";
 			coPilot.GetComponent<TextMesh>().text = FetchPlayerName();
+			flagBox.GetComponent<Renderer>().material.mainTexture = (Texture2D) flags[Random.Range(0,flags.Length)];
 			
             GameObject browserbg = GameObject.Find("SBrowserBG");
             serverNameBox.renderer.enabled = false;
@@ -83,6 +78,7 @@ public class SP : MonoBehaviour {
 			heading2.renderer.enabled = false;
 			serverLimitBox.renderer.enabled = false;
 			coPilot.renderer.enabled = true;
+			flagBox.renderer.enabled = true;
 
             iTween.FadeTo(browserbg, 0.75f, 4f);
             iTween.MoveTo(Camera.main.gameObject, new Vector3(75, 0, 0), 4);
@@ -91,7 +87,7 @@ public class SP : MonoBehaviour {
 		}
 	}
 	
-		private string FetchPlayerName() {
+	private string FetchPlayerName() {
         ArrayList rank = new ArrayList();
             rank.Add("Pvt. ");
             rank.Add("Sgt. ");
@@ -134,6 +130,7 @@ public class SP : MonoBehaviour {
             player.Add("Lockyer");
             player.Add("Matusiewicz");
             player.Add("McIntosh");
+			player.Add("Mortensson");
             player.Add("Muir");
             player.Add("Nelson");
             player.Add("Ogilvie");
@@ -150,5 +147,4 @@ public class SP : MonoBehaviour {
 		string winner = (string)  rank[(int) Random.Range(0,rank.Count)] + player[(int) Random.Range(0,player.Count)];
 		return winner.ToUpper();
 	}
-	
 }
