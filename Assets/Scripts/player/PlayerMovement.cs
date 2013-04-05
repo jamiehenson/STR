@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool myCharacter;
     private float vertDist;
     private float horDist;
-	private bool rotation, rottoggle = true, camtoggle;
+	private bool rotation, rottoggle, camtoggle, rotexception;
     private int universeNum = 1;
     public Universe positions;
     private int characterNum;
@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		startingPos = gameObject.transform.position;
 		startingRot = new Vector3(0,0,0);	
+		camtoggle = false;
+		rottoggle = true;
 	}
 
     public void activateCharacter(int charNum, int univNum)
@@ -31,82 +33,90 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		int direction = (toggle) ? 1 : -1;
 		
-		if (toggle || camtoggle)
+		if (toggle)
     	{
-			iTween.MoveTo(gameObject, new Vector3(startingPos.x,gameObject.transform.position.y,Positions.baseZ), 1);
+			iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, Positions.baseZ), 1);
 			iTween.RotateTo(gameObject, startingRot, 1);
 		}
 		else
 		{
-			iTween.MoveTo(gameObject, new Vector3(startingPos.x + 4, gameObject.transform.position.y, Positions.baseZ - 5), 1);
+			iTween.MoveTo(gameObject, new Vector3(startingPos.x + 4, startingPos.y - 2, Positions.baseZ - 5), 1);
 			iTween.RotateBy(gameObject, new Vector3(0, direction * 0.25f, 0), 1);
 		}
-
-        toggle = !toggle;
-		yield return new WaitForSeconds(1.5f);	
+		yield return new WaitForSeconds(1f);	
 	}
 	
 	public IEnumerator rotateCamera(bool cameraBehind) 
 	{
 		int direction = (cameraBehind) ? 1 : -1;
-        iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 30f, 0, direction * 6f), 2f);
-        iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2f);
-		iTween.MoveBy(gameObject, new Vector3(gameObject.transform.position.x-10, gameObject.transform.position.y, gameObject.transform.position.z), 1f);
-		
-		if (cameraBehind) StartCoroutine("rotateChar",true);
-		
-        cameraBehind = !cameraBehind;
+        iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * 4), 2);
+        iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
+		iTween.MoveBy(gameObject, new Vector3(-10, 0, 0), 1f);
 		yield return new WaitForSeconds(2);
 	}
 
 	// Update is called once per frame
-	void Update () {
-      if (Network.isClient && myCharacter) {
-            float vertDist = PlayerManager.speed * Input.GetAxis("Vertical") * Time.deltaTime;
-            float horDist = PlayerManager.speed * Input.GetAxis("Horizontal") * Time.deltaTime;
+	void Update () 
+	{
+	    if (Network.isClient && myCharacter) 
+		{
+	        float vertDist = PlayerManager.speed * Input.GetAxis("Vertical") * Time.deltaTime;
+	        float horDist = PlayerManager.speed * Input.GetAxis("Horizontal") * Time.deltaTime;
 			
 			// If R is pressed, rotate the character, toggling 90 degrees
 			if (Input.GetButtonDown("Rotate Character")) charRotate = true;
-			else charRotate = false;
 			
 			if (Input.GetKeyDown("t")) 
 			{
 				StartCoroutine("rotateCamera",camtoggle);
+				rotexception = true;
 				camtoggle = !camtoggle;
 			}
 			
-			if (charRotate) {
+			if (rotexception) 
+			{
+				if (camtoggle == true) 
+				{
+					rotation = true; 
+					rottoggle = true;
+				}
+				else if (camtoggle == false) rottoggle = true;
+				rotexception = false;
+			}
+			else if (charRotate && camtoggle == false) 
+			{
 				rotation = true;
 				rottoggle = !rottoggle;
-			} else {
-				rotation = false;
-			}
+			} 
+			else rotation = false;
+			
+			charRotate = false;
 						
-            networkView.RPC("moveCharacter", RPCMode.Server, vertDist, horDist, rotation, rottoggle, camtoggle);
-
-            // Warp between universes
-            string x = Input.inputString;
-            if (x.Equals("4") || x.Equals("5") || x.Equals("6") || x.Equals("7"))
-            {
-                int num = int.Parse(x);
-                OnlineClient.moveUniverse(num , characterNum);
-                networkView.RPC("updateUniverse", RPCMode.Server, num-3);
-            }
-
-        }
+	        networkView.RPC("moveCharacter", RPCMode.Server, vertDist, horDist, rotation, rottoggle, camtoggle);
+	
+	        // Warp between universes
+	        string x = Input.inputString;
+	        if (x.Equals("4") || x.Equals("5") || x.Equals("6") || x.Equals("7"))
+	        {
+	            int num = int.Parse(x);
+	            OnlineClient.moveUniverse(num , characterNum);
+	            networkView.RPC("updateUniverse", RPCMode.Server, num-3);
+	        }	
+		}
       else if (Network.isServer)
       {  
         if (vertDist != 0 || horDist != 0)
         {
             positions = GameObject.Find("Universe"+universeNum+"/Managers/OriginManager").GetComponent<Universe>();
             
+			// Stop the lad from going out of bounds
 			// Standard orientation
 			if (rottoggle && !camtoggle) 
 			{
 				gameObject.transform.Translate(horDist, vertDist, 0);
 				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), transform.position.z);
 			}
-				
+	
 			// When rotated to face into the screen
 			else if (!rottoggle && !camtoggle)
 			{
@@ -124,17 +134,13 @@ public class PlayerMovement : MonoBehaviour {
 			{
 				gameObject.transform.Translate(0,vertDist,-horDist);
 				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightBorder), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), transform.position.z);
-			}	
-					
-			// Stop the lad from going out of bounds	
-            
+			}	            
         }
 		if (rotation)
 		{
 			StartCoroutine("rotateChar",rottoggle);
 		}	
-      }
-		
+      }	
 	}
 
     [RPC]
@@ -150,7 +156,6 @@ public class PlayerMovement : MonoBehaviour {
     [RPC]
     public void updateUniverse(int univNum)
     {
-       // characterNum = charNum;
         universeNum = univNum;
     }
 }
