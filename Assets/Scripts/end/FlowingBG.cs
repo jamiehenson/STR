@@ -6,11 +6,6 @@ public class FlowingBG : MonoBehaviour {
 	public Transform BG;
 	private bool notcopied = true;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		transform.Translate(Vector3.left * Time.deltaTime * 8);

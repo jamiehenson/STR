@@ -140,8 +140,13 @@ public class Server : MonoBehaviour {
 
     void OnGUI()
     {
+		Texture2D svrbg = HudOn.fillTex(Screen.width,Screen.height,Color.black);
+		Texture2D svrTitle = (Texture2D) Resources.Load ("hud/svrTitle");
+		GUI.Box(new Rect(0,0,Screen.width,Screen.height),svrbg);
+		GUI.Label (new Rect(Screen.width/2-200, 0, 400, 200),svrTitle);
         int x = 400;
-        if (!manualGoAhead) if (GUI.Button(new Rect((Screen.width / 2) - x/2, (Screen.height / 2) - x/4, x, x/2), "START GAME", buttonStyle)) manualGoAhead = true;
+        if (!manualGoAhead) if (GUI.Button(new Rect((Screen.width / 2) - x/2, (Screen.height / 2) - x/8, x, x/4), "START GAME", buttonStyle)) manualGoAhead = true;
 		GUI.Label(new Rect(Screen.width/4, Screen.height*0.75f, Screen.width/2, 200), playersJoined);
+		if (GUI.Button(new Rect(Screen.width/4,Screen.height*0.9f, Screen.width/2, 50), "QUIT SERVER", buttonStyle)) Application.LoadLevel("menu");
     }
 }
