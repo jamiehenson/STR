@@ -81,7 +81,11 @@ public class OnlineClient : MonoBehaviour
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Universe"))
         {
             NetworkViewID id = obj.networkView.viewID;
-            if (ID == id) obj.name = name;
+            if (ID == id) {
+				obj.name = name;
+				if (!name.Equals("Universe1"))
+					obj.GetComponentInChildren<BackgroundGenerator>().enabled = false;
+			}
         }
 
     }
