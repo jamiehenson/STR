@@ -142,7 +142,7 @@ public class Server : MonoBehaviour {
     {
 		Texture2D svrbg = HudOn.fillTex(Screen.width,Screen.height,Color.black);
 		Texture2D svrTitle = (Texture2D) Resources.Load ("hud/svrTitle");
-		GUI.Box(new Rect(0,0,Screen.width,Screen.height),svrbg);
+		//GUI.Box(new Rect(0,0,Screen.width,Screen.height),svrbg);
 		GUI.Label (new Rect(Screen.width/2-200, 0, 400, 200),svrTitle);
         int x = 400;
         if (!manualGoAhead) if (GUI.Button(new Rect((Screen.width / 2) - x/2, (Screen.height / 2) - x/8, x, x/4), "START GAME", buttonStyle)) manualGoAhead = true;
