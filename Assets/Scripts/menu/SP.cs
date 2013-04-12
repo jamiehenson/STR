@@ -4,7 +4,8 @@ using System.Collections;
 public class SP : MonoBehaviour {
 	private bool menuSP = false;
 	public static bool singleplayerStart;
-	private string coPilotName;
+	public static string coPilotName = "MORT";
+	public static Texture2D coPilotFlag = (Texture2D) Resources.Load("menu/flags/northkorea");
 
     private GameObject header,subheader,heading1,serverNameBox,proceed,proceedtext,refresh,flagbg,serverLimitBox,heading2,coPilot,flagBox;
 	private GameObject[] playerdetails;
@@ -32,6 +33,7 @@ public class SP : MonoBehaviour {
 		flagBox = GameObject.Find("SFlag");
 		flagBox.GetComponent<Renderer>().material.shader = Shader.Find("Transparent/Diffuse");
 		flags = Resources.LoadAll("menu/flags", typeof(Texture2D));
+		coPilotFlag = (Texture2D) flags[1];
 	}
 
 	void OnMouseEnter() {
@@ -65,8 +67,10 @@ public class SP : MonoBehaviour {
             header.GetComponent<TextMesh>().text = "JOIN ONLINE GAME";
             subheader.GetComponent<TextMesh>().text = "CHOOSE AN ONLINE SERVER TO JOIN";
             heading1.GetComponent<TextMesh>().text = "AVAILABLE SERVERS";
-			coPilot.GetComponent<TextMesh>().text = FetchPlayerName();
-			flagBox.GetComponent<Renderer>().material.mainTexture = (Texture2D) flags[Random.Range(0,flags.Length)];
+			coPilotName = FetchPlayerName();
+			coPilot.GetComponent<TextMesh>().text = coPilotName;
+			coPilotFlag = (Texture2D) flags[Random.Range(0,flags.Length)];
+			flagBox.GetComponent<Renderer>().material.mainTexture = coPilotFlag;
 			
             GameObject browserbg = GameObject.Find("SBrowserBG");
             serverNameBox.renderer.enabled = false;
