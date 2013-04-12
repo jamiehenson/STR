@@ -63,6 +63,12 @@ public class Commander : MonoBehaviour {
 
     public Universe Positions;
 
+    /* Keep track of characters in universe. <-- Easter present for Ben !!*/
+    /* How it works: For each Commander script in each Universe, there is an activeCharacters bool array that
+     * determines which character is active in the respective universe. The count is started for simplicity
+     * from 1 (activeCharacters[1] refers to the status of the first character in the current universe).*/
+    private bool[] activeCharacters;
+
     List<int> masterDiffStats = new List<int>();
 
     // ******Determine by which prefab is the script called***** 
@@ -230,6 +236,9 @@ public class Commander : MonoBehaviour {
             asteroidCount[universeN()] = 0;
             enemyCount[universeN()] = 0;
             StartCoroutine("StartGame");
+
+            activeCharacters = new bool[countUniverse];
+            activeCharacters[universeN()] = true;
         }
     }
 
@@ -377,5 +386,11 @@ public class Commander : MonoBehaviour {
 
     public void BossDestroyed() {
         bossDeployed = false;
+    }
+
+    /* Notify Server Commander script about post warp positions*/
+    public void updateActiveChar(int characterNum, bool val)
+    {
+        if (activeCharacters != null) activeCharacters[characterNum] = val;
     }
 }

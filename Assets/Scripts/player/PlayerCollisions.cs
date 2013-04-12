@@ -4,11 +4,20 @@ using System.Collections;
 public class PlayerCollisions : MonoBehaviour {
 
     public AudioSource smack;
+    PlayerManager manager;
 
     [RPC]
     public void destroyObject()
     {
         Destroy(gameObject);
+    }
+
+    private int universeN()
+    {
+        int length = transform.name.Length;
+        string num = transform.name.Substring(length - 1, 1);
+        if ("0123456789".Contains(num)) return (int.Parse(num));
+        else return -1;
     }
 
     public static void Boom(GameObject gameObject) {
@@ -40,7 +49,7 @@ public class PlayerCollisions : MonoBehaviour {
     void OnCollisionEnter(Collision collision) {
 		if (Network.isClient)
 			return;
-		
+        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
         GameObject collided = collision.collider.gameObject;
         //string collidedName = collided.name;
         string tag = collided.tag;
@@ -51,20 +60,21 @@ public class PlayerCollisions : MonoBehaviour {
                 Network.Destroy(collided);
                 smack.Play();
                 EnemyBulletSettings bulletSettings = collided.GetComponent<EnemyBulletSettings>();
-                PlayerManager.hitPoints -= bulletSettings.damage;
+                manager.updateHitPoints(-bulletSettings.damage);
                 break;           
             default:
                 // Do nothing!
                 break;
         }
-        if (PlayerManager.hitPoints <= 0) {
+      /*  if (manager.getHitPoints() <= 0)
+        {
             Boom(gameObject);
             if (Network.isServer)
             {
                 networkView.RPC("destroyObject", RPCMode.All);
                 Network.Destroy(gameObject);
             }
-        }
+        }*/
     }
 
     void OnDestroy() {
@@ -74,6 +84,7 @@ public class PlayerCollisions : MonoBehaviour {
         GameObject bullMan = GameObject.Find("BulletManager");
         Destroy(enMan);
         Destroy(bullMan);
-        PlayerManager.hitPoints = 0;
+        // Last line throws errors when server shuts down. Don't panic.
+        //manager.resetHitPoints(0);
     }
 }

@@ -13,6 +13,7 @@ public class FiringHandler : MonoBehaviour {
     private int player;
     private bool myCharacter;
     private int characterNum;
+    PlayerManager manager;
 	// Incorporate some way of setting a nice name for bullets?
 
     public void activateCharacter(int num)
@@ -26,6 +27,15 @@ public class FiringHandler : MonoBehaviour {
     {
         weaponHandler = gameObject.GetComponent<WeaponHandler>(); 
 	}
+
+    private int universeN()
+    {
+        int length = transform.name.Length;
+        string num = transform.name.Substring(length - 1, 1);
+        if ("0123456789".Contains(num)) return (int.Parse(num));
+        else return -1;
+    }
+
 	
 	void Update () {
 		//bulletType = WeaponHandler.wepType;
@@ -33,35 +43,39 @@ public class FiringHandler : MonoBehaviour {
 		//bulletSpeed = WeaponHandler.wepSpeed;
 		//bulletRate = WeaponHandler.wepRate;
         //bulletName = WeaponHandler.wepName;
+        
+        if (universeN() != -1)
+        {
+            manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+            timer += Time.deltaTime;
 
+            // Is player firing?
+            if (Network.isClient && myCharacter && Input.GetButton("Primary Fire") && timer >= weaponHandler.wepRate && manager.getEnergyLevel() != 0)
+            {
+                // Can I fire?
+                if (manager.getEnergyLevel() - manager.getSelectedWepDrain() >= 0)
+                {
+                    // Calculate the position to fire at
+                    float camDist = (transform.position - Camera.main.transform.position).z;
+                    Vector3 mousePos = Input.mousePosition;
+                    mousePos.z = camDist;
+                    Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
 
+                    // Send message to fire
+                    networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, weaponHandler.wepType);
+                    // Update fire stats
 
-        timer += Time.deltaTime;
+                    timer = 0;
 
-		// Is player firing?
-		if (Network.isClient && myCharacter && Input.GetButton("Primary Fire") && timer >= weaponHandler.wepRate && PlayerManager.energyLevel != 0)
-		{   
-            // Can I fire?
-			if (PlayerManager.energyLevel - PlayerManager.selectedWepDrain >= 0)
-			{
-				// Calculate the position to fire at
-				float camDist = (transform.position - Camera.main.transform.position).z;
-				Vector3 mousePos = Input.mousePosition;
-	            mousePos.z = camDist;
-				Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
-				
-				// Send message to fire
-                networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, weaponHandler.wepType);
-				// Update fire stats
-				timer = 0;
-				PlayerManager.energyLevel -= PlayerManager.selectedWepDrain;
-			}
-		}
+                }
+            }
+        }
 	}
 	
 	[RPC]
 	void fireWeapon(Vector3 lookAt, Vector3 fireDirection, int bulletType)
 	{
+        manager.updateEnergyLevel(-manager.getSelectedWepDrain());
 		// Update the WeaponHandler about the type (not the best way to do it)
 		weaponHandler.wepType = bulletType;
 		weaponHandler.Update();
