@@ -230,7 +230,7 @@ public class HudOn : MonoBehaviour {
 		
 		deco = (Font) Resources.Load ("Belgrad");
 		
-		GUI.Label (new Rect (-15,-20,main.width,main.height), main);
+		GUI.Label (new Rect (-115,-20,main.width,main.height), main);
 		GUI.Label (new Rect (Screen.width-speed.width+15,-20,speed.width,speed.height), speed);
 		GUI.Label (new Rect (Screen.width-leaderboard.width+80,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
 		GUI.Label (new Rect (5,0,64,64),flag);
@@ -256,7 +256,7 @@ public class HudOn : MonoBehaviour {
 		GUIStyle wepStyle = new GUIStyle();
     	wepStyle.font = deco;
 		wepStyle.normal.textColor = Color.white;
-		wepStyle.fontSize = 14;
+		wepStyle.fontSize = 12;
 		
 		GUIStyle smallStyle = new GUIStyle();
     	smallStyle.font = deco;
@@ -265,21 +265,21 @@ public class HudOn : MonoBehaviour {
 		smallStyle.alignment = TextAnchor.MiddleRight;
 
 		GUI.Label (new Rect (70,5,200,50),charName,hudStyle);
-		GUI.Label (new Rect (92,25,200,50),coName,coStyle);
-		GUI.Label (new Rect (70,20,20,20),coFlag,coStyle);
+		GUI.Label (new Rect (230,8,200,50),coName,coStyle);
+		GUI.Label (new Rect (210,2,20,20),coFlag,coStyle);
 		
-		GUI.Label (new Rect (200,1,40,20),hullTitle,smallStyle);
-		GUI.Label (new Rect (202,11,40,20),energyTitle,smallStyle);
-		GUI.Label (new Rect (200,21,40,20),bankTitle,smallStyle);
+		GUI.Label (new Rect (75,21,40,20),hullTitle,smallStyle);
+		GUI.Label (new Rect (77,31,40,20),energyTitle,smallStyle);
+		GUI.Label (new Rect (75,41,40,20),bankTitle,smallStyle);
 		
 		// Health bar
-		GUI.Label (new Rect (241,5,hitPoints/(startHP/hudBarSize),10),"",health);
+		GUI.Label (new Rect (115,25,hitPoints/(startHP/hudBarSize),10),"",health);
 		
 		// Energy bar
-		GUI.Label (new Rect (240,15,energyLevel/(startEnergy/hudBarSize),10),"",energy);
+		GUI.Label (new Rect (115,35,energyLevel/(startEnergy/hudBarSize),10),"",energy);
 		
 		// Power bank
-		GUI.Label (new Rect (240,25,energyBank/(bankSize/hudBarSize),10),"",bank);
+		GUI.Label (new Rect (115,45,energyBank/(bankSize/hudBarSize),10),"",bank);
 		
 		// Speed and gear indicator
         GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + score, speedStyle);
@@ -290,10 +290,10 @@ public class HudOn : MonoBehaviour {
 		
 		// Weapons initialisation
         int wepBoxSize = 48;
-		GUI.Label (new Rect (-5,25,wepBoxSize,wepBoxSize), wepBox1);
-		GUI.Label (new Rect (12,25,wepBoxSize,wepBoxSize), wepBox2);
-        GUI.Label(new Rect(29,25,wepBoxSize,wepBoxSize), wepBox3);
-		GUI.Label (new Rect (70,42,200,64), wepName, wepStyle);
+		GUI.Label (new Rect (-5,10,wepBoxSize,wepBoxSize), wepBox1);
+		GUI.Label (new Rect (12,10,wepBoxSize,wepBoxSize), wepBox2);
+        GUI.Label(new Rect(29,10,wepBoxSize,wepBoxSize), wepBox3);
+		GUI.Label (new Rect (7,47,200,64), wepName, wepStyle);
 
         // Add a crosshair
         if (PlayerManager.activeChar == "china") crossTex = (Texture2D)Resources.Load("hud/crossChi");
