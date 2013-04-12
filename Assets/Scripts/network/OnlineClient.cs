@@ -10,10 +10,11 @@ public class OnlineClient : MonoBehaviour
     private Transform playerOrigin;
     private Transform[] universe;
     private PlayerMovement playerMovement;
+	private PlayerManager playerManager;
     private static PlayerMovement playerMovementMove;
     public bool joinedUniverse;
     private static Transform Camera;
-    private int characterNum;
+    public static int characterNum;
 
     // Use this for initialization
     void Start()
@@ -47,6 +48,8 @@ public class OnlineClient : MonoBehaviour
             Log.Note("Activate initial");
             playerMovement = GameObject.Find("Character" + num).GetComponent<PlayerMovement>();
             playerMovement.activateCharacter(num, num);
+			playerManager = GameObject.Find("Character" + num).GetComponent<PlayerManager>();
+            playerManager.activateCharacter(num);
             FiringHandler fireHandler = GameObject.Find("Character" + num).GetComponent<FiringHandler>();
             fireHandler.activateCharacter(num);
         }
@@ -81,11 +84,7 @@ public class OnlineClient : MonoBehaviour
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Universe"))
         {
             NetworkViewID id = obj.networkView.viewID;
-            if (ID == id) {
-				obj.name = name;
-				if (!name.Equals("Universe1"))
-					obj.GetComponentInChildren<BackgroundGenerator>().enabled = false;
-			}
+            if (ID == id) obj.name = name;
         }
 
     }
@@ -103,5 +102,4 @@ public class OnlineClient : MonoBehaviour
 
         }
     }
-
 }
