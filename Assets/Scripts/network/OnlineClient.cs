@@ -58,7 +58,7 @@ public class OnlineClient : MonoBehaviour
     public static void moveUniverse(int universeNum, int character)
     {
         Log.Note("Move Universe");
-        Vector3 origin = GameObject.Find("Universe" + universeNum + "/Managers/OriginManager").GetComponent<Universe>().origin;
+        Vector3 origin = Universe.PositionOfCamera(universeNum);
 
         // Set camPos to bgPos + 1000 to z
         Vector3 camPos = new Vector3(origin.x - (float)4, origin.y, origin.z + 0.1f);

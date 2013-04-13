@@ -41,6 +41,10 @@ public class Universe : MonoBehaviour {
 
 			stream.Serialize(ref origin);
 	}
+	
+	public static Vector3 PositionOfCamera(int universeNum) {
+		return GameObject.Find("Universe" + universeNum + "/Managers/OriginManager").GetComponent<Universe>().origin;
+	}
 
 	// Update is called once per frame
 	void Update () {
