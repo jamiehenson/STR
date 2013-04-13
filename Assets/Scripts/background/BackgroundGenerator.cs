@@ -31,8 +31,6 @@ public class BackgroundGenerator : MonoBehaviour
 				{
 					obj.particleSystem.startColor = new Color(Random.Range (0.5f,1), Random.Range (0.5f,1), Random.Range (0.5f,1), 1.0f);
 				}
-				count++;
-				print (count);
 			}
 			yield return new WaitForSeconds(1);
 		}
