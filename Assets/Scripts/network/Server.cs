@@ -140,7 +140,7 @@ public class Server : MonoBehaviour {
         //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + "has connected");
         if (!manualGoAhead)
         {
-            Debug.Log(ID);
+            // Debug.Log(ID); // Ahhh maddie!!!!!
             if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
             {
                 PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
