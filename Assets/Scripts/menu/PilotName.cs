@@ -2,9 +2,12 @@ using UnityEngine;
 using System.Collections;
 
 public class PilotName : MonoBehaviour {
-	public static bool showBox = false, showBox2 = false, showLimitBox = false;
+	public static bool showBox, showBox2, showLimitBox;
 	
 	void Start () {
+		showBox = false;
+		showBox2 = false;
+		showLimitBox = false;
 		iTween.FadeTo(gameObject, 0.6f, 0.1f);	
 	}
 

@@ -212,7 +212,7 @@ public class HudOn : MonoBehaviour {
 	void Start () {
 		// Set statics
 		score = 0;
-		gameOver = 0;
+		gameOver = false;
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
 

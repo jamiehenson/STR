@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
     // Level stats
-    public static float stage = 0;
+    public static float stage;
     private float changeTime = 10;
     private Commander enemyGen;
     private HudOn hudOn;
@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour {
     private int stagesBeforeBoss = 3;
 
     public void Awake() {
+		stage = 0;
+		
         GameObject enMan = GameObject.Find("EnemyManager");
         //GameObject cam = GameObject.Find("Main Camera");
         enemyGen = enMan.GetComponent<Commander>();
