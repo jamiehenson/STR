@@ -128,10 +128,15 @@ public class Server : MonoBehaviour {
 
 	// When player disconnects, log event
     void OnPlayerDisconnected() {
+		Log.Warning("In OnPlayerDisconnected, connects = "+Network.connections.Length);
 		//GameObject activeChar = GameObject.Find("Character" + nextPlayerID);
 		//PlayerManager pm = activeChar.GetComponent<PlayerManager>();
 		//string playername = pm.returnName();
         //playersJoined = playersJoined + "Character " + nextPlayerID + ": " + playername + " has left the game...\n";
+		if (Network.connections.Length == 1) { // Go back to menu
+			Misc.CleanStatics();
+			Application.LoadLevel("menu");
+		}
     }
 
     void OnGUI()
