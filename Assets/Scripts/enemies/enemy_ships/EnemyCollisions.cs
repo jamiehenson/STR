@@ -17,12 +17,22 @@ public class EnemyCollisions : MonoBehaviour {
     private float screenX, screenY;
     private Texture2D enemyBar;
     private GameObject xp;
+    PlayerManager manager;
+    private bool showScore;
 
     void Start() {
         eManager = gameObject.GetComponent<EnemyManager>();
         eMove = gameObject.GetComponent<EnemyMovement>();
         health = eManager.health;
         enemyBar = HudOn.fillTex(60, 10, new Color(1f, 0f, 0f, 1f));
+    }
+
+    private int universeN()
+    {
+        int length = transform.parent.parent.name.Length;
+        string num = transform.parent.parent.name.Substring(length - 1, 1);
+        if ("0123456789".Contains(num)) return (int.Parse(num));
+        else return -1;
     }
 
     void Update() {
@@ -32,71 +42,83 @@ public class EnemyCollisions : MonoBehaviour {
         remainingHealth = health / eManager.health;
     }
 
-    void OnTriggerEnter(Collider other) {
-		if (Network.isClient)
-			return;
-		
-        GameObject collided = other.gameObject;
-        // Need to switch from name-based system to tag-based
-        string collidedTag = collided.tag;
-        switch (collidedTag) {
-            case "PlayerBeam":
-                // Do what we want for beam
-                Network.Destroy(collided);
-                PlayerCollisions.WeaponBoom(gameObject, 1);
-                beamSmack.Play();
-                health = health - (WeaponHandler.beamDamage);
-                break;
-            case "PlayerCannon":
-                // Do what we want for cannon
-                Network.Destroy(collided);
-                PlayerCollisions.WeaponBoom(gameObject, 2);
-                cannonSmack.Play();
-                iTween.MoveBy(gameObject, eManager.speed * (collided.rigidbody.velocity / 7), 1f);
-                health = health - (WeaponHandler.cannonDamage);
-                break;
-            case "PlayerMine":
-                // Do what we want for mine
-                for (int i = 0; i < 40; i++) {
-                    Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
-                    fragment.name = "Mine Fragment";
-                    Physics.IgnoreCollision(fragment.collider, gameObject.collider);
-                    fragment.rigidbody.AddForce((Random.insideUnitSphere.normalized * 2) * eManager.force);
-                }
-                for (int i = 0; i < 20; i++) {
-                    Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
-                    fragment.name = "Mine Fragment";
-                    Physics.IgnoreCollision(fragment.collider, gameObject.collider);
-                    fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * eManager.force);
-                }
-                Network.Destroy(collided);
-                beamSmack.Play();
-                health = health - (WeaponHandler.mineDamage);
-                break;
-            case "MineFrag":
-                beamSmack.Play();
-                health = health - (WeaponHandler.mineFragmentDamage);
-                Network.Destroy(collided);
-                break;
-            case "Enemy":
-                // Do what we want for hitting anther enemy (not yet perfected)
-                eMove.randPos = eMove.startPos + eMove.randPos;
-                eMove.startPos = eMove.randPos - eMove.startPos;
-                eMove.randPos = eMove.randPos - eMove.startPos;
-                break;
-            default:
-                // Do nothing!
-                break;
-        }
-        if (health <= 0) {
-            int points = eManager.killPoints;
-            if (Network.isServer)
+    void OnTriggerEnter(Collider other)
+    {
+        if (Network.isClient)
+            return;
+        if (universeN() != -1)
+        {
+            manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+            GameObject collided = other.gameObject;
+            // Need to switch from name-based system to tag-based
+            string collidedTag = collided.tag;
+            switch (collidedTag)
             {
-                Network.Destroy(collided);
+                case "PlayerBeam":
+                    // Do what we want for beam
+                    Network.Destroy(collided);
+                    PlayerCollisions.WeaponBoom(gameObject, 1);
+                    beamSmack.Play();
+                    health = health - (WeaponHandler.beamDamage);
+                    break;
+                case "PlayerCannon":
+                    // Do what we want for cannon
+                    Network.Destroy(collided);
+                    PlayerCollisions.WeaponBoom(gameObject, 2);
+                    cannonSmack.Play();
+                    iTween.MoveBy(gameObject, eManager.speed * (collided.rigidbody.velocity / 7), 1f);
+                    health = health - (WeaponHandler.cannonDamage);
+                    break;
+                case "PlayerMine":
+                    // Do what we want for mine
+                    for (int i = 0; i < 40; i++)
+                    {
+                        Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
+                        fragment.name = "Mine Fragment";
+                        Physics.IgnoreCollision(fragment.collider, gameObject.collider);
+                        fragment.rigidbody.AddForce((Random.insideUnitSphere.normalized * 2) * eManager.force);
+                    }
+                    for (int i = 0; i < 20; i++)
+                    {
+                        Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
+                        fragment.name = "Mine Fragment";
+                        Physics.IgnoreCollision(fragment.collider, gameObject.collider);
+                        fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * eManager.force);
+                    }
+                    Network.Destroy(collided);
+                    beamSmack.Play();
+                    health = health - (WeaponHandler.mineDamage);
+                    break;
+                case "MineFrag":
+                    beamSmack.Play();
+                    health = health - (WeaponHandler.mineFragmentDamage);
+                    Network.Destroy(collided);
+                    break;
+                case "Enemy":
+                    // Do what we want for hitting anther enemy (not yet perfected)
+                    eMove.randPos = eMove.startPos + eMove.randPos;
+                    eMove.startPos = eMove.randPos - eMove.startPos;
+                    eMove.randPos = eMove.randPos - eMove.startPos;
+                    break;
+                default:
+                    // Do nothing!
+                    break;
             }
-            PlayerCollisions.Boom(gameObject);
-            HudOn.score += points;
-            StartCoroutine(XP("+" + points));
+            if (health <= 0)
+            {
+                int scoreAddition = (int)(100 * transform.localScale.x);
+                showScore = false;
+                networkView.RPC("scoreXP", RPCMode.All, universeN(), scoreAddition);
+                manager.updateScore(scoreAddition);
+                int points = eManager.killPoints;
+                if (showScore)
+                {
+                    Network.Destroy(collided);
+                    PlayerCollisions.Boom(gameObject);
+                }
+                //HudOn.score += points;
+                // StartCoroutine(XP("+" + points));
+            }
         }
     }
 
@@ -126,6 +148,24 @@ public class EnemyCollisions : MonoBehaviour {
         networkView.RPC("destroyObject", RPCMode.All);
         Destroy(gameObject);
     }*/
+
+    [RPC]
+    void scoreXP(int camNum, int score)
+    {
+        Debug.Log("Score: " + score);
+        if (Network.isClient && GameObject.Find("Camera " + camNum))
+        {
+            StartCoroutine(XP("+" + score));
+            networkView.RPC("showedScore", RPCMode.Server);
+        }
+
+    }
+
+    [RPC]
+    void showedScore()
+    {
+        showScore = true;
+    }
 
     void OnDestroy() {
         if (Network.isServer)

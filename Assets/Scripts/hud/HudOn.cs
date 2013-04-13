@@ -27,8 +27,10 @@ public class HudOn : MonoBehaviour {
 		bankTitle = "WARP";
 
     // This seems a logical place to keep track of the score
-    public static float score;
-    public static bool gameOver;
+    public float score = 0;
+    public static bool gameOver = false;
+  //  public static float score;
+   // public static bool gameOver;
 	
 	public static Texture2D fillTex(int width, int height, Color col)
     {
@@ -220,8 +222,9 @@ public class HudOn : MonoBehaviour {
         if (manager.activeCharN == null) manager.activeCharN = "tester";
         Debug.Log("Hud on" + manager.activeCharN);
         manager.InitialiseStats();
-        /* Was in Awake() */
         StartScore();
+        /* Was in Awake() */
+ 
 
 		iTween.CameraFadeAdd();
 		iTween.CameraFadeFrom(1.0f, 2.0f);

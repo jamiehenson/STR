@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerManager : MonoBehaviour {
     // Player stats
+    private int score;
     private float hitPoints;
     private float energyLevel;
     private float startHP, startEnergy;
@@ -12,6 +13,7 @@ public class PlayerManager : MonoBehaviour {
     public static bool bankFull;
     public static float speed;
     public static string playername;
+    private GameObject xp;
 
     // Character-centric player stats
     public string activeCharN;
@@ -29,6 +31,18 @@ public class PlayerManager : MonoBehaviour {
         return energyLevel;
     }
 
+    /* Score functions*/
+    public int getScore()
+    {
+        return score;
+    }
+
+    public void updateScore(int s)
+    {
+        score = score + s;
+    }
+
+    /* End of core functions*/
     public void updateEnergyLevel(float val)
     {
         energyLevel = energyLevel + val;
@@ -159,6 +173,7 @@ public class PlayerManager : MonoBehaviour {
             networkView.RPC("updateStartEnergy", RPCMode.Server, startEnergy);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.Server, hitPoints);
+           
         }
     }
 
@@ -195,6 +210,7 @@ public class PlayerManager : MonoBehaviour {
             if (!bankFull) energyBank += (startEnergy / 1500);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
+            networkView.RPC("updatePlayerScore", RPCMode.All, score);
         }
     }
 
@@ -227,4 +243,14 @@ public class PlayerManager : MonoBehaviour {
     {
         playername = name;
     }
+
+    [RPC]
+    void updatePlayerScore(int s)
+    {
+        if (Network.isClient)
+        {
+            score = s;
+        }
+    }
+
 }

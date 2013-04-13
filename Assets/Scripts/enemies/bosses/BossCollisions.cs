@@ -92,7 +92,7 @@ public class BossCollisions : MonoBehaviour {
             int points = eManager.killPoints;
             Destroy(gameObject);
             PlayerCollisions.Boom(gameObject);
-            HudOn.score += points;
+           // HudOn.score += points;
             StartCoroutine(XP("+" + points));
         }
     }
