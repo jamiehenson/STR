@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour {
         myCharacter = true;
         characterNum = charNum;
         universeNum = univNum;
-        networkView.RPC("updateUniverse", RPCMode.Server, universeNum);
+        networkView.RPC("updateUniverse", RPCMode.Server, universeNum, characterNum);
     }
 	
 	// Rotation procedures. Made into a coroutine, so that it is uninterruptable
@@ -99,8 +99,8 @@ public class PlayerMovement : MonoBehaviour {
 	        if (x.Equals("4") || x.Equals("5") || x.Equals("6") || x.Equals("7"))
 	        {
 	            int num = int.Parse(x);
-	            OnlineClient.moveUniverse(num , characterNum);
-	            networkView.RPC("updateUniverse", RPCMode.Server, num-3);
+	            OnlineClient.moveUniverse(num-3 , characterNum);
+	            networkView.RPC("updateUniverse", RPCMode.Server, num-3, characterNum);
 	        }	
 		}
       else if (Network.isServer)
@@ -154,8 +154,14 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     [RPC]
-    public void updateUniverse(int univNum)
+    public void updateUniverse(int univNum, int character)
     {
-        universeNum = univNum;
+        // characterNum = charNum;
+        if (universeNum != 0)
+        {
+            GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().updateActiveChar(character, false);
+            universeNum = univNum;
+            GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().updateActiveChar(character, true);
+        }
     }
 }

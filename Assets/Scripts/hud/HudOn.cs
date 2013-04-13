@@ -17,7 +17,8 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
     WeaponHandler weaponHandler;
-	
+    PlayerManager manager; 
+
 	private string beamTitle = "BEAM", 
 		cannonTitle = "CANNON", 
 		mineTitle = "SPECIAL", 
@@ -96,16 +97,18 @@ public class HudOn : MonoBehaviour {
     }
 	
 	void Update() {
-		if (gameOver) {
-			StartCoroutine("headOut");
-		}
+        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+        if (gameOver)
+        {
+            StartCoroutine("headOut");
+        }
 
-		// Update player stats
-		hitPoints = PlayerManager.hitPoints;
-		energyLevel = PlayerManager.energyLevel;
-		energyBank = PlayerManager.energyBank;
-		
-		// Weapon changing
+        // Update player stats
+        hitPoints = manager.getHitPoints();
+        energyLevel = manager.getEnergyLevel();
+        energyBank = manager.getEnergyBank();
+
+        // Weapon changing
         if (Input.GetKeyDown("1")) setWeapon(1);
         else if (Input.GetKeyDown("2"))
         {
@@ -117,13 +120,13 @@ public class HudOn : MonoBehaviour {
         //else if (Input.GetAxis("Mouse ScrollWheel") > 0) setWeapon(WeaponHandler.wepType + 1);
 
         if (energyBank / (bankSize / hudBarSize) >= hudBarSize)
-		{
-            PlayerManager.energyBank = PlayerManager.bankSize;
-			gearReady = "WARP DRIVE READY!";
-			PlayerManager.bankFull = true;
-			if (Input.GetKeyDown ("space"))
-			{
-                PlayerManager.energyBank = 0;
+        {
+            manager.resetEnergyBank(manager.getBankSize());
+            gearReady = "WARP DRIVE READY!";
+            PlayerManager.bankFull = true;
+            if (Input.GetKeyDown("space"))
+            {
+                manager.resetEnergyBank(0);
                 PlayerManager.bankFull = false;
                 gearReady = "";
 
@@ -134,15 +137,15 @@ public class HudOn : MonoBehaviour {
                 GameObject vortex = (GameObject)Resources.Load("Player/vortex");
                 float[] xvals = new float[playercount - 1];
                 float[] yvals = new float[playercount - 1];
-                float chunkX = (float) 0.5f / (playercount - 1);
-                float chunkY = (float) 0.8f / (playercount - 1);
+                float chunkX = (float)0.5f / (playercount - 1);
+                float chunkY = (float)0.8f / (playercount - 1);
                 for (int i = 0; i < playercount - 1; i++)
                 {
                     xvals[i] = Random.Range(0 + (i * chunkX), (i + 1) * chunkX);
                     yvals[i] = Random.Range(0 + (i * chunkY), (i + 1) * chunkY);
                 }
 
-                for (var i = (playercount-2); i > 0; i--)
+                for (var i = (playercount - 2); i > 0; i--)
                 {
                     int t = Random.Range(0, i);
                     float temp = yvals[i];
@@ -162,8 +165,8 @@ public class HudOn : MonoBehaviour {
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
                     vortex.tag = "vortex";
                 }
-			}
-		}
+            }
+        }
 	}
 
 	IEnumerator Toast(string notetext) {
@@ -184,15 +187,39 @@ public class HudOn : MonoBehaviour {
 		Destroy(toast);
 	}
 
-    void Awake() {
-        if (PlayerManager.activeChar == null) PlayerManager.activeChar = "tester";
-        Debug.Log("Hud on" + PlayerManager.activeChar);
-        PlayerManager.InitialiseStats();
-        StartScore();
+    private int universeN()
+    {
+        int length = transform.name.Length;
+        string num = transform.name.Substring(length - 1, 1);
+        if ("0123456789".Contains(num)) return (int.Parse(num));
+        else return -1;
     }
+
+    /* Can't use it and moved all its contents to Start() as InitialiseStats() is not static anymore
+    void Awake() {
+        if (universeN() != -1)
+        {
+            manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+            if (manager.activeChar == null) manager.activeChar = "tester";
+            Debug.Log("Hud on" + manager.activeChar);
+            manager.InitialiseStats();
+            StartScore();
+        }
+    }
+    Not being used. Not sure if necessary*/
 
 	
 	void Start () {
+
+        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+
+        /* Was in Awake() */
+        if (manager.activeCharN == null) manager.activeCharN = "tester";
+        Debug.Log("Hud on" + manager.activeCharN);
+        manager.InitialiseStats();
+        /* Was in Awake() */
+        StartScore();
+
 		iTween.CameraFadeAdd();
 		iTween.CameraFadeFrom(1.0f, 2.0f);
 
@@ -213,9 +240,9 @@ public class HudOn : MonoBehaviour {
             weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
             setWeapon(1);
         }
-		startHP = PlayerManager.startHP;
-		startEnergy = PlayerManager.startEnergy;
-        bankSize = PlayerManager.bankSize;
+        startHP = manager.getStartHP();
+        startEnergy = manager.getStartEnergy();
+        bankSize = manager.getBankSize();
 
 		health.normal.background = fillTex(1,1,new Color(0.8f,0f,0f,1f));
 		energy.normal.background = fillTex(1,1,new Color(0f,0f,0.8f,1f));

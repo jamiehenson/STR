@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class EnemyCollisions : MonoBehaviour {
-
+    /* Github, Please work! */
     private EnemyManager eManager;
     private EnemyMovement eMove;
 

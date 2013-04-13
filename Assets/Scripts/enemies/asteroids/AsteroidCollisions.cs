@@ -13,18 +13,29 @@ public class AsteroidCollisions : MonoBehaviour {
 	private GameObject xp;
     private bool exploded;
 
+    PlayerManager manager;
+
 
     // Destroy asteroid on collision with the character
     [RPC]
     void destroyAfterExplosion()
     {
-        Network.Destroy(gameObject);
+        //Network.Destroy(gameObject);
+        Instantiate(explosion, transform.position, transform.rotation);
     }
 
     void Start() {
         health = health * gameObject.transform.localScale.x;
     }
-	
+
+    private int universeN()
+    {
+        int length = transform.parent.parent.name.Length;
+        string num = transform.parent.parent.name.Substring(length - 1, 1);
+        if ("0123456789".Contains(num)) return (int.Parse(num));
+        else return -1;
+    }
+
 	IEnumerator XP(string points)
     {
         xp = new GameObject("XP");
@@ -45,81 +56,79 @@ public class AsteroidCollisions : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
 		if (Network.isClient)
 			return;
-		
-        GameObject collided = other.gameObject;
-        string collidedTag = collided.tag;
+        if (universeN() != -1)
+        {
+            manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+            GameObject collided = other.gameObject;
+            string collidedTag = collided.tag;
+            switch (collidedTag)
+            {
+                case "EnemyWeapon":
+                    Network.Destroy(collided);
+                    break;
+                case "Enemy":
+                    PlayerCollisions.Boom(collided);
+                    Network.Destroy(collided);
+                    break;
+                case "Player":
+                    manager.updateHitPoints(-asteroidDamage * gameObject.transform.localScale.x);
+                    health = 0;
+                    break;
+                case "PlayerBeam":
+                    // Do what we want for beam
+                    PlayerCollisions.WeaponBoom(gameObject, 1);
+                    Network.Destroy(collided);
+                    health = health - (WeaponHandler.beamDamage);
+                    break;
+                case "PlayerCannon":
+                    // Do what we want for cannon
+                    PlayerCollisions.WeaponBoom(gameObject, 2);
+                    Network.Destroy(collided);
+                    iTween.MoveBy(gameObject, new Vector3(collided.rigidbody.velocity.x / 10, collided.rigidbody.velocity.y / 10, 0), 4f);
+                    iTween.RotateAdd(gameObject, new Vector3(50, 50), 5f);
 
-        switch (collidedTag) {
-            case "EnemyWeapon":
-                Network.Destroy(collided);
-                break;
-            case "Enemy":
-                PlayerCollisions.Boom(collided);
-                Network.Destroy(collided);
-                break;
-            case "Player":
-                PlayerManager.hitPoints -= asteroidDamage * gameObject.transform.localScale.x;
-                // Explode  asteroid only on the Client (don't network.instantiate it), then destroy from the Server
-                /*if (Network.isClient)
-                {
-                    Instantiate(explosion, transform.position, transform.rotation);
-                    networkView.RPC("destroyAfterExplosion", RPCMode.Server);
-                }*/
-                health = 0;
-                break;
-            case "PlayerBeam":
-                // Do what we want for beam
-                PlayerCollisions.WeaponBoom(gameObject, 1);
-                Network.Destroy(collided);
-                health = health - (WeaponHandler.beamDamage);
-                break;
-            case "PlayerCannon":
-                // Do what we want for cannon
-                PlayerCollisions.WeaponBoom(gameObject, 2);
-                Network.Destroy(collided);
-                iTween.MoveBy(gameObject, new Vector3(collided.rigidbody.velocity.x/10,collided.rigidbody.velocity.y/10,0), 4f);
-                iTween.RotateAdd(gameObject, new Vector3(50,50), 5f);
-                
-                health = health - (WeaponHandler.cannonDamage);
-                break;
-            case "PlayerMine":
-                // Do what we want for mine
-                if (Network.isClient)
-                {
-                    for (int i = 0; i < 1; i++)
+                    health = health - (WeaponHandler.cannonDamage);
+                    break;
+                case "PlayerMine":
+                    // Do what we want for mine
+                    if (Network.isClient)
                     {
+                        for (int i = 0; i < 1; i++)
+                        {
 
-                        Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
-                        fragment.name = "MineFragment";
-                        Physics.IgnoreCollision(fragment.collider, gameObject.collider);
-                        fragment.rigidbody.AddForce((Random.insideUnitSphere.normalized * 2) * force);
+                            Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
+                            fragment.name = "MineFragment";
+                            Physics.IgnoreCollision(fragment.collider, gameObject.collider);
+                            fragment.rigidbody.AddForce((Random.insideUnitSphere.normalized * 2) * force);
+                        }
+                        for (int i = 0; i < 1; i++)
+                        {
+                            Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
+                            fragment.name = "Mine Fragment";
+                            Physics.IgnoreCollision(fragment.collider, gameObject.collider);
+                            fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * force);
+                        }
+                        networkView.RPC("destroyAfterExplosion", RPCMode.Server);
                     }
-                    for (int i = 0; i < 1; i++)
-                    {
-                        Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
-                        fragment.name = "Mine Fragment";
-                        Physics.IgnoreCollision(fragment.collider, gameObject.collider);
-                        fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * force);
-                    }
-                    networkView.RPC("destroyAfterExplosion", RPCMode.Server);
-                }
-                Network.Destroy(collided);
-                health = health - (WeaponHandler.mineDamage);
-                
-                break;
-            case "MineFrag":
-                health = health - (WeaponHandler.mineFragmentDamage);
-                Network.Destroy(collided);
-                break;
-            default:
-                break;
-        }
-        if (health <= 0 && Network.isServer) {
-            Network.Instantiate(explosion, transform.position, transform.rotation,0);
-            Network.Destroy(gameObject);
-            int scoreAddition = (int)(100 * transform.localScale.x);
-            HudOn.score += scoreAddition;
-            StartCoroutine(XP("+" + scoreAddition));
+                    Network.Destroy(collided);
+                    health = health - (WeaponHandler.mineDamage);
+
+                    break;
+                case "MineFrag":
+                    health = health - (WeaponHandler.mineFragmentDamage);
+                    Network.Destroy(collided);
+                    break;
+                default:
+                    break;
+            }
+            if (health <= 0 && Network.isServer)
+            {
+                Network.Instantiate(explosion, transform.position, transform.rotation, 0);
+                Network.Destroy(gameObject);
+                int scoreAddition = (int)(100 * transform.localScale.x);
+                HudOn.score += scoreAddition;
+                StartCoroutine(XP("+" + scoreAddition));
+            }
         }
     }
 

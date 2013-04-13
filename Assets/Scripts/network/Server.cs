@@ -21,6 +21,9 @@ public class Server : MonoBehaviour {
     public static string serverAddress;
     public GUIStyle buttonStyle;
 	private string playersJoined;
+    int ID = 1;
+    public static int finalNumberofPlayers;
+    public string takenNames;
 
     // Use this for initialization
     void Start() {
@@ -53,6 +56,7 @@ public class Server : MonoBehaviour {
 		
 		// Initalise private memeber variables
         countUniverse = 4;
+        finalNumberofPlayers = countUniverse;
         universe = new Transform[countUniverse+1];
         characterView = new NetworkView[countUniverse+1];
         viewIDNameMapping = new Dictionary<NetworkViewID, string>();
@@ -106,14 +110,6 @@ public class Server : MonoBehaviour {
         bridge.updateUniverseNames(viewIDNameMapping, player);
         bridge.updateCharacterNames(viewIDChNameMapping, player);
 		
-		GameObject activeChar = GameObject.Find("Character" + nextPlayerID);
-		PlayerManager pm = activeChar.GetComponent<PlayerManager>();
-		string playerName = pm.returnName();
-		int characterNum = 0;
-		
-		playersJoined = playersJoined + "Character " + characterNum + ": " + playerName + " has joined the game...\n";
-		Log.Note("Player has connected" + playerCount++ + "connected from" + player.ipAddress + ":" + player.port);
-		
         if (!startGame)
         {
             if (manualGoAhead)
@@ -141,7 +137,28 @@ public class Server : MonoBehaviour {
     void OnGUI()
     {
         int x = 400;
+        //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + "has connected");
+        if (!manualGoAhead)
+        {
+            Debug.Log(ID);
+            if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
+            {
+                PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
+                Debug.Log("Player :" + manager.getPlayerName() + "has connected");
+                //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
+                ID++;
+                takenNames = takenNames + "" + manager.getPlayerName();
+               // MP.updateTakenNames(takenNames);
+
+            }
+
+        }
         if (!manualGoAhead) if (GUI.Button(new Rect((Screen.width / 2) - x/2, (Screen.height / 2) - x/4, x, x/2), "START GAME", buttonStyle)) manualGoAhead = true;
 		GUI.Label(new Rect(Screen.width/4, Screen.height*0.75f, Screen.width/2, 200), playersJoined);
+    }
+
+    public static int numberOfPlayers()
+    {
+        return finalNumberofPlayers;
     }
 }

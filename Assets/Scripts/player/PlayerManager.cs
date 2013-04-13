@@ -2,138 +2,229 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerManager : MonoBehaviour {
-	// Player stats
-	public static float hitPoints;
-	public static float energyLevel;
-	public static float startHP, startEnergy;
-	public static float energyBank = 0;
-	public static int selectedWepDrain;
-    public static int bankSize = 10000;
+    // Player stats
+    private float hitPoints;
+    private float energyLevel;
+    private float startHP, startEnergy;
+    private float energyBank = 0;
+    private int selectedWepDrain;
+    private int bankSize = 10000;
     public static bool bankFull;
     public static float speed;
-    private string playername = "b";
-	private int characterNum = 0;
-	
-	// Character-centric player stats
-	public static string activeChar;
-	public static int wepType;
-	public static float damageMultiplier;
-	public static float energyMultiplier;
-	
-	private bool myCharacter;
-	public static string playerNameTemp = "";
-	private bool i;	
-	public string[] playerNames = new string[4];
-	
-	public static void InitialiseStats()
-	{
-		switch(activeChar) {              
-			case "china":
-				startHP = 500;
-				startEnergy = 1000;
-                speed = 15.0f;
-				damageMultiplier = 0.5f;
-				energyMultiplier = 1f;
-                bankSize = 7000;
-				energyBank = 0;
-				break;
-			case "usa":
-				startHP = 1000;
-				startEnergy = 500;
-                speed = 5.0f;
-				damageMultiplier = 1.5f;
-				energyMultiplier = 1.5f;
-                bankSize = 7000;
-				energyBank = 0;
-				break;
-			case "russia":
-				startHP = 750;
-				startEnergy = 750;
-                speed = 10.0f;
-				damageMultiplier = 1.0f;
-				energyMultiplier = 1.25f;
-                bankSize = 5000;
-				energyBank = 0;
-				break;
-			default: 
-			    startHP = 1000;
-			    startEnergy = 1000;
-                speed = 10.0f;
-			    damageMultiplier = 1f;
-			    energyMultiplier = 1f;
-                bankSize = 7000;
-				energyBank = 0;
-				break;
-		}
-		if (activeChar == null) activeChar = "tester";
-        Debug.Log("Active " + activeChar);
-		hitPoints = startHP;
-		energyLevel = startEnergy;
-        WeaponHandler.ScaleDamages(damageMultiplier);
-	}
-	
-	void Update() {
-		/*
-		wepType = WeaponHandler.wepType;
-		switch(wepType) {
-		case 1: 
-			selectedWepDrain = 6;
-			break;
-		case 2: 
-			selectedWepDrain = 15;
-			break;
-		case 3: 
-			selectedWepDrain = 70;
-			break;
-		default:
-			break;
-		}
-		*/
-		// Recharge power supply
-		if (energyLevel > 0 && energyLevel <= startEnergy && Time.timeScale != 0) energyLevel += (startEnergy/800);
-        if (energyLevel <= 0) energyLevel = 1;
-		if (hitPoints < 0) hitPoints = 0;
-        if (!bankFull) energyBank += (startEnergy / 1500);
-		if(playerNameTemp != "")
-		{
-			playername = playerNameTemp;
-			print("Name 2 : " + playername);
-			i = false;
-			playerNameTemp = "";
-		}
-		
-		if(Network.isClient && !i) {
-			networkView.RPC("updateName", RPCMode.Server, playername, characterNum);
-		}
-		if(Network.isServer) print ("NameServer: " + playername + ", " + characterNum);
-		
-	}
+    public static string playername;
 
-	[RPC]
-	void updateName(string pn, int num) {
-		playername = pn;
-		characterNum = num;
-	}
-	
-	public string returnName()
-	{
-		return playername;
-	}
-	
-	public static void setName(string pn)
-	{
-		playerNameTemp = pn;
-		Debug.Log ("Name: " + playerNameTemp);
-	}
-	
-	public int returnNum()
+    // Character-centric player stats
+    public string activeCharN;
+    public static string activeChar;
+    public static int wepType;
+    public static float damageMultiplier;
+    public static float energyMultiplier;
+
+    //Scoring System variables
+    private bool myCharacter;
+    private int characterNum;
+
+    public float getEnergyLevel()
     {
-        return characterNum;
+        return energyLevel;
     }
-	
-	public void activateCharacter(int charNum)
+
+    public void updateEnergyLevel(float val)
     {
-		characterNum = charNum;
-		myCharacter = true;
+        energyLevel = energyLevel + val;
+
+    }
+
+    public float getStartHP()
+    {
+        return startHP;
+    }
+
+    public float getStartEnergy()
+    {
+        return startEnergy;
+    }
+
+    public int getSelectedWepDrain()
+    {
+        return selectedWepDrain;
+    }
+    public int getBankSize()
+    {
+        return bankSize;
+    }
+
+
+    /*Hit Points call functions*/
+    public float getHitPoints()
+    {
+        return hitPoints;
+    }
+
+    public void updateHitPoints(float val)
+    {
+        hitPoints = hitPoints + val;
+    }
+
+    public void resetHitPoints(float val)
+    {
+        hitPoints = val;
+    }
+    /*End of Hit Points call functions*/
+
+    /* Energy Bank call functions*/
+    public float getEnergyBank()
+    {
+        return energyBank;
+    }
+
+    public void resetEnergyBank(float val)
+    {
+        energyBank = val;
+    }
+    /* Energy Bank call functions*/
+
+    public string getPlayerName()
+    {
+        return playername;
+    }
+
+    public string getActiveChar()
+    {
+        return activeChar;
+    }
+
+    public void activateCharacter(int charNum)
+    {
+        myCharacter = true;
+        characterNum = charNum;
+    }
+
+    public void Awake()
+    {
+
+
+    }
+
+    /* Called in HudOn class, Start() */
+    public void InitialiseStats()
+    {
+        if (Network.isClient)
+        {
+            networkView.RPC("updatePlayerName", RPCMode.Server, playername);
+            switch (activeChar)
+            {
+                case "china":
+                    startHP = 500;
+                    startEnergy = 1000;
+                    speed = 15.0f;
+                    damageMultiplier = 0.5f;
+                    energyMultiplier = 1f;
+                    bankSize = 7000;
+                    energyBank = 0;
+                    break;
+                case "usa":
+                    startHP = 1000;
+                    startEnergy = 500;
+                    speed = 5.0f;
+                    damageMultiplier = 1.5f;
+                    energyMultiplier = 1.5f;
+                    bankSize = 7000;
+                    energyBank = 0;
+                    break;
+                case "russia":
+                    startHP = 750;
+                    startEnergy = 750;
+                    speed = 10.0f;
+                    damageMultiplier = 1.0f;
+                    energyMultiplier = 1.25f;
+                    bankSize = 5000;
+                    energyBank = 0;
+                    break;
+                default:
+                    startHP = 1000;
+                    startEnergy = 1000;
+                    speed = 10.0f;
+                    damageMultiplier = 1f;
+                    energyMultiplier = 1f;
+                    bankSize = 7000;
+                    energyBank = 0;
+                    break;
+            }
+            if (activeChar == null) activeChar = "tester";
+            Debug.Log("Active " + activeCharN);
+            hitPoints = startHP;
+            energyLevel = startEnergy;
+            WeaponHandler.ScaleDamages(damageMultiplier);
+            networkView.RPC("updateStartEnergy", RPCMode.Server, startEnergy);
+            networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
+            networkView.RPC("updateHitP", RPCMode.Server, hitPoints);
+        }
+    }
+
+    void Update()
+    {
+
+        if (Network.isClient && myCharacter)
+        {
+            WeaponHandler weaponHandler = GameObject.Find("Character" + characterNum).GetComponent<WeaponHandler>();
+            wepType = weaponHandler.wepType;
+            switch (wepType)
+            {
+                case 1:
+                    selectedWepDrain = 6;
+                    break;
+                case 2:
+                    selectedWepDrain = 15;
+                    break;
+                case 3:
+                    selectedWepDrain = 70;
+                    break;
+                default:
+                    break;
+            }
+            networkView.RPC("updateWepDrain", RPCMode.Server, selectedWepDrain);
+        }
+
+        // Recharge power supply
+        if (Network.isServer)
+        {
+            if (energyLevel > 0 && energyLevel <= startEnergy && Time.timeScale != 0) energyLevel += (startEnergy / 800);
+            if (energyLevel <= 0) energyLevel = 1;
+            if (hitPoints < 0) hitPoints = 0;
+            if (!bankFull) energyBank += (startEnergy / 1500);
+            networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
+            networkView.RPC("updateHitP", RPCMode.All, hitPoints);
+        }
+    }
+
+    [RPC]
+    void updateEnergy(float e)
+    {
+        energyLevel = e;
+    }
+
+    [RPC]
+    void updateWepDrain(int e)
+    {
+        selectedWepDrain = e;
+    }
+
+    [RPC]
+    void updateHitP(float e)
+    {
+        hitPoints = e;
+    }
+
+    [RPC]
+    void updateStartEnergy(float e)
+    {
+        startEnergy = e;
+    }
+
+    [RPC]
+    void updatePlayerName(string name)
+    {
+        playername = name;
     }
 }

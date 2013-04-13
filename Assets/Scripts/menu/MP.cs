@@ -24,6 +24,14 @@ public class MP : MonoBehaviour
 	private GameObject header, subheader, heading1, heading2, serverNameBox, serverLimitBox, proceed, proceedtext, refreshbutton, flagbg, coPilot, flagBox;
 	private GameObject[] playerdetails, playerballs;
 
+    public static string takenNames = "";
+
+    public static void updateTakenNames(string names)
+    {
+        takenNames = names;
+        // networkView.RPC("updateClientNames", RPCMode.Others, takenNames);
+    }
+
     void Start()
     {
 		header = GameObject.Find("SBrowserHeader");
@@ -185,7 +193,7 @@ public class MP : MonoBehaviour
                 {
                     hostnb = i;	
                     joinScreen = false;
-					PlayerManager.setName(playerName);
+                    PlayerManager.playername = playerName;
                     Application.LoadLevel("OnlineClient");
                 }
             }
