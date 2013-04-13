@@ -4,7 +4,7 @@ public class Misc
 {
 	public static void CleanStatics()
 	{
-		
+		Commander.SetupStatics();
 	}
 }
 

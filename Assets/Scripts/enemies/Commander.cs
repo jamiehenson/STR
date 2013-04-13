@@ -70,6 +70,11 @@ public class Commander : MonoBehaviour {
     private bool[] activeCharacters;
 
     List<int> masterDiffStats = new List<int>();
+	
+	public static void SetupStatics() {
+		asteroidCount = null;
+    	enemyCount = null;	
+	}
 
     // ******Determine by which prefab is the script called***** 
     private int universeN()
