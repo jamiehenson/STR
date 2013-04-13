@@ -134,12 +134,12 @@ public class AsteroidCollisions : MonoBehaviour {
                 showScore = false;
                 networkView.RPC("scoreXP", RPCMode.All, universeN(), scoreAddition);
 
-                if (showScore)
-                {
-                    Network.Instantiate(explosion, transform.position, transform.rotation, 0);
-                    Network.Destroy(gameObject);
-                    showScore = false;
-                }
+                while (!showScore) { }
+                
+                Network.Instantiate(explosion, transform.position, transform.rotation, 0);
+                Network.Destroy(gameObject);
+                showScore = false;
+                
                 //HudOn.score += scoreAddition;
 
                 //StartCoroutine(XP("+" + scoreAddition));

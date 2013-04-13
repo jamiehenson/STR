@@ -116,11 +116,14 @@ public class EnemyCollisions : MonoBehaviour {
                 networkView.RPC("scoreXP", RPCMode.All, universeN(), scoreAddition);
                 manager.updateScore(scoreAddition);
                 int points = eManager.killPoints;
-                if (showScore)
-                {
-                    Network.Destroy(collided);
-                    PlayerCollisions.Boom(gameObject);
-                }
+                Debug.Log("Destroy" + showScore);
+                while (!showScore) { }
+               
+                Debug.Log("Destroy");
+                Network.Destroy(collided);
+                PlayerCollisions.Boom(gameObject);
+                showScore = false;
+                
                 //HudOn.score += points;
                 // StartCoroutine(XP("+" + points));
             }
