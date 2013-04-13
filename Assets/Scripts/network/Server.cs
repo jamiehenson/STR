@@ -80,6 +80,7 @@ public class Server : MonoBehaviour {
 			// Instaniate charater in universe
             Vector3 position = new Vector3(pos.x - 8, pos.y, pos.z + 15);
             Transform characterPlayer = (Transform)Network.Instantiate(characterPrefab, position, new Quaternion(0,0,0,0), i);
+			//characterPlayer.Rotate(new Vector3(0,180,0));
 			
 			// Rename the character and pass name to clients
             characterPlayer.name = "Character" + i;
