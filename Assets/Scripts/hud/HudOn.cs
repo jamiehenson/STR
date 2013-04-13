@@ -217,8 +217,9 @@ public class HudOn : MonoBehaviour {
         if (manager.activeCharN == null) manager.activeCharN = "tester";
         Debug.Log("Hud on" + manager.activeCharN);
         manager.InitialiseStats();
-        /* Was in Awake() */
         StartScore();
+        /* Was in Awake() */
+ 
 
 		iTween.CameraFadeAdd();
 		iTween.CameraFadeFrom(1.0f, 2.0f);
