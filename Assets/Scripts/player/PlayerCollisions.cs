@@ -58,7 +58,7 @@ public class PlayerCollisions : MonoBehaviour {
             case "EnemyWeapon":
                 // Do what we want for EnemyBullet
                 Network.Destroy(collided);
-                smack.Play();
+                //smack.Play();
                 EnemyBulletSettings bulletSettings = collided.GetComponent<EnemyBulletSettings>();
                 manager.updateHitPoints(-bulletSettings.damage);
                 break;           
