@@ -72,8 +72,8 @@ public class Commander : MonoBehaviour {
     List<int> masterDiffStats = new List<int>();
 	
 	public static void SetupStatics() {
-		asteroidCount = null;
-    	enemyCount = null;	
+		asteroidCount = new int[5];
+    	enemyCount = new int[5];	
 	}
 
     // ******Determine by which prefab is the script called***** 

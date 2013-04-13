@@ -25,6 +25,7 @@ public class ServerScoringSystem : MonoBehaviour {
                 PlayerManager manager = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
                 GUI.Label(new Rect(60 * i, 60, 64, 64), "Energy level: " + manager.getEnergyLevel());
                 GUI.Label(new Rect(60 * i, 100, 64, 64), "HitPoints: " + manager.getHitPoints());
+                GUI.Label(new Rect(60 * i, 140, 64, 64), "Score: " + manager.getScore());
             }
         }
     }

@@ -58,6 +58,7 @@ public class AsteroidCollisions : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
 		if (Network.isClient)
 			return;
+        bool hit = false;
         if (universeN() != -1)
         {
             manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
@@ -81,6 +82,7 @@ public class AsteroidCollisions : MonoBehaviour {
                     PlayerCollisions.WeaponBoom(gameObject, 1);
                     Network.Destroy(collided);
                     health = health - (WeaponHandler.beamDamage);
+                    hit = true;
                     break;
                 case "PlayerCannon":
                     // Do what we want for cannon
@@ -88,7 +90,7 @@ public class AsteroidCollisions : MonoBehaviour {
                     Network.Destroy(collided);
                     iTween.MoveBy(gameObject, new Vector3(collided.rigidbody.velocity.x / 10, collided.rigidbody.velocity.y / 10, 0), 4f);
                     iTween.RotateAdd(gameObject, new Vector3(50, 50), 5f);
-
+                    hit = true;
                     health = health - (WeaponHandler.cannonDamage);
                     break;
                 case "PlayerMine":
@@ -113,17 +115,19 @@ public class AsteroidCollisions : MonoBehaviour {
                         networkView.RPC("destroyAfterExplosion", RPCMode.Server);
                     }
                     Network.Destroy(collided);
+                    hit = true;
                     health = health - (WeaponHandler.mineDamage);
 
                     break;
                 case "MineFrag":
                     health = health - (WeaponHandler.mineFragmentDamage);
                     Network.Destroy(collided);
+                    hit = true;
                     break;
                 default:
                     break;
             }
-            if (health <= 0 && Network.isServer)
+            if (health <= 0 && hit)
             {
                 int scoreAddition = (int)(100 * transform.localScale.x);
                 manager.updateScore(scoreAddition);

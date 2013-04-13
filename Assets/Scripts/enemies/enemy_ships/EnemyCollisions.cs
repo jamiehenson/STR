@@ -46,6 +46,7 @@ public class EnemyCollisions : MonoBehaviour {
     {
         if (Network.isClient)
             return;
+        bool hit = false;
         if (universeN() != -1)
         {
             manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
@@ -60,6 +61,7 @@ public class EnemyCollisions : MonoBehaviour {
                     PlayerCollisions.WeaponBoom(gameObject, 1);
                     beamSmack.Play();
                     health = health - (WeaponHandler.beamDamage);
+                    hit = true;
                     break;
                 case "PlayerCannon":
                     // Do what we want for cannon
@@ -68,6 +70,7 @@ public class EnemyCollisions : MonoBehaviour {
                     cannonSmack.Play();
                     iTween.MoveBy(gameObject, eManager.speed * (collided.rigidbody.velocity / 7), 1f);
                     health = health - (WeaponHandler.cannonDamage);
+                    hit = true;
                     break;
                 case "PlayerMine":
                     // Do what we want for mine
@@ -88,11 +91,13 @@ public class EnemyCollisions : MonoBehaviour {
                     Network.Destroy(collided);
                     beamSmack.Play();
                     health = health - (WeaponHandler.mineDamage);
+                    hit = true;
                     break;
                 case "MineFrag":
                     beamSmack.Play();
                     health = health - (WeaponHandler.mineFragmentDamage);
                     Network.Destroy(collided);
+                    hit = true;
                     break;
                 case "Enemy":
                     // Do what we want for hitting anther enemy (not yet perfected)
@@ -104,7 +109,7 @@ public class EnemyCollisions : MonoBehaviour {
                     // Do nothing!
                     break;
             }
-            if (health <= 0)
+            if (health <= 0 && hit)
             {
                 int scoreAddition = (int)(100 * transform.localScale.x);
                 showScore = false;
