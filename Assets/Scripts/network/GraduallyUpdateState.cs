@@ -44,7 +44,8 @@ public class GraduallyUpdateState : MonoBehaviour {
 	bool m_IsMine = false;
 	
 	// Stat variables for latency, msg rate
-	float m_Timer = Time.time + 1;
+	//float m_Timer = Time.time + 1;
+	float m_Timer;
 	int m_MsgCounter = 0;
 	int m_MsgRate = 0;
 	double m_MsgLatencyTotal = 0;
@@ -71,6 +72,7 @@ public class GraduallyUpdateState : MonoBehaviour {
 	void Start() {
 		//targetController = GetComponent("ThirdPersonController");
 		//isMovingFieldInfo=targetController.GetType().GetField("isMoving");
+		m_Timer = Time.time + 1;
 	}
 	
 	// Convert field info from character controller script to a local bool variable
