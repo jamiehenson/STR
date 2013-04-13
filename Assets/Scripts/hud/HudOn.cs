@@ -6,9 +6,9 @@ using UnityEngine;
 using System.Collections;
 
 public class HudOn : MonoBehaviour {
-	private Texture2D main, speed, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard, coFlag;
+	private Texture2D main, speed, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard;
 	private Font deco;
-	private string charName, coName, wepName, gearReady;
+	private string charName, wepName, gearReady;
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount = 4;
@@ -29,6 +29,8 @@ public class HudOn : MonoBehaviour {
     // This seems a logical place to keep track of the score
     public float score = 0;
     public static bool gameOver = false;
+  //  public static float score;
+   // public static bool gameOver;
 	
 	public static Texture2D fillTex(int width, int height, Color col)
     {
@@ -210,6 +212,9 @@ public class HudOn : MonoBehaviour {
 
 	
 	void Start () {
+		// Set statics
+		score = 0;
+		gameOver = false;
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
 
@@ -232,8 +237,6 @@ public class HudOn : MonoBehaviour {
         flag = (Texture2D)Resources.Load("hud/" + PlayerManager.activeChar);
 		
         charName = MP.playerName;
-		coName = SP.coPilotName;
-		coFlag = SP.coPilotFlag;
 
         if (Network.isClient)
         {
@@ -258,10 +261,10 @@ public class HudOn : MonoBehaviour {
 		
 		deco = (Font) Resources.Load ("Belgrad");
 		
-		GUI.Label (new Rect (-115,-20,main.width,main.height), main);
+		GUI.Label (new Rect (-130,-20,main.width,main.height), main);
 		GUI.Label (new Rect (Screen.width-speed.width+15,-20,speed.width,speed.height), speed);
 		GUI.Label (new Rect (Screen.width-leaderboard.width+80,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
-		GUI.Label (new Rect (5,0,64,64),flag);
+		GUI.Label (new Rect (0,0,64,64),flag);
 		
 		GUIStyle hudStyle = new GUIStyle();
     	hudStyle.font = deco;
@@ -293,8 +296,6 @@ public class HudOn : MonoBehaviour {
 		smallStyle.alignment = TextAnchor.MiddleRight;
 
 		GUI.Label (new Rect (70,5,200,50),charName,hudStyle);
-		GUI.Label (new Rect (230,8,200,50),coName,coStyle);
-		GUI.Label (new Rect (210,2,20,20),coFlag,coStyle);
 		
 		GUI.Label (new Rect (75,21,40,20),hullTitle,smallStyle);
 		GUI.Label (new Rect (77,31,40,20),energyTitle,smallStyle);
@@ -318,9 +319,9 @@ public class HudOn : MonoBehaviour {
 		
 		// Weapons initialisation
         int wepBoxSize = 48;
-		GUI.Label (new Rect (-5,10,wepBoxSize,wepBoxSize), wepBox1);
-		GUI.Label (new Rect (12,10,wepBoxSize,wepBoxSize), wepBox2);
-        GUI.Label(new Rect(29,10,wepBoxSize,wepBoxSize), wepBox3);
+		GUI.Label (new Rect (-10,10,wepBoxSize,wepBoxSize), wepBox1);
+		GUI.Label (new Rect (7,10,wepBoxSize,wepBoxSize), wepBox2);
+        GUI.Label(new Rect(24,10,wepBoxSize,wepBoxSize), wepBox3);
 		GUI.Label (new Rect (7,47,200,64), wepName, wepStyle);
 
         // Add a crosshair

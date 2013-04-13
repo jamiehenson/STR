@@ -4,14 +4,18 @@ using System.Collections;
 public class SP : MonoBehaviour {
 	private bool menuSP = false;
 	public static bool singleplayerStart;
-	public static string coPilotName = "MORT";
-	public static Texture2D coPilotFlag = (Texture2D) Resources.Load("menu/flags/northkorea");
+	public static string coPilotName;
+	public static Texture2D coPilotFlag;
 
     private GameObject header,subheader,heading1,serverNameBox,proceed,proceedtext,refresh,flagbg,serverLimitBox,heading2,coPilot,flagBox;
 	private GameObject[] playerdetails;
 	private Object[] flags;
 	
 	void Start () {
+		// Set static vars
+		coPilotName = "MORT";
+		coPilotFlag = (Texture2D) Resources.Load("menu/flags/northkorea");
+		
 		GameObject PopSP = GameObject.Find ("PopSP");
 		GameObject SP = GameObject.Find ("SP Button");
 		iTween.FadeTo(SP, 0.3f, 0.1f);	

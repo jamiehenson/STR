@@ -16,7 +16,7 @@ public class FlowingBGBehind : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate(Vector3.right * Time.deltaTime * 1);
+		transform.Translate(Vector3.right * Time.deltaTime * 2);
 		if (transform.position.x < 0 && notcopied) {
 			Transform newBG = (Transform) Instantiate (BG, new Vector3(430,0,120), new Quaternion(0,0,0,0));
 			newBG.renderer.material.mainTexture = (Texture2D) spacePix[Random.Range (0,spacePix.Length)];

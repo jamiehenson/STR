@@ -77,6 +77,7 @@ public class EndGame : MonoBehaviour {
 		}
 		if (GUI.Button(new Rect(Screen.width-300,(Screen.height/1.15f), 200, 50), "BACK TO MENU")) {
 			HudOn.gameOver = false;
+			Misc.CleanStatics();
 			Application.LoadLevel("menu");
 		}
 	}

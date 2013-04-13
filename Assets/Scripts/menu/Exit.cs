@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class Exit : MonoBehaviour {
-	public static bool goingOut = false;
+	public static bool goingOut;
 	private Font deco;
     private Texture2D bg;
 	
 	void Start () {
+		goingOut = false;
+		
 		GameObject PopExit = GameObject.Find ("PopExit");
 		GameObject Exit = GameObject.Find ("Exit");
 		iTween.FadeTo(Exit, 0.3f, 0.1f);
