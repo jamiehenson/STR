@@ -27,8 +27,8 @@ public class HudOn : MonoBehaviour {
 		bankTitle = "WARP";
 
     // This seems a logical place to keep track of the score
-    public static float score = 0;
-    public static bool gameOver = false;
+    public static float score;
+    public static bool gameOver;
 	
 	public static Texture2D fillTex(int width, int height, Color col)
     {
@@ -210,6 +210,9 @@ public class HudOn : MonoBehaviour {
 
 	
 	void Start () {
+		// Set statics
+		score = 0;
+		gameOver = 0;
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
 
