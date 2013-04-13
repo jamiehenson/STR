@@ -30,6 +30,14 @@ public class PlayerManager : MonoBehaviour {
 	public void changeWeapon(int type){
 		wepStats = WeaponHandler.GetWeaponStats(activeChar, type);
 		wepType = type;
+		
+		if (Network.isClient)
+			networkView.RPC("changeWeaponRPC", RPCMode.Server, type);
+	}
+	
+	[RPC]
+	public void changeWeaponRPC(int type){
+		changeWeapon(type);
 	}
 
     public float getEnergyLevel()
@@ -185,7 +193,7 @@ public class PlayerManager : MonoBehaviour {
         if (Network.isClient && myCharacter)
         {
             WeaponHandler weaponHandler = GameObject.Find("Character" + characterNum).GetComponent<WeaponHandler>();
-            wepType = weaponHandler.wepType;
+ 
             switch (wepType)
             {
                 case 1:
