@@ -2,11 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class WeaponHandler : MonoBehaviour {
-	public int wepType = 1;
-	public float wepSpeed;
-	public Transform wepPrefab;
-	public float wepRate;
-    public string wepName;
 	public Transform beamPrefabChina;
 	public Transform cannonPrefabChina;
 	public Transform minePrefabChina;
@@ -28,6 +23,7 @@ public class WeaponHandler : MonoBehaviour {
 	public void Start() {
 		Instance = this;
 	}
+	
 
     public static void ScaleDamages(float scale) {
         beamDamage *= scale;
@@ -80,16 +76,9 @@ public class WeaponHandler : MonoBehaviour {
 		
 		return stats;
 	}
-
-	public void Update() {
-		WeaponStats stats = GetWeaponStats(PlayerManager.activeChar, wepType);
-		
-		wepPrefab = stats.wepPrefab;
-		wepSpeed = stats.wepSpeed;
-		wepRate = stats.wepRate;
-		wepName = stats.wepName;
-	}
 }
+
+
 
 public class WeaponStats {
 	public readonly int wepType;
@@ -98,26 +87,26 @@ public class WeaponStats {
 	public readonly float wepRate;
     public readonly string wepName;
 	
-	public WeaponStats(int _wepType, Transform _wepPrefab, float _wepSpeed, float _wepRate, string _wepName){
+	public WeaponStats(int _wepType, float _wepSpeed, Transform _wepPrefab, float _wepRate, string _wepName) {
 		wepType = _wepType;
 		wepSpeed = _wepSpeed;
 		wepPrefab = _wepPrefab;
 		wepRate = _wepRate;
-		wepName = _wepName;
+	    wepName = _wepName;
 	}
 }
 
 public class BeamStats : WeaponStats {
 	public BeamStats(Transform wepPrefab, float wepSpeed, float wepRate)
-		: base(1, wepPrefab, wepSpeed, wepRate, "Beam") {}
+		 : base(1,wepSpeed,wepPrefab,wepRate,"Beam") {}
 }
 
 public class CannonStats : WeaponStats {
 	public CannonStats(Transform wepPrefab, float wepSpeed, float wepRate)
-		: base(2, wepPrefab, wepSpeed, wepRate, "Cannon") {}
+		 : base(2,wepSpeed,wepPrefab,wepRate,"Cannon") {}
 }
 
 public class MineStats : WeaponStats {
 	public MineStats(Transform wepPrefab, float wepSpeed, float wepRate)
-		: base(3, wepPrefab, wepSpeed, wepRate, "Mine") {}
+		 : base(3,wepSpeed,wepPrefab,wepRate,"Mine") {}
 }

@@ -18,13 +18,27 @@ public class PlayerManager : MonoBehaviour {
     // Character-centric player stats
     public string activeCharN;
     public static string activeChar;
-    public static int wepType;
+    public int wepType;
+	public WeaponStats wepStats;
     public static float damageMultiplier;
     public static float energyMultiplier;
 
     //Scoring System variables
     private bool myCharacter;
     private int characterNum;
+	
+	public void changeWeapon(int type){
+		wepStats = WeaponHandler.GetWeaponStats(activeChar, type);
+		wepType = type;
+		
+		if (Network.isClient)
+			networkView.RPC("changeWeaponRPC", RPCMode.Server, type);
+	}
+	
+	[RPC]
+	public void changeWeaponRPC(int type){
+		changeWeapon(type);
+	}
 
     public float getEnergyLevel()
     {
@@ -117,6 +131,7 @@ public class PlayerManager : MonoBehaviour {
     /* Called in HudOn class, Start() */
     public void InitialiseStats()
     {
+		changeWeapon(1);
         if (Network.isClient)
         {
             networkView.RPC("updatePlayerName", RPCMode.Server, playername);
@@ -178,7 +193,7 @@ public class PlayerManager : MonoBehaviour {
         if (Network.isClient && myCharacter)
         {
             WeaponHandler weaponHandler = GameObject.Find("Character" + characterNum).GetComponent<WeaponHandler>();
-            wepType = weaponHandler.wepType;
+ 
             switch (wepType)
             {
                 case 1:
