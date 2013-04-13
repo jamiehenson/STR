@@ -122,7 +122,7 @@ public class HudOn : MonoBehaviour {
         //else if (Input.GetAxis("Mouse ScrollWheel") < 0) setWeapon(WeaponHandler.wepType - 1);
         //else if (Input.GetAxis("Mouse ScrollWheel") > 0) setWeapon(WeaponHandler.wepType + 1);
 
-        if (energyBank / (bankSize / hudBarSize) >= hudBarSize)
+        if (energyBank / (bankSize / hudBarSize) >= hudBarSize || true) // Always true, for testing
         {
             manager.resetEnergyBank(manager.getBankSize());
             gearReady = "WARP DRIVE READY!";
