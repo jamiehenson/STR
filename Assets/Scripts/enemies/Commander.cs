@@ -18,8 +18,9 @@ public class Commander : MonoBehaviour {
     // For keeping track of numbers
     public static int[] asteroidCount;
     public static int[] enemyCount;
-
-    public Transform enemyPrefab;
+	
+	private Object[] enemyPrefabs;
+    //public Transform enemyPrefab;
     public Transform asteroidPrefab;
     public Transform bossPrefab;
     private bool levelStarted = false;
@@ -29,7 +30,7 @@ public class Commander : MonoBehaviour {
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
     private float beltGap = 1f;
-    private int astProb = 3;
+    private int astProb = 220;
 
     private float leftMoveLimit;
 
@@ -172,9 +173,12 @@ public class Commander : MonoBehaviour {
             default:
                 break;
         }
-        Transform enemy = (Transform)Network.Instantiate(enemyPrefab, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0),100+universeN());
+
+		GameObject enemyPrefab = (GameObject) enemyPrefabs[Random.Range (0,enemyPrefabs.Length)];
+        Transform enemy = (Transform)Network.Instantiate(enemyPrefab.transform, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0),100+universeN());
         enemy.name = "Enemy" + universeN();
         enemy.transform.parent = transform.parent.parent.FindChild("Enemies");
+		
         EnemyManager eMan = enemy.GetComponent<EnemyManager>();
         eMan.direction = dir;
         eMan.changeType(type);
@@ -230,6 +234,7 @@ public class Commander : MonoBehaviour {
 
     // ******General Functions******
     void Start() {
+		enemyPrefabs = Resources.LoadAll("enemies/enemytypes", typeof(GameObject));
         if (Network.isServer)
         {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
