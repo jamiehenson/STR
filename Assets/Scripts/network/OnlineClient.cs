@@ -53,6 +53,8 @@ public class OnlineClient : MonoBehaviour
             FiringHandler fireHandler = GameObject.Find("Character" + num).GetComponent<FiringHandler>();
             fireHandler.activateCharacter(num);
         }
+		
+		playerManager.universeNumber = num;
     }
 
     public static void moveUniverse(int universeNum, int character)

@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour {
     public static float speed;
     public static string playername;
     private GameObject xp;
+	
+	public int universeNumber;
 
     // Character-centric player stats
     public string activeCharN;
