@@ -3,35 +3,38 @@ using System.Collections;
 
 public class BackgroundGenerator : MonoBehaviour 
 {
-	private int spawnProbability = 100, count=0;	
+	private int spawnProbability = 30, count=0;	
 	private Object[] objects;
 	
 	void Start () 
 	{
 		objects = Resources.LoadAll("bg/randomObjects", typeof(Transform));
-
-		if (Network.isServer && !transform.parent.parent.name.Equals("Universe1"))
-			this.enabled = false;
+		if (Network.isServer && !transform.parent.parent.name.Equals("Universe1")) this.enabled = false;
+		StartCoroutine("genBGElement");
 	}
 	
-	void Update () 
+	IEnumerator genBGElement()
 	{
-		int diceRoller = Random.Range(0,spawnProbability);
-		int objX = 10140;
-		int objY = Random.Range(-80,80);
-		int objZ = Random.Range (70,110);
-				
-		if (diceRoller == 47) 
+		while(true)
 		{
-			int objChoice = Random.Range (0,objects.Length);
-			Transform obj = (Transform) Instantiate((Transform) objects[objChoice], new Vector3(objX,objY,objZ), new Quaternion(0,0,0,0));
-			//obj.name = objects[objChoice].name;
-			//if (obj.name == "gasPocket2" || obj.name == "gasPocket1")
-			//{
-		//		obj.particleSystem.startColor = new Color(Random.Range (0.5f,1), Random.Range (0.5f,1), Random.Range (0.5f,1), 1.0f);
-			//}
-			count++;
-			//print (count);
+			int diceRoller = Random.Range(0,spawnProbability);
+			int objX = 10140;
+			int objY = Random.Range(-80,80);
+			int objZ = Random.Range (70,110);
+					
+			if (diceRoller == 4) 
+			{
+				int objChoice = Random.Range (0,objects.Length);
+				Transform obj = (Transform) Instantiate((Transform) objects[objChoice], new Vector3(objX,objY,objZ), new Quaternion(0,0,0,0));
+				obj.name = objects[objChoice].name;
+				if (obj.name == "gasPocket2" || obj.name == "gasPocket1")
+				{
+					obj.particleSystem.startColor = new Color(Random.Range (0.5f,1), Random.Range (0.5f,1), Random.Range (0.5f,1), 1.0f);
+				}
+				count++;
+				print (count);
+			}
+			yield return new WaitForSeconds(1);
 		}
 	}
 }
