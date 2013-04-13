@@ -131,14 +131,9 @@ public class AsteroidCollisions : MonoBehaviour {
             {
                 int scoreAddition = (int)(100 * transform.localScale.x);
                 manager.updateScore(scoreAddition);
-                showScore = false;
                 networkView.RPC("scoreXP", RPCMode.All, universeN(), scoreAddition);
-
-                //while (!showScore) { }
-                
                 Network.Instantiate(explosion, transform.position, transform.rotation, 0);
                 Network.Destroy(gameObject);
-                showScore = false;
                 
                 //HudOn.score += scoreAddition;
 
@@ -153,7 +148,7 @@ public class AsteroidCollisions : MonoBehaviour {
         if (Network.isClient && GameObject.Find("Camera " + camNum))
         {
             StartCoroutine(XP("+" + score));
-            networkView.RPC("showedScore", RPCMode.Server);
+           //s networkView.RPC("showedScore", RPCMode.Server);
         }
     }
 

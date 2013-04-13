@@ -57,7 +57,7 @@ public class EnemyCollisions : MonoBehaviour {
             {
                 case "PlayerBeam":
                     // Do what we want for beam
-                   // Network.Destroy(collided);
+                    Network.Destroy(collided);
                     PlayerCollisions.WeaponBoom(gameObject, 1);
                     //beamSmack.Play();
                     health = health - (WeaponHandler.beamDamage);
@@ -112,18 +112,12 @@ public class EnemyCollisions : MonoBehaviour {
             if (health <= 0 )
             {
                 int scoreAddition = (int)(100 * transform.localScale.x);
-                showScore = false;
                 networkView.RPC("scoreXP", RPCMode.All, universeN(), scoreAddition);
                 manager.updateScore(scoreAddition);
                 int points = eManager.killPoints;
-                Debug.Log("Destroy" + showScore);
-               // while (!showScore) { }
-               
                 Debug.Log("Destroy");
-                Network.Destroy(collided);
+                Network.Destroy(gameObject);
                 PlayerCollisions.Boom(gameObject);
-                showScore = false;
-                
                 //HudOn.score += points;
                 // StartCoroutine(XP("+" + points));
             }
@@ -156,21 +150,15 @@ public class EnemyCollisions : MonoBehaviour {
         if (Network.isClient && GameObject.Find("Camera " + camNum))
         {
             StartCoroutine(XP("+" + score));
-         //   networkView.RPC("showedScore", RPCMode.Server);
+
         }
 
     }
 
-    [RPC]
-    void showedScore()
-    {
-        showScore = true;
-    }
 
     void OnDestroy() {
         if (Network.isServer)
         {
-
             int length = transform.parent.parent.name.Length;
             string num = transform.parent.parent.name.Substring(length - 1, 1);
             int universeNum = int.Parse(num);
