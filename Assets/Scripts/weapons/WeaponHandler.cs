@@ -91,3 +91,34 @@ public class WeaponHandler : MonoBehaviour {
 		}
 	}
 }
+
+public class WeaponStats {
+	public readonly int wepType;
+	public readonly float wepSpeed;
+	public readonly Transform wepPrefab;
+	public readonly float wepRate;
+    public readonly string wepName;
+	
+	public WeaponStats(int _wepType, float _wepSpeed, Transform _wepPrefab, float _wepRate, string _wepName) {
+		wepType = _wepType;
+		wepSpeed = _wepSpeed;
+		wepPrefab = _wepPrefab;
+		wepRate = _wepRate;
+	    wepName = _wepName;
+	}
+}
+
+public class BeamStats : WeaponStats {
+	public BeamStats(Transform wepPrefab, float wepSpeed, float wepRate)
+		 : base(1,wepSpeed,wepPrefab,wepRate,"Beam") {}
+}
+
+public class CannonStats : WeaponStats {
+	public CannonStats(Transform wepPrefab, float wepSpeed, float wepRate)
+		 : base(2,wepSpeed,wepPrefab,wepRate,"Cannon") {}
+}
+
+public class MineStats : WeaponStats {
+	public MineStats(Transform wepPrefab, float wepSpeed, float wepRate)
+		 : base(3,wepSpeed,wepPrefab,wepRate,"Mine") {}
+}
