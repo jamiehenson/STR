@@ -11,13 +11,13 @@ Platform assembly: C:\Users\Madalina\Year 3\Games Project\STR\test_Data\Managed\
 Loading C:\Users\Madalina\Year 3\Games Project\STR\test_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\Madalina\Year 3\Games Project\STR\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\Madalina\Year 3\Games Project\STR\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.048 seconds
+- Completed reload, in  0.051 seconds
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 215 unused Assets to reduce memory usage. Loaded Objects now: 520. Operation took 7.866284 ms.
+Unloading 215 unused Assets to reduce memory usage. Loaded Objects now: 534. Operation took 5.228714 ms.
 Bridge Client Set Universe
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
@@ -34,62 +34,18 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 439
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 391
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 333
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 445
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 353
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 410
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
-Score: 317
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-View ID AllocatedID: 82 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-View ID AllocatedID: 83 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
@@ -97,14 +53,6 @@ Can not play a disabled audio source
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-View ID AllocatedID: 141 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
 
 Can not play a disabled audio source
  
@@ -125,154 +73,46 @@ Can not play a disabled audio source
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 109 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-View ID AllocatedID: 112 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
 
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 127 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 140 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-View ID AllocatedID: 138 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
 
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
@@ -282,10 +122,6 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
@@ -293,43 +129,23 @@ Can not play a disabled audio source
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
@@ -341,782 +157,522 @@ Can not play a disabled audio source
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
@@ -1126,9 +682,9 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
@@ -1150,145 +706,145 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
@@ -1302,17 +858,17 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
@@ -1322,9 +878,9 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
@@ -1334,9 +890,9 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
@@ -1354,9 +910,9 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
@@ -1366,13 +922,13 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
@@ -1386,9 +942,9 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
@@ -1410,7 +966,7 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-View ID AllocatedID: 3382 not found during lookup. Strange behaviour may occur
+View ID AllocatedID: 5048 not found during lookup. Strange behaviour may occur
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
 
@@ -1426,69 +982,29 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
@@ -1501,18 +1017,10 @@ Can not play a disabled audio source
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
 Can not play a disabled audio source
  
@@ -1534,2111 +1042,492 @@ Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
+Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
 Can not play a disabled audio source
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function '__RPCNetworkDestroy'
 
-Score: 100
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function '__RPCNetworkDestroy'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function '__RPCNetworkDestroy'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updateEnergy'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updateHitP'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updatePlayerScore'
 
-Score: 100
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+Couldn't send RPC function 'updateEnergy'
 
-Score: 100
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updateHitP'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updatePlayerScore'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updateEnergy'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updateHitP'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updatePlayerScore'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updateEnergy'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updateHitP'
 
-Can not play a disabled audio source
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Couldn't send RPC function 'updatePlayerScore'
 
-Score: 100
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
 
-Score: 100
+[#1 Warning] In OnPlayerDisconnected, connects = 1
  
 (Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
 
-Can not play a disabled audio source
+NullReferenceException: Object reference not set to an instance of an object
+  at AsteroidCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at AsteroidCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Can not play a disabled audio source
+NullReferenceException: Object reference not set to an instance of an object
+  at AsteroidCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Can not play a disabled audio source
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Can not play a disabled audio source
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Can not play a disabled audio source
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Can not play a disabled audio source
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Can not play a disabled audio source
+NullReferenceException: Object reference not set to an instance of an object
+  at EnemyCollisions.OnDestroy () [0x00000] in <filename unknown>:0 
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 5175 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 413
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 441
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 311
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 438
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 385
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 405
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 381
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 5645 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 435
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 5699 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 5721 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 5768 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-View ID AllocatedID: 5787 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 5800 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 5821 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-View ID AllocatedID: 5880 not found during lookup. Strange behaviour may occur
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1678)
-
-Couldn't destroy object because the associate network view was not found
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 1386)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename:  Line: -1)
 
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Can not play a disabled audio source
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Audio/AudioSource.cpp Line: 318)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
-
-Score: 100
- 
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
+Unloading 526 unused Assets to reduce memory usage. Loaded Objects now: 754. Operation took 13.510402 ms.

@@ -114,12 +114,6 @@ public class PlayerManager : MonoBehaviour {
         characterNum = charNum;
     }
 
-    public void Awake()
-    {
-
-
-    }
-
     /* Called in HudOn class, Start() */
     public void InitialiseStats()
     {
@@ -169,6 +163,7 @@ public class PlayerManager : MonoBehaviour {
             Debug.Log("Active " + activeCharN);
             hitPoints = startHP;
             energyLevel = startEnergy;
+            score = 0;
             WeaponHandler.ScaleDamages(damageMultiplier);
             networkView.RPC("updateStartEnergy", RPCMode.Server, startEnergy);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);

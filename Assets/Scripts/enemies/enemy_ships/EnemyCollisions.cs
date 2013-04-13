@@ -142,17 +142,9 @@ public class EnemyCollisions : MonoBehaviour {
         if (remainingHealth != 1) GUI.Label(new Rect(screenX - 30, screenY - 30, remainingHealth * 60, 30), enemyBar);
     }
 
-    /*public void destroyObj()
-    {
-        
-        networkView.RPC("destroyObject", RPCMode.All);
-        Destroy(gameObject);
-    }*/
-
     [RPC]
     void scoreXP(int camNum, int score)
     {
-        Debug.Log("Score: " + score);
         if (Network.isClient && GameObject.Find("Camera " + camNum))
         {
             StartCoroutine(XP("+" + score));
