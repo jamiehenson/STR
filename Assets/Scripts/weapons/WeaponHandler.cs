@@ -99,11 +99,26 @@ public class WeaponStats {
 	public readonly float wepRate;
     public readonly string wepName;
 	
-	WeaponStats(int _wepType, Transform _wepPrefab, float _wepSpeed, float _wepRate, string _wepName){
+	public WeaponStats(int _wepType, Transform _wepPrefab, float _wepSpeed, float _wepRate, string _wepName){
 		wepType = _wepType;
 		wepSpeed = _wepSpeed;
 		wepPrefab = _wepPrefab;
 		wepRate = _wepRate;
 		wepName = _wepName;
 	}
+}
+
+public class BeamStats : WeaponStats {
+	public BeamStats(Transform wepPrefab, float wepSpeed, float wepRate)
+		: base(1, wepPrefab, wepSpeed, wepRate, "Beam") {}
+}
+
+public class CannonStats : WeaponStats {
+	public CannonStats(Transform wepPrefab, float wepSpeed, float wepRate)
+		: base(2, wepPrefab, wepSpeed, wepRate, "Cannon") {}
+}
+
+public class MineStats : WeaponStats {
+	public MineStats(Transform wepPrefab, float wepSpeed, float wepRate)
+		: base(3, wepPrefab, wepSpeed, wepRate, "Mine") {}
 }
