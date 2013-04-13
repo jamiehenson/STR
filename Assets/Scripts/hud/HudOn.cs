@@ -161,7 +161,7 @@ public class HudOn : MonoBehaviour {
                 {
                     float x = xvals[i];
                     float y = yvals[i];
-                    Vector3 vortpoint = new Vector3(x, y, 25);
+                    Vector3 vortpoint = new Vector3(x, y, 15);
                     Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
                     Instantiate(vortex, vort, Quaternion.identity);
                     vortex.name = "vortex" + (i + 1);
