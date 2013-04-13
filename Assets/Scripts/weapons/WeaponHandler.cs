@@ -91,3 +91,19 @@ public class WeaponHandler : MonoBehaviour {
 		}
 	}
 }
+
+public class WeaponStats {
+	public readonly int wepType;
+	public readonly float wepSpeed;
+	public readonly Transform wepPrefab;
+	public readonly float wepRate;
+    public readonly string wepName;
+	
+	WeaponStats(int _wepType, Transform _wepPrefab, float _wepSpeed, float _wepRate, string _wepName){
+		wepType = _wepType;
+		wepSpeed = _wepSpeed;
+		wepPrefab = _wepPrefab;
+		wepRate = _wepRate;
+		wepName = _wepName;
+	}
+}
