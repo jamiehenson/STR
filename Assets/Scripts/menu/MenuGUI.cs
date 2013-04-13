@@ -10,7 +10,7 @@ public class MenuGUI : MonoBehaviour {
 		iTween.CameraFadeFrom(1.0f, 2.0f);
 		credz = (Texture2D) Resources.Load ("menu/credz");
 		HudOn.gameOver = false;
-		HudOn.score = 0;
+		//HudOn.score = 0;
 	}
 	
 	void OnGUI() {

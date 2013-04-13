@@ -24,6 +24,8 @@ public class AsteroidCollisions : MonoBehaviour {
         Instantiate(explosion, transform.position, transform.rotation);
     }
 
+
+
     void Start() {
         health = health * gameObject.transform.localScale.x;
     }
@@ -123,12 +125,26 @@ public class AsteroidCollisions : MonoBehaviour {
             }
             if (health <= 0 && Network.isServer)
             {
+                int scoreAddition = (int)(100 * transform.localScale.x);
+                manager.updateScore(scoreAddition);
+                networkView.RPC("scoreXP", RPCMode.All, universeN(), scoreAddition);
                 Network.Instantiate(explosion, transform.position, transform.rotation, 0);
                 Network.Destroy(gameObject);
-                int scoreAddition = (int)(100 * transform.localScale.x);
-                HudOn.score += scoreAddition;
-                StartCoroutine(XP("+" + scoreAddition));
+
+                //HudOn.score += scoreAddition;
+
+                //StartCoroutine(XP("+" + scoreAddition));
             }
+        }
+    }
+
+    [RPC]
+    void scoreXP(int camNum, int score)
+    {
+        Debug.Log("Score: " + score);
+        if (Network.isClient && GameObject.Find("Camera " + camNum))
+        {
+            StartCoroutine(XP("+" + score));
         }
     }
 
