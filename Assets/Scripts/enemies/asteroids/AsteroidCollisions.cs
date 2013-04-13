@@ -14,7 +14,7 @@ public class AsteroidCollisions : MonoBehaviour {
     private bool exploded;
 
     PlayerManager manager;
-
+    private bool showScore;
 
     // Destroy asteroid on collision with the character
     [RPC]
@@ -127,10 +127,15 @@ public class AsteroidCollisions : MonoBehaviour {
             {
                 int scoreAddition = (int)(100 * transform.localScale.x);
                 manager.updateScore(scoreAddition);
+                showScore = false;
                 networkView.RPC("scoreXP", RPCMode.All, universeN(), scoreAddition);
-                Network.Instantiate(explosion, transform.position, transform.rotation, 0);
-                Network.Destroy(gameObject);
 
+                if (showScore)
+                {
+                    Network.Instantiate(explosion, transform.position, transform.rotation, 0);
+                    Network.Destroy(gameObject);
+                    showScore = false;
+                }
                 //HudOn.score += scoreAddition;
 
                 //StartCoroutine(XP("+" + scoreAddition));
@@ -141,11 +146,17 @@ public class AsteroidCollisions : MonoBehaviour {
     [RPC]
     void scoreXP(int camNum, int score)
     {
-        Debug.Log("Score: " + score);
         if (Network.isClient && GameObject.Find("Camera " + camNum))
         {
             StartCoroutine(XP("+" + score));
+            networkView.RPC("showedScore", RPCMode.Server);
         }
+    }
+
+    [RPC]
+    void showedScore()
+    {
+        showScore = true;
     }
 
     void OnDestroy() {
