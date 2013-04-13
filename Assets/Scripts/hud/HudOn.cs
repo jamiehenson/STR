@@ -52,7 +52,7 @@ public class HudOn : MonoBehaviour {
 			wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2Off");
 			wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
 			wepName = beamTitle;
-			weaponHandler.wepType = 1;
+			manager.changeWeapon(1);
 		}
 		
 		else if (type == 2) 
@@ -62,7 +62,7 @@ public class HudOn : MonoBehaviour {
 			wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2On");
 			wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
 			wepName = cannonTitle;
-			weaponHandler.wepType = 2;
+			manager.changeWeapon(2);
 		}
 		
 		else if (type == 3 || type == 0) 
@@ -71,7 +71,7 @@ public class HudOn : MonoBehaviour {
 			wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2Off");
 			wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3On");
 			wepName = mineTitle;
-			weaponHandler.wepType = 3;
+			manager.changeWeapon(3);
 		}	
 	}
 		
