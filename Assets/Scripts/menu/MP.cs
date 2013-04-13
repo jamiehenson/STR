@@ -6,8 +6,8 @@ public class MP : MonoBehaviour
     public GameObject SBrowserDetails;
     public GameObject SNewServer;
     public GameObject SAvailableServers;
-    public static bool joinScreen = false, hostScreen = false;
-    public static string playerName = "HOLYER", serverName, playerLimit="4";
+    public static bool joinScreen, hostScreen;
+    public static string playerName, serverName, playerLimit;
     private Font deco;
     private Texture2D bg;
     public static bool refresh;
@@ -24,7 +24,7 @@ public class MP : MonoBehaviour
 	private GameObject header, subheader, heading1, heading2, serverNameBox, serverLimitBox, proceed, proceedtext, refreshbutton, flagbg, coPilot, flagBox;
 	private GameObject[] playerdetails, playerballs;
 
-    public static string takenNames = "";
+    public static string takenNames;
 
     public static void updateTakenNames(string names)
     {
@@ -34,6 +34,16 @@ public class MP : MonoBehaviour
 
     void Start()
     {
+		// Set static vars
+		joinScreen = false;
+		hostScreen = false;
+		playerName = "HOLYER";
+		playerLimit="4";
+		hostData = null;
+		playerdetails = null;
+		playerballs = null;
+		takenNames = "";
+		
 		header = GameObject.Find("SBrowserHeader");
         subheader = GameObject.Find("SBrowserSelect");
         heading1 = GameObject.Find("SGameName");
