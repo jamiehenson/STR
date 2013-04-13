@@ -2,11 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class WeaponHandler : MonoBehaviour {
-	public int wepType = 1;
-	public float wepSpeed;
-	public Transform wepPrefab;
-	public float wepRate;
-    public string wepName;
 	public Transform beamPrefabChina;
 	public Transform cannonPrefabChina;
 	public Transform minePrefabChina;
@@ -81,16 +76,9 @@ public class WeaponHandler : MonoBehaviour {
 		
 		return stats;
 	}
-
-	public void Update() {
-		WeaponStats stats = GetWeaponStats(PlayerManager.activeChar, wepType);
-		
-		wepPrefab = stats.wepPrefab;
-		wepSpeed = stats.wepSpeed;
-	    wepRate = stats.wepRate;
-        wepName = stats.wepName;
-	}
 }
+
+
 
 public class WeaponStats {
 	public readonly int wepType;
