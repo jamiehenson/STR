@@ -27,10 +27,10 @@ public class HudOn : MonoBehaviour {
 		bankTitle = "WARP";
 
     // This seems a logical place to keep track of the score
-    public float score = 0;
-    public static bool gameOver = false;
-  //  public static float score;
-   // public static bool gameOver;
+   // public float score = 0;
+   // public static bool gameOver = false;
+      public static float score;
+      public static bool gameOver;
 	
 	public static Texture2D fillTex(int width, int height, Color col)
     {
@@ -76,7 +76,7 @@ public class HudOn : MonoBehaviour {
 	}
 		
 	IEnumerator headOut() {
-		EndGame.endIndividualScore = (int) score;
+		EndGame.endIndividualScore = manager.getScore();
 		iTween.CameraFadeAdd();
 		iTween.CameraFadeTo(1f, 2f);
 		yield return new WaitForSeconds(2);
@@ -85,7 +85,8 @@ public class HudOn : MonoBehaviour {
 
     IEnumerator KeepScore() {
         while (!gameOver) {
-            score += 1;
+            if(Network.isServer) manager.updateScore(1);
+            //score += 1;
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -311,7 +312,7 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (115,45,energyBank/(bankSize/hudBarSize),10),"",bank);
 		
 		// Speed and gear indicator
-        GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + score, speedStyle);
+        GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + manager.getScore(), speedStyle);
 		GUI.Label (new Rect (Screen.width-240,100,200,40),gearReady,hudStyle);
 		
 		// Scoreboard indicator
