@@ -58,14 +58,14 @@ public class EnemyCollisions : MonoBehaviour {
                     // Do what we want for beam
                     Network.Destroy(collided);
                     PlayerCollisions.WeaponBoom(gameObject, 1);
-                    beamSmack.Play();
+                    //beamSmack.Play();
                     health = health - (WeaponHandler.beamDamage);
                     break;
                 case "PlayerCannon":
                     // Do what we want for cannon
                     Network.Destroy(collided);
                     PlayerCollisions.WeaponBoom(gameObject, 2);
-                    cannonSmack.Play();
+                    //cannonSmack.Play();
                     iTween.MoveBy(gameObject, eManager.speed * (collided.rigidbody.velocity / 7), 1f);
                     health = health - (WeaponHandler.cannonDamage);
                     break;
