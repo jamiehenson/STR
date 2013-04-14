@@ -57,7 +57,7 @@ public class Server : MonoBehaviour {
 		// Initalise private memeber variables
         countUniverse = 4;
         finalNumberofPlayers = countUniverse;
-        universe = new Transform[countUniverse+1];
+        universe = new Transform[countUniverse+2];
         characterView = new NetworkView[countUniverse+1];
         viewIDNameMapping = new Dictionary<NetworkViewID, string>();
         viewIDChNameMapping = new Dictionary<NetworkViewID, string>();
@@ -88,6 +88,17 @@ public class Server : MonoBehaviour {
             characterView[i] = nView;
             viewIDChNameMapping.Add(characterPlayer.networkView.viewID, characterPlayer.name);
         }
+
+        // Set up boss universe
+        Vector3 pos_b = new Vector3(0 + ((countUniverse+1) * 10000), 0, 0);
+        Transform obj_b = (Transform)Network.Instantiate(playerUniversePrefab, pos_b, new Quaternion(0, 0, 0, 0), 99);
+        universe[countUniverse+1] = obj_b;
+
+        // Rename it to something useful and pass name to clients
+        universe[countUniverse+1].transform.Find("Managers/OriginManager").GetComponent<Universe>().origin = pos_b;
+        obj_b.name = "Boss Universe";
+        viewIDNameMapping.Add(obj_b.networkView.viewID, obj_b.name);
+			
     }
 
 	// When a player is connected , set it up correctly
@@ -111,20 +122,6 @@ public class Server : MonoBehaviour {
         bridge.updateUniverseNames(viewIDNameMapping, player);
         bridge.updateCharacterNames(viewIDChNameMapping, player);
 		
-        if (!startGame)
-        {
-            if (manualGoAhead)
-            {
-                print("LETS GO");
-                startGame = true;
-                for (int i = 1; i <= countUniverse; i++)
-                {
-                    // Enable enemy generation
-                    commander = GameObject.Find("Universe" + i + "/Managers/EnemyManager").GetComponent<Commander>();
-                    commander.enabled = true;
-                }
-            }
-        }
     }
 
 	// When player disconnects, log event
@@ -160,6 +157,22 @@ public class Server : MonoBehaviour {
             }
 
         }
+
+        if (!startGame)
+        {
+            if (manualGoAhead)
+            {
+                print("LETS GO");
+                startGame = true;
+                for (int i = 1; i <= countUniverse; i++)
+                {
+                    // Enable enemy generation
+                    commander = GameObject.Find("Universe" + i + "/Managers/EnemyManager").GetComponent<Commander>();
+                    commander.enabled = true;
+                }
+            }
+        }
+
         if (!manualGoAhead) if (GUI.Button(new Rect((Screen.width / 2) - x/2, (Screen.height / 2) - x/4, x, x/2), "START GAME", buttonStyle)) manualGoAhead = true;
 		GUI.Label(new Rect(Screen.width/4, Screen.height*0.75f, Screen.width/2, 200), playersJoined);
     }

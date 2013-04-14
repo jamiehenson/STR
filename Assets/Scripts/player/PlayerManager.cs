@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour {
     public void updatePlayerNames(int pos, string s)
     {
         playerNames[pos] = s;
-        networkView.RPC("updatePlayerNameC", RPCMode.All, pos, s);
+        networkView.RPC("updatePlayerNameC", RPCMode.AllBuffered, pos, s);
     }
 
 	[RPC]
