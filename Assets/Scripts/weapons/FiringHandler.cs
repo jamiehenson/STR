@@ -83,6 +83,7 @@ public class FiringHandler : MonoBehaviour {
 		// Place Weapon
 		Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z-1);
 		Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
+        bullet.name = bullet.name + universeN();
 		Physics.IgnoreCollision(bullet.collider, transform.collider);
 		
 		// Tell everyone to set up its movement
@@ -90,7 +91,7 @@ public class FiringHandler : MonoBehaviour {
 		Vector3 forceToApply = fireDirection.normalized * weaponHandler.wepSpeed;
 		networkView.RPC("setupWeapon", RPCMode.All, id, lookAt, forceToApply, bulletType);
 	}
-	
+
 	[RPC]
 	void setupWeapon(NetworkViewID id, Vector3 lookAt, Vector3 forceToApply, int bulletType)
 	{

@@ -49,10 +49,12 @@ public class EnemyCollisions : MonoBehaviour {
         bool hit = false;
         if (universeN() != -1)
         {
-            manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+            
             GameObject collided = other.gameObject;
             // Need to switch from name-based system to tag-based
             string collidedTag = collided.tag;
+            string characterNum = collided.name.Substring(collided.name.Length -1, 1);
+            if ("0123456789".Contains(characterNum)) manager = GameObject.Find("Character" + characterNum ).GetComponent<PlayerManager>();
             switch (collidedTag)
             {
                 case "PlayerBeam":
@@ -112,10 +114,12 @@ public class EnemyCollisions : MonoBehaviour {
             if (health <= 0 )
             {
                 int scoreAddition = (int)(100 * transform.localScale.x);
-                networkView.RPC("scoreXP", RPCMode.All, universeN(), scoreAddition);
+                if ("0123456789".Contains(characterNum))
+                {
+                    networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), scoreAddition);
+                }
                 manager.updateScore(scoreAddition);
                 int points = eManager.killPoints;
-                Debug.Log("Destroy");
                 Network.Destroy(gameObject);
                 PlayerCollisions.Boom(gameObject);
                 //HudOn.score += points;
