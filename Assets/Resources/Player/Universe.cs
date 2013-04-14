@@ -43,7 +43,14 @@ public class Universe : MonoBehaviour {
 	}
 	
 	public static Vector3 PositionOfCamera(int universeNum) {
-		return GameObject.Find("Universe" + universeNum + "/Managers/OriginManager").GetComponent<Universe>().origin;
+		GameObject universe = GameObject.Find("Universe" + universeNum + "/Managers/OriginManager");
+		
+		if (universe == null)
+			Log.Error ("Could not find universe's origin", "In Universe.PositionOfCamera, " +
+				"while looking for GameObject called `Universe" + universeNum + "/Managers/OriginManager`, " +
+				"only found null :(.");
+		
+		return universe.GetComponent<Universe>().origin;
 	}
 
 	// Update is called once per frame
