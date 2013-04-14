@@ -175,6 +175,7 @@ public class HudOn : MonoBehaviour {
                     vortex.name = "vortex" + (i + 1);
 					obj.GetComponentInChildren<Vortex>().leadsToUniverse =
 						(i + 1 >= currentUniverse) ? i+2 : i+1;
+					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
                     vortex.tag = "vortex";
                 }
@@ -349,6 +350,7 @@ public class HudOn : MonoBehaviour {
 	IEnumerator VortexCountdown() {
 		// Do GUI magic here!
 		while (vortexCountdownNum != 0) {
+			print ("In vortex: "+vortexCountdownNum);
 			vortexCountdownNum--;
 			yield return new WaitForSeconds(1);
 		}
@@ -357,6 +359,9 @@ public class HudOn : MonoBehaviour {
 	}
 	
 	public void enteredVortex(int vortexTo) {
+		print ("LEADS TO "+vortexTo);
+		print("Entered Vortex");
+		
 		if (inVortexCountdown){
 			StopCoroutine("VortexCountdown");
 			inVortexCountdown = false;
@@ -368,6 +373,8 @@ public class HudOn : MonoBehaviour {
 	}
 	
 	public void leftVortex() {
+		print("Left Vortex");
+		
 		if (inVortexCountdown){
 			StopCoroutine("VortexCountdown");
 			inVortexCountdown = false;
