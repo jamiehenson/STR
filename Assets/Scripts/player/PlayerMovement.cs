@@ -156,12 +156,12 @@ public class PlayerMovement : MonoBehaviour {
     [RPC]
     public void updateUniverse(int univNum, int character)
     {
-        // characterNum = charNum;
         if (universeNum != 0)
         {
             GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().updateActiveChar(character, false);
             universeNum = univNum;
             GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().updateActiveChar(character, true);
         }
+
     }
 }

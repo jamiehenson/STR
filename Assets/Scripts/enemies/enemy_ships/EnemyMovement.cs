@@ -123,7 +123,7 @@ public class EnemyMovement : MonoBehaviour {
             if (commander.activeCharacters[i] == true) {
                 activeChars.Add(i);
             }
-            print(i + ": " + commander.activeCharacters[i] + " " + universeNb);
+          //  print(i + ": " + commander.activeCharacters[i] + " " + universeNb);
         }
         if (activeChars.Count == 0) return -1;
         int index = Random.Range(0, activeChars.Count);

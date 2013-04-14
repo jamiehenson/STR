@@ -244,6 +244,8 @@ public class Commander : MonoBehaviour {
         if (Network.isServer)
         {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
+            activeCharacters = new bool[countUniverse+1];
+            activeCharacters[universeN()] = true;
             asteroidCount = new int[countUniverse];
             enemyCount = new int[countUniverse];
             Positions = transform.parent.FindChild("OriginManager").GetComponent<Universe>();
@@ -252,9 +254,6 @@ public class Commander : MonoBehaviour {
             asteroidCount[universeN()] = 0;
             enemyCount[universeN()] = 0;
             StartCoroutine("StartGame");
-
-            activeCharacters = new bool[countUniverse];
-            activeCharacters[universeN()] = true;
         }
     }
 

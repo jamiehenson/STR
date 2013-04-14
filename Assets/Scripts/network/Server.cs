@@ -143,18 +143,19 @@ public class Server : MonoBehaviour {
     void OnGUI()
     {
         int x = 400;
-        //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + "has connected");
+        GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "");
         if (!manualGoAhead)
         {
-            // Debug.Log(ID); // Ahhh maddie!!!!!
+            // Debug.Log(ID); // Ahhh maddie!!!!! Sorry forgot about that one!
             if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
             {
                 PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
                 Debug.Log("Player :" + manager.getPlayerName() + "has connected");
-                //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
+                GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
+                GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().updatePlayerNames(ID, manager.getPlayerName());
+                manager.updatePlayerNames(ID, manager.getPlayerName());
                 ID++;
-                takenNames = takenNames + "" + manager.getPlayerName();
-               // MP.updateTakenNames(takenNames);
+                takenNames = takenNames + " " + manager.getPlayerName();
 
             }
 

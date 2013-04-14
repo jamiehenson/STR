@@ -239,6 +239,7 @@ public class HudOn : MonoBehaviour {
 		
         charName = MP.playerName;
 
+
         if (Network.isClient)
         {
             int PlayerNumber = int.Parse(GameObject.FindGameObjectWithTag("MainCamera").name.Substring(GameObject.FindGameObjectWithTag("MainCamera").name.Length - 1, 1));
@@ -320,7 +321,7 @@ public class HudOn : MonoBehaviour {
         for (int i = 1; i <= 4; i++)
         {
             PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
-            GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 20 + i*20, 40, 40), "Player "+ i + ":" +score.getScore() , coStyle);
+            GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 20 + i*20, 40, 40), score.playerNames[i] + " :" +score.getScore() , coStyle);
         }
 		
 		// Weapons initialisation

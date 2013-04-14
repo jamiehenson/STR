@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour {
     public static float speed;
     public static string playername;
     private GameObject xp;
+    public string[] playerNames;
 
     // Character-centric player stats
     public string activeCharN;
@@ -34,7 +35,13 @@ public class PlayerManager : MonoBehaviour {
 		if (Network.isClient)
 			networkView.RPC("changeWeaponRPC", RPCMode.Server, type);
 	}
-	
+
+    public void updatePlayerNames(int pos, string s)
+    {
+        playerNames[pos] = s;
+        networkView.RPC("updatePlayerNameC", RPCMode.All, pos, s);
+    }
+
 	[RPC]
 	public void changeWeaponRPC(int type){
 		changeWeapon(type);
@@ -184,6 +191,17 @@ public class PlayerManager : MonoBehaviour {
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
         }
+
+    }
+
+    void Start()
+    {
+        if (Network.isServer)
+        {
+            Debug.Log("Instantiate");
+            playerNames = new string[Server.numberOfPlayers() + 1];
+            networkView.RPC("intantiatePlayerNames", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
+        }
     }
 
     void Update()
@@ -221,6 +239,19 @@ public class PlayerManager : MonoBehaviour {
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
             networkView.RPC("updatePlayerScore", RPCMode.All, score);
         }
+    }
+
+    [RPC]
+    void intantiatePlayerNames(int count)
+    {
+        Debug.Log("Instantiate");
+        playerNames = new string[count];
+    }
+
+    [RPC]
+    void updatePlayerNameC(int pos, string s)
+    {
+        playerNames[pos] = s;
     }
 
     [RPC]
