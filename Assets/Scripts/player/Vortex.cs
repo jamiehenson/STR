@@ -56,6 +56,11 @@ public class Vortex : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        OnlineClient.moveUniverse(1, 1);
+		HudOn.Instance.enteredVortex();
+    }
+	
+	void OnCollisionExit(Collision collision)
+    {
+		HudOn.Instance.leftVortex();
     }
 }

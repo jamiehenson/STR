@@ -17,7 +17,12 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
     WeaponHandler weaponHandler;
-    PlayerManager manager; 
+    PlayerManager manager;
+	
+	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
+	
+	bool inVortexCountdown = false;
+	int vortexCountdownNum;
 
 	private string beamTitle = "BEAM", 
 		cannonTitle = "CANNON", 
@@ -216,6 +221,7 @@ public class HudOn : MonoBehaviour {
 		// Set statics
 		score = 0;
 		gameOver = false;
+		Instance = this;
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
 
@@ -333,4 +339,37 @@ public class HudOn : MonoBehaviour {
         GUI.DrawTexture(position, crossTex);
         Screen.showCursor = false;
 	}	
+	
+	// Vortex logic
+	IEnumerator VortexCountdown() {
+		// Do GUI magic here!
+		while (vortexCountdownNum != 0) {
+			print ("In vortex: "+vortexCountdownNum);
+			vortexCountdownNum--;
+			yield return new WaitForSeconds(1);
+		}
+		
+		OnlineClient.moveUniverse(1, 1);
+	}
+	
+	public void enteredVortex() {
+		print("Entered Vortex");
+		
+		if (inVortexCountdown){
+			StopCoroutine("VortexCountdown");
+			inVortexCountdown = false;
+		}
+		
+		vortexCountdownNum = 4;
+		StartCoroutine("VortexCountdown");		
+	}
+	
+	public void leftVortex() {
+		print("Left Vortex");
+		
+		if (inVortexCountdown){
+			StopCoroutine("VortexCountdown");
+			inVortexCountdown = false;
+		}
+	}
 }
