@@ -68,7 +68,7 @@ public class Commander : MonoBehaviour {
     /* How it works: For each Commander script in each Universe, there is an activeCharacters bool array that
      * determines which character is active in the respective universe. The count is started for simplicity
      * from 1 (activeCharacters[1] refers to the status of the first character in the current universe).*/
-    private bool[] activeCharacters;
+    public bool[] activeCharacters;
 
     List<int> masterDiffStats = new List<int>();
 	
@@ -76,6 +76,12 @@ public class Commander : MonoBehaviour {
 		asteroidCount = new int[5];
     	enemyCount = new int[5];	
 	}
+
+    // ******Used by enemies to pick a target player******
+    /*public static int pickTarget() {
+        // Pick randomly from the array
+        return 1;
+    }*/
 
     // ******Determine by which prefab is the script called***** 
     private int universeN()

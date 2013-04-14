@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour {
     private Transform bulletPrefab;
     private GameObject explosionPrefab, explosionPrefab2, explosionPrefab3;
     private Universe Positions;
+    private Commander commander;
 
     private float stop = 5;
 
@@ -49,9 +50,7 @@ public class EnemyMovement : MonoBehaviour {
             case 3: bulletPrefab = heavyWeapon; typeForceMultiplier = 0.6f; break;
             case 4: bulletPrefab = superheavyWeapon; typeForceMultiplier = 0.3f; break;
             default: break;
-        }
-
-           
+        }     
     }
 
     void Start() {
@@ -62,6 +61,7 @@ public class EnemyMovement : MonoBehaviour {
             universeNb = int.Parse(name.Substring(name.Length-1, 1));
             Vector3 forceDir = Vector3.zero;
             eManager = gameObject.GetComponent<EnemyManager>();
+            commander = transform.parent.parent.FindChild("Managers/EnemyManager").GetComponent<Commander>();
             setUpEnemy();
 
             int enemyType = eManager.enemyType;
@@ -117,23 +117,39 @@ public class EnemyMovement : MonoBehaviour {
         gameObject.renderer.material.color = eManager.color;
     }
 
+    int PickTarget() {
+        ArrayList activeChars = new ArrayList();
+        for (int i = 0; i < commander.activeCharacters.Length; i++) {
+            if (commander.activeCharacters[i] == true) {
+                activeChars.Add(i);
+            }
+            print(i + ": " + commander.activeCharacters[i] + " " + universeNb);
+        }
+        if (activeChars.Count == 0) return -1;
+        int index = Random.Range(0, activeChars.Count);
+        return (int) activeChars[index];
+    }
 
     // Used for firing
     IEnumerator Shoot() {
         while (true) {
             if (inPlane) {
-                Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation,100+universeNb);
-                GameObject character = GameObject.Find("Character"+universeNb);
-                EnemyBulletSettings ebs = bullet.GetComponent<EnemyBulletSettings>();
-                Vector3 fireDirection = character.transform.position - gameObject.transform.position;
-                fireDirection.y = Random.Range(fireDirection.y - firingOffset, fireDirection.y + firingOffset);
-                bullet.transform.LookAt(character.transform, Vector3.forward);
-                bullet.transform.Rotate(new Vector3(90, 0, 90));
-                bullet.name = "EnemyBullet";
-                Physics.IgnoreCollision(bullet.collider, gameObject.collider);
-                bullet.rigidbody.AddForce(fireDirection.normalized * eManager.force * 2 * typeForceMultiplier);
-                bullet.rigidbody.freezeRotation = true;
-                ebs.damage = eManager.weaponPower;
+                //targetPlayer = comman
+                int targetPlayer = PickTarget();
+                if (targetPlayer != -1) {
+                    Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation, 100 + universeNb);
+                    GameObject character = GameObject.Find("Character" + targetPlayer);
+                    EnemyBulletSettings ebs = bullet.GetComponent<EnemyBulletSettings>();
+                    Vector3 fireDirection = character.transform.position - gameObject.transform.position;
+                    fireDirection.y = Random.Range(fireDirection.y - firingOffset, fireDirection.y + firingOffset);
+                    bullet.transform.LookAt(character.transform, Vector3.forward);
+                    bullet.transform.Rotate(new Vector3(90, 0, 90));
+                    bullet.name = "EnemyBullet";
+                    Physics.IgnoreCollision(bullet.collider, gameObject.collider);
+                    bullet.rigidbody.AddForce(fireDirection.normalized * eManager.force * 2 * typeForceMultiplier);
+                    bullet.rigidbody.freezeRotation = true;
+                    ebs.damage = eManager.weaponPower;
+                }
                 yield return new WaitForSeconds(eManager.firingDelay);
             }
             else yield return new WaitForSeconds(1);
