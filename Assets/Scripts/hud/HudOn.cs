@@ -23,6 +23,7 @@ public class HudOn : MonoBehaviour {
 	
 	bool inVortexCountdown = false;
 	int vortexCountdownNum;
+	int vortexLeadsTo;
 
 	private string beamTitle = "BEAM", 
 		cannonTitle = "CANNON", 
@@ -160,6 +161,8 @@ public class HudOn : MonoBehaviour {
                     yvals[i] = yvals[t];
                     yvals[t] = temp;
                 }
+				
+				int currentUniverse = manager.universeNumber;
 
                 // Make n-1 new ones
                 for (int i = 0; i < playercount - 1; i++)
@@ -168,8 +171,11 @@ public class HudOn : MonoBehaviour {
                     float y = yvals[i];
                     Vector3 vortpoint = new Vector3(x, y, 15);
                     Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
-                    Instantiate(vortex, vort, Quaternion.identity);
+                    GameObject obj = (GameObject)Instantiate(vortex, vort, Quaternion.identity);
                     vortex.name = "vortex" + (i + 1);
+					obj.GetComponentInChildren<Vortex>().leadsToUniverse =
+						(i + 1 >= currentUniverse) ? i+2 : i+1;
+					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
                     vortex.tag = "vortex";
                 }
@@ -349,10 +355,11 @@ public class HudOn : MonoBehaviour {
 			yield return new WaitForSeconds(1);
 		}
 		
-		OnlineClient.moveUniverse(1, 1);
+		OnlineClient.moveUniverse(vortexLeadsTo, manager.universeNumber);
 	}
 	
-	public void enteredVortex() {
+	public void enteredVortex(int vortexTo) {
+		print ("LEADS TO "+vortexTo);
 		print("Entered Vortex");
 		
 		if (inVortexCountdown){
@@ -361,6 +368,7 @@ public class HudOn : MonoBehaviour {
 		}
 		
 		vortexCountdownNum = 4;
+		vortexLeadsTo = vortexTo;
 		StartCoroutine("VortexCountdown");		
 	}
 	

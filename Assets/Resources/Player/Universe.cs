@@ -43,6 +43,7 @@ public class Universe : MonoBehaviour {
 	}
 	
 	public static Vector3 PositionOfCamera(int universeNum) {
+		print ("numNum = "+universeNum);
 		GameObject universe = GameObject.Find("Universe" + universeNum + "/Managers/OriginManager");
 		
 		if (universe == null)

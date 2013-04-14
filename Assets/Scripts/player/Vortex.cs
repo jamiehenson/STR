@@ -4,6 +4,7 @@ using System.Collections;
 public class Vortex : MonoBehaviour {
     private bool scaleswitch;
     private int i;
+	public int leadsToUniverse;
     private float growth = 0.015f;
 
     public static IEnumerator grow(GameObject vortex)
@@ -56,7 +57,7 @@ public class Vortex : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-		HudOn.Instance.enteredVortex();
+		HudOn.Instance.enteredVortex(leadsToUniverse);
     }
 	
 	void OnCollisionExit(Collision collision)
