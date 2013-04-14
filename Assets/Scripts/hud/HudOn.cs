@@ -317,6 +317,11 @@ public class HudOn : MonoBehaviour {
 		
 		// Scoreboard indicator
 		GUI.Label (new Rect (Screen.width-120,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",coStyle);
+        for (int i = 1; i <= 4; i++)
+        {
+            PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
+            GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 20 + i*20, 40, 40), "Player "+ i + ":" +score.getScore() , coStyle);
+        }
 		
 		// Weapons initialisation
         int wepBoxSize = 48;

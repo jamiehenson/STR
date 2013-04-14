@@ -182,8 +182,7 @@ public class PlayerManager : MonoBehaviour {
             WeaponHandler.ScaleDamages(damageMultiplier);
             networkView.RPC("updateStartEnergy", RPCMode.Server, startEnergy);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
-            networkView.RPC("updateHitP", RPCMode.Server, hitPoints);
-           
+            networkView.RPC("updateHitP", RPCMode.All, hitPoints);
         }
     }
 
