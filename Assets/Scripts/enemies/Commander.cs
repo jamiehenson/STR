@@ -93,7 +93,7 @@ public class Commander : MonoBehaviour {
 
     // ******Asteroid Belt Functions******
     IEnumerator SendAsteroidBelt() {
-        
+        //RotatePlayers(false);
         GameObject[] asteroidBelts = GameObject.FindGameObjectsWithTag("AsteroidBelt");
         
         foreach (GameObject asteroidBelt in asteroidBelts) {
@@ -113,6 +113,17 @@ public class Commander : MonoBehaviour {
 
         foreach (GameObject asteroidBelt in asteroidBelts) {
             asteroidBelt.GetComponent<ParticleSystem>().enableEmission = false;
+        }
+        //RotatePlayers(true);
+    }
+
+    void RotatePlayers(bool camBehind) {
+        for (int i = 0; i < activeCharacters.Length; i++) {
+            if (activeCharacters[i]) {
+                GameObject character = GameObject.Find("Character" + i);
+                PlayerMovement move = character.GetComponent<PlayerMovement>();
+                move.StartCoroutine("rotateCamera", camBehind);
+            }
         }
     }
 

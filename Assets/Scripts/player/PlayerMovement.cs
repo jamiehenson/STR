@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour {
 	
 	public IEnumerator rotateCamera(bool cameraBehind) 
 	{
+        rotexception = true;
+        camtoggle = !camtoggle;
 		int direction = (cameraBehind) ? 1 : -1;
         iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * 4), 2);
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
@@ -69,8 +71,8 @@ public class PlayerMovement : MonoBehaviour {
 			if (Input.GetKeyDown("t")) 
 			{
 				StartCoroutine("rotateCamera",camtoggle);
-				rotexception = true;
-				camtoggle = !camtoggle;
+				/*rotexception = true;
+				camtoggle = !camtoggle;*/
 			}
 			
 			if (rotexception) 
