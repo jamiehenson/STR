@@ -81,8 +81,11 @@ public class EnemyMovement : MonoBehaviour {
             minY = Positions.bottomBorder;
             maxY = Positions.topBorder;
 
-            GameObject character = GameObject.Find("Character"+universeNb);
-            stopZ = character.transform.position.z;
+            // NEED to do this not based on position, but on a FIXED stopZ (due to rotation issues)
+            /*GameObject character = GameObject.Find("Character"+universeNb);
+            stopZ = character.transform.position.z;*/
+
+            stopZ = 15;
 
             // Check direction
             switch (eManager.direction)
