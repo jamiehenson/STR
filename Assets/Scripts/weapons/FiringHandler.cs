@@ -14,6 +14,7 @@ public class FiringHandler : MonoBehaviour {
     private bool myCharacter;
     private int characterNum;
     PlayerManager manager;
+	
 	// Incorporate some way of setting a nice name for bullets?
 
     public void activateCharacter(int num)
@@ -50,7 +51,7 @@ public class FiringHandler : MonoBehaviour {
             timer += Time.deltaTime;
 
             // Is player firing?
-            if (Network.isClient && myCharacter && Input.GetButton("Primary Fire") && timer >= weaponHandler.wepRate && manager.getEnergyLevel() != 0)
+            if (Network.isClient && myCharacter && Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0)
             {
                 // Can I fire?
                 if (manager.getEnergyLevel() - manager.getSelectedWepDrain() >= 0)
@@ -62,7 +63,7 @@ public class FiringHandler : MonoBehaviour {
                     Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
 
                     // Send message to fire
-                    networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, weaponHandler.wepType);
+                    networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, manager.wepStats.wepType);
                     // Update fire stats
 
                     timer = 0;
@@ -77,18 +78,20 @@ public class FiringHandler : MonoBehaviour {
 	{
         manager.updateEnergyLevel(-manager.getSelectedWepDrain());
 		// Update the WeaponHandler about the type (not the best way to do it)
-		weaponHandler.wepType = bulletType;
-		weaponHandler.Update();
+		//weaponHandler.wepType = bulletType;
+		//weaponHandler.Update();
 		
 		// Place Weapon
 		Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z-1);
-		Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
+		//Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
+       
+		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startPos, transform.rotation,200);
         bullet.name = bullet.name + universeN();
 		Physics.IgnoreCollision(bullet.collider, transform.collider);
 		
 		// Tell everyone to set up its movement
 		NetworkViewID id = bullet.networkView.viewID;
-		Vector3 forceToApply = fireDirection.normalized * weaponHandler.wepSpeed;
+		Vector3 forceToApply = fireDirection.normalized * manager.wepStats.wepSpeed;
 		networkView.RPC("setupWeapon", RPCMode.All, id, lookAt, forceToApply, bulletType);
 	}
 
