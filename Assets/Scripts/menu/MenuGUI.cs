@@ -21,7 +21,7 @@ public class MenuGUI : MonoBehaviour {
 		float credHeight = Screen.height;
 		
 		if (ShowCredits.credOn) {
-			GUI.Label (new Rect ((Screen.width-credWidth)/2,(Screen.height-credHeight)/4,credWidth,credHeight), credz, centeredStyle);
+			GUI.Label (new Rect (0,0,Screen.width,Screen.height), credz);
             float yButPos = ((((Screen.height)/4)*3)+15);
             float xButPos = (Screen.width/2)-50;
 			if (GUI.Button(new Rect(xButPos,yButPos, 100, 30), "Close")) ShowCredits.credOn = false;

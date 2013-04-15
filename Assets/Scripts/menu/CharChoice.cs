@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class CharChoice : MonoBehaviour {
+public class CharChoice : MonoBehaviour
+{
 	private bool fading;
 
     private int inPos, outPos;
 	
-	void Start () {
+	void Start ()
+	{
         if (gameObject.name.Contains("Details"))
         {
             inPos = 20; outPos = 19;
@@ -32,21 +34,16 @@ public class CharChoice : MonoBehaviour {
         }
     }
 
-	void OnMouseEnter() {
+	void OnMouseEnter()
+	{
 		iTween.FadeTo(gameObject, 1.0f, 0.5f);
         iTween.MoveTo(gameObject, new Vector3(transform.position.x, transform.position.y, outPos), 1f);
 	}
 	
-	void OnMouseExit() {
+	void OnMouseExit()
+	{
 		iTween.FadeTo(gameObject, 0.6f, 0.5f);
         iTween.MoveTo(gameObject, new Vector3(transform.position.x, transform.position.y, inPos), 1f);
-	}
-	
-	IEnumerator LoadGame () {
-	    iTween.CameraFadeAdd();
-		iTween.CameraFadeTo(1.0f, 2.0f);
-		yield return new WaitForSeconds(2.0f);
-	    Application.LoadLevel("plane");
 	}
 	
     IEnumerator changeBGTex (string character)
@@ -54,12 +51,11 @@ public class CharChoice : MonoBehaviour {
         GameObject bg = GameObject.Find("SBrowserBG");
         Shader trans = Shader.Find("Transparent/Diffuse");
         bg.renderer.material.shader = trans;
-
-        iTween.FadeTo(bg, 0, 0.5f);
-        yield return new WaitForSeconds(0.5f);
+        iTween.FadeTo(bg, 0, 0.2f);
+        yield return new WaitForSeconds(0.2f);
         bg.renderer.material.SetTexture("_MainTex", (Texture2D) Resources.Load("menu/" + character));
-        iTween.FadeTo(bg, 0.7f, 0.5f);
-        yield return new WaitForSeconds(0.1f);
+        iTween.FadeTo(bg, 0.7f, 0.3f);
+        yield return new WaitForSeconds(0.4f);
     }
 
     void SetIndicators(string character)
@@ -136,11 +132,12 @@ public class CharChoice : MonoBehaviour {
         }
     }
 
-	void OnMouseUp() {
+	void OnMouseUp()
+	{
         GameObject header = GameObject.Find("SDetailsSelected");
-        
 
-        if (gameObject.name.Contains("China")) {
+        if (gameObject.name.Contains("China"))
+		{
             PlayerManager.activeChar = "china";
             if (MP.joinScreen || MP.hostScreen)
             {
@@ -149,7 +146,8 @@ public class CharChoice : MonoBehaviour {
                 header.GetComponent<TextMesh>().text = "DRAGON";
             }
         }
-        else if (gameObject.name.Contains("USA")) {
+        else if (gameObject.name.Contains("USA"))
+		{
             PlayerManager.activeChar = "usa";
             if (MP.joinScreen || MP.hostScreen)
             {
@@ -158,7 +156,8 @@ public class CharChoice : MonoBehaviour {
                 header.GetComponent<TextMesh>().text = "PATRIOT";
             }
         }
-        else if (gameObject.name.Contains("Russia")) {
+        else if (gameObject.name.Contains("Russia"))
+		{
             PlayerManager.activeChar = "russia";
             if (MP.joinScreen || MP.hostScreen)
             {
@@ -167,7 +166,5 @@ public class CharChoice : MonoBehaviour {
                 header.GetComponent<TextMesh>().text = "SPARTAK";
             }
         }
-		
-        if (SP.singleplayerStart) StartCoroutine(LoadGame());
 	}
 }

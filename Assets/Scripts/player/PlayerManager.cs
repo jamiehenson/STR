@@ -15,6 +15,9 @@ public class PlayerManager : MonoBehaviour {
     public static string playername;
     private GameObject xp;
     public string[] playerNames;
+	public PlayerMovement movement;
+	
+	public int universeNumber;
 
     // Character-centric player stats
     public string activeCharN;
@@ -45,6 +48,17 @@ public class PlayerManager : MonoBehaviour {
 	[RPC]
 	public void changeWeaponRPC(int type){
 		changeWeapon(type);
+	}
+
+	public void Start(){
+		movement = gameObject.GetComponent<PlayerMovement>();
+
+		if (Network.isServer)
+        {
+            Debug.Log("Instantiate");
+            playerNames = new string[Server.numberOfPlayers() + 1];
+            networkView.RPC("intantiatePlayerNames", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
+        }
 	}
 
     public float getEnergyLevel()
@@ -194,16 +208,6 @@ public class PlayerManager : MonoBehaviour {
 
     }
 
-    void Start()
-    {
-        if (Network.isServer)
-        {
-            Debug.Log("Instantiate");
-            playerNames = new string[Server.numberOfPlayers() + 1];
-            networkView.RPC("intantiatePlayerNames", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
-        }
-    }
-
     void Update()
     {
 
@@ -292,5 +296,4 @@ public class PlayerManager : MonoBehaviour {
             score = s;
         }
     }
-
 }

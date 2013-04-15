@@ -17,7 +17,14 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
     WeaponHandler weaponHandler;
-    PlayerManager manager; 
+    PlayerManager manager;
+	OnlineClient onlineClient;
+	
+	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
+	
+	bool inVortexCountdown = false;
+	int vortexCountdownNum;
+	int vortexLeadsTo;
 
 	private string beamTitle = "BEAM", 
 		cannonTitle = "CANNON", 
@@ -122,7 +129,7 @@ public class HudOn : MonoBehaviour {
         //else if (Input.GetAxis("Mouse ScrollWheel") < 0) setWeapon(WeaponHandler.wepType - 1);
         //else if (Input.GetAxis("Mouse ScrollWheel") > 0) setWeapon(WeaponHandler.wepType + 1);
 
-        if (energyBank / (bankSize / hudBarSize) >= hudBarSize)
+        if (energyBank / (bankSize / hudBarSize) >= hudBarSize || true) // Always true, for testing
         {
             manager.resetEnergyBank(manager.getBankSize());
             gearReady = "WARP DRIVE READY!";
@@ -155,16 +162,21 @@ public class HudOn : MonoBehaviour {
                     yvals[i] = yvals[t];
                     yvals[t] = temp;
                 }
+				
+				int currentUniverse = manager.universeNumber;
 
                 // Make n-1 new ones
                 for (int i = 0; i < playercount - 1; i++)
                 {
                     float x = xvals[i];
                     float y = yvals[i];
-                    Vector3 vortpoint = new Vector3(x, y, 25);
+                    Vector3 vortpoint = new Vector3(x, y, 15);
                     Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
-                    Instantiate(vortex, vort, Quaternion.identity);
+                    GameObject obj = (GameObject)Instantiate(vortex, vort, Quaternion.identity);
                     vortex.name = "vortex" + (i + 1);
+					obj.GetComponentInChildren<Vortex>().leadsToUniverse =
+						(i + 1 >= currentUniverse) ? i+2 : i+1;
+					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
                     vortex.tag = "vortex";
                 }
@@ -216,8 +228,10 @@ public class HudOn : MonoBehaviour {
 		// Set statics
 		score = 0;
 		gameOver = false;
+		Instance = this;
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+		onlineClient = GameObject.Find ("Network").GetComponent<OnlineClient>();
 
         /* Was in Awake() */
         if (manager.activeCharN == null) manager.activeCharN = "tester";
@@ -339,4 +353,39 @@ public class HudOn : MonoBehaviour {
         GUI.DrawTexture(position, crossTex);
         Screen.showCursor = false;
 	}	
+	
+	// Vortex logic
+	IEnumerator VortexCountdown() {
+		// Do GUI magic here!
+		while (vortexCountdownNum != 0) {
+			print ("In vortex: "+vortexCountdownNum);
+			vortexCountdownNum--;
+			yield return new WaitForSeconds(1);
+		}
+		
+		manager.movement.changeUniverse(vortexLeadsTo);
+	}
+	
+	public void enteredVortex(int vortexTo) {
+		print ("LEADS TO "+vortexTo);
+		print("Entered Vortex");
+		
+		if (inVortexCountdown){
+			StopCoroutine("VortexCountdown");
+			inVortexCountdown = false;
+		}
+		
+		vortexCountdownNum = 4;
+		vortexLeadsTo = vortexTo;
+		StartCoroutine("VortexCountdown");		
+	}
+	
+	public void leftVortex() {
+		print("Left Vortex");
+		
+		if (inVortexCountdown){
+			StopCoroutine("VortexCountdown");
+			inVortexCountdown = false;
+		}
+	}
 }

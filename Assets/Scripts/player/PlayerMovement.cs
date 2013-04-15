@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-    private bool myCharacter;
+    public bool myCharacter;
     private float vertDist;
     private float horDist;
 	private bool rotation, rottoggle, camtoggle, rotexception;
@@ -11,9 +11,18 @@ public class PlayerMovement : MonoBehaviour {
     private int characterNum;
 	public static bool charRotate;
 	private Vector3 startingRot, startingPos;
+	public PlayerManager playerManager;
+	public OnlineClient onlineClient;
+	public Server server;
 	
-	void Start ()
+	public void Start ()
 	{
+		if (Application.loadedLevelName == "OnlineClient")
+			onlineClient = GameObject.Find("Network").GetComponent<OnlineClient>();
+		else if (Application.loadedLevelName == "server")
+			server = GameObject.Find("Network").GetComponent<Server>();
+
+		playerManager = gameObject.GetComponent<PlayerManager>();
 		startingPos = gameObject.transform.position;
 		startingRot = new Vector3(0,0,0);	
 		camtoggle = false;
@@ -70,6 +79,16 @@ public class PlayerMovement : MonoBehaviour {
 		yield return new WaitForSeconds(2);
 	}
 
+	// Used for universe change
+	public void jumpCharacter(Vector3 position) {
+		networkView.RPC("jumpCharacterRPC", RPCMode.Server, position);
+	}
+
+	[RPC]
+	public void jumpCharacterRPC(Vector3 position) {
+		gameObject.transform.position = position;
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -109,7 +128,8 @@ public class PlayerMovement : MonoBehaviour {
 			charRotate = false;
 						
 	        networkView.RPC("moveCharacter", RPCMode.Server, vertDist, horDist, rotation, rottoggle, camtoggle);
-	
+
+			/*
 	        // Warp between universes
 	        string x = Input.inputString;
 	        if (x.Equals("4") || x.Equals("5") || x.Equals("6") || x.Equals("7"))
@@ -117,7 +137,7 @@ public class PlayerMovement : MonoBehaviour {
 	            int num = int.Parse(x);
 	            OnlineClient.moveUniverse(num-3 , characterNum);
 	            networkView.RPC("updateUniverse", RPCMode.Server, num-3, characterNum);
-	        }	
+	        }*/
 		}
       else if (Network.isServer)
       {  
@@ -186,4 +206,31 @@ public class PlayerMovement : MonoBehaviour {
             PubRotateCam();
         }
     }
+
+	public void changeUniverse(int universeNum) {
+		networkView.RPC("changeUniverseRPC", RPCMode.Server, universeNum);
+	}
+
+	[RPC]
+	public void changeUniverseRPC(int newUniverseNum, NetworkMessageInfo info) {
+
+		Log.Note("Move Universe");
+        Vector3 curOrigin = Universe.PositionOfOrigin(playerManager.universeNumber);
+		Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
+
+        // Move Spaceship
+        Debug.Log("Move Character" + characterNum);
+		Vector3 characterPosition = transform.position;
+		Vector3 diffFromOrigin =  characterPosition - curOrigin;
+
+		Vector3 newPosition = newOrigin + diffFromOrigin;
+		//character.transform.position = newPosition;
+		transform.position = newPosition;
+
+		server.moveCamera(newUniverseNum, info.sender);
+		// Update positions var
+		positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
+		universeNum = newUniverseNum;
+		playerManager.universeNumber = newUniverseNum;
+	}
 }

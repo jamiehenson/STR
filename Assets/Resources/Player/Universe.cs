@@ -41,6 +41,18 @@ public class Universe : MonoBehaviour {
 
 			stream.Serialize(ref origin);
 	}
+	
+	public static Vector3 PositionOfOrigin(int universeNum) {
+		print ("numNum = "+universeNum);
+		GameObject universe = GameObject.Find("Universe" + universeNum + "/Managers/OriginManager");
+		
+		if (universe == null)
+			Log.Error ("Could not find universe's origin", "In Universe.PositionOfCamera, " +
+				"while looking for GameObject called `Universe" + universeNum + "/Managers/OriginManager`, " +
+				"only found null :(.");
+		
+		return universe.GetComponent<Universe>().origin;
+	}
 
 	// Update is called once per frame
 	void Update () {
