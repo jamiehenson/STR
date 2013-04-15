@@ -190,7 +190,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	[RPC]
-	public void changeUniverseRPC(int newUniverseNum) {
+	public void changeUniverseRPC(int newUniverseNum, NetworkMessageInfo info) {
 
 		Log.Note("Move Universe");
         Vector3 curOrigin = Universe.PositionOfOrigin(playerManager.universeNumber);
@@ -205,7 +205,7 @@ public class PlayerMovement : MonoBehaviour {
 		//character.transform.position = newPosition;
 		transform.position = newPosition;
 
-		server.moveCamera(newUniverseNum);
+		server.moveCamera(newUniverseNum, info.sender);
 		// Update positions var
 		positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
 		universeNum = newUniverseNum;

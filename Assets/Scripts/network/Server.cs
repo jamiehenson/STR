@@ -169,7 +169,7 @@ public class Server : MonoBehaviour {
         return finalNumberofPlayers;
     }
 
-	public void moveCamera(int universeNum){
-		bridge.moveCamera(universeNum);
+	public void moveCamera(int universeNum, NetworkPlayer player){
+		bridge.moveCamera(universeNum, player);
 	}
 }

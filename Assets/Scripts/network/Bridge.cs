@@ -134,9 +134,9 @@ public class Bridge : MonoBehaviour {
         }
     }
 
-	public void moveCamera(int universeNum) {
+	public void moveCamera(int universeNum, NetworkPlayer player) {
 		if (Network.isServer)
-			networkView.RPC("moveCameraRPC", RPCMode.Server, universeNum);
+			networkView.RPC("moveCameraRPC", player, universeNum);
 	}
 
 	[RPC]
