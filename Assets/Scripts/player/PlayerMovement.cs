@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-    private bool myCharacter;
+    public bool myCharacter;
     private float vertDist;
     private float horDist;
 	private bool rotation, rottoggle, camtoggle, rotexception;
