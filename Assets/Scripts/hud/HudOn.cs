@@ -184,6 +184,10 @@ public class HudOn : MonoBehaviour {
         }
 	}
 
+    public void ToastWrapper(string notetext) {
+        StartCoroutine("Toast", notetext);
+    }
+
 	IEnumerator Toast(string notetext) {
 		toast = new GameObject("Toast");
 		toast.AddComponent("GUIText");
@@ -223,7 +227,6 @@ public class HudOn : MonoBehaviour {
     }
     Not being used. Not sure if necessary*/
 
-	
 	void Start () {
 		// Set statics
 		score = 0;
