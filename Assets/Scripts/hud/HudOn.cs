@@ -230,10 +230,7 @@ public class HudOn : MonoBehaviour {
 		gameOver = false;
 		Instance = this;
 
-		systemNames[0] = generateSystemNames();
-		systemNames[1] = generateSystemNames();
-		systemNames[2] = generateSystemNames();
-		systemNames[3] = generateSystemNames();
+		for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
 		onlineClient = GameObject.Find ("Network").GetComponent<OnlineClient>();
@@ -263,6 +260,12 @@ public class HudOn : MonoBehaviour {
             weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
             setWeapon(1);
         }
+
+		if (Network.isServer)
+		{
+
+		}
+
         startHP = manager.getStartHP();
         startEnergy = manager.getStartEnergy();
         bankSize = manager.getBankSize();
@@ -272,7 +275,7 @@ public class HudOn : MonoBehaviour {
 		bank.normal.background = fillTex (1,1,new Color(0f,0.8f,0f,1f));
 
 	}
-	
+
 	void OnGUI () {
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
@@ -315,9 +318,11 @@ public class HudOn : MonoBehaviour {
 		smallStyle.fontSize = 11;
 		smallStyle.alignment = TextAnchor.MiddleRight;
 
+		// Universe (or rather, star system) name
+		int uniNo = manager.universeNumber;
 		GUI.Label (new Rect (-5,Screen.height-universe.height/2,universe.width,universe.height),universe);
 		GUI.Label (new Rect (5,Screen.height-universe.height/2+15,200,50),"LOCATION:",coStyle);
-		GUI.Label (new Rect (5,Screen.height-universe.height/2+30,200,50),systemNames[0],speedStyle);
+		GUI.Label (new Rect (5,Screen.height-universe.height/2+30,200,50),systemNames[uniNo],speedStyle);
 
 		GUI.Label (new Rect (70,5,200,50),charName,hudStyle);
 		GUI.Label (new Rect (75,21,40,20),hullTitle,smallStyle);
@@ -425,5 +430,11 @@ public class HudOn : MonoBehaviour {
 		greek.Add("omega");
 		string system = (string) greek[(int) Random.Range(0,greek.Count)] + "-" + Random.Range(0,20).ToString();
 		return system.ToUpper();
+	}
+
+	[RPC]
+	private void setSystemName(int i, string name)
+	{
+		systemNames[i] = name;
 	}
 }
