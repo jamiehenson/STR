@@ -93,7 +93,8 @@ public class PlayerMovement : MonoBehaviour {
 			charRotate = false;
 						
 	        networkView.RPC("moveCharacter", RPCMode.Server, vertDist, horDist, rotation, rottoggle, camtoggle);
-	
+
+			/*
 	        // Warp between universes
 	        string x = Input.inputString;
 	        if (x.Equals("4") || x.Equals("5") || x.Equals("6") || x.Equals("7"))
@@ -101,7 +102,7 @@ public class PlayerMovement : MonoBehaviour {
 	            int num = int.Parse(x);
 	            OnlineClient.moveUniverse(num-3 , characterNum);
 	            networkView.RPC("updateUniverse", RPCMode.Server, num-3, characterNum);
-	        }	
+	        }*/
 		}
       else if (Network.isServer)
       {  
