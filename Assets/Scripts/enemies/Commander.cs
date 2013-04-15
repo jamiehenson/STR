@@ -30,7 +30,7 @@ public class Commander : MonoBehaviour {
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
     private float beltGap = 1f;
-    private int astProb = 220;
+    private int astProb = 3;
 
     private float leftMoveLimit;
 
@@ -62,7 +62,7 @@ public class Commander : MonoBehaviour {
     /*3b*/
     private float hardestMaxEnemyClearanceTime = 10;
 
-    public Universe Positions;
+    public Universe positions;
 
     /* Keep track of characters in universe. <-- Easter present for Ben !!*/
     /* How it works: For each Commander script in each Universe, there is an activeCharacters bool array that
@@ -93,7 +93,7 @@ public class Commander : MonoBehaviour {
 
     // ******Asteroid Belt Functions******
     IEnumerator SendAsteroidBelt() {
-        //RotatePlayers(false);
+        RotatePlayers(true);
         GameObject[] asteroidBelts = GameObject.FindGameObjectsWithTag("AsteroidBelt");
         
         foreach (GameObject asteroidBelt in asteroidBelts) {
@@ -114,22 +114,13 @@ public class Commander : MonoBehaviour {
         foreach (GameObject asteroidBelt in asteroidBelts) {
             asteroidBelt.GetComponent<ParticleSystem>().enableEmission = false;
         }
-        //RotatePlayers(true);
     }
 
-    void RotatePlayers(bool camBehind) {
-        for (int i = 0; i < activeCharacters.Length; i++) {
-            if (activeCharacters[i]) {
-                GameObject character = GameObject.Find("Character" + i);
-                PlayerMovement move = character.GetComponent<PlayerMovement>();
-                move.StartCoroutine("rotateCamera", camBehind);
-            }
-        }
-    }
+    
 
     void CreateAsteroid() {
-        float y = Random.Range(Positions.bottomBorder, Positions.topBorder);
-        Vector3 astPosition = new Vector3(Positions.rightBorder + Positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Positions.baseZ);
+        float y = Random.Range(positions.bottomBorder, positions.topBorder);
+        Vector3 astPosition = new Vector3(positions.rightBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, positions.baseZ);
         Transform asteroid = (Transform)Network.Instantiate(asteroidPrefab, astPosition, new Quaternion(0, 0, 0, 0), 100+universeN());
         asteroid.name = "Asteroid" + universeN();
         asteroid.transform.parent = transform.parent.parent.FindChild("Enemies");
@@ -142,6 +133,7 @@ public class Commander : MonoBehaviour {
 
     // Sends a wave of enemies, adding to the level of enemyTotalStrength
     void SendEnemyWave() {
+        RotatePlayers(false);
         int deployedStrength = enemyTotalStrength;
         while (deployedStrength != 0) {
             // Send a random enemy from the possibles still permitted
@@ -162,26 +154,26 @@ public class Commander : MonoBehaviour {
         int dir = Random.Range(1, 5);
         float x = 0, y = 0, z = 0;
         GameObject character = GameObject.Find("Character" + universeN());
-        float genZ = (float)character.transform.position.z;
+        float genZ = positions.baseZ;
         switch (dir) {
             case 1:
-                x = Positions.leftBorder - Positions.generationOffset;
-                y = Random.Range(Positions.bottomBorder, Positions.topBorder);
+                x = positions.leftBorder - positions.generationOffset;
+                y = Random.Range(positions.bottomBorder, positions.topBorder);
                 z = genZ + 2;
                 break;
             case 2:
-                x = Random.Range(leftMoveLimit, Positions.rightBorder);
-                y = Positions.topBorder + Positions.generationOffset;
+                x = Random.Range(leftMoveLimit, positions.rightBorder);
+                y = positions.topBorder + positions.generationOffset;
                 z = genZ + 4;
                 break;
             case 3:
-                x = Positions.rightBorder + Positions.generationOffset;
-                y = Random.Range(Positions.bottomBorder, Positions.topBorder);
+                x = positions.rightBorder + positions.generationOffset;
+                y = Random.Range(positions.bottomBorder, positions.topBorder);
                 z = genZ + 6;
                 break;
             case 4:
-                x = Random.Range(leftMoveLimit, Positions.rightBorder);
-                y = Positions.bottomBorder - Positions.generationOffset;
+                x = Random.Range(leftMoveLimit, positions.rightBorder);
+                y = positions.bottomBorder - positions.generationOffset;
                 z = genZ + 8;
                 break;
             default:
@@ -209,26 +201,26 @@ public class Commander : MonoBehaviour {
         int dir = Random.Range(1, 5);
         float x = 0, y = 0, z = 0;
         GameObject character = GameObject.Find("Character" + universeN());
-        float genZ = character.transform.position.z;
+        float genZ = positions.baseZ;
         switch (dir) {
             case 1:
-                x = Positions.leftBorder - Positions.generationOffset;
-                y = Random.Range(Positions.bottomBorder, Positions.topBorder);
+                x = positions.leftBorder - positions.generationOffset;
+                y = Random.Range(positions.bottomBorder, positions.topBorder);
                 z = genZ + 2;
                 break;
             case 2:
-                x = Random.Range(leftMoveLimit, Positions.rightBorder);
-                y = Positions.topBorder + Positions.generationOffset;
+                x = Random.Range(leftMoveLimit, positions.rightBorder);
+                y = positions.topBorder + positions.generationOffset;
                 z = genZ + 4;
                 break;
             case 3:
-                x = Positions.rightBorder + Positions.generationOffset;
-                y = Random.Range(Positions.bottomBorder, Positions.topBorder);
+                x = positions.rightBorder + positions.generationOffset;
+                y = Random.Range(positions.bottomBorder, positions.topBorder);
                 z = genZ + 6;
                 break;
             case 4:
-                x = Random.Range(leftMoveLimit, Positions.rightBorder);
-                y = Positions.bottomBorder - Positions.generationOffset;
+                x = Random.Range(leftMoveLimit, positions.rightBorder);
+                y = positions.bottomBorder - positions.generationOffset;
                 z = genZ + 8;
                 break;
             default:
@@ -256,8 +248,8 @@ public class Commander : MonoBehaviour {
             activeCharacters[universeN()] = true;
             asteroidCount = new int[countUniverse];
             enemyCount = new int[countUniverse];
-            Positions = transform.parent.FindChild("OriginManager").GetComponent<Universe>();
-            leftMoveLimit = Positions.rightMovementLimit + 2.5f;
+            positions = transform.parent.FindChild("OriginManager").GetComponent<Universe>();
+            leftMoveLimit = positions.rightMovementLimit + 2.5f;
             FillMasterDiffStats();
             asteroidCount[universeN()] = 0;
             enemyCount[universeN()] = 0;
@@ -289,6 +281,16 @@ public class Commander : MonoBehaviour {
             if (asteroidCount[universeN()] == 0 && enemyCount[universeN()] < 2 && !bossDeployed) {
                 StopCoroutine("EnemyWaveCountdown");
                 MakeDeploymentDecision();
+            }
+        }
+    }
+
+    void RotatePlayers(bool toBehind) {
+        for (int i = 0; i < activeCharacters.Length; i++) {
+            if (activeCharacters[i]) {
+                GameObject character = GameObject.Find("Character" + i);
+                PlayerMovement move = character.GetComponent<PlayerMovement>();
+                move.networkView.RPC("RotateCharacter", RPCMode.Others, toBehind, i);
             }
         }
     }
