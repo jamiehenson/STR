@@ -19,6 +19,7 @@ public class Names : MonoBehaviour
 		str.Add("Sensible Tail Recursion");
 		str.Add("Salsa Training, Revisited");
 		str.Add("Sublime Tympani Recording");
+        str.Add("Stoke Taste Relegation");
 		str.Add("Sunday's Tragic Roast");
 		str.Add("Speedos, Thongs, Rabbits");
 		str.Add("Spaniels Terminating Robots");

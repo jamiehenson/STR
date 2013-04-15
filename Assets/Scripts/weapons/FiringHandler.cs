@@ -14,8 +14,6 @@ public class FiringHandler : MonoBehaviour {
     private bool myCharacter;
     private int characterNum;
     PlayerManager manager;
-	
-	// Incorporate some way of setting a nice name for bullets?
 
     public void activateCharacter(int num)
     {
