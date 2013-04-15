@@ -208,6 +208,7 @@ public class PlayerMovement : MonoBehaviour {
 		server.moveCamera(newUniverseNum);
 		// Update positions var
 		positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
+		universeNum = newUniverseNum;
 
 	}
 }
