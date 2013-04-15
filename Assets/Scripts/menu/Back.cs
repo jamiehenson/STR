@@ -5,7 +5,7 @@ public class Back : MonoBehaviour {
 	private bool menuBack = false;
 	
 	void Start () {
-		iTween.FadeTo(gameObject, 0.3f, 0.1f);	
+		iTween.FadeTo(gameObject, 0.6f, 0.1f);
 	}
 
 	void OnMouseEnter() {
@@ -13,7 +13,7 @@ public class Back : MonoBehaviour {
 	}
 	
 	void OnMouseExit() {
-		iTween.FadeTo(gameObject, 0.3f, 0.5f);
+		iTween.FadeTo(gameObject, 0.6f, 0.5f);
 	}
 	
 	void OnMouseUp ()
@@ -29,11 +29,9 @@ public class Back : MonoBehaviour {
             iTween.FadeTo(browserbg, 0, 1f);
 			iTween.MoveTo(Camera.main.gameObject,new Vector3(0,0,0), 6);	
 			menuBack = false;
-            SP.singleplayerStart = false;
             MP.joinScreen = false;
             MP.hostScreen = false;
-			PilotName.showBox = false;
-			PilotName.showBox2 = false;
+			MP.openBox = false;
 		}
 	}
 }
