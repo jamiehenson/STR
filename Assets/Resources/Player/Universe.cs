@@ -42,7 +42,7 @@ public class Universe : MonoBehaviour {
 			stream.Serialize(ref origin);
 	}
 	
-	public static Vector3 PositionOfCamera(int universeNum) {
+	public static Vector3 PositionOfOrigin(int universeNum) {
 		print ("numNum = "+universeNum);
 		GameObject universe = GameObject.Find("Universe" + universeNum + "/Managers/OriginManager");
 		
