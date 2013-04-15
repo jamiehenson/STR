@@ -32,5 +32,6 @@ public class SP : MonoBehaviour
 	void OnMouseUp ()
 	{
 		MP.joinScreen = true;
+		MP.openBox = true;
 	}
 }

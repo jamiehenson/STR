@@ -134,13 +134,19 @@ public class MP : MonoBehaviour
         GUIStyle exitStyle = new GUIStyle();
         exitStyle.font = deco;
         exitStyle.normal.textColor = Color.white;
-        exitStyle.fontSize = 32;
+        exitStyle.fontSize = Screen.height/16;
         exitStyle.alignment = TextAnchor.MiddleLeft;
+
+		GUIStyle exitStyleR = new GUIStyle();
+        exitStyleR.font = deco;
+        exitStyleR.normal.textColor = Color.white;
+        exitStyleR.fontSize = Screen.height/12;
+        exitStyleR.alignment = TextAnchor.MiddleRight;
 		
 		GUIStyle exitStyleBig = new GUIStyle();
         exitStyleBig.font = deco;
         exitStyleBig.normal.textColor = Color.white;
-        exitStyleBig.fontSize = 44;
+        exitStyleBig.fontSize = Screen.height/16;
         exitStyleBig.alignment = TextAnchor.UpperCenter;
 
         GUIStyle field = new GUIStyle();
@@ -149,7 +155,15 @@ public class MP : MonoBehaviour
 		field.normal.background = bgTexFull;
         field.alignment = TextAnchor.MiddleCenter;
         field.font = deco;
-        field.fontSize = (int)(Screen.height/100)*6;
+        field.fontSize = (int)(Screen.height/100)*10;
+
+		GUIStyle field2 = new GUIStyle();
+        field2.padding = new RectOffset(15, 15, 15, 15);
+        field2.normal.textColor = Color.white;
+		field2.normal.background = bgTexFull;
+        field2.alignment = TextAnchor.MiddleCenter;
+        field2.font = deco;
+        field2.fontSize = (int)(Screen.height/100)*6;
 
         if (joinScreen)
         {
@@ -157,9 +171,9 @@ public class MP : MonoBehaviour
 			{
 				GUI.Label (new Rect(0,0,Screen.width,Screen.height),bgTex);
 				GUI.Label (new Rect(Screen.width/2-90,Screen.height/4+10,200,40),"WHAT'S YOUR NAME?",exitStyleBig);
-				playerName = GUI.TextField(new Rect((Screen.width / 2)-(Screen.width / 6), Screen.height / 4 + 70, Screen.width/3, 100), playerName, 10, field);
+				playerName = GUI.TextField(new Rect((Screen.width / 2)-(Screen.width / 6), Screen.height / 4 + (Screen.width / 18), Screen.width/3, Screen.width/12), playerName, 10, field);
 				playerName = playerName.ToUpper();
-				if (GUI.Button(new Rect(Screen.width/2-100,Screen.height*0.6f,200,60),"DONE",field)) openBox = false;
+				if (GUI.Button(new Rect(Screen.width/2-Screen.width/8,Screen.height*0.65f,Screen.width/4,Screen.height/10),"DONE",field2)) openBox = false;
 			}
 
 			header.GetComponent<TextMesh>().text = "JOIN ONLINE GAME";
@@ -197,14 +211,19 @@ public class MP : MonoBehaviour
 			if (openBox)
 			{
 				GUI.Label (new Rect(0,0,Screen.width,Screen.height),bgTex);
-				GUI.Label (new Rect(Screen.width/2-90,Screen.height/4+10,200,40),"SET UP YOUR SERVER!",exitStyleBig);
-				GUI.Label (new Rect(Screen.width/4 + 80,Screen.height/4 + 70, 200, 50),"NAME:",exitStyle);
-				serverName = GUI.TextField(new Rect((Screen.width / 3 + 140), Screen.height / 4 + 70, 300, 50), serverName, 10, field);
-				GUI.Label (new Rect(Screen.width/4 + 80,Screen.height/4 + 130, 200, 50),"PLAYERS:",exitStyle);
-				playerLimit = GUI.TextField(new Rect((Screen.width / 3 + 140), Screen.height / 4 + 130, 300, 50), playerLimit, 2, field);
+
+				GUI.Label (new Rect(Screen.width/2-90,Screen.height/4+10,200,40),"SET UP YOUR GAME!",exitStyleBig);
+
+				GUI.Label (new Rect(Screen.width/4 + Screen.width/18, Screen.height/4 + Screen.height/8, Screen.width/6, Screen.height/10),"NAME:",exitStyle);
+				serverName = GUI.TextField(new Rect((Screen.width/2 - Screen.height/8), Screen.height/4 + Screen.height/8 + 2, Screen.width/4, Screen.height/10), serverName, 10, field);
+
+				GUI.Label (new Rect(Screen.width/4 + Screen.width/18, Screen.height/3 + Screen.height/6, Screen.width/6, Screen.height/10),"PLAYERS:",exitStyle);
+				playerLimit = GUI.TextField(new Rect((Screen.width/2 - Screen.height/8), Screen.height/3 + Screen.height/6, Screen.width/4, Screen.height/10), playerLimit, 2, field);
+
 				serverName = serverName.ToUpper();
 				playerLimit = playerLimit.ToUpper();
-				if (GUI.Button(new Rect(Screen.width/2-100,Screen.height*0.6f,200,60),"DONE",field)) openBox = false;
+
+				if (GUI.Button(new Rect(Screen.width/2-Screen.width/8,Screen.height*0.65f,Screen.width/4,Screen.height/10),"DONE",field2)) openBox = false;
 			}
 
             // HOST ONLINE GAME

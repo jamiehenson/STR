@@ -19,7 +19,6 @@ public class Names : MonoBehaviour
 		str.Add("Sensible Tail Recursion");
 		str.Add("Salsa Training, Revisited");
 		str.Add("Sublime Tympani Recording");
-		str.Add("Susan Turned Red");
 		str.Add("Sunday's Tragic Roast");
 		str.Add("Speedos, Thongs, Rabbits");
 		str.Add("Spaniels Terminating Robots");
@@ -29,6 +28,12 @@ public class Names : MonoBehaviour
 		str.Add("Shepherd Turned Rapper");
 		str.Add("Secretly, Timothy Rages");
 		str.Add("Swindon's Totalitarian Regime");
+		str.Add("Silver Tongued Retiree");
+		str.Add("Sober Times, Rejoice!");
+		str.Add("Shania Twain Reunion");
+		str.Add("Surf Turtles: Rehab");
+		str.Add("Swindon's Totalitarian Regime");
+		str.Add("Tom Hanks Edition");
 		string winner = (string) str[(int) Random.Range(0,str.Count)];
 		return winner.ToUpper();
 	}
