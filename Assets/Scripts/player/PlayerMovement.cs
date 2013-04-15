@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	public OnlineClient onlineClient;
 	public Server server;
 	
-	void Start ()
+	public void Start ()
 	{
 		if (Application.loadedLevelName == "OnlineClient")
 			onlineClient = GameObject.Find("Network").GetComponent<OnlineClient>();
@@ -209,6 +209,6 @@ public class PlayerMovement : MonoBehaviour {
 		// Update positions var
 		positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
 		universeNum = newUniverseNum;
-
+		playerManager.universeNumber = newUniverseNum;
 	}
 }

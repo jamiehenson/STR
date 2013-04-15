@@ -98,5 +98,7 @@ public class OnlineClient : MonoBehaviour
 		// Set camPos to bgPos + 1000 to z
         Vector3 camPos = new Vector3(newOrigin.x - (float)4, newOrigin.y, newOrigin.z + 0.1f);
         Camera.GetComponent<Transform>().position = camPos;
+
+		playerManager.universeNumber = newUniverseNum;
 	}
 }
