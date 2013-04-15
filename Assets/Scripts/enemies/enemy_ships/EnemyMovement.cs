@@ -85,7 +85,7 @@ public class EnemyMovement : MonoBehaviour {
             /*GameObject character = GameObject.Find("Character"+universeNb);
             stopZ = character.transform.position.z;*/
 
-            stopZ = 15;
+            stopZ = positions.baseZ;
 
             // Check direction
             switch (eManager.direction)
