@@ -56,29 +56,6 @@ public class OnlineClient : MonoBehaviour
 		
 		playerManager.universeNumber = num;
     }
-
-    public void moveUniverse(int universeNum, int characterNum)
-    {
-        Log.Note("Move Universe");
-        Vector3 curOrigin = Universe.PositionOfOrigin(playerManager.universeNumber);
-		Vector3 newOrigin = Universe.PositionOfOrigin(universeNum);
-
-        // Set camPos to bgPos + 1000 to z
-        Vector3 camPos = new Vector3(newOrigin.x - (float)4, newOrigin.y, newOrigin.z + 0.1f);
-        Camera.GetComponent<Transform>().position = camPos;
-
-        // Move Spaceship
-        Debug.Log("Move Character" + characterNum);
-		GameObject character = GameObject.Find("Character" + characterNum);
-		Vector3 characterPosition = character.transform.position;
-		Vector3 diffFromOrigin =  characterPosition - curOrigin;
-
-		Vector3 newPosition = newOrigin + diffFromOrigin;
-		//character.transform.position = newPosition;
-		character.GetComponent<PlayerMovement>().jumpCharacter(newPosition);
-		print("Moved from "+characterPosition);
-		print("To "+newPosition);
-    }
 	
 	// When disconnected from server, go back to menu
     void OnDisconnectedFromServer()
@@ -113,4 +90,13 @@ public class OnlineClient : MonoBehaviour
 
         }
     }
+
+	public void moveCamera(int newUniverseNum){
+		print ("In moveCameraRPC");
+		Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
+
+		// Set camPos to bgPos + 1000 to z
+        Vector3 camPos = new Vector3(newOrigin.x - (float)4, newOrigin.y, newOrigin.z + 0.1f);
+        Camera.GetComponent<Transform>().position = camPos;
+	}
 }

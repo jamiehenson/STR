@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour {
     public static float speed;
     public static string playername;
     private GameObject xp;
+	public PlayerMovement movement;
 	
 	public int universeNumber;
 
@@ -27,6 +28,10 @@ public class PlayerManager : MonoBehaviour {
     //Scoring System variables
     private bool myCharacter;
     private int characterNum;
+
+	public void Start(){
+		movement = gameObject.GetComponent<PlayerMovement>();
+	}
 
     public float getEnergyLevel()
     {
@@ -249,5 +254,4 @@ public class PlayerManager : MonoBehaviour {
             score = s;
         }
     }
-
 }

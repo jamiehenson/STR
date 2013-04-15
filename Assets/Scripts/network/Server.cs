@@ -84,6 +84,7 @@ public class Server : MonoBehaviour {
 			
 			// Rename the character and pass name to clients
             characterPlayer.name = "Character" + i;
+			characterPlayer.GetComponent<PlayerManager>().universeNumber = i;
             NetworkView nView = characterPlayer.GetComponent<NetworkView>(); 
             characterView[i] = nView;
             viewIDChNameMapping.Add(characterPlayer.networkView.viewID, characterPlayer.name);
@@ -167,4 +168,8 @@ public class Server : MonoBehaviour {
     {
         return finalNumberofPlayers;
     }
+
+	public void moveCamera(int universeNum){
+		bridge.moveCamera(universeNum);
+	}
 }

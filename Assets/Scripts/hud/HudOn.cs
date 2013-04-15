@@ -357,7 +357,7 @@ public class HudOn : MonoBehaviour {
 			yield return new WaitForSeconds(1);
 		}
 		
-		onlineClient.moveUniverse(vortexLeadsTo, manager.universeNumber);
+		manager.movement.changeUniverse(vortexLeadsTo);
 	}
 	
 	public void enteredVortex(int vortexTo) {

@@ -11,9 +11,18 @@ public class PlayerMovement : MonoBehaviour {
     private int characterNum;
 	public static bool charRotate;
 	private Vector3 startingRot, startingPos;
+	public PlayerManager playerManager;
+	public OnlineClient onlineClient;
+	public Server server;
 	
 	void Start ()
 	{
+		if (Network.isClient)
+			onlineClient = GameObject.Find("Network").GetComponent<OnlineClient>();
+		else
+			server = GameObject.Find("Network").GetComponent<Server>();
+
+		playerManager = gameObject.GetComponent<PlayerManager>();
 		startingPos = gameObject.transform.position;
 		startingRot = new Vector3(0,0,0);	
 		camtoggle = false;
@@ -175,4 +184,27 @@ public class PlayerMovement : MonoBehaviour {
             GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().updateActiveChar(character, true);
         }
     }
+
+	public void changeUniverse(int universeNum) {
+		networkView.RPC("changeUniverseRPC", RPCMode.Server, universeNum);
+	}
+
+	[RPC]
+	public void changeUniverseRPC(int newUniverseNum) {
+
+		Log.Note("Move Universe");
+        Vector3 curOrigin = Universe.PositionOfOrigin(playerManager.universeNumber);
+		Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
+
+        // Move Spaceship
+        Debug.Log("Move Character" + characterNum);
+		Vector3 characterPosition = transform.position;
+		Vector3 diffFromOrigin =  characterPosition - curOrigin;
+
+		Vector3 newPosition = newOrigin + diffFromOrigin;
+		//character.transform.position = newPosition;
+		transform.position = newPosition;
+
+		server.moveCamera(newUniverseNum);
+	}
 }

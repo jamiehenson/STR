@@ -134,6 +134,17 @@ public class Bridge : MonoBehaviour {
         }
     }
 
+	public void moveCamera(int universeNum) {
+		if (Network.isServer)
+			networkView.RPC("moveCameraRPC", RPCMode.Server, universeNum);
+	}
+
+	[RPC]
+	public void moveCameraRPC(int universeNum) {
+		if (Network.isClient)
+			client.moveCamera(universeNum);
+	}
+
   /*  public void sendCharacter(NetworkViewID viewID, Vector3 position, NetworkPlayer player)
     {
         if(Network.isClient)
