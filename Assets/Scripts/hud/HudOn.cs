@@ -174,8 +174,9 @@ public class HudOn : MonoBehaviour {
                     Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
                     GameObject obj = (GameObject)Instantiate(vortex, vort, Quaternion.identity);
                     vortex.name = "vortex" + (i + 1);
-					obj.GetComponentInChildren<Vortex>().leadsToUniverse =
-						(i + 1 >= currentUniverse) ? i+2 : i+1;
+					Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
+					vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
+					vortexScript.setLabel(x,y,"Vortex");
 					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
                     vortex.tag = "vortex";
