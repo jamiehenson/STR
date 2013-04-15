@@ -52,6 +52,13 @@ public class PlayerManager : MonoBehaviour {
 
 	public void Start(){
 		movement = gameObject.GetComponent<PlayerMovement>();
+
+		if (Network.isServer)
+        {
+            Debug.Log("Instantiate");
+            playerNames = new string[Server.numberOfPlayers() + 1];
+            networkView.RPC("intantiatePlayerNames", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
+        }
 	}
 
     public float getEnergyLevel()
@@ -199,16 +206,6 @@ public class PlayerManager : MonoBehaviour {
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
         }
 
-    }
-
-    void Start()
-    {
-        if (Network.isServer)
-        {
-            Debug.Log("Instantiate");
-            playerNames = new string[Server.numberOfPlayers() + 1];
-            networkView.RPC("intantiatePlayerNames", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
-        }
     }
 
     void Update()
