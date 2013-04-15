@@ -57,11 +57,14 @@ public class Vortex : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-		HudOn.Instance.enteredVortex(leadsToUniverse);
+		print ("Character entered colider with num: "+leadsToUniverse);
+		if (collision.gameObject.tag == "Player")
+			HudOn.Instance.enteredVortex(leadsToUniverse);
     }
 	
 	void OnCollisionExit(Collision collision)
     {
-		HudOn.Instance.leftVortex();
+		if (collision.gameObject.tag == "Player")
+			HudOn.Instance.leftVortex();
     }
 }
