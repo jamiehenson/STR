@@ -17,6 +17,7 @@ public class Server : MonoBehaviour {
     private Dictionary<NetworkViewID, string> viewIDChNameMapping;
     public NetworkView[] characterView;
     public Commander commander;
+    public LevelManager levMan;
     public bool startGame, manualGoAhead;
     public static string serverAddress;
     public GUIStyle buttonStyle;
@@ -170,6 +171,10 @@ public class Server : MonoBehaviour {
                     // Enable enemy generation
                     commander = GameObject.Find("Universe" + i + "/Managers/EnemyManager").GetComponent<Commander>();
                     commander.enabled = true;
+
+                    // Enable level progression
+                    LevelManager levMan = GameObject.Find("Universe" + i + "/Managers/LevelManager").GetComponent<LevelManager>();
+                    levMan.enabled = true;
                 }
             }
         }

@@ -30,7 +30,7 @@ public class Commander : MonoBehaviour {
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
     private float beltGap = 1f;
-    private int astProb = 3;
+    private int astProb = 2;
 
     private float leftMoveLimit;
 
@@ -386,6 +386,7 @@ public class Commander : MonoBehaviour {
             varToChange = availableDiffStats[varToChange];
             AlterDifficultyVariable(varToChange);
             changed[i] = varToChange;
+            //if (universeN() == 1) Debug.Log(varToChange);
             // Ensure we can't change the same one twice in the same difficulty increase
             availableDiffStats.Remove(varToChange);
         }

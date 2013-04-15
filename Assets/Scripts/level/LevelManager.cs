@@ -8,19 +8,31 @@ public class LevelManager : MonoBehaviour {
     private float changeTime = 10;
     private Commander enemyGen;
     private HudOn hudOn;
+    private int universeNum;
 
     private List<string> levelNames = new List<string>();
     private int stagesBeforeBoss = 3;
 
-    public void Awake() {
-		stage = 0;
-		
-        GameObject enMan = GameObject.Find("EnemyManager");
-        //GameObject cam = GameObject.Find("Main Camera");
-        enemyGen = enMan.GetComponent<Commander>();
-        //hudOn = cam.GetComponent<HudOn>();
-        InitializeLevelNames();
-       // StartCoroutine("StageProgression");     
+    // ******Determine by which prefab is the script called***** 
+    private int universeN() {
+        int length = transform.parent.parent.name.Length;
+        string name = transform.parent.parent.name;
+        if (name == "Boss Universe") return -1;
+        string num = name.Substring(length - 1, 1);
+        return (int.Parse(num));
+    }
+
+    public void Start() {
+        if (Network.isServer) {
+            universeNum = universeN();
+            if (universeNum == -1) return;
+            stage = 0;
+            enemyGen = transform.parent.FindChild("EnemyManager").GetComponent<Commander>();
+            //GameObject cam = GameObject.Find("Main Camera");
+            //hudOn = cam.GetComponent<HudOn>();
+            InitializeLevelNames();
+            StartCoroutine("StageProgression");     
+        }
     }
 
     // PLACEHOLDER NAMES
@@ -123,13 +135,14 @@ public class LevelManager : MonoBehaviour {
             if (stage != 1) {
                 int level = Random.Range(0, levelNames.Count);
                 string thisLevelName = levelNames[level];
-                string toastText = "NOW ENTERING " + thisLevelName;
+                //Debug.Log(thisLevelName + " " + universeNum);
+                //string toastText = "NOW ENTERING " + thisLevelName;
                 // Make more difficult
                 int[] changedVars = enemyGen.IncreaseDifficulty();
                 for (int i = 0; i < changedVars.Length; i++) {
-                    toastText = toastText + "\n" + enemyGen.GetDiffVarFromInt(changedVars[i]);
+                    //toastText = toastText + "\n" + enemyGen.GetDiffVarFromInt(changedVars[i]);
                 }
-                StartCoroutine(Toast(toastText));
+                //StartCoroutine(Toast(toastText));
                 levelNames.Remove(thisLevelName);
                 if (levelNames.Count == 0) InitializeLevelNames();
             }
@@ -137,10 +150,11 @@ public class LevelManager : MonoBehaviour {
             yield return new WaitForSeconds(changeTime);
         }
         // Deploy boss here and halt all enemy distribution
-        StartCoroutine(Toast("BOSS INCOMING"));
+        //StartCoroutine(Toast("BOSS INCOMING"));
         yield return new WaitForSeconds(3);
-        hudOn.StopScore();
-        enemyGen.DeployBoss();
+        StartCoroutine("StageProgression");
+        //hudOn.StopScore();
+        //enemyGen.DeployBoss();
     }
 
     IEnumerator Toast(string notetext) {
