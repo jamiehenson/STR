@@ -15,6 +15,9 @@ public class PlayerManager : MonoBehaviour {
     public static string playername;
     private GameObject xp;
     public string[] playerNames;
+	public PlayerMovement movement;
+	
+	public int universeNumber;
 
     // Character-centric player stats
     public string activeCharN;
@@ -45,6 +48,10 @@ public class PlayerManager : MonoBehaviour {
 	[RPC]
 	public void changeWeaponRPC(int type){
 		changeWeapon(type);
+	}
+
+	public void Start(){
+		movement = gameObject.GetComponent<PlayerMovement>();
 	}
 
     public float getEnergyLevel()
@@ -292,5 +299,4 @@ public class PlayerManager : MonoBehaviour {
             score = s;
         }
     }
-
 }
