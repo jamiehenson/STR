@@ -20,9 +20,10 @@ public class Commander : MonoBehaviour {
     public static int[] enemyCount;
 	
 	private Object[] enemyPrefabs;
+    private Object[] bossPrefabs;
     //public Transform enemyPrefab;
     public Transform asteroidPrefab;
-    public Transform bossPrefab;
+    //public Transform bossPrefab;
     private bool levelStarted = false;
     public bool bossDeployed = false;
 
@@ -191,7 +192,7 @@ public class Commander : MonoBehaviour {
         enemyCount[universeN()]++;
     }
 
-    // Currently a near-copy of CreateEnemy
+    // Creates an enemy of the given type
     void CreateBoss(int type) {
         // Directions:
         // 1 - From Left
@@ -226,7 +227,11 @@ public class Commander : MonoBehaviour {
             default:
                 break;
         }
-        Transform enemy = (Transform)Instantiate(bossPrefab, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0));
+        GameObject enemyPrefab = (GameObject)bossPrefabs[Random.Range(0, bossPrefabs.Length)];
+        Transform enemy = (Transform)Network.Instantiate(enemyPrefab.transform, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0), 100 + universeN());
+        enemy.name = "Enemy" + universeN();
+        enemy.transform.parent = transform.parent.parent.FindChild("Enemies");
+
         BossManager eMan = enemy.GetComponent<BossManager>();
         eMan.direction = dir;
         eMan.changeType(type);
@@ -241,6 +246,7 @@ public class Commander : MonoBehaviour {
     // ******General Functions******
     void Start() {
 		enemyPrefabs = Resources.LoadAll("enemies/enemytypes", typeof(GameObject));
+        bossPrefabs = Resources.LoadAll("enemies/bosses", typeof(GameObject));
         if (Network.isServer)
         {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
@@ -397,16 +403,27 @@ public class Commander : MonoBehaviour {
         // Clear all enemies/asteroids from the screen
         // Pick a boss and send them out!
         // Resume usual enemy generation techniques
+        RotatePlayers(true);
         bossDeployed = true;
         ClearScreen();
         CreateBoss(4);
     }
 
-    private void ClearScreen() {      
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
-        foreach (GameObject e in enemies) Destroy(e);
-        foreach (GameObject a in asteroids) Destroy(a);
+    private void ClearScreen() { 
+        // Need to fix up for clearing just the enemies/asteroids for the desired universe
+        GameObject en = transform.parent.parent.gameObject;
+        Transform enDirectory = transform.parent.parent.FindChild("Enemies");
+
+        List<GameObject> children = new List<GameObject>();
+
+        foreach (Transform child in enDirectory) children.Add(child.gameObject);
+
+        children.ForEach(child => Network.Destroy(child));
+        
+        //GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+        // Switch to Network.Destroys
+        //foreach (GameObject e in enemies) Network.Destroy(e);
+        //foreach (GameObject a in asteroids) Network.Destroy(a);
         StopAllCoroutines();
     }
 
