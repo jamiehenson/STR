@@ -185,6 +185,10 @@ public class HudOn : MonoBehaviour {
         }
 	}
 
+    public void ToastWrapper(string notetext) {
+        StartCoroutine("Toast", notetext);
+    }
+
 	IEnumerator Toast(string notetext) {
 		toast = new GameObject("Toast");
 		toast.AddComponent("GUIText");

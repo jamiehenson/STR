@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class LevelManager : MonoBehaviour {
     // Level stats
     public static float stage;
-    private float changeTime = 10;
+    private float changeTime = 30;
     private Commander enemyGen;
     private HudOn hudOn;
     private int universeNum;
@@ -28,8 +28,7 @@ public class LevelManager : MonoBehaviour {
             if (universeNum == -1) return;
             stage = 0;
             enemyGen = transform.parent.FindChild("EnemyManager").GetComponent<Commander>();
-            //GameObject cam = GameObject.Find("Main Camera");
-            //hudOn = cam.GetComponent<HudOn>();
+            //hudOn = GameObject.Find("Camera " + universeNum).GetComponent<HudOn>();
             InitializeLevelNames();
             StartCoroutine("StageProgression");     
         }
@@ -136,13 +135,20 @@ public class LevelManager : MonoBehaviour {
                 int level = Random.Range(0, levelNames.Count);
                 string thisLevelName = levelNames[level];
                 //Debug.Log(thisLevelName + " " + universeNum);
-                //string toastText = "NOW ENTERING " + thisLevelName;
+                string toastText = "NOW ENTERING " + thisLevelName;
                 // Make more difficult
                 int[] changedVars = enemyGen.IncreaseDifficulty();
                 for (int i = 0; i < changedVars.Length; i++) {
-                    //toastText = toastText + "\n" + enemyGen.GetDiffVarFromInt(changedVars[i]);
+                    toastText = toastText + "\n" + enemyGen.GetDiffVarFromInt(changedVars[i]);
                 }
                 //StartCoroutine(Toast(toastText));
+                // Needs tweaking - has to be for every character in that universe
+                //networkView.RPC("PlaceToast", RPCMode.Others, universeNum, toastText);
+                for (int i = 1; i < enemyGen.activeCharacters.Length; i++) {
+                    if (enemyGen.activeCharacters[i]) {
+                        //networkView.RPC("PlaceToast", RPCMode.Others, i, toastText);
+                    }
+                }
                 levelNames.Remove(thisLevelName);
                 if (levelNames.Count == 0) InitializeLevelNames();
             }
@@ -152,9 +158,9 @@ public class LevelManager : MonoBehaviour {
         // Deploy boss here and halt all enemy distribution
         //StartCoroutine(Toast("BOSS INCOMING"));
         yield return new WaitForSeconds(3);
-        StartCoroutine("StageProgression");
+        //StartCoroutine("StageProgression");
         //hudOn.StopScore();
-        //enemyGen.DeployBoss();
+        enemyGen.DeployBoss();
     }
 
     IEnumerator Toast(string notetext) {
@@ -175,14 +181,22 @@ public class LevelManager : MonoBehaviour {
     }
 
     IEnumerator BossClearedEnumerator() {     
-        StartCoroutine("Toast", "CONGRATULATIONS");
+        //StartCoroutine("Toast", "CONGRATULATIONS");
         yield return new WaitForSeconds(5);
-        hudOn.StartScore();
+        //hudOn.StartScore();
         StartCoroutine("StageProgression");
         enemyGen.BossDestroyed();
     }
 
     public void BossCleared() {
         StartCoroutine("BossClearedEnumerator");
+    }
+
+    [RPC]
+    void PlaceToast(int camNum, string toastText) {
+        if (Network.isClient && GameObject.Find("Camera " + camNum)) {
+            HudOn hOn = GameObject.Find("Camera " + camNum).GetComponent<HudOn>();
+            hOn.ToastWrapper(toastText);
+        }
     }
 }
