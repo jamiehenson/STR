@@ -18,6 +18,7 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle bank = new GUIStyle();
     WeaponHandler weaponHandler;
     PlayerManager manager;
+	OnlineClient onlineClient;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
 	
@@ -230,6 +231,7 @@ public class HudOn : MonoBehaviour {
 		Instance = this;
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+		onlineClient = GameObject.Find ("Network").GetComponent<OnlineClient>();
 
         /* Was in Awake() */
         if (manager.activeCharN == null) manager.activeCharN = "tester";
@@ -355,7 +357,7 @@ public class HudOn : MonoBehaviour {
 			yield return new WaitForSeconds(1);
 		}
 		
-		OnlineClient.moveUniverse(vortexLeadsTo, manager.universeNumber);
+		onlineClient.moveUniverse(vortexLeadsTo, manager.universeNumber);
 	}
 	
 	public void enteredVortex(int vortexTo) {

@@ -57,7 +57,7 @@ public class OnlineClient : MonoBehaviour
 		playerManager.universeNumber = num;
     }
 
-    public static void moveUniverse(int universeNum, int character)
+    public void moveUniverse(int universeNum, int character)
     {
         Log.Note("Move Universe");
         Vector3 origin = Universe.PositionOfCamera(universeNum);
