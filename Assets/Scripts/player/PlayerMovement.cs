@@ -55,6 +55,16 @@ public class PlayerMovement : MonoBehaviour {
 		yield return new WaitForSeconds(2);
 	}
 
+	// Used for universe change
+	public void jumpCharacter(Vector3 position) {
+		networkView.RPC("jumpCharacterRPC", RPCMode.Server, position);
+	}
+
+	[RPC]
+	public void jumpCharacterRPC(Vector3 position) {
+		gameObject.transform.position = position;
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{

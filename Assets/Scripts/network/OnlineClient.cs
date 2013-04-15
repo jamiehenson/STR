@@ -61,9 +61,10 @@ public class OnlineClient : MonoBehaviour
     {
         Log.Note("Move Universe");
         Vector3 curOrigin = Universe.PositionOfOrigin(playerManager.universeNumber);
+		Vector3 newOrigin = Universe.PositionOfOrigin(universeNum);
 
         // Set camPos to bgPos + 1000 to z
-        Vector3 camPos = new Vector3(curOrigin.x - (float)4, curOrigin.y, curOrigin.z + 0.1f);
+        Vector3 camPos = new Vector3(newOrigin.x - (float)4, newOrigin.y, newOrigin.z + 0.1f);
         Camera.GetComponent<Transform>().position = camPos;
 
         // Move Spaceship
@@ -72,9 +73,9 @@ public class OnlineClient : MonoBehaviour
 		Vector3 characterPosition = character.transform.position;
 		Vector3 diffFromOrigin =  characterPosition - curOrigin;
 
-		Vector3 newOrigin = Universe.PositionOfOrigin(universeNum);
 		Vector3 newPosition = newOrigin + diffFromOrigin;
-		character.transform.position = newPosition;
+		//character.transform.position = newPosition;
+		character.GetComponent<PlayerMovement>().jumpCharacter(newPosition);
 		print("Moved from "+characterPosition);
 		print("To "+newPosition);
     }
