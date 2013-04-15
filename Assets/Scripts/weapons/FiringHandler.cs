@@ -58,6 +58,7 @@ public class FiringHandler : MonoBehaviour {
                 {
                     // Calculate the position to fire at
                     float camDist = (transform.position - Camera.main.transform.position).z;
+                    camDist = 15;
                     Vector3 mousePos = Input.mousePosition;
                     mousePos.z = camDist;
                     Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
@@ -82,7 +83,7 @@ public class FiringHandler : MonoBehaviour {
 		//weaponHandler.Update();
 		
 		// Place Weapon
-		Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z-1);
+		Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z);
 		//Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
        
 		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startPos, transform.rotation,200);

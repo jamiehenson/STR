@@ -103,10 +103,10 @@ public class Commander : MonoBehaviour {
 
         for (int i = 0; i < beltLevels; i++) {
             // First asteroid is always at the character's current position (stops player from sitting in 1 spot)
-            CreateAsteroid(false);
+            CreateAsteroid();
             for (int j = 1; j < Random.Range(minAstsInBelt, maxAstsInBelt + 1); j++) {
                 
-                CreateAsteroid(true);
+                CreateAsteroid();
             }
             yield return new WaitForSeconds(beltGap);
         }
@@ -127,11 +127,8 @@ public class Commander : MonoBehaviour {
         }
     }
 
-    void CreateAsteroid(bool randY) {
-        GameObject character = GameObject.Find("Character" + universeN());
-        float y;
-        if (randY) y = Random.Range(Positions.bottomBorder, Positions.topBorder);
-        else y = character.transform.position.y;
+    void CreateAsteroid() {
+        float y = Random.Range(Positions.bottomBorder, Positions.topBorder);
         Vector3 astPosition = new Vector3(Positions.rightBorder + Positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Positions.baseZ);
         Transform asteroid = (Transform)Network.Instantiate(asteroidPrefab, astPosition, new Quaternion(0, 0, 0, 0), 100+universeN());
         asteroid.name = "Asteroid" + universeN();

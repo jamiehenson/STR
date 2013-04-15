@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour {
     public Transform lightWeapon, mediumWeapon, heavyWeapon, superheavyWeapon;
     private Transform bulletPrefab;
     private GameObject explosionPrefab, explosionPrefab2, explosionPrefab3;
-    private Universe Positions;
+    private Universe positions;
     private Commander commander;
 
     private float stop = 5;
@@ -57,7 +57,7 @@ public class EnemyMovement : MonoBehaviour {
         if (Network.isServer)
         {
             networkView.RPC("modifyName", RPCMode.All, gameObject.name);
-            Positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
+            positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
             universeNb = int.Parse(name.Substring(name.Length-1, 1));
             Vector3 forceDir = Vector3.zero;
             eManager = gameObject.GetComponent<EnemyManager>();
@@ -75,11 +75,11 @@ public class EnemyMovement : MonoBehaviour {
             }
 
             // Set movement variables
-            minX = Positions.rightMovementLimit + 2.5f;
-            //minX = Positions.leftBorder;
-            maxX = Positions.rightBorder;
-            minY = Positions.bottomBorder;
-            maxY = Positions.topBorder;
+            minX = positions.rightMovementLimit + 2.5f;
+            //minX = positions.leftBorder;
+            maxX = positions.rightBorder;
+            minY = positions.bottomBorder;
+            maxY = positions.topBorder;
 
             // NEED to do this not based on position, but on a FIXED stopZ (due to rotation issues)
             /*GameObject character = GameObject.Find("Character"+universeNb);
