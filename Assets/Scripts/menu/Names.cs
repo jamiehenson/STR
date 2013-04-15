@@ -20,6 +20,7 @@ public class Names : MonoBehaviour
 		str.Add("Salsa Training, Revisited");
 		str.Add("Sublime Tympani Recording");
 		str.Add("Susan Turned Red");
+        str.Add("Stoke Taste Relegation");
 		str.Add("Sunday's Tragic Roast");
 		str.Add("Speedos, Thongs, Rabbits");
 		str.Add("Spaniels Terminating Robots");
