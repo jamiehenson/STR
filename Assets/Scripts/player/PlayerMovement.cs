@@ -35,32 +35,45 @@ public class PlayerMovement : MonoBehaviour {
 		
 		if (toggle)
     	{
-			iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, Positions.baseZ), 1);
+			iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, positions.baseZ), 1);
 			iTween.RotateTo(gameObject, startingRot, 1);
 		}
 		else
 		{
-			iTween.MoveTo(gameObject, new Vector3(startingPos.x + 4, startingPos.y - 2, Positions.baseZ - 5), 1);
+			iTween.MoveTo(gameObject, new Vector3(startingPos.x + 4, startingPos.y - 2, positions.baseZ - 5), 1);
 			iTween.RotateBy(gameObject, new Vector3(0, direction * 0.25f, 0), 1);
 		}
 		yield return new WaitForSeconds(1f);	
 	}
 	
+    public void PubRotateCam() {
+        if (Network.isClient && myCharacter) {
+            StartCoroutine("rotateCamera", camtoggle);
+            //gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
+            
+            rotexception = true;
+            camtoggle = !camtoggle;
+            networkView.RPC("moveCharacter", RPCMode.Server, 1 + vertDist, horDist, rotation, rottoggle, camtoggle);
+        }
+    }
+
 	public IEnumerator rotateCamera(bool cameraBehind) 
 	{
-        rotexception = true;
-        camtoggle = !camtoggle;
+        /*rotexception = true;
+        camtoggle = !camtoggle;*/
 		int direction = (cameraBehind) ? 1 : -1;
+        
         iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * 4), 2);
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
-		iTween.MoveBy(gameObject, new Vector3(-10, 0, 0), 1f);
+        //iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, positions.baseZ), 1);
+        //iTween.MoveBy(gameObject, new Vector3(-10, 0, 0), 1f);
 		yield return new WaitForSeconds(2);
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-	    if (Network.isClient && myCharacter) 
+	    if (Network.isClient && myCharacter)  
 		{
 	        float vertDist = PlayerManager.speed * Input.GetAxis("Vertical") * Time.deltaTime;
 	        float horDist = PlayerManager.speed * Input.GetAxis("Horizontal") * Time.deltaTime;
@@ -70,9 +83,10 @@ public class PlayerMovement : MonoBehaviour {
 			
 			if (Input.GetKeyDown("t")) 
 			{
-				StartCoroutine("rotateCamera",camtoggle);
-				/*rotexception = true;
+				/*StartCoroutine("rotateCamera",camtoggle);
+				rotexception = true;
 				camtoggle = !camtoggle;*/
+                PubRotateCam();
 			}
 			
 			if (rotexception) 
@@ -111,12 +125,12 @@ public class PlayerMovement : MonoBehaviour {
         {
             positions = GameObject.Find("Universe"+universeNum+"/Managers/OriginManager").GetComponent<Universe>();
             
-			// Stop the lad from going out of bounds
+			// Stop the lad from going out of bounds - INCOMPLETE
 			// Standard orientation
 			if (rottoggle && !camtoggle) 
 			{
 				gameObject.transform.Translate(horDist, vertDist, 0);
-				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), transform.position.z);
+				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
 			}
 	
 			// When rotated to face into the screen
@@ -136,7 +150,7 @@ public class PlayerMovement : MonoBehaviour {
 			{
 				gameObject.transform.Translate(0,vertDist,-horDist);
 				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightBorder), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), transform.position.z);
-			}	            
+			}           
         }
 		if (rotation)
 		{
@@ -164,6 +178,12 @@ public class PlayerMovement : MonoBehaviour {
             universeNum = univNum;
             GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().updateActiveChar(character, true);
         }
+    }
 
+    [RPC]
+    public void RotateCharacter(bool toBehind, int chNum) {
+        if (toBehind != camtoggle && characterNum == chNum) {
+            PubRotateCam();
+        }
     }
 }
