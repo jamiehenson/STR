@@ -92,6 +92,18 @@ public class Commander : MonoBehaviour {
         return(int.Parse(num));
     }
 
+    private int cameraN()
+    {
+        if (Network.isClient)
+        {
+            int length = GameObject.FindGameObjectWithTag("MainCamera").name.Length;
+            string num = GameObject.FindGameObjectWithTag("MainCamera").name.Substring(length - 1, 1);
+            Debug.Log("Camera name " + GameObject.FindGameObjectWithTag("MainCamera").name + " " + num);
+            return (int.Parse(num));
+        }
+        else return 0;
+    }
+
     // ******Asteroid Belt Functions******
     IEnumerator SendAsteroidBelt() {
         RotatePlayers(true);
@@ -247,6 +259,7 @@ public class Commander : MonoBehaviour {
     void Start() {
 		enemyPrefabs = Resources.LoadAll("enemies/enemytypes", typeof(GameObject));
         bossPrefabs = Resources.LoadAll("enemies/bosses", typeof(GameObject));
+        
         if (Network.isServer)
         {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
@@ -260,13 +273,42 @@ public class Commander : MonoBehaviour {
             asteroidCount[universeN()] = 0;
             enemyCount[universeN()] = 0;
             StartCoroutine("StartGame");
+            /* Functions to move to and back from the boss universe
+            networkView.RPC("moveBossUniverse", RPCMode.All);
+            networkView.RPC("moveInitialUniverse", RPCMode.All);
+             * 
+             Don't forget to put them inside if(Network.isServer)*/
         }
+        
     }
 
     IEnumerator StartGame() {
         // Wait for fade
+        
         yield return new WaitForSeconds(fadeWait);
         levelStarted = true;
+    }
+
+    [RPC]
+    public void moveBossUniverse()
+    {
+        if (Network.isClient)
+        {
+            Debug.Log("Move to Boss universe " + cameraN());
+            PlayerManager manager = GameObject.Find("Character" + cameraN()).GetComponent<PlayerManager>();
+            manager.movement.changeUniverse(0);
+        }
+    }
+
+    [RPC]
+    public void moveInitialUniverse()
+    {
+        if (Network.isClient)
+        {
+            Debug.Log("Move back to universe " + cameraN());
+            PlayerManager manager = GameObject.Find("Character" + cameraN()).GetComponent<PlayerManager>();
+            manager.movement.changeUniverse(cameraN());
+        }
     }
 
     void MakeDeploymentDecision() {
