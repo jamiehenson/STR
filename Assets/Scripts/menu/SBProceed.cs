@@ -29,6 +29,7 @@ public class SBProceed : MonoBehaviour
     {
         if (MP.hostScreen && proceed)
         {
+            Server.countUniverse = int.Parse(MP.playerLimit);
             Application.LoadLevel("server");
             proceed = false;
         }

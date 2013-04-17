@@ -25,6 +25,7 @@ public class Server : MonoBehaviour {
     int ID = 1;
     public static int finalNumberofPlayers;
     public string takenNames;
+    public string[] playerNames;
 
     // Use this for initialization
     void Start() {
@@ -54,9 +55,9 @@ public class Server : MonoBehaviour {
     // When sever is initalise, set it up
     void OnServerInitialized() {
         Log.Note("Initialized Server" + MasterServer.ipAddress+ MasterServer.port);
-		
+        Log.Note("Count Universe: " + countUniverse);
 		// Initalise private memeber variables
-        countUniverse = 4;
+        playerNames = new string[countUniverse + 1];
         finalNumberofPlayers = countUniverse;
         universe = new Transform[countUniverse+2];
         characterView = new NetworkView[countUniverse+1];
@@ -142,7 +143,10 @@ public class Server : MonoBehaviour {
     void OnGUI()
     {
         int x = 400;
-        GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "");
+        for(int i = 1; i <ID; i++)
+        {
+            GUI.Label(new Rect(60, 200 + (20 * i), 300, 100), i + ". Player " + playerNames[i] + "has joined the game.");
+        }
         if (!manualGoAhead)
         {
             // Debug.Log(ID); // Ahhh maddie!!!!! Sorry forgot about that one!
@@ -150,7 +154,8 @@ public class Server : MonoBehaviour {
             {
                 PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
                 Debug.Log("Player :" + manager.getPlayerName() + "has connected");
-                GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
+                playerNames[ID] = manager.getPlayerName();
+                //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
                 GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().updatePlayerNames(ID, manager.getPlayerName());
                 manager.updatePlayerNames(ID, manager.getPlayerName());
                 ID++;
