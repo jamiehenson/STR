@@ -181,6 +181,8 @@ public class Server : MonoBehaviour {
                     LevelManager levMan = GameObject.Find("Universe" + i + "/Managers/LevelManager").GetComponent<LevelManager>();
                     levMan.enabled = true;
                 }
+                // Enable timing
+                GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().StartTimer();
             }
         }
 

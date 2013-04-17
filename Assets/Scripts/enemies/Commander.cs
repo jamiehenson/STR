@@ -409,7 +409,7 @@ public class Commander : MonoBehaviour {
         CreateBoss(4);
     }
 
-    private void ClearScreen() { 
+    public void ClearScreen() { 
         // Need to fix up for clearing just the enemies/asteroids for the desired universe
         GameObject en = transform.parent.parent.gameObject;
         Transform enDirectory = transform.parent.parent.FindChild("Enemies");
