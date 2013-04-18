@@ -55,7 +55,6 @@ public class PlayerManager : MonoBehaviour {
 
 		if (Network.isServer)
         {
-            Debug.Log("Instantiate");
             playerNames = new string[Server.numberOfPlayers() + 1];
             networkView.RPC("intantiatePlayerNames", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
         }
@@ -136,6 +135,13 @@ public class PlayerManager : MonoBehaviour {
     public string getPlayerName()
     {
         return playername;
+        
+    }
+
+    public void updatePlayerNameS(string name)
+    {
+        playername = name;
+        networkView.RPC("updatePlayerName", RPCMode.OthersBuffered, playername);
     }
 
     public string getActiveChar()
@@ -248,7 +254,6 @@ public class PlayerManager : MonoBehaviour {
     [RPC]
     void intantiatePlayerNames(int count)
     {
-        Debug.Log("Instantiate");
         playerNames = new string[count];
     }
 

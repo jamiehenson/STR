@@ -192,7 +192,7 @@ public class PlayerMovement : MonoBehaviour {
     [RPC]
     public void updateUniverse(int univNum, int character)
     {
-        if (universeNum != 0)
+        if (universeNum != 0 && GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().enabled == true)
         {
             GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().updateActiveChar(character, false);
             universeNum = univNum;

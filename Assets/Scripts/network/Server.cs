@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Server : MonoBehaviour {
 
     private int playerCount = 0;
-    public static string gameName = "Spektor0307"; // I think this should be STR ?
+    public static string gameName = "STD"; // I think this should be STR ?
     public Transform playerUniversePrefab;
     public static int countUniverse;
     public Transform[] universe;
@@ -143,28 +143,32 @@ public class Server : MonoBehaviour {
     void OnGUI()
     {
         int x = 400;
+        /* Notify server which player has connected. */
+        /* GUI part*/
         for(int i = 1; i <ID; i++)
         {
             GUI.Label(new Rect(60, 200 + (20 * i), 300, 100), i + ". Player " + playerNames[i] + "has joined the game.");
         }
+        /* Check if a new player has connected. */
         if (!manualGoAhead)
         {
-            // Debug.Log(ID); // Ahhh maddie!!!!! Sorry forgot about that one!
-            if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
+            if (ID<= countUniverse && GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null)
             {
+                /*if (takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
+                    GameObject.Find("Character" + ID).GetComponent<PlayerManager>().updatePlayerNameS(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() + "'");*/
                 PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
-                Debug.Log("Player :" + manager.getPlayerName() + "has connected");
                 playerNames[ID] = manager.getPlayerName();
-                //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
+
                 GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().updatePlayerNames(ID, manager.getPlayerName());
                 manager.updatePlayerNames(ID, manager.getPlayerName());
                 ID++;
-                takenNames = takenNames + " " + manager.getPlayerName();
-
+                takenNames = takenNames + ", " + manager.getPlayerName();
             }
 
         }
+        /* End*/
 
+        /* Start the AI part of the game.*/
         if (!startGame)
         {
             if (manualGoAhead)

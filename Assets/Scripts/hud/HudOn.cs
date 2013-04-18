@@ -20,6 +20,7 @@ public class HudOn : MonoBehaviour {
     WeaponHandler weaponHandler;
     PlayerManager manager;
 	OnlineClient onlineClient;
+    public static int countUniverse;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
 	
@@ -233,8 +234,8 @@ public class HudOn : MonoBehaviour {
 		score = 0;
 		gameOver = false;
 		Instance = this;
-
-		for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
+        countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length-1;
+		for (int i = 0; i < countUniverse; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
 		onlineClient = GameObject.Find ("Network").GetComponent<OnlineClient>();
@@ -348,7 +349,7 @@ public class HudOn : MonoBehaviour {
 		
 		// Scoreboard indicator
 		GUI.Label (new Rect (Screen.width-120,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",coStyle);
-        for (int i = 1; i <= 4; i++)
+        for (int i = 1; i <= countUniverse; i++)
         {
             PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
             GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 20 + i*20, 40, 40), score.playerNames[i] + " :" +score.getScore() , coStyle);
