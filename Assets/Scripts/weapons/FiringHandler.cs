@@ -64,13 +64,19 @@ public class FiringHandler : MonoBehaviour {
                     // Send message to fire
                     networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, manager.wepStats.wepType);
                     // Update fire stats
-
+                    
                     timer = 0;
 
                 }
             }
         }
 	}
+
+    [RPC]
+    void fireAnimation(int n)
+    {
+        GameObject.Find("Character" + n).animation.Play("RightHandMove");
+    }
 	
 	[RPC]
 	void fireWeapon(Vector3 lookAt, Vector3 fireDirection, int bulletType)
@@ -86,6 +92,7 @@ public class FiringHandler : MonoBehaviour {
        
 		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startPos, transform.rotation,200);
         bullet.name = bullet.name + universeN();
+        networkView.RPC("fireAnimation", RPCMode.All, universeN());
 		Physics.IgnoreCollision(bullet.collider, transform.collider);
 		
 		// Tell everyone to set up its movement

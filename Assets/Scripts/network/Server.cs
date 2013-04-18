@@ -75,7 +75,7 @@ public class Server : MonoBehaviour {
             Vector3 pos = new Vector3(0 + (i * 10000), 0, 0);
             Transform obj = (Transform)Network.Instantiate(playerUniversePrefab, pos, new Quaternion(0, 0, 0, 0), 99);
             universe[i] = obj;
-			
+            
 			// Rename it to something useful and pass name to clients
             universe[i].transform.Find("Managers/OriginManager").GetComponent<Universe>().origin = pos;
             obj.name = "Universe" + i;
@@ -85,7 +85,6 @@ public class Server : MonoBehaviour {
             Vector3 position = new Vector3(pos.x - 8, pos.y, pos.z + 15);
             Transform characterPlayer = (Transform)Network.Instantiate(characterPrefab, position, new Quaternion(0,0,0,0), i);
 			//characterPlayer.Rotate(new Vector3(0,180,0));
-			
 			// Rename the character and pass name to clients
             characterPlayer.name = "Character" + i;
 			characterPlayer.GetComponent<PlayerManager>().universeNumber = i;
