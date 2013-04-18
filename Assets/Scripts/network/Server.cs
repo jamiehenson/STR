@@ -99,7 +99,7 @@ public class Server : MonoBehaviour {
 
         // Rename it to something useful and pass name to clients
         universe[countUniverse+1].transform.Find("Managers/OriginManager").GetComponent<Universe>().origin = pos_b;
-        obj_b.name = "Boss Universe";
+        obj_b.name = "Universe0";
         viewIDNameMapping.Add(obj_b.networkView.viewID, obj_b.name);
 			
     }
