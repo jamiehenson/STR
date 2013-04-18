@@ -12,7 +12,32 @@ public class Vortex : MonoBehaviour {
 	public static bool labelIsSet = false;
 	private Font deco = (Font) Resources.Load ("Belgrad");
 
-    public static IEnumerator grow(GameObject vortex)
+	public static IEnumerator playerGrow(GameObject player)
+    {
+        double o = player.transform.localScale.x;
+		float x = 0;
+        player.transform.localScale = new Vector3(0, 0, 0);
+        while (x <= o)
+        {
+            x += 0.004f;
+            player.transform.localScale = new Vector3(x, x, x);
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+
+	public static IEnumerator playerShrink(GameObject player)
+    {
+		labelIsSet = false;
+		float x = player.transform.localScale.x;
+        while (x > 0)
+        {
+            x -= 0.0002f;
+            player.transform.localScale = new Vector3(x, x, x);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+	public static IEnumerator grow(GameObject vortex)
     {
         float x = 0;
         vortex.transform.localScale = new Vector3(0, 0, 0);
@@ -44,6 +69,8 @@ public class Vortex : MonoBehaviour {
 		labelIsSet = true;
 	}
 
+
+
 	public void OnGUI()
 	{
 		if (labelIsSet)
@@ -61,14 +88,15 @@ public class Vortex : MonoBehaviour {
 			style.fontStyle = FontStyle.Bold;
 			style.fontSize = 18;
 			label = label.ToUpper();
-			GUI.DrawTexture(new Rect(screenPoint.x-(bgw/2-5),screenPoint.y-(bgh/2),bgw,bgh),bg,ScaleMode.StretchToFill, true, 0);
-			GUI.Label(new Rect(screenPoint.x,screenPoint.y,x,y), label, style);
+			GUI.DrawTexture(new Rect(screenPoint.x-(bgw/2-5),screenPoint.y-(bgh/2)-40,bgw,bgh),bg,ScaleMode.StretchToFill, true, 0);
+			GUI.Label(new Rect(screenPoint.x,screenPoint.y-40,x,y), label, style);
 		}
 	}
 
     void Start()
     {
-        StartCoroutine(grow(gameObject));
+		StopCoroutine("shrink");
+		StartCoroutine(grow(gameObject));
 		bg = (Texture2D) Resources.Load ("menu/blankfull");
     }
 
@@ -96,6 +124,7 @@ public class Vortex : MonoBehaviour {
 		GameObject obj = collision.gameObject;
 		if (obj.tag == "Player" && obj.GetComponent<PlayerMovement>().myCharacter)
 			HudOn.Instance.enteredVortex(leadsToUniverse);
+			HudOn.vortpointOut = gameObject.transform.position;
     }
 	
 	void OnCollisionExit(Collision collision)

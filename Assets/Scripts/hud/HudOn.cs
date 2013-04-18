@@ -13,10 +13,14 @@ public class HudOn : MonoBehaviour {
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount = 4;
-	private GameObject toast;
+	private GameObject toast, charModel;
+	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
+	private Vector3 charScale;
+	public static Vector3 vortpointOut;
+	private bool showCountdown;
     WeaponHandler weaponHandler;
     PlayerManager manager;
 	OnlineClient onlineClient;
@@ -272,6 +276,8 @@ public class HudOn : MonoBehaviour {
         {
             int PlayerNumber = int.Parse(GameObject.FindGameObjectWithTag("MainCamera").name.Substring(GameObject.FindGameObjectWithTag("MainCamera").name.Length - 1, 1));
             weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
+			charScale = GameObject.Find("Character" + PlayerNumber).transform.localScale;
+			charModel = GameObject.Find("Character" + PlayerNumber);
             setWeapon(1);
         }
 
@@ -282,7 +288,6 @@ public class HudOn : MonoBehaviour {
 		health.normal.background = fillTex(1,1,new Color(0.8f,0f,0f,1f));
 		energy.normal.background = fillTex(1,1,new Color(0f,0f,0.8f,1f));
 		bank.normal.background = fillTex (1,1,new Color(0f,0.8f,0f,1f));
-
 	}
 
 	void OnGUI ()
@@ -373,12 +378,31 @@ public class HudOn : MonoBehaviour {
         Rect position = new Rect(Input.mousePosition.x - (crossTex.width / 2), (Screen.height - Input.mousePosition.y) - (crossTex.height / 2), crossTex.width, crossTex.height);
         GUI.DrawTexture(position, crossTex);
         Screen.showCursor = false;
+
+		// Show vortex timer
+		if (showCountdown)
+		{
+			Vector3 screenPoint = Camera.main.WorldToScreenPoint(vortpointOut);
+			screenPoint.y = (Screen.height/2 - (screenPoint.y - Screen.height/2)); // Flip y about center line (lord knows why)
+			int x = 100;
+			int y = 100;
+
+			// Counter style - yes, I included another style here, shoot me
+			GUIStyle style = new GUIStyle();
+	    	style.font = deco;
+			style.normal.textColor = Color.white;
+			style.alignment = TextAnchor.MiddleCenter;
+			style.fontStyle = FontStyle.Bold;
+			style.fontSize = 70;
+
+			GUI.Label(new Rect(screenPoint.x,screenPoint.y,10,10), vortexCountdownNum.ToString(), style);
+		}
 	}	
 	
 	// Vortex logic
 	IEnumerator VortexCountdown()
 	{
-		// Do GUI magic here!
+		showCountdown = true;
 		while (vortexCountdownNum != 0)
 		{
 			print ("In vortex: "+vortexCountdownNum);
@@ -386,8 +410,10 @@ public class HudOn : MonoBehaviour {
 			yield return new WaitForSeconds(1);
 		}
 		manager.movement.changeUniverse(vortexLeadsTo);
+		charModel.transform.localScale = charScale;
+		showCountdown = false;
 	}
-	
+
 	public void enteredVortex(int vortexTo)
 	{
 		print ("LEADS TO "+vortexTo);
@@ -396,21 +422,27 @@ public class HudOn : MonoBehaviour {
 		if (inVortexCountdown)
 		{
 			StopCoroutine("VortexCountdown");
+			StopCoroutine ("Vortex.playerGrow");
 			inVortexCountdown = false;
 		}
 		
 		vortexCountdownNum = 4;
 		vortexLeadsTo = vortexTo;
-		StartCoroutine("VortexCountdown");		
+		StartCoroutine("VortexCountdown");
+		StartCoroutine(Vortex.playerShrink(charModel));
 	}
-	
+
 	public void leftVortex() {
 		print("Left Vortex");
-		
-		if (inVortexCountdown){
+
+		Vortex.labelIsSet = false;
+		if (inVortexCountdown)
+		{
 			StopCoroutine("VortexCountdown");
+			StopCoroutine ("Vortex.playerShrink");
 			inVortexCountdown = false;
 		}
+		StartCoroutine(Vortex.playerGrow(charModel));
 	}
 
 	private string generateSystemNames()
