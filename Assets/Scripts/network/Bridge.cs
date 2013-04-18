@@ -13,10 +13,12 @@ public class Bridge : MonoBehaviour {
 
 	public static Bridge Instance;
 
+	void Awake() {
+		Instance = this;
+	}
+
     // Use this for initialization
     void Start() {
-		Instance = this;
-
         if (Network.isServer) {
             server = GameObject.Find("Network").GetComponent<Server>();
         }
