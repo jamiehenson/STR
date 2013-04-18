@@ -125,6 +125,7 @@ public class Server : MonoBehaviour {
         bridge.setUniverse(nextPlayerID, player);
         bridge.updateUniverseNames(viewIDNameMapping, player);
         bridge.updateCharacterNames(viewIDChNameMapping, player);
+		changeSystemNames();
 		
     }
 
@@ -143,6 +144,9 @@ public class Server : MonoBehaviour {
 
     void OnGUI()
     {
+		if (GameObject.Find("Character" + ID) == null)
+			return;
+		
         int x = 400;
         for(int i = 1; i <ID; i++)
         {
@@ -189,12 +193,52 @@ public class Server : MonoBehaviour {
 		GUI.Label(new Rect(Screen.width/4, Screen.height*0.75f, Screen.width/2, 200), playersJoined);
     }
 
-    public static int numberOfPlayers()
-    {
+    public static int numberOfPlayers() {
         return finalNumberofPlayers;
     }
 
 	public void moveCamera(int universeNum, NetworkPlayer player){
 		bridge.moveCamera(universeNum, player);
+	}
+
+	public void changeSystemNames() {
+		bridge.systemNames = new List<string>(4);
+
+
+		for (int i=0; i<4; i++)
+			bridge.systemNames.Add(generateSystemNames());
+
+		bridge.sendSystemNames();
+	}
+
+	public string generateSystemNames()
+	{
+		ArrayList greek = new ArrayList();
+		greek.Add("alpha");
+		greek.Add("beta");
+		greek.Add("gamma");
+		greek.Add("delta");
+		greek.Add("epsilon");
+		greek.Add("zeta");
+		greek.Add("eta");
+		greek.Add("theta");
+		greek.Add("iota");
+		greek.Add("kappa");
+		greek.Add("lambda");
+		greek.Add("mu");
+		greek.Add("nu");
+		greek.Add("xi");
+		greek.Add("omicron");
+		greek.Add("pi");
+		greek.Add("rho");
+		greek.Add("sigma");
+		greek.Add("tau");
+		greek.Add("upsilon");
+		greek.Add("phi");
+		greek.Add("chi");
+		greek.Add("psi");
+		greek.Add("omega");
+		string system = (string) greek[(int) Random.Range(0,greek.Count)] + "-" + Random.Range(0,20).ToString();
+		return system.ToUpper();
 	}
 }

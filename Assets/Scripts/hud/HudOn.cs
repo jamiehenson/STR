@@ -18,11 +18,16 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
+
 	private Vector3 charScale;
 	public static Vector3 vortpointOut;
 	private bool showCountdown;
+	public static float score;
+	public static bool gameOver;
+	private static bool gameOverBeenDetected;
+
     WeaponHandler weaponHandler;
-    PlayerManager manager;
+    PlayerManager manager = null;
 	OnlineClient onlineClient;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
@@ -38,12 +43,6 @@ public class HudOn : MonoBehaviour {
 		energyTitle = "ENERGY", 
 		bankTitle = "WARP";
 
-    // This seems a logical place to keep track of the score
-   // public float score = 0;
-   // public static bool gameOver = false;
-      public static float score;
-      public static bool gameOver;
-	
 	public static Texture2D fillTex(int width, int height, Color col)
     {
         Color[] pix = new Color[width*height];
@@ -112,10 +111,16 @@ public class HudOn : MonoBehaviour {
     }
 	
 	void Update() {
-        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
-        if (gameOver)
-        {
+		// Check if names have been sent from the server. If not then we canot
+		// determin our character, so stop.
+		if (manager == null)
+			return;
+
+		// The headOut coroutine should only be called once, so check if it
+		// needs to be called and hasn't already
+        if (gameOver && !gameOverBeenDetected){
             StartCoroutine("headOut");
+			gameOverBeenDetected = true;
         }
 
         // Update player stats
@@ -220,6 +225,7 @@ public class HudOn : MonoBehaviour {
     {
         int length = transform.name.Length;
         string num = transform.name.Substring(length - 1, 1);
+		print ("Num = "+num);
         if ("0123456789".Contains(num)) return (int.Parse(num));
         else return -1;
     }
@@ -243,16 +249,16 @@ public class HudOn : MonoBehaviour {
 		gameOver = false;
 		Instance = this;
 
+		gameOverBeenDetected = false;
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
 		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");
 		universe = (Texture2D) Resources.Load ("hud/bottomleft");
 		deco = (Font) Resources.Load ("Belgrad");
+	}
 
-		for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
-
-        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
-		onlineClient = GameObject.Find ("Network").GetComponent<OnlineClient>();
+	void startWithManager(){
+		onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
 
         /* Was in Awake() */
         if (manager.activeCharN == null) manager.activeCharN = "tester";
@@ -290,8 +296,10 @@ public class HudOn : MonoBehaviour {
 		bank.normal.background = fillTex (1,1,new Color(0f,0.8f,0f,1f));
 	}
 
-	void OnGUI ()
-	{
+	void OnGUI () {
+		if (manager == null)
+			return;
+
 		GUI.Label (new Rect (-130,-20,main.width,main.height), main);
 		GUI.Label (new Rect (Screen.width-speed.width+15,-20,speed.width,speed.height), speed);
 		GUI.Label (new Rect (Screen.width-leaderboard.width+80,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
@@ -334,7 +342,7 @@ public class HudOn : MonoBehaviour {
 		int uniNo = manager.universeNumber;
 		GUI.Label (new Rect (-5,Screen.height-universe.height/2,universe.width,universe.height),universe);
 		GUI.Label (new Rect (6,Screen.height-universe.height/2+14,200,50),"LOCATION:",coStyle);
-		GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),systemNames[uniNo],speedStyle);
+		GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),systemNames[uniNo-1],speedStyle);
 
 		GUI.Label (new Rect (70,5,200,50),charName,hudStyle);
 		GUI.Label (new Rect (75,21,40,20),hullTitle,smallStyle);
@@ -445,40 +453,8 @@ public class HudOn : MonoBehaviour {
 		StartCoroutine(Vortex.playerGrow(charModel));
 	}
 
-	private string generateSystemNames()
-	{
-		ArrayList greek = new ArrayList();
-		greek.Add("alpha");
-		greek.Add("beta");
-		greek.Add("gamma");
-		greek.Add("delta");
-		greek.Add("epsilon");
-		greek.Add("zeta");
-		greek.Add("eta");
-		greek.Add("theta");
-		greek.Add("iota");
-		greek.Add("kappa");
-		greek.Add("lambda");
-		greek.Add("mu");
-		greek.Add("nu");
-		greek.Add("xi");
-		greek.Add("omicron");
-		greek.Add("pi");
-		greek.Add("rho");
-		greek.Add("sigma");
-		greek.Add("tau");
-		greek.Add("upsilon");
-		greek.Add("phi");
-		greek.Add("chi");
-		greek.Add("psi");
-		greek.Add("omega");
-		string system = (string) greek[(int) Random.Range(0,greek.Count)] + "-" + Random.Range(0,20).ToString();
-		return system.ToUpper();
-	}
-
-	[RPC]
-	private void setSystemName(int i, string name)
-	{
-		systemNames[i] = name;
+	public void setManager(PlayerManager m) {
+		manager = m;
+		startWithManager();
 	}
 }
