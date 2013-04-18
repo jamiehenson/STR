@@ -334,7 +334,7 @@ public class HudOn : MonoBehaviour {
 		int uniNo = manager.universeNumber;
 		GUI.Label (new Rect (-5,Screen.height-universe.height/2,universe.width,universe.height),universe);
 		GUI.Label (new Rect (5,Screen.height-universe.height/2+15,200,50),"LOCATION:",coStyle);
-		GUI.Label (new Rect (5,Screen.height-universe.height/2+30,200,50),systemNames[uniNo],speedStyle);
+		GUI.Label (new Rect (5,Screen.height-universe.height/2+30,200,50),systemNames[uniNo-1],speedStyle);
 
 		GUI.Label (new Rect (70,5,200,50),charName,hudStyle);
 		GUI.Label (new Rect (75,21,40,20),hullTitle,smallStyle);
