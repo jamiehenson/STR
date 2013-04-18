@@ -137,6 +137,8 @@ public class LevelManager : MonoBehaviour {
     }
 
     IEnumerator BossComingIE(int wait) {
+        // Push everyone to boss universe
+        enemyGen.SendToBoss();
         // Pause for a set amount of time
         yield return new WaitForSeconds(wait + 2);
         // Tell the commander to stop sending enemies (& clear screen)
@@ -151,10 +153,12 @@ public class LevelManager : MonoBehaviour {
     }
 
     IEnumerator BossClearedIE(int wait) {
+        // Pull everyone back to their own universe
+        enemyGen.BringBackFromBoss();
         // Pause for a set amount of time
         yield return new WaitForSeconds(wait);
         // Tell the commander to resume sending enemies
-        enemyGen.BossDestroyed();
+        enemyGen.ResumeGame();
     }
 
     public void BossCleared(int wait) {

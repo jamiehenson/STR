@@ -10,6 +10,7 @@ public class ServerScoringSystem : MonoBehaviour {
     private int pauseDelay = 3; // in seconds
     private int stagesBeforeBoss = 3;
     private LevelManager[] levelManagers = new LevelManager[4];
+    private BossLevelManager bossLevelManager;
     int stage = 0;
 
 	// Use this for initialization
@@ -39,31 +40,39 @@ public class ServerScoringSystem : MonoBehaviour {
         }
     }
 
+    // TEMP FOR TESTING
+    IEnumerator SendBoss() {
+        yield return new WaitForSeconds(10);
+        Debug.Log("Boss Clear");
+        BossCleared();
+    }
+
     // Used to time different stages and increment difficulty progression
     IEnumerator TimeLevels() {
         yield return new WaitForSeconds(pauseDelay);
         for (int j = 0; j < stagesBeforeBoss; j++) {
+            Debug.Log("New Stage");
             // Level up
             foreach (LevelManager levMan in levelManagers) {
                 levMan.LevelIncrease();
             }
             // Wait a certain amount of time
             yield return new WaitForSeconds(levelTime);
-        }
-        // Inform LevelManagers about incoming boss & tell to halt enemies
+        }      
+        yield return new WaitForSeconds(pauseDelay);
+        // Inform LevelManagers about incoming boss
         foreach (LevelManager levMan in levelManagers) {
             levMan.BossComing(pauseDelay);
         }
         yield return new WaitForSeconds(pauseDelay);
-        // WARP EVERYONE TO BOSS LEVEL HERE
-        yield return new WaitForSeconds(pauseDelay);
         // SEND BOSS HERE
+        Debug.Log("Send Boss");
+        bossLevelManager.CreateBoss(4);
     }
 
     // Used to control when a boss has been cleared
     public void BossCleared() {
         if (Network.isServer) {
-            // WARP EVERYONE BACK TO THEIR OWN LEVELS HERE
             // Inform all LevelManagers that the boss is complete
             foreach (LevelManager levMan in levelManagers) {
                 levMan.BossCleared(pauseDelay);
@@ -80,6 +89,7 @@ public class ServerScoringSystem : MonoBehaviour {
             for (int i = 0; i < Server.numberOfPlayers(); i++) {
                 levelManagers[i] = GameObject.Find("Universe" + (i + 1) + "/Managers/LevelManager").GetComponent<LevelManager>();
             }
+            bossLevelManager = GameObject.Find("Universe" + (0) + "/Managers/LevelManager").GetComponent<BossLevelManager>();
             StartCoroutine("TimeLevels");
         }
     }

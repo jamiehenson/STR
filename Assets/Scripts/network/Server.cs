@@ -177,10 +177,14 @@ public class Server : MonoBehaviour {
                     commander = GameObject.Find("Universe" + i + "/Managers/EnemyManager").GetComponent<Commander>();
                     commander.enabled = true;
 
-                    // Enable level progression
+                    // Enable level progression (needs to start AFTER commander)
                     LevelManager levMan = GameObject.Find("Universe" + i + "/Managers/LevelManager").GetComponent<LevelManager>();
                     levMan.enabled = true;
                 }
+                // Enable boss level
+                BossLevelManager blm = GameObject.Find("Universe" + 0 + "/Managers/LevelManager").GetComponent<BossLevelManager>();
+                blm.enabled = true;
+
                 // Enable timing
                 GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().StartTimer();
             }

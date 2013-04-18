@@ -441,7 +441,7 @@ public class Commander : MonoBehaviour {
         return changed;
     }
 
-    public void DeployBoss() {
+    /*public void DeployBoss() {
         // Clear all enemies/asteroids from the screen
         // Pick a boss and send them out!
         // Resume usual enemy generation techniques
@@ -449,27 +449,35 @@ public class Commander : MonoBehaviour {
         bossDeployed = true;
         ClearScreen();
         CreateBoss(4);
+    }*/
+
+    public void SendToBoss() {
+        if (Network.isServer) {
+            RotatePlayers(false);
+            networkView.RPC("moveBossUniverse", RPCMode.All);
+            bossDeployed = true;
+            ClearScreen();
+        }
+    }
+
+    public void BringBackFromBoss() {
+        if (Network.isServer) {
+            networkView.RPC("moveInitialUniverse", RPCMode.All);
+        }
     }
 
     public void ClearScreen() { 
-        // Need to fix up for clearing just the enemies/asteroids for the desired universe
         GameObject en = transform.parent.parent.gameObject;
         Transform enDirectory = transform.parent.parent.FindChild("Enemies");
 
         List<GameObject> children = new List<GameObject>();
-
-        foreach (Transform child in enDirectory) children.Add(child.gameObject);
-
-        children.ForEach(child => Network.Destroy(child));
-        
-        //GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
-        // Switch to Network.Destroys
-        //foreach (GameObject e in enemies) Network.Destroy(e);
-        //foreach (GameObject a in asteroids) Network.Destroy(a);
+        // Stops countdown timer
         StopAllCoroutines();
+        foreach (Transform child in enDirectory) children.Add(child.gameObject);
+        children.ForEach(child => Network.Destroy(child));     
     }
 
-    public void BossDestroyed() {
+    public void ResumeGame() {
         bossDeployed = false;
     }
 
