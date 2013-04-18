@@ -4,6 +4,10 @@ using System.Collections;
 public class PlayerManager : MonoBehaviour {
     // Player stats
     private int score;
+
+	private Object[] flags;
+	public Texture2D flag;
+
     private float hitPoints;
     private float energyLevel;
     private float startHP, startEnergy;
@@ -50,8 +54,11 @@ public class PlayerManager : MonoBehaviour {
 		changeWeapon(type);
 	}
 
-	public void Start(){
+	public void Start()
+	{
 		movement = gameObject.GetComponent<PlayerMovement>();
+		flags = Resources.LoadAll ("menu/flags");
+		flag = (Texture2D) flags[Random.Range(0,flags.Length)];
 
 		if (Network.isServer)
         {
@@ -210,7 +217,6 @@ public class PlayerManager : MonoBehaviour {
 
     void Update()
     {
-
         if (Network.isClient && myCharacter)
         {
             WeaponHandler weaponHandler = GameObject.Find("Character" + characterNum).GetComponent<WeaponHandler>();

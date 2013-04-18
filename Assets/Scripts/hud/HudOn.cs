@@ -265,7 +265,7 @@ public class HudOn : MonoBehaviour {
 		wepBox1 = (Texture2D) Resources.Load ("hud/wepBox1Off");
 		wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2Off");
 		wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
-        flag = (Texture2D)Resources.Load("hud/" + PlayerManager.activeChar);
+		flag = manager.flag;
 		
         charName = MP.playerName;
 
@@ -275,11 +275,6 @@ public class HudOn : MonoBehaviour {
             weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
             setWeapon(1);
         }
-
-		if (Network.isServer)
-		{
-
-		}
 
         startHP = manager.getStartHP();
         startEnergy = manager.getStartEnergy();
@@ -296,7 +291,7 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (-130,-20,main.width,main.height), main);
 		GUI.Label (new Rect (Screen.width-speed.width+15,-20,speed.width,speed.height), speed);
 		GUI.Label (new Rect (Screen.width-leaderboard.width+80,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
-		GUI.Label (new Rect (0,0,64,64),flag);
+		GUI.DrawTexture (new Rect (2,-2,64,48),flag,ScaleMode.StretchToFill);
 
 		GUIStyle hudStyle = new GUIStyle();
     	hudStyle.font = deco;
@@ -308,13 +303,18 @@ public class HudOn : MonoBehaviour {
     	coStyle.font = deco;
 		coStyle.normal.textColor = Color.white;
 		coStyle.fontStyle = FontStyle.Italic;
-		coStyle.fontSize = 12;
+		coStyle.fontSize = 14;
 		
 		GUIStyle speedStyle = new GUIStyle();
     	speedStyle.font = deco;
 		speedStyle.normal.textColor = Color.white;
-        speedStyle.fontSize = 38;
-		
+        speedStyle.fontSize = 34;
+
+		GUIStyle largeStyle = new GUIStyle();
+    	largeStyle.font = deco;
+		largeStyle.normal.textColor = Color.white;
+        largeStyle.fontSize = 40;
+
 		GUIStyle wepStyle = new GUIStyle();
     	wepStyle.font = deco;
 		wepStyle.normal.textColor = Color.white;
@@ -329,7 +329,7 @@ public class HudOn : MonoBehaviour {
 		// Universe (or rather, star system) name
 		int uniNo = manager.universeNumber;
 		GUI.Label (new Rect (-5,Screen.height-universe.height/2,universe.width,universe.height),universe);
-		GUI.Label (new Rect (7,Screen.height-universe.height/2+15,200,50),"LOCATION:",coStyle);
+		GUI.Label (new Rect (6,Screen.height-universe.height/2+14,200,50),"LOCATION:",coStyle);
 		GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),systemNames[uniNo],speedStyle);
 
 		GUI.Label (new Rect (70,5,200,50),charName,hudStyle);
@@ -347,22 +347,23 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (115,45,energyBank/(bankSize/hudBarSize),10),"",bank);
 		
 		// Speed and gear indicator
-        GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + manager.getScore(), speedStyle);
+        GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + manager.getScore(), largeStyle);
 		GUI.Label (new Rect (Screen.width-240,100,200,40),gearReady,hudStyle);
 		
 		// Scoreboard indicator
-		GUI.Label (new Rect (Screen.width-120,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",coStyle);
+		GUI.Label (new Rect (Screen.width-150,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",hudStyle);
         for (int i = 1; i <= 4; i++)
         {
             PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
-            GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 20 + i*20, 40, 40), score.playerNames[i] + " :" +score.getScore() , coStyle);
+            GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 22 + i*25, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
+            GUI.Label(new Rect(Screen.width - 155, Screen.height / 2 - leaderboard.height / 2 + 10 + i*25, 35, 35), score.flag);
         }
 		
 		// Weapons initialisation
         int wepBoxSize = 48;
 		GUI.Label (new Rect (-10,10,wepBoxSize,wepBoxSize), wepBox1);
-		GUI.Label (new Rect (7,10,wepBoxSize,wepBoxSize), wepBox2);
-        GUI.Label(new Rect(24,10,wepBoxSize,wepBoxSize), wepBox3);
+		GUI.Label (new Rect (10,10,wepBoxSize,wepBoxSize), wepBox2);
+        GUI.Label(new Rect(30,10,wepBoxSize,wepBoxSize), wepBox3);
 		GUI.Label (new Rect (7,47,200,64), wepName, wepStyle);
 
         // Add a crosshair
