@@ -248,7 +248,7 @@ public class MP : MonoBehaviour
 			heading2.renderer.enabled = true;
 			coPilot.renderer.enabled = false;
 			flagBox.renderer.enabled = false;
-			flagBoxMain.renderer.enabled = true;
+			flagBoxMain.renderer.enabled = false;
 			playerNameText.renderer.enabled = false;
 
             GameObject browserbg = GameObject.Find("SBrowserBG");
