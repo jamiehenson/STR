@@ -9,7 +9,7 @@ public class MP : MonoBehaviour
     public static bool joinScreen, hostScreen, openBox;
     public static string playerName, serverName, playerLimit, coPilotName;
     private Font deco;
-    private Texture2D coPilotFlag;
+    public static Texture2D coPilotFlag;
     public static bool refresh;
     private bool startServer;
     public static HostData[] hostData;
@@ -268,6 +268,7 @@ public class MP : MonoBehaviour
                     hostnb = i;	
                     joinScreen = false;
                     PlayerManager.playername = playerName;
+					PlayerManager.flagname = coPilotFlag.name;
                     Application.LoadLevel("OnlineClient");
                 }
             }

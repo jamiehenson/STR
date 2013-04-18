@@ -265,8 +265,7 @@ public class HudOn : MonoBehaviour {
 		wepBox1 = (Texture2D) Resources.Load ("hud/wepBox1Off");
 		wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2Off");
 		wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
-		flag = manager.flag;
-		
+		flag = (Texture2D) Resources.Load ("menu/flags/"+manager.getFlag());
         charName = MP.playerName;
 
         if (Network.isClient)
@@ -355,8 +354,9 @@ public class HudOn : MonoBehaviour {
         for (int i = 1; i <= 4; i++)
         {
             PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
+			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
             GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 22 + i*25, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
-            GUI.Label(new Rect(Screen.width - 155, Screen.height / 2 - leaderboard.height / 2 + 10 + i*25, 35, 35), score.flag);
+            GUI.Label(new Rect(Screen.width - 155, Screen.height / 2 - leaderboard.height / 2 + 10 + i*25, 35, 35), playerFlag);
         }
 		
 		// Weapons initialisation

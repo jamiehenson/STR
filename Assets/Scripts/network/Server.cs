@@ -25,7 +25,7 @@ public class Server : MonoBehaviour {
     int ID = 1;
     public static int finalNumberofPlayers;
     public string takenNames;
-    public string[] playerNames;
+    public string[] playerNames, playerFlags;
 
     // Use this for initialization
     void Start() {
@@ -58,6 +58,7 @@ public class Server : MonoBehaviour {
         Log.Note("Count Universe: " + countUniverse);
 		// Initalise private memeber variables
         playerNames = new string[countUniverse + 1];
+		playerFlags = new string[countUniverse + 1];
         finalNumberofPlayers = countUniverse;
         universe = new Transform[countUniverse+2];
         characterView = new NetworkView[countUniverse+1];
@@ -149,20 +150,20 @@ public class Server : MonoBehaviour {
         }
         if (!manualGoAhead)
         {
-            // Debug.Log(ID); // Ahhh maddie!!!!! Sorry forgot about that one!
+            // Debug.Log(ID); // Ahhh maddie!!!!! Sorry forgot about that one! Hey guys it's me
             if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
             {
                 PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
                 Debug.Log("Player :" + manager.getPlayerName() + "has connected");
                 playerNames[ID] = manager.getPlayerName();
+				playerFlags[ID] = manager.getFlag();
                 //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
                 GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().updatePlayerNames(ID, manager.getPlayerName());
                 manager.updatePlayerNames(ID, manager.getPlayerName());
+				manager.updatePlayerFlags(ID, manager.getFlag());
                 ID++;
                 takenNames = takenNames + " " + manager.getPlayerName();
-
             }
-
         }
 
         if (!startGame)
