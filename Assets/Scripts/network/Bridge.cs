@@ -38,6 +38,7 @@ public class Bridge : MonoBehaviour {
         updateUniverseNamesBuffer = new Dictionary<NetworkPlayer, Dictionary<NetworkViewID, string>>();
         updateCharacterNamesBuffer = new Dictionary<NetworkPlayer, Dictionary<NetworkViewID, string>>();
         hasClientLoaded = new Dictionary<NetworkPlayer, bool>();
+
     }
 
     public void addPlayer(NetworkPlayer player) {
@@ -171,11 +172,16 @@ public class Bridge : MonoBehaviour {
         }
     }*/
 
+	public void sendSystemNames(NetworkPlayer player) {
+		for (int i=0; i<4; i++)
+			networkView.RPC("sendSystemNameRPC",player,i,systemNames[i]);
+	}
+
 	public void sendSystemNames() {
-		print ("I'm told to send system names");
 		for (int i=0; i<4; i++)
 			networkView.RPC("sendSystemNameRPC",RPCMode.Others,i,systemNames[i]);
 	}
+
 
 	[RPC]
 	public void sendSystemNameRPC(int i, string name) {
