@@ -143,7 +143,11 @@ public class HudOn : MonoBehaviour {
 
                 // Destroy existing vortices
                 GameObject[] vortices = GameObject.FindGameObjectsWithTag("vortex");
-                foreach (GameObject existingVortex in vortices) StartCoroutine(Vortex.shrink(existingVortex));
+                foreach (GameObject existingVortex in vortices)
+				{
+					Vortex.labelIsSet = false;
+					StartCoroutine(Vortex.shrink(existingVortex));
+				}
 
                 GameObject vortex = (GameObject)Resources.Load("Player/vortex");
                 float[] xvals = new float[playercount - 1];
@@ -177,7 +181,7 @@ public class HudOn : MonoBehaviour {
                     vortex.name = "vortex" + (i + 1);
 					Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
 					vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
-					vortexScript.setLabel(x,y,"Vortex");
+					vortexScript.setLabel(vortpoint,"Vortex");
 					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
                     vortex.tag = "vortex";
@@ -235,6 +239,12 @@ public class HudOn : MonoBehaviour {
 		gameOver = false;
 		Instance = this;
 
+		main = (Texture2D) Resources.Load ("hud/topleft");
+		speed = (Texture2D) Resources.Load ("hud/topright");
+		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");
+		universe = (Texture2D) Resources.Load ("hud/bottomleft");
+		deco = (Font) Resources.Load ("Belgrad");
+
 		for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
@@ -281,14 +291,8 @@ public class HudOn : MonoBehaviour {
 
 	}
 
-	void OnGUI () {
-		main = (Texture2D) Resources.Load ("hud/topleft");
-		speed = (Texture2D) Resources.Load ("hud/topright");
-		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");
-		universe = (Texture2D) Resources.Load ("hud/bottomleft");
-		
-		deco = (Font) Resources.Load ("Belgrad");
-		
+	void OnGUI ()
+	{
 		GUI.Label (new Rect (-130,-20,main.width,main.height), main);
 		GUI.Label (new Rect (Screen.width-speed.width+15,-20,speed.width,speed.height), speed);
 		GUI.Label (new Rect (Screen.width-leaderboard.width+80,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
@@ -309,7 +313,6 @@ public class HudOn : MonoBehaviour {
 		GUIStyle speedStyle = new GUIStyle();
     	speedStyle.font = deco;
 		speedStyle.normal.textColor = Color.white;
-		//speedStyle.fontSize = 72;
         speedStyle.fontSize = 38;
 		
 		GUIStyle wepStyle = new GUIStyle();
@@ -326,8 +329,8 @@ public class HudOn : MonoBehaviour {
 		// Universe (or rather, star system) name
 		int uniNo = manager.universeNumber;
 		GUI.Label (new Rect (-5,Screen.height-universe.height/2,universe.width,universe.height),universe);
-		GUI.Label (new Rect (5,Screen.height-universe.height/2+15,200,50),"LOCATION:",coStyle);
-		GUI.Label (new Rect (5,Screen.height-universe.height/2+30,200,50),systemNames[uniNo],speedStyle);
+		GUI.Label (new Rect (7,Screen.height-universe.height/2+15,200,50),"LOCATION:",coStyle);
+		GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),systemNames[uniNo],speedStyle);
 
 		GUI.Label (new Rect (70,5,200,50),charName,hudStyle);
 		GUI.Label (new Rect (75,21,40,20),hullTitle,smallStyle);
@@ -372,22 +375,25 @@ public class HudOn : MonoBehaviour {
 	}	
 	
 	// Vortex logic
-	IEnumerator VortexCountdown() {
+	IEnumerator VortexCountdown()
+	{
 		// Do GUI magic here!
-		while (vortexCountdownNum != 0) {
+		while (vortexCountdownNum != 0)
+		{
 			print ("In vortex: "+vortexCountdownNum);
 			vortexCountdownNum--;
 			yield return new WaitForSeconds(1);
 		}
-		
 		manager.movement.changeUniverse(vortexLeadsTo);
 	}
 	
-	public void enteredVortex(int vortexTo) {
+	public void enteredVortex(int vortexTo)
+	{
 		print ("LEADS TO "+vortexTo);
 		print("Entered Vortex");
 		
-		if (inVortexCountdown){
+		if (inVortexCountdown)
+		{
 			StopCoroutine("VortexCountdown");
 			inVortexCountdown = false;
 		}

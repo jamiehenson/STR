@@ -6,11 +6,10 @@ public class Vortex : MonoBehaviour {
     private int i;
 	public int leadsToUniverse;
     private float growth = 0.015f;
-	public float screenPositionX;
-	public float screenPositionY;
+	public Vector3 vortPos;
 	public string label;
 	private Texture2D bg;
-	private bool labelIsSet = false;
+	public static bool labelIsSet = false;
 	private Font deco = (Font) Resources.Load ("Belgrad");
 
     public static IEnumerator grow(GameObject vortex)
@@ -19,7 +18,7 @@ public class Vortex : MonoBehaviour {
         vortex.transform.localScale = new Vector3(0, 0, 0);
         while (x <= 4)
         {
-            x += 0.05f;
+            x += 0.06f;
             vortex.transform.localScale = new Vector3(x, 0, x);
             yield return new WaitForSeconds(0.01f);
         }
@@ -27,28 +26,30 @@ public class Vortex : MonoBehaviour {
 
     public static IEnumerator shrink(GameObject vortex)
     {
-        float x = 1;
+		labelIsSet = false;
+		float x = 1;
         while (x > 0)
         {
-            x -= 0.01f;
+            x -= 0.04f;
             vortex.transform.localScale = new Vector3(x, x, x);
             yield return new WaitForSeconds(0.01f);
         }
         Destroy(vortex);
     }
 
-	public void setLabel(float x, float y, string lab) {
-		screenPositionX = x;
-		screenPositionY = y;
+	public void setLabel(Vector3 pos, string lab)
+	{
+		vortPos = pos;
 		label = lab;
 		labelIsSet = true;
 	}
 
-	public void OnGUI() {
-
-		if (labelIsSet) {
-			Vector3 viewPort = new Vector3(screenPositionX,screenPositionY,0);
-			Vector3 screenPoint = Camera.main.ViewportToScreenPoint(viewPort);
+	public void OnGUI()
+	{
+		if (labelIsSet)
+		{
+			Vector3 screenPoint = Camera.main.ViewportToScreenPoint(vortPos);
+			screenPoint.y = (Screen.height/2 - (screenPoint.y - Screen.height/2)); // Flip y about center line (lord knows why)
 			print ("screenPoint = "+screenPoint);
 			int bgw = 140; // Vortex note bg width
 			int bgh = 30; // Vortex note bg height
