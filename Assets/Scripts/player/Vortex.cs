@@ -20,7 +20,7 @@ public class Vortex : MonoBehaviour {
         {
             x += 0.06f;
             vortex.transform.localScale = new Vector3(x, 0, x);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.005f);
         }
     }
 
@@ -32,7 +32,7 @@ public class Vortex : MonoBehaviour {
         {
             x -= 0.04f;
             vortex.transform.localScale = new Vector3(x, x, x);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.005f);
         }
         Destroy(vortex);
     }
@@ -50,7 +50,6 @@ public class Vortex : MonoBehaviour {
 		{
 			Vector3 screenPoint = Camera.main.ViewportToScreenPoint(vortPos);
 			screenPoint.y = (Screen.height/2 - (screenPoint.y - Screen.height/2)); // Flip y about center line (lord knows why)
-			print ("screenPoint = "+screenPoint);
 			int bgw = 140; // Vortex note bg width
 			int bgh = 30; // Vortex note bg height
 			int x = 10;
