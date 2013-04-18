@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour {
     private GameObject xp;
     public string[] playerNames;
 	public PlayerMovement movement;
+    private string myPlayerName;
 	
 	public int universeNumber;
 
@@ -52,7 +53,7 @@ public class PlayerManager : MonoBehaviour {
 
 	public void Start(){
 		movement = gameObject.GetComponent<PlayerMovement>();
-
+        myPlayerName = playername;
 		if (Network.isServer)
         {
             playerNames = new string[Server.numberOfPlayers() + 1];
@@ -134,14 +135,15 @@ public class PlayerManager : MonoBehaviour {
 
     public string getPlayerName()
     {
-        return playername;
+        return myPlayerName;
         
     }
 
     public void updatePlayerNameS(string name)
     {
-        playername = name;
-        networkView.RPC("updatePlayerName", RPCMode.OthersBuffered, playername);
+        myPlayerName = name;
+
+        networkView.RPC("updatePlayerName", RPCMode.Others, myPlayerName);
     }
 
     public string getActiveChar()
@@ -290,7 +292,11 @@ public class PlayerManager : MonoBehaviour {
     [RPC]
     void updatePlayerName(string name)
     {
-        playername = name;
+        myPlayerName = name;
+        if (Network.isClient)
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<HudOn>().updateName(myPlayerName);
+        }
     }
 
     [RPC]

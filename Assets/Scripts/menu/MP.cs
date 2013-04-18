@@ -25,14 +25,6 @@ public class MP : MonoBehaviour
 	private GameObject header, subheader, heading1, heading2, playerNameText, serverNameBox, serverNameBoxText, serverLimitBox, serverLimitBoxText, proceed, proceedtext, refreshbutton, flagbg, coPilot, flagBox;
 	private GameObject[] playerdetails, playerballs;
 
-    public static string takenNames;
-
-    public static void updateTakenNames(string names)
-    {
-        takenNames = names;
-        // networkView.RPC("updateClientNames", RPCMode.Others, takenNames);
-    }
-
     void Start()
     {
 		// Set static vars
@@ -43,7 +35,6 @@ public class MP : MonoBehaviour
 		hostData = null;
 		playerdetails = null;
 		playerballs = null;
-		takenNames = "";
 		
 		header = GameObject.Find("SBrowserHeader");
         subheader = GameObject.Find("SBrowserSelect");

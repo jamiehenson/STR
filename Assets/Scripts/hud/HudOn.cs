@@ -52,7 +52,12 @@ public class HudOn : MonoBehaviour {
         result.Apply();
         return result;
     }
-	
+
+    public void updateName(string s)
+    {
+        charName = s;
+    }
+
 	void setWeapon(int type)
 	{
 		if (type == 1 || type == 4) 
@@ -239,7 +244,7 @@ public class HudOn : MonoBehaviour {
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
 		onlineClient = GameObject.Find ("Network").GetComponent<OnlineClient>();
-
+      
         /* Was in Awake() */
         if (manager.activeCharN == null) manager.activeCharN = "tester";
         Debug.Log("Hud on" + manager.activeCharN);
@@ -278,10 +283,11 @@ public class HudOn : MonoBehaviour {
 		health.normal.background = fillTex(1,1,new Color(0.8f,0f,0f,1f));
 		energy.normal.background = fillTex(1,1,new Color(0f,0f,0.8f,1f));
 		bank.normal.background = fillTex (1,1,new Color(0f,0.8f,0f,1f));
-
+        charName = manager.getPlayerName();
 	}
 
 	void OnGUI () {
+
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
 		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");
