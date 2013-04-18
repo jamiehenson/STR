@@ -147,6 +147,7 @@ public class PlayerManager : MonoBehaviour {
     {
         myCharacter = true;
         characterNum = charNum;
+		HudOn.Instance.setManager(this);
     }
 
     /* Called in HudOn class, Start() */

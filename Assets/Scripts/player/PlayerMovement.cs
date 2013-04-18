@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 	public void Start ()
 	{
 		if (Application.loadedLevelName == "OnlineClient")
-			onlineClient = GameObject.Find("Network").GetComponent<OnlineClient>();
+			onlineClient = GameObject.Find("Client Scripts").GetComponent<OnlineClient>();
 		else if (Application.loadedLevelName == "server")
 			server = GameObject.Find("Network").GetComponent<Server>();
 

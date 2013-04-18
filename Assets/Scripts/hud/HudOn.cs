@@ -21,7 +21,7 @@ public class HudOn : MonoBehaviour {
 	public static bool gameOver;
 	private static bool gameOverBeenDetected;
     WeaponHandler weaponHandler;
-    PlayerManager manager;
+    PlayerManager manager = null;
 	OnlineClient onlineClient;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
@@ -107,14 +107,8 @@ public class HudOn : MonoBehaviour {
 	void Update() {
 		// Check if names have been sent from the server. If not then we canot
 		// determin our character, so stop.
-		if (manager == null) {
-			GameObject c = GameObject.Find("Character" + universeN());
-
-			if (c == null) // Still not been set
-				return;
-			else
-				manager = c.GetComponent<PlayerManager>();
-		}
+		if (manager == null)
+			return;
 
 		// The headOut coroutine should only be called once, so check if it
 		// needs to be called and hasn't already
@@ -220,6 +214,7 @@ public class HudOn : MonoBehaviour {
     {
         int length = transform.name.Length;
         string num = transform.name.Substring(length - 1, 1);
+		print ("Num = "+num);
         if ("0123456789".Contains(num)) return (int.Parse(num));
         else return -1;
     }
@@ -244,10 +239,9 @@ public class HudOn : MonoBehaviour {
 		Instance = this;
 
 		gameOverBeenDetected = false;
+	}
 
-		for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
-
-        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+	void startWithManager(){
 		onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
 
         /* Was in Awake() */
@@ -413,46 +407,14 @@ public class HudOn : MonoBehaviour {
 	public void leftVortex() {
 		print("Left Vortex");
 		
-		if (inVortexCountdown){
+		if (inVortexCountdown) {
 			StopCoroutine("VortexCountdown");
 			inVortexCountdown = false;
 		}
 	}
 
-	private string generateSystemNames()
-	{
-		ArrayList greek = new ArrayList();
-		greek.Add("alpha");
-		greek.Add("beta");
-		greek.Add("gamma");
-		greek.Add("delta");
-		greek.Add("epsilon");
-		greek.Add("zeta");
-		greek.Add("eta");
-		greek.Add("theta");
-		greek.Add("iota");
-		greek.Add("kappa");
-		greek.Add("lambda");
-		greek.Add("mu");
-		greek.Add("nu");
-		greek.Add("xi");
-		greek.Add("omicron");
-		greek.Add("pi");
-		greek.Add("rho");
-		greek.Add("sigma");
-		greek.Add("tau");
-		greek.Add("upsilon");
-		greek.Add("phi");
-		greek.Add("chi");
-		greek.Add("psi");
-		greek.Add("omega");
-		string system = (string) greek[(int) Random.Range(0,greek.Count)] + "-" + Random.Range(0,20).ToString();
-		return system.ToUpper();
-	}
-
-	[RPC]
-	private void setSystemName(int i, string name)
-	{
-		systemNames[i] = name;
+	public void setManager(PlayerManager m) {
+		manager = m;
+		startWithManager();
 	}
 }

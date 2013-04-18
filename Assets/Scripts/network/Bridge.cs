@@ -5,16 +5,19 @@ using System.Collections.Generic;
 public class Bridge : MonoBehaviour {
     public Server server;
     public OnlineClient client;
+	public HudOn hudon;
 
     Dictionary<NetworkPlayer, bool> hasClientLoaded;
     Dictionary<NetworkPlayer, int> setUniverseBuffer;
     Dictionary<NetworkPlayer, Dictionary<NetworkViewID, string>> updateUniverseNamesBuffer;
     Dictionary<NetworkPlayer, Dictionary<NetworkViewID, string>> updateCharacterNamesBuffer;
+	public List<string> systemNames;
 
 	public static Bridge Instance;
 
 	void Awake() {
 		Instance = this;
+		hudon = GameObject.Find("Client Scripts").GetComponent<HudOn>();
 	}
 
     // Use this for initialization
@@ -24,7 +27,9 @@ public class Bridge : MonoBehaviour {
         }
         else {
             Network.isMessageQueueRunning = true;
-            client = GameObject.Find("Client Scripts").GetComponent<OnlineClient>();
+			GameObject obj =GameObject.Find("Client Scripts");
+            client = obj.GetComponent<OnlineClient>();
+			hudon = obj.GetComponent<HudOn>();
             print("Client Bridge initial" + Network.player);
             networkView.RPC("clientBridgeLoaded", RPCMode.Server, Network.player);
         }
@@ -165,6 +170,19 @@ public class Bridge : MonoBehaviour {
                 server.createCharacter(viewID, position, player);
         }
     }*/
+
+	public void sendSystemNames() {
+		print ("I'm told to send system names");
+		for (int i=0; i<4; i++)
+			networkView.RPC("sendSystemNameRPC",RPCMode.Others,i,systemNames[i]);
+	}
+
+	[RPC]
+	public void sendSystemNameRPC(int i, string name) {
+		print ("Got it: "+i+", "+name);
+		hudon.systemNames[i] = name;
+	}
+
     // Update is called once per frame
     void Update() {
 
