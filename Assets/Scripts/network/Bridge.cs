@@ -11,7 +11,7 @@ public class Bridge : MonoBehaviour {
     Dictionary<NetworkPlayer, Dictionary<NetworkViewID, string>> updateUniverseNamesBuffer;
     Dictionary<NetworkPlayer, Dictionary<NetworkViewID, string>> updateCharacterNamesBuffer;
 
-	public Bridge Instance;
+	public static Bridge Instance;
 
     // Use this for initialization
     void Start() {
