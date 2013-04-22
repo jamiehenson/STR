@@ -106,7 +106,7 @@ public class Commander : MonoBehaviour {
 
     // ******Asteroid Belt Functions******
     IEnumerator SendAsteroidBelt() {
-        RotatePlayers(true);
+        RotatePlayers(true, universeN());
         GameObject[] asteroidBelts = GameObject.FindGameObjectsWithTag("AsteroidBelt");
         
         foreach (GameObject asteroidBelt in asteroidBelts) {
@@ -118,7 +118,6 @@ public class Commander : MonoBehaviour {
             // First asteroid is always at the character's current position (stops player from sitting in 1 spot)
             CreateAsteroid();
             for (int j = 1; j < Random.Range(minAstsInBelt, maxAstsInBelt + 1); j++) {
-                
                 CreateAsteroid();
             }
             yield return new WaitForSeconds(beltGap);
@@ -129,11 +128,9 @@ public class Commander : MonoBehaviour {
         }
     }
 
-    
-
     void CreateAsteroid() {
         float y = Random.Range(positions.bottomBorder, positions.topBorder);
-        Vector3 astPosition = new Vector3(positions.rightBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, positions.baseZ);
+        Vector3 astPosition = new Vector3(positions.rightBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Random.Range(positions.baseZ + 5, positions.baseZ - 5));
         Transform asteroid = (Transform)Network.Instantiate(asteroidPrefab, astPosition, new Quaternion(0, 0, 0, 0), 100+universeN());
         asteroid.name = "Asteroid" + universeN();
         asteroid.transform.parent = transform.parent.parent.FindChild("Enemies");
@@ -146,7 +143,7 @@ public class Commander : MonoBehaviour {
 
     // Sends a wave of enemies, adding to the level of enemyTotalStrength
     void SendEnemyWave() {
-        RotatePlayers(false);
+        RotatePlayers(false, universeN());
         int deployedStrength = enemyTotalStrength;
         while (deployedStrength != 0) {
             // Send a random enemy from the possibles still permitted
@@ -273,11 +270,6 @@ public class Commander : MonoBehaviour {
             asteroidCount[universeN()] = 0;
             enemyCount[universeN()] = 0;
             StartCoroutine("StartGame");
-            /* Functions to move to and back from the boss universe
-            networkView.RPC("moveBossUniverse", RPCMode.All);
-            networkView.RPC("moveInitialUniverse", RPCMode.All);
-             * 
-             Don't forget to put them inside if(Network.isServer)*/
         }
         
     }
@@ -297,17 +289,18 @@ public class Commander : MonoBehaviour {
             Debug.Log("Move to Boss universe " + cameraN());
             PlayerManager manager = GameObject.Find("Character" + cameraN()).GetComponent<PlayerManager>();
             manager.movement.changeUniverse(0);
+            manager.movement.SetCamForBoss();
         }
     }
 
     [RPC]
     public void moveInitialUniverse()
     {
-        if (Network.isClient)
-        {
+        if (Network.isClient) {
             Debug.Log("Move back to universe " + cameraN());
             PlayerManager manager = GameObject.Find("Character" + cameraN()).GetComponent<PlayerManager>();
             manager.movement.changeUniverse(cameraN());
+            manager.movement.SetCamAfterBoss();
         }
     }
 
@@ -325,20 +318,22 @@ public class Commander : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (levelStarted) {
-            if (asteroidCount[universeN()] == 0 && enemyCount[universeN()] < 2 && !bossDeployed) {
-                StopCoroutine("EnemyWaveCountdown");
-                MakeDeploymentDecision();
+        if (Network.isServer) {
+            if (levelStarted) {
+                if (asteroidCount[universeN()] == 0 && enemyCount[universeN()] < 2 && !bossDeployed) {
+                    StopCoroutine("EnemyWaveCountdown");
+                    MakeDeploymentDecision();
+                }
             }
         }
     }
 
-    void RotatePlayers(bool toBehind) {
+    void RotatePlayers(bool toBehind, int rotUniverse) {
         for (int i = 0; i < activeCharacters.Length; i++) {
             if (activeCharacters[i]) {
                 GameObject character = GameObject.Find("Character" + i);
                 PlayerMovement move = character.GetComponent<PlayerMovement>();
-                move.networkView.RPC("RotateCharacter", RPCMode.Others, toBehind, i);
+                move.networkView.RPC("RotateCamera", RPCMode.Others, toBehind, i, rotUniverse);
             }
         }
     }
@@ -453,16 +448,29 @@ public class Commander : MonoBehaviour {
 
     public void SendToBoss() {
         if (Network.isServer) {
-            RotatePlayers(false);
+            /*for (int i = 1; i < 5; i++) {
+                if (activeCharacters[i]) {
+                    GameObject character = GameObject.Find("Character" + i);
+                    PlayerMovement move = character.GetComponent<PlayerMovement>();
+                    move.SetCamForBoss();
+                }
+            }*/
             networkView.RPC("moveBossUniverse", RPCMode.All);
             bossDeployed = true;
-            ClearScreen();
+            ClearScreen();   
         }
     }
 
     public void BringBackFromBoss() {
         if (Network.isServer) {
             networkView.RPC("moveInitialUniverse", RPCMode.All);
+            /*for (int i = 1; i < 5; i++) {
+                if (activeCharacters[i]) {
+                    GameObject character = GameObject.Find("Character" + i);
+                    PlayerMovement move = character.GetComponent<PlayerMovement>();
+                    move.SetCamAfterBoss();
+                }
+            }*/
         }
     }
 

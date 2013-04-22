@@ -124,11 +124,19 @@ public class HudOn : MonoBehaviour {
         else if (Input.GetKeyDown("2"))
         {
             setWeapon(2);
-            Debug.Log("Input Change Weapon");
         }
         else if (Input.GetKeyDown("3")) setWeapon(3);
-        //else if (Input.GetAxis("Mouse ScrollWheel") < 0) setWeapon(WeaponHandler.wepType - 1);
-        //else if (Input.GetAxis("Mouse ScrollWheel") > 0) setWeapon(WeaponHandler.wepType + 1);
+        // To be implemented
+        /*else if (Input.GetAxis("Mouse ScrollWheel") < 0) {
+            int t = manager.wepType - 1;
+            if (t < 1) t = 3;
+            setWeapon(t);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0) {
+            int t = manager.wepType + 1;
+            if (t > 3) t = 1;
+            setWeapon(t);
+        }*/
 
         if (energyBank / (bankSize / hudBarSize) >= hudBarSize || true) // Always true, for testing
         {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class LevelManager : MonoBehaviour {
     // Level stats
     private int stage = 0;
-    private float changeTime = 30;
+    private float changeTime = 10;
     private Commander enemyGen;
     private HudOn hudOn;
     private int universeNum;
@@ -126,7 +126,6 @@ public class LevelManager : MonoBehaviour {
 
     public void LevelIncrease() {
         stage++;
-        Debug.Log(universeNum + " " + stage);
         int level = Random.Range(0, levelNames.Count);
         string thisLevelName = levelNames[level];
         // Difficulty increases ahoy!
@@ -156,7 +155,7 @@ public class LevelManager : MonoBehaviour {
         // Pull everyone back to their own universe
         enemyGen.BringBackFromBoss();
         // Pause for a set amount of time
-        yield return new WaitForSeconds(wait);
+        yield return new WaitForSeconds(wait+5);
         // Tell the commander to resume sending enemies
         enemyGen.ResumeGame();
     }

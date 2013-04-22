@@ -70,15 +70,21 @@ public class ServerScoringSystem : MonoBehaviour {
         bossLevelManager.CreateBoss(4);
     }
 
-    // Used to control when a boss has been cleared
+    IEnumerator BossClearedIE() {
+        // Inform all LevelManagers that the boss is complete
+        Debug.Log("BOSS CLEARED");
+        yield return new WaitForSeconds(pauseDelay);
+        foreach (LevelManager levMan in levelManagers) {
+            levMan.BossCleared(pauseDelay);
+        }
+        // Start timing again
+        StartCoroutine("TimeLevels");
+    }
+
+    // Used to control when a boss has been cleared (wrapper)
     public void BossCleared() {
         if (Network.isServer) {
-            // Inform all LevelManagers that the boss is complete
-            foreach (LevelManager levMan in levelManagers) {
-                levMan.BossCleared(pauseDelay);
-            }
-            // Start timing again
-            StartCoroutine("TimeLevels");
+            StartCoroutine("BossClearedIE");   
         }
     }
 
