@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Planet : MonoBehaviour {
 
+	public float speed;
+
 	void Update () {
-		transform.Rotate(Vector3.up * Time.deltaTime * 0.3f);
+		transform.Rotate(Vector3.up * Time.deltaTime * speed);
 	}
 	
 }

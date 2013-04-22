@@ -12,6 +12,8 @@ public class FlowingBGBehind : MonoBehaviour {
 	{
 		spacePix = Resources.LoadAll("bg/space", typeof(Texture2D));
 		gameObject.renderer.material.mainTexture = (Texture2D) spacePix[Random.Range (0,spacePix.Length)];
+		GameObject otherBG = GameObject.Find("Corner Plane");
+		otherBG.renderer.material.mainTexture = gameObject.renderer.material.mainTexture;
 	}
 	
 	// Update is called once per frame
