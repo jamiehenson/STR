@@ -392,7 +392,7 @@ public class HudOn : MonoBehaviour {
 		{
 			print ("In vortex: "+vortexCountdownNum);
 			vortexCountdownNum--;
-
+            // ANIMATE HERE AT 2
 			yield return new WaitForSeconds(1);
 		}
 		

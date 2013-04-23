@@ -201,51 +201,6 @@ public class Commander : MonoBehaviour {
         enemyCount[universeN()]++;
     }
 
-    // Creates an enemy of the given type
-    void CreateBoss(int type) {
-        // Directions:
-        // 1 - From Left
-        // 2 - From Top
-        // 3 - From Right
-        // 4 - From Bottom
-        int dir = Random.Range(1, 5);
-        float x = 0, y = 0, z = 0;
-        GameObject character = GameObject.Find("Character" + universeN());
-        float genZ = positions.baseZ;
-        switch (dir) {
-            case 1:
-                x = positions.leftBorder - positions.generationOffset;
-                y = Random.Range(positions.bottomBorder, positions.topBorder);
-                z = genZ + 2;
-                break;
-            case 2:
-                x = Random.Range(leftMoveLimit, positions.rightBorder);
-                y = positions.topBorder + positions.generationOffset;
-                z = genZ + 4;
-                break;
-            case 3:
-                x = positions.rightBorder + positions.generationOffset;
-                y = Random.Range(positions.bottomBorder, positions.topBorder);
-                z = genZ + 6;
-                break;
-            case 4:
-                x = Random.Range(leftMoveLimit, positions.rightBorder);
-                y = positions.bottomBorder - positions.generationOffset;
-                z = genZ + 8;
-                break;
-            default:
-                break;
-        }
-        GameObject enemyPrefab = (GameObject)bossPrefabs[Random.Range(0, bossPrefabs.Length)];
-        Transform enemy = (Transform)Network.Instantiate(enemyPrefab.transform, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0), 100 + universeN());
-        enemy.name = "Enemy" + universeN();
-        enemy.transform.parent = transform.parent.parent.FindChild("Enemies");
-
-        BossManager eMan = enemy.GetComponent<BossManager>();
-        eMan.direction = dir;
-        eMan.changeType(type);
-    }
-
     // Gives the user set seconds to clear enemies, or starts a new decision
     IEnumerator EnemyWaveCountdown() {
         yield return new WaitForSeconds(Random.Range(minEnemyClearanceTime, maxEnemyClearanceTime));
@@ -447,15 +402,20 @@ public class Commander : MonoBehaviour {
         CreateBoss(4);
     }*/
 
-    public void SendToBoss() {
+    public void WarpAnimation() {
         if (Network.isServer) {
-            /*for (int i = 1; i < 5; i++) {
+            for (int i = 1; i < 5; i++) {
                 if (activeCharacters[i]) {
                     GameObject character = GameObject.Find("Character" + i);
                     PlayerMovement move = character.GetComponent<PlayerMovement>();
-                    move.SetCamForBoss();
+                    move.networkView.RPC("AnimateWarp", RPCMode.All, i);
                 }
-            }*/
+            }
+        }
+    }
+
+    public void SendToBoss() {
+        if (Network.isServer) {
             networkView.RPC("moveBossUniverse", RPCMode.All);
             bossDeployed = true;
             ClearScreen();   

@@ -223,6 +223,14 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    [RPC]
+    public void AnimateWarp(int chNum) {
+        if (characterNum == chNum) {
+            GameObject warpAni = (GameObject) Resources.Load("bg/trans");
+            Instantiate(warpAni, gameObject.transform.position, gameObject.transform.rotation);
+        }
+    }
+
 	public void changeUniverse(int universeNum) {
 		networkView.RPC("changeUniverseRPC", RPCMode.Server, universeNum);
 	}
