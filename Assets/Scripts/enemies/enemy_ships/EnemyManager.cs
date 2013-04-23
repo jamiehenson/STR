@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour {
                 health = 4;
                 weaponPower = 7;
                 speed = 1.5f;
-                firingDelay = 0.2f;
+                firingDelay = 1f;
                 moveDelay = 1f;
                 color = Color.white;
                 killPoints = 1000;
@@ -43,7 +43,7 @@ public class EnemyManager : MonoBehaviour {
                 health = 8;
                 weaponPower = 15;
                 speed = 1;
-                firingDelay = 1;
+                firingDelay = 2;
                 moveDelay = 1.5f;
                 color = Color.yellow;
                 killPoints = 2000;

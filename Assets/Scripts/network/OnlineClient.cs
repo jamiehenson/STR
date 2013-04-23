@@ -37,7 +37,7 @@ public class OnlineClient : MonoBehaviour
         Debug.Log(num + "Universe " + origin);
 
         // Set camPos to bgPos + 1000 to z
-        Vector3 camPos = new Vector3(origin.x - (float)4, origin.y, origin.z + 0.1f);
+        Vector3 camPos = new Vector3(origin.x, origin.y, origin.z + 0.1f);
         Camera = (Transform)Instantiate(camPrefab, camPos, new Quaternion(0, 0, 0, 0));
         Camera.name = "Camera " + num;
 		
@@ -94,11 +94,26 @@ public class OnlineClient : MonoBehaviour
 	public void moveCamera(int newUniverseNum){
 		print ("In moveCameraRPC");
 		Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
+        Vector3 camPos;
+        Vector3 rotation;
 
-		// Set camPos to bgPos + 1000 to z
-        Vector3 camPos = new Vector3(newOrigin.x - (float)4, newOrigin.y, newOrigin.z + 0.1f);
+		// MAKE SHIT GO DOWN
+		GameObject transition = (GameObject) Resources.Load ("bg/trans");
+		GameObject character = GameObject.Find("Character" + characterNum);
+		Instantiate(transition,character.transform.position,Quaternion.Euler(new Vector3(0,90,0)));
+
+		// Rotation for BossUniverse
+        if (newUniverseNum == 0) {
+            camPos = new Vector3(newOrigin.x - 20, newOrigin.y, newOrigin.z + 15);
+            rotation = new Vector3(0, 90, 0);
+        }
+        // Rotation for all other universes
+        else {
+            camPos = new Vector3(newOrigin.x, newOrigin.y, newOrigin.z + 0.1f);
+            rotation = new Vector3(0, 0, 0);
+        }
         Camera.GetComponent<Transform>().position = camPos;
-
+        Camera.GetComponent<Transform>().localEulerAngles = rotation;
 		playerManager.universeNumber = newUniverseNum;
 	}
 }

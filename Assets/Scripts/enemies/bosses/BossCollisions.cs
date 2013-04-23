@@ -152,8 +152,7 @@ public class BossCollisions : MonoBehaviour {
 
     void OnDestroy() {
         if (Network.isServer) {
-            LevelManager levMan = transform.parent.parent.FindChild("Managers/LevelManager").GetComponent<LevelManager>();
-            levMan.BossCleared();
+            GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().BossCleared();
         }
     }
 }

@@ -5,15 +5,16 @@ public class PlayerMovement : MonoBehaviour {
     public bool myCharacter;
     private float vertDist;
     private float horDist;
-	private bool rotation, rottoggle, camtoggle, rotexception;
+	private bool rotation, rottoggle=true, camtoggle=false, rotexception;
     private int universeNum = 1;
     public Universe positions;
     private int characterNum;
 	public static bool charRotate;
-	private Vector3 startingRot, startingPos;
+	private Vector3 startingRot, startingPos, camStartingPos;
 	public PlayerManager playerManager;
 	public OnlineClient onlineClient;
 	public Server server;
+    private float camXDist = 20;
 	
 	public void Start ()
 	{
@@ -29,6 +30,16 @@ public class PlayerMovement : MonoBehaviour {
 		rottoggle = true;
 	}
 
+    public void SetCamForBoss() {
+        camtoggle = true;
+        rottoggle = true;
+    }
+
+    public void SetCamAfterBoss() {
+        camtoggle = false;
+        rottoggle = true;
+    }
+
     public void activateCharacter(int charNum, int univNum)
     {
         myCharacter = true;
@@ -40,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Rotation procedures. Made into a coroutine, so that it is uninterruptable
 	public IEnumerator rotateChar(bool toggle)
 	{
-		int direction = (toggle) ? 1 : -1;
+		/*int direction = (toggle) ? 1 : -1;
 		
 		if (toggle)
     	{
@@ -51,28 +62,31 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			iTween.MoveTo(gameObject, new Vector3(startingPos.x + 4, startingPos.y - 2, positions.baseZ - 5), 1);
 			iTween.RotateBy(gameObject, new Vector3(0, direction * 0.25f, 0), 1);
-		}
+		}*/
 		yield return new WaitForSeconds(1f);	
 	}
 	
-    public void PubRotateCam() {
+    public void PubRotateCam(int universe) {
         if (Network.isClient && myCharacter) {
-            StartCoroutine("rotateCamera", camtoggle);
+            StartCoroutine(rotateCamera(camtoggle, universe));
             //gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
             
-            rotexception = true;
+            //rotexception = true;
             camtoggle = !camtoggle;
             networkView.RPC("moveCharacter", RPCMode.Server, 1 + vertDist, horDist, rotation, rottoggle, camtoggle);
         }
     }
 
-	public IEnumerator rotateCamera(bool cameraBehind) 
+	public IEnumerator rotateCamera(bool cameraBehind, int universe) 
 	{
         /*rotexception = true;
         camtoggle = !camtoggle;*/
 		int direction = (cameraBehind) ? 1 : -1;
-        
-        iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * 4), 2);
+        Vector3 origin = Universe.PositionOfOrigin(universe);
+        //iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * 4), 2);
+        //iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * -15), 2);
+        if (cameraBehind) iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x, origin.y, origin.z + 0.1f), 2);
+        else iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
         //iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, positions.baseZ), 1);
         //iTween.MoveBy(gameObject, new Vector3(-10, 0, 0), 1f);
@@ -98,17 +112,17 @@ public class PlayerMovement : MonoBehaviour {
 	        float horDist = PlayerManager.speed * Input.GetAxis("Horizontal") * Time.deltaTime;
 			
 			// If R is pressed, rotate the character, toggling 90 degrees
-			if (Input.GetButtonDown("Rotate Character")) charRotate = true;
+			//if (Input.GetButtonDown("Rotate Character")) charRotate = true;
 			
-			if (Input.GetKeyDown("t")) 
+			/*if (Input.GetKeyDown("t")) 
 			{
-				/*StartCoroutine("rotateCamera",camtoggle);
+				StartCoroutine("rotateCamera",camtoggle);
 				rotexception = true;
-				camtoggle = !camtoggle;*/
-                PubRotateCam();
-			}
+				camtoggle = !camtoggle;
+                PubRotateCam(universeNum);
+			}*/
 			
-			if (rotexception) 
+			/*if (rotexception) 
 			{
 				if (camtoggle == true) 
 				{
@@ -125,7 +139,7 @@ public class PlayerMovement : MonoBehaviour {
 			} 
 			else rotation = false;
 			
-			charRotate = false;
+			charRotate = false;*/
 						
 	        networkView.RPC("moveCharacter", RPCMode.Server, vertDist, horDist, rotation, rottoggle, camtoggle);
 
@@ -201,9 +215,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     [RPC]
-    public void RotateCharacter(bool toBehind, int chNum) {
+    public void RotateCamera(bool toBehind, int chNum, int uNum) {
         if (toBehind != camtoggle && characterNum == chNum) {
-            PubRotateCam();
+            PubRotateCam(uNum);
         }
     }
 

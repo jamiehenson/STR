@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
     // Level stats
-    public static float stage;
-    private float changeTime = 30;
+    private int stage = 0;
+    private float changeTime = 10;
     private Commander enemyGen;
     private HudOn hudOn;
     private int universeNum;
@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour {
             enemyGen = transform.parent.FindChild("EnemyManager").GetComponent<Commander>();
             //hudOn = GameObject.Find("Camera " + universeNum).GetComponent<HudOn>();
             InitializeLevelNames();
-            StartCoroutine("StageProgression");     
+            //StartCoroutine("StageProgression");     
         }
     }
 
@@ -124,8 +124,51 @@ public class LevelManager : MonoBehaviour {
         levelNames.Add("ZUG");
     }
 
+    public void LevelIncrease() {
+        stage++;
+        int level = Random.Range(0, levelNames.Count);
+        string thisLevelName = levelNames[level];
+        // Difficulty increases ahoy!
+        int[] changedVars = enemyGen.IncreaseDifficulty();
+        levelNames.Remove(thisLevelName);
+        if (levelNames.Count == 0) InitializeLevelNames();
+        // Put a toast informing about level/difficulty increase here?
+    }
+
+    IEnumerator BossComingIE(int wait) {
+        // Push everyone to boss universe
+        enemyGen.SendToBoss();
+        // Pause for a set amount of time
+        yield return new WaitForSeconds(wait + 2);
+        // Tell the commander to stop sending enemies (& clear screen)
+        enemyGen.ClearScreen();
+    }
+
+    public void BossComing(int wait) {
+        // Wrapper - needs to run on a coroutine
+        if (Network.isServer) {
+            StartCoroutine("BossComingIE", wait);
+        }
+    }
+
+    IEnumerator BossClearedIE(int wait) {
+        // Pull everyone back to their own universe
+        enemyGen.BringBackFromBoss();
+        // Pause for a set amount of time
+        yield return new WaitForSeconds(wait+5);
+        // Tell the commander to resume sending enemies
+        enemyGen.ResumeGame();
+    }
+
+    public void BossCleared(int wait) {
+        // Wrapper - needs to run on a coroutine
+        if (Network.isServer) {
+            StartCoroutine("BossClearedIE", wait);
+        }
+    }
+
     // Used to time different stages and increment difficulty progression
-    IEnumerator StageProgression() {
+    /*IEnumerator StageProgression() {
         yield return new WaitForSeconds(2);
         for (int j = 0; j < stagesBeforeBoss; j++) {
             
@@ -161,9 +204,9 @@ public class LevelManager : MonoBehaviour {
         //StartCoroutine("StageProgression");
         //hudOn.StopScore();
         enemyGen.DeployBoss();
-    }
+    }*/
 
-    IEnumerator Toast(string notetext) {
+    /*IEnumerator Toast(string notetext) {
         GameObject toast = new GameObject("Toast");
         toast.AddComponent("GUIText");
         toast.guiText.font = (Font)Resources.Load("Belgrad");
@@ -178,25 +221,25 @@ public class LevelManager : MonoBehaviour {
         iTween.FadeTo(toast, 0f, 1f);
         yield return new WaitForSeconds(1f);
         Destroy(toast);
-    }
+    }*/
 
-    IEnumerator BossClearedEnumerator() {     
+    /*IEnumerator BossClearedEnumerator() {     
         //StartCoroutine("Toast", "CONGRATULATIONS");
         yield return new WaitForSeconds(5);
         //hudOn.StartScore();
         StartCoroutine("StageProgression");
         enemyGen.BossDestroyed();
-    }
+    }*/
 
-    public void BossCleared() {
+    /*public void BossCleared() {
         StartCoroutine("BossClearedEnumerator");
-    }
+    }*/
 
-    [RPC]
+    /*[RPC]
     void PlaceToast(int camNum, string toastText) {
         if (Network.isClient && GameObject.Find("Camera " + camNum)) {
             HudOn hOn = GameObject.Find("Camera " + camNum).GetComponent<HudOn>();
             hOn.ToastWrapper(toastText);
         }
-    }
+    }*/
 }
