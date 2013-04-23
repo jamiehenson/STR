@@ -13,6 +13,7 @@ public class FiringHandler : MonoBehaviour {
     private int player;
     private bool myCharacter;
     private int characterNum;
+    public float fireDepth = 15;
     PlayerManager manager;
 
     public void activateCharacter(int num)
@@ -56,9 +57,9 @@ public class FiringHandler : MonoBehaviour {
                 {
                     // Calculate the position to fire at
                     float camDist = (transform.position - Camera.main.transform.position).z;
-                    camDist = 15;
+                    //camDist = 15;
                     Vector3 mousePos = Input.mousePosition;
-                    mousePos.z = camDist;
+                    mousePos.z = fireDepth;
                     Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
 
                     // Send message to fire

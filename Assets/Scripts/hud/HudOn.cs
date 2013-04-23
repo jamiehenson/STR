@@ -6,12 +6,14 @@ using UnityEngine;
 using System.Collections;
 
 public class HudOn : MonoBehaviour {
+    public int wepType, bankSize;
+    public Rect position;
+    public string[] systemNames = new string[4];
+
 	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard;
 	private Font deco;
 	private string charName, wepName, gearReady;
-	public string[] systemNames = new string[4];
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
-	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount = 4;
 	private GameObject toast;
 	private GUIStyle health = new GUIStyle();
@@ -265,6 +267,10 @@ public class HudOn : MonoBehaviour {
 
         StartCoroutine(Toast("SURVIVE THE ENEMY ONSLAUGHT"));
 
+        if (PlayerManager.activeChar == "china") crossTex = (Texture2D)Resources.Load("hud/crossChi");
+        else if (PlayerManager.activeChar == "usa") crossTex = (Texture2D)Resources.Load("hud/crossUSA");
+        else crossTex = (Texture2D)Resources.Load("hud/crossRus");
+
 		wepBox1 = (Texture2D) Resources.Load ("hud/wepBox1Off");
 		wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2Off");
 		wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
@@ -377,10 +383,7 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (7,47,200,64), wepName, wepStyle);
 
         // Add a crosshair
-        if (PlayerManager.activeChar == "china") crossTex = (Texture2D)Resources.Load("hud/crossChi");
-        else if (PlayerManager.activeChar == "usa") crossTex = (Texture2D)Resources.Load("hud/crossUSA");
-        else crossTex = (Texture2D)Resources.Load("hud/crossRus");
-        Rect position = new Rect(Input.mousePosition.x - (crossTex.width / 2), (Screen.height - Input.mousePosition.y) - (crossTex.height / 2), crossTex.width, crossTex.height);
+        position = new Rect(Input.mousePosition.x - (crossTex.width / 2), (Screen.height - Input.mousePosition.y) - (crossTex.height / 2), crossTex.width, crossTex.height);
         GUI.DrawTexture(position, crossTex);
         Screen.showCursor = false;
 	}	

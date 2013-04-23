@@ -2,21 +2,26 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-    public bool myCharacter;
-    private float vertDist;
-    private float horDist;
-	private bool rotation, rottoggle=true, camtoggle=false, rotexception;
-    private int universeNum = 1;
+
+    // Object reference vars
     public Universe positions;
-    private int characterNum;
-	public static bool charRotate;
-	private Vector3 startingRot, startingPos, camStartingPos;
-	public PlayerManager playerManager;
-	public OnlineClient onlineClient;
-	public Server server;
-    private float camXDist = 20;
-	
-	public void Start ()
+    public PlayerManager playerManager;
+    public OnlineClient onlineClient;
+    public Server server;
+    GameObject character;
+
+    // Helper vars
+    public bool myCharacter;
+    public static bool charRotate;
+    private bool rotation, rottoggle = true, camtoggle = false, rotexception;
+    private int characterNum, universeNum = 1;
+    private float vertDist, horDist;
+    private Vector3 startingRot, startingPos, camStartingPos;
+
+    // For the laser pointer
+    Object material;
+
+	public void Start()
 	{
 		if (Application.loadedLevelName == "OnlineClient")
 			onlineClient = GameObject.Find("Network").GetComponent<OnlineClient>();
@@ -24,7 +29,8 @@ public class PlayerMovement : MonoBehaviour {
 			server = GameObject.Find("Network").GetComponent<Server>();
 
 		playerManager = gameObject.GetComponent<PlayerManager>();
-		startingPos = gameObject.transform.position;
+		
+        startingPos = gameObject.transform.position;
 		startingRot = new Vector3(0,0,0);	
 		camtoggle = false;
 		rottoggle = true;
@@ -33,11 +39,13 @@ public class PlayerMovement : MonoBehaviour {
     public void SetCamForBoss() {
         camtoggle = true;
         rottoggle = true;
+        gameObject.GetComponent<FiringHandler>().fireDepth = 30;
     }
 
     public void SetCamAfterBoss() {
         camtoggle = false;
         rottoggle = true;
+        gameObject.GetComponent<FiringHandler>().fireDepth = 15;
     }
 
     public void activateCharacter(int charNum, int univNum)
@@ -70,7 +78,6 @@ public class PlayerMovement : MonoBehaviour {
         if (Network.isClient && myCharacter) {
             StartCoroutine(rotateCamera(camtoggle, universe));
             //gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
-            
             //rotexception = true;
             camtoggle = !camtoggle;
             networkView.RPC("moveCharacter", RPCMode.Server, 1 + vertDist, horDist, rotation, rottoggle, camtoggle);
@@ -85,8 +92,14 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 origin = Universe.PositionOfOrigin(universe);
         //iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * 4), 2);
         //iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * -15), 2);
-        if (cameraBehind) iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x, origin.y, origin.z + 0.1f), 2);
-        else iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
+        if (cameraBehind) {
+            iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x, origin.y, origin.z + 0.1f), 2);
+            gameObject.GetComponent<FiringHandler>().fireDepth = 15;
+        }
+        else {
+            iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
+            gameObject.GetComponent<FiringHandler>().fireDepth = 30;
+        }
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
         //iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, positions.baseZ), 1);
         //iTween.MoveBy(gameObject, new Vector3(-10, 0, 0), 1f);
@@ -111,6 +124,12 @@ public class PlayerMovement : MonoBehaviour {
 	        float vertDist = PlayerManager.speed * Input.GetAxis("Vertical") * Time.deltaTime;
 	        float horDist = PlayerManager.speed * Input.GetAxis("Horizontal") * Time.deltaTime;
 			
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = 15;
+            LineRenderer beam = GetComponent<LineRenderer>();
+            beam.SetPosition(0, gameObject.transform.position);
+            beam.SetPosition(1, Camera.main.ScreenToWorldPoint(mousePos));
+            
 			// If R is pressed, rotate the character, toggling 90 degrees
 			//if (Input.GetButtonDown("Rotate Character")) charRotate = true;
 			
