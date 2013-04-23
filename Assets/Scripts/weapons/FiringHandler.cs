@@ -75,7 +75,7 @@ public class FiringHandler : MonoBehaviour {
     [RPC]
     void fireAnimation(int n)
     {
-        GameObject.Find("Character" + n).animation.Play("RightHandMove");
+      //  GameObject.Find("Character" + n).animation.Play("RightHandMove");
     }
 	
 	[RPC]
