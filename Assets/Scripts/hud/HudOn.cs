@@ -386,11 +386,13 @@ public class HudOn : MonoBehaviour {
 	}	
 	
 	// Vortex logic
-	IEnumerator VortexCountdown() {
-		// Do GUI magic here!
-		while (vortexCountdownNum != 0) {
+	IEnumerator VortexCountdown()
+	{
+		while (vortexCountdownNum != 0)
+		{
 			print ("In vortex: "+vortexCountdownNum);
 			vortexCountdownNum--;
+
 			yield return new WaitForSeconds(1);
 		}
 		

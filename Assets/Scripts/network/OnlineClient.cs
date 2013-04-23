@@ -96,6 +96,12 @@ public class OnlineClient : MonoBehaviour
 		Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
         Vector3 camPos;
         Vector3 rotation;
+
+		// MAKE SHIT GO DOWN
+		GameObject transition = (GameObject) Resources.Load ("bg/trans");
+		GameObject character = GameObject.Find("Character" + characterNum);
+		Instantiate(transition,character.transform.position,Quaternion.Euler(new Vector3(0,90,0)));
+
 		// Rotation for BossUniverse
         if (newUniverseNum == 0) {
             camPos = new Vector3(newOrigin.x - 20, newOrigin.y, newOrigin.z + 15);
