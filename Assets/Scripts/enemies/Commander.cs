@@ -433,6 +433,7 @@ public class Commander : MonoBehaviour {
             // Ensure we can't change the same one twice in the same difficulty increase
             availableDiffStats.Remove(varToChange);
         }
+        // Send a message to the screen for the wanted clients (via Universe)
         return changed;
     }
 

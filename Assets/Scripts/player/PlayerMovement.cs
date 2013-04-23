@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour {
     private int universeNum = 1;
     public Universe positions;
     private int characterNum;
-	public static bool charRotate;
+	public bool charRotate;
+    public bool isRotating = false;
 	private Vector3 startingRot, startingPos, camStartingPos;
 	public PlayerManager playerManager;
 	public OnlineClient onlineClient;
@@ -79,18 +80,19 @@ public class PlayerMovement : MonoBehaviour {
 
 	public IEnumerator rotateCamera(bool cameraBehind, int universe) 
 	{
-        /*rotexception = true;
-        camtoggle = !camtoggle;*/
+        isRotating = true;
 		int direction = (cameraBehind) ? 1 : -1;
         Vector3 origin = Universe.PositionOfOrigin(universe);
         //iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * 4), 2);
         //iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * -15), 2);
         if (cameraBehind) iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x, origin.y, origin.z + 0.1f), 2);
         else iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
+        gameObject.transform.position = new Vector3(origin.x, gameObject.transform.position.y, gameObject.transform.position.z);
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
         //iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, positions.baseZ), 1);
         //iTween.MoveBy(gameObject, new Vector3(-10, 0, 0), 1f);
 		yield return new WaitForSeconds(2);
+        isRotating = false;
 	}
 
 	// Used for universe change
@@ -225,26 +227,37 @@ public class PlayerMovement : MonoBehaviour {
 		networkView.RPC("changeUniverseRPC", RPCMode.Server, universeNum);
 	}
 
-	[RPC]
-	public void changeUniverseRPC(int newUniverseNum, NetworkMessageInfo info) {
+    IEnumerator ChangeUniverseIE(object[] pars) {
+        while (isRotating) yield return new WaitForSeconds(0.5f);
+        UniverseMove(pars);
+    }
 
-		Log.Note("Move Universe");
+    void UniverseMove(object[] pars) {
+        int newUniverseNum = (int) pars[0];
+        NetworkMessageInfo info = (NetworkMessageInfo) pars[1];
+        Log.Note("Move Universe");
         Vector3 curOrigin = Universe.PositionOfOrigin(playerManager.universeNumber);
-		Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
+        Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
 
         // Move Spaceship
         Debug.Log("Move Character" + characterNum);
-		Vector3 characterPosition = transform.position;
-		Vector3 diffFromOrigin =  characterPosition - curOrigin;
+        Vector3 characterPosition = transform.position;
+        Vector3 diffFromOrigin = characterPosition - curOrigin;
 
-		Vector3 newPosition = newOrigin + diffFromOrigin;
-		//character.transform.position = newPosition;
-		transform.position = newPosition;
+        Vector3 newPosition = newOrigin + diffFromOrigin;
+        //character.transform.position = newPosition;
+        transform.position = newPosition;
 
-		server.moveCamera(newUniverseNum, info.sender);
-		// Update positions var
-		positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
-		universeNum = newUniverseNum;
-		playerManager.universeNumber = newUniverseNum;
+        server.moveCamera(newUniverseNum, info.sender);
+        // Update positions var
+        positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
+        universeNum = newUniverseNum;
+        playerManager.universeNumber = newUniverseNum;
+    }
+
+	[RPC]
+	public void changeUniverseRPC(int newUniverseNum, NetworkMessageInfo info) {
+        object[] pars = new object[2] { newUniverseNum, info };
+        StartCoroutine("ChangeUniverseIE", pars);
 	}
 }

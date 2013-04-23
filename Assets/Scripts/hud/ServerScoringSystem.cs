@@ -40,13 +40,6 @@ public class ServerScoringSystem : MonoBehaviour {
         }
     }
 
-    // TEMP FOR TESTING
-    IEnumerator SendBoss() {
-        yield return new WaitForSeconds(10);
-        Debug.Log("Boss Clear");
-        BossCleared();
-    }
-
     // Used to time different stages and increment difficulty progression
     IEnumerator TimeLevels() {
         yield return new WaitForSeconds(pauseDelay);
@@ -65,7 +58,7 @@ public class ServerScoringSystem : MonoBehaviour {
             levMan.BossComing(pauseDelay);
         }
         yield return new WaitForSeconds(pauseDelay);
-        // SEND BOSS HERE
+        // SEND BOSS HERE - Need to get confirmation that everyone has moved first!
         Debug.Log("Send Boss");
         bossLevelManager.CreateBoss(4);
     }

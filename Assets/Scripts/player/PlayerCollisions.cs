@@ -75,7 +75,27 @@ public class PlayerCollisions : MonoBehaviour {
                 Network.Destroy(gameObject);
             }
         }*/
+        /*if (manager.getHitPoints() <= 0) {
+            Boom(gameObject);
+            gameObject.SetActive(false);
+            networkView.RPC("ChangePlayerActiveState", RPCMode.Others, false);
+            StartCoroutine("DeathTimeout");
+        }*/
     }
+
+    IEnumerator DeathTimeout() {
+        yield return new WaitForSeconds(3);
+        gameObject.SetActive(true);
+        networkView.RPC("ChangePlayerActiveState", RPCMode.Others, true);
+    }
+
+    [RPC]
+    void ChangePlayerActiveState(bool active) {
+        if (Network.isClient) {
+            gameObject.SetActive(active);
+        }
+    }
+
 
     void OnDestroy() {
         HudOn.gameOver = true;
