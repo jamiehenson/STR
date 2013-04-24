@@ -6,18 +6,18 @@ public class PlayerMovement : MonoBehaviour {
     private float vertDist;
     private float horDist;
 	private bool rotation, rottoggle=true, camtoggle=false, rotexception;
+    private Vector3 startingPos;
     private int universeNum = 1;
     public Universe positions;
     private int characterNum;
 	public bool charRotate;
     public bool isRotating = false;
-	private Vector3 startingRot, startingPos, camStartingPos;
+	private Vector3 camStartingPos;
 	public PlayerManager playerManager;
 	public OnlineClient onlineClient;
 	public Server server;
-    private float camXDist = 20;
 	
-	public void Start ()
+	public void Start()
 	{
 		if (Application.loadedLevelName == "OnlineClient")
 			onlineClient = GameObject.Find("Network").GetComponent<OnlineClient>();
@@ -25,8 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 			server = GameObject.Find("Network").GetComponent<Server>();
 
 		playerManager = gameObject.GetComponent<PlayerManager>();
-		startingPos = gameObject.transform.position;
-		startingRot = new Vector3(0,0,0);	
+        startingPos = gameObject.transform.position;
 		camtoggle = false;
 		rottoggle = true;
 	}
@@ -83,14 +82,11 @@ public class PlayerMovement : MonoBehaviour {
         isRotating = true;
 		int direction = (cameraBehind) ? 1 : -1;
         Vector3 origin = Universe.PositionOfOrigin(universe);
-        //iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * 4), 2);
-        //iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * -15), 2);
         if (cameraBehind) iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x, origin.y, origin.z + 0.1f), 2);
         else iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
         gameObject.transform.position = new Vector3(origin.x, gameObject.transform.position.y, gameObject.transform.position.z);
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
-        //iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, positions.baseZ), 1);
-        //iTween.MoveBy(gameObject, new Vector3(-10, 0, 0), 1f);
+        iTween.MoveTo(gameObject, new Vector3(startingPos.x, gameObject.transform.position.y, gameObject.transform.position.z), 1);
 		yield return new WaitForSeconds(2);
         isRotating = false;
 	}
@@ -220,6 +216,15 @@ public class PlayerMovement : MonoBehaviour {
     public void RotateCamera(bool toBehind, int chNum, int uNum) {
         if (toBehind != camtoggle && characterNum == chNum) {
             PubRotateCam(uNum);
+        }
+    }
+
+    [RPC]
+    public void AnimateWarp(int chNum) {
+        if (characterNum == chNum) {
+            GameObject warpAni = (GameObject) Resources.Load("bg/trans");
+            if (camtoggle) Instantiate(warpAni, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)));
+            else Instantiate(warpAni, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
         }
     }
 

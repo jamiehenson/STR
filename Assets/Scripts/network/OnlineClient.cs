@@ -100,11 +100,12 @@ public class OnlineClient : MonoBehaviour
 		// MAKE SHIT GO DOWN
 		GameObject transition = (GameObject) Resources.Load ("bg/trans");
 		GameObject character = GameObject.Find("Character" + characterNum);
-		Instantiate(transition,character.transform.position,Quaternion.Euler(new Vector3(0,90,0)));
+        Instantiate(transition, character.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
 
 		// Rotation for BossUniverse
         if (newUniverseNum == 0) {
             camPos = new Vector3(newOrigin.x - 20, newOrigin.y, newOrigin.z + 15);
+            character.transform.position = new Vector3(newOrigin.x - 10, character.transform.position.y, character.transform.position.z);
             rotation = new Vector3(0, 90, 0);
         }
         // Rotation for all other universes

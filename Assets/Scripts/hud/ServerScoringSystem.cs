@@ -7,11 +7,10 @@ public class ServerScoringSystem : MonoBehaviour {
     public bool initialized;
 
     private float levelTime = 10; // in seconds
-    private int pauseDelay = 3; // in seconds
+    private int pauseDelay = 2; // in seconds
     private int stagesBeforeBoss = 3;
     private LevelManager[] levelManagers = new LevelManager[4];
     private BossLevelManager bossLevelManager;
-    int stage = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -51,7 +50,10 @@ public class ServerScoringSystem : MonoBehaviour {
             }
             // Wait a certain amount of time
             yield return new WaitForSeconds(levelTime);
-        }      
+        }
+        foreach (LevelManager levMan in levelManagers) {
+            levMan.WarpAnimation();
+        }
         yield return new WaitForSeconds(pauseDelay);
         // Inform LevelManagers about incoming boss
         foreach (LevelManager levMan in levelManagers) {
@@ -59,13 +61,14 @@ public class ServerScoringSystem : MonoBehaviour {
         }
         yield return new WaitForSeconds(pauseDelay);
         // SEND BOSS HERE - Need to get confirmation that everyone has moved first!
-        Debug.Log("Send Boss");
         bossLevelManager.CreateBoss(4);
     }
 
     IEnumerator BossClearedIE() {
         // Inform all LevelManagers that the boss is complete
-        Debug.Log("BOSS CLEARED");
+        foreach (LevelManager levMan in levelManagers) {
+            levMan.WarpAnimation();
+        }
         yield return new WaitForSeconds(pauseDelay);
         foreach (LevelManager levMan in levelManagers) {
             levMan.BossCleared(pauseDelay);

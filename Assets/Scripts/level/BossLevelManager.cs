@@ -29,7 +29,6 @@ public class BossLevelManager : MonoBehaviour {
             // 4 - From Bottom
             int dir = 3;
             float x = 0, y = 0, z = 0;
-            GameObject character = GameObject.Find("Character" + universeN);
             float genZ = positions.baseZ;
             switch (dir) {
                 case 1:

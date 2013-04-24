@@ -99,7 +99,6 @@ public class PlayerCollisions : MonoBehaviour {
 
     void OnDestroy() {
         HudOn.gameOver = true;
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject enMan = GameObject.Find("EnemyManager");
         GameObject bullMan = GameObject.Find("BulletManager");
         Destroy(enMan);

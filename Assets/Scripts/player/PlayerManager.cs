@@ -30,7 +30,6 @@ public class PlayerManager : MonoBehaviour {
 
     //Scoring System variables
     private bool myCharacter;
-    private int characterNum;
 	
 	public void changeWeapon(int type){
 		wepStats = WeaponHandler.GetWeaponStats(activeChar, type);
@@ -154,7 +153,6 @@ public class PlayerManager : MonoBehaviour {
     public void activateCharacter(int charNum)
     {
         myCharacter = true;
-        characterNum = charNum;
     }
 
     /* Called in HudOn class, Start() */
@@ -221,8 +219,6 @@ public class PlayerManager : MonoBehaviour {
 
         if (Network.isClient && myCharacter)
         {
-            WeaponHandler weaponHandler = GameObject.Find("Character" + characterNum).GetComponent<WeaponHandler>();
- 
             switch (wepType)
             {
                 case 1:
