@@ -131,6 +131,7 @@ public class LevelManager : MonoBehaviour {
         int level = Random.Range(0, levelNames.Count);
         string thisLevelName = levelNames[level];
         // Difficulty increases ahoy!
+        enemyGen.IncreaseDifficulty();
         levelNames.Remove(thisLevelName);
         if (levelNames.Count == 0) InitializeLevelNames();
         // Put a toast informing about level/difficulty increase here?
