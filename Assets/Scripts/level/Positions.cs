@@ -23,8 +23,6 @@ public class Positions : MonoBehaviour {
         // Fix "action" plane at a certain distance away from the camera
 
         if (Network.isClient) {
-           GameObject cam = GameObject.Find("CamPrefab(Clone)");
-            
             //Debug.Log("Camera found " + cam.name);
             leftBorder = Camera.mainCamera.ViewportToWorldPoint(new Vector3(0, 0, baseZ)).x;
             rightBorder = Camera.mainCamera.ViewportToWorldPoint(new Vector3(1, 0, baseZ)).x;

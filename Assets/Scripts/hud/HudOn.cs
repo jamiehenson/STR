@@ -17,9 +17,7 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
-    WeaponHandler weaponHandler;
     PlayerManager manager;
-	OnlineClient onlineClient;
     public static int countUniverse;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
@@ -251,7 +249,6 @@ public class HudOn : MonoBehaviour {
 		for (int i = 0; i < countUniverse; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
-		onlineClient = GameObject.Find ("Network").GetComponent<OnlineClient>();
       
         /* Was in Awake() */
         if (manager.activeCharN == null) manager.activeCharN = "tester";
@@ -274,8 +271,6 @@ public class HudOn : MonoBehaviour {
 
         if (Network.isClient)
         {
-            int PlayerNumber = int.Parse(GameObject.FindGameObjectWithTag("MainCamera").name.Substring(GameObject.FindGameObjectWithTag("MainCamera").name.Length - 1, 1));
-            weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
             setWeapon(1);
         }
 

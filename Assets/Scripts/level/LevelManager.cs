@@ -5,13 +5,11 @@ using System.Collections.Generic;
 public class LevelManager : MonoBehaviour {
     // Level stats
     private int stage = 0;
-    private float changeTime = 10;
     private Commander enemyGen;
     private HudOn hudOn;
     private int universeNum;
 
     private List<string> levelNames = new List<string>();
-    private int stagesBeforeBoss = 3;
 
     // ******Determine by which prefab is the script called***** 
     private int universeN() {
@@ -133,7 +131,6 @@ public class LevelManager : MonoBehaviour {
         int level = Random.Range(0, levelNames.Count);
         string thisLevelName = levelNames[level];
         // Difficulty increases ahoy!
-        int[] changedVars = enemyGen.IncreaseDifficulty();
         levelNames.Remove(thisLevelName);
         if (levelNames.Count == 0) InitializeLevelNames();
         // Put a toast informing about level/difficulty increase here?

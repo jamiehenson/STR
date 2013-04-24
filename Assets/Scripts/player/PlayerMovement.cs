@@ -11,11 +11,10 @@ public class PlayerMovement : MonoBehaviour {
     private int characterNum;
 	public bool charRotate;
     public bool isRotating = false;
-	private Vector3 startingRot, startingPos, camStartingPos;
+	private Vector3 camStartingPos;
 	public PlayerManager playerManager;
 	public OnlineClient onlineClient;
 	public Server server;
-    private float camXDist = 20;
 	
 	public void Start ()
 	{
@@ -25,8 +24,6 @@ public class PlayerMovement : MonoBehaviour {
 			server = GameObject.Find("Network").GetComponent<Server>();
 
 		playerManager = gameObject.GetComponent<PlayerManager>();
-		startingPos = gameObject.transform.position;
-		startingRot = new Vector3(0,0,0);	
 		camtoggle = false;
 		rottoggle = true;
 	}

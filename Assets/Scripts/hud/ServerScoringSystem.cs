@@ -11,7 +11,6 @@ public class ServerScoringSystem : MonoBehaviour {
     private int stagesBeforeBoss = 3;
     private LevelManager[] levelManagers = new LevelManager[4];
     private BossLevelManager bossLevelManager;
-    int stage = 0;
 
 	// Use this for initialization
 	void Start () {

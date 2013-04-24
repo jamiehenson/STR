@@ -20,10 +20,7 @@ public class Commander : MonoBehaviour {
     public static int[] enemyCount;
 	
 	private Object[] enemyPrefabs;
-    private Object[] bossPrefabs;
-    //public Transform enemyPrefab;
     public Transform asteroidPrefab;
-    //public Transform bossPrefab;
     private bool levelStarted = false;
     public bool bossDeployed = false;
 
@@ -163,7 +160,6 @@ public class Commander : MonoBehaviour {
         // 4 - From Bottom
         int dir = Random.Range(1, 5);
         float x = 0, y = 0, z = 0;
-        GameObject character = GameObject.Find("Character" + universeN());
         float genZ = positions.baseZ;
         switch (dir) {
             case 1:
@@ -210,7 +206,6 @@ public class Commander : MonoBehaviour {
     // ******General Functions******
     void Start() {
 		enemyPrefabs = Resources.LoadAll("enemies/enemytypes", typeof(GameObject));
-        bossPrefabs = Resources.LoadAll("enemies/bosses", typeof(GameObject));
         
         if (Network.isServer)
         {
@@ -436,9 +431,7 @@ public class Commander : MonoBehaviour {
     }
 
     public void ClearScreen() { 
-        GameObject en = transform.parent.parent.gameObject;
         Transform enDirectory = transform.parent.parent.FindChild("Enemies");
-
         List<GameObject> children = new List<GameObject>();
         // Stops countdown timer
         StopAllCoroutines();

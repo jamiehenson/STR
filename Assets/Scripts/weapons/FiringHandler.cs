@@ -7,25 +7,17 @@ public class FiringHandler : MonoBehaviour {
     //private string bulletName;
 	//private float bulletSpeed, bulletRate;
 	//private int bulletType;
-	private WeaponHandler weaponHandler;
 	private float timer = 0;
     private bool instantiated;
     private int player;
     private bool myCharacter;
-    private int characterNum;
     PlayerManager manager;
 
     public void activateCharacter(int num)
     {
         myCharacter = true;
-        characterNum = num;
         Debug.Log("Activate");
     }
-
-	void Start()
-    {
-        weaponHandler = gameObject.GetComponent<WeaponHandler>(); 
-	}
 
     private int universeN()
     {

@@ -9,7 +9,6 @@ public class VortexTransInner : MonoBehaviour
 {
 	void Start ()
 	{
-		float lower = 0.8f, upper = 1f;
 		Color[] colourRange = {Color.red,Color.blue,Color.green,Color.yellow,Color.white};
 		gameObject.particleSystem.startColor = colourRange[Random.Range (0,5)];
 	}

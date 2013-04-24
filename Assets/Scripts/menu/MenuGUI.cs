@@ -17,8 +17,6 @@ public class MenuGUI : MonoBehaviour {
 		GUIStyle centeredStyle = GUI.skin.GetStyle("Label");
         Screen.showCursor = true;
     	centeredStyle.alignment = TextAnchor.UpperCenter;
-		float credWidth = Screen.width;
-		float credHeight = Screen.height;
 		
 		if (ShowCredits.credOn) {
 			GUI.Label (new Rect (0,0,Screen.width,Screen.height), credz);
