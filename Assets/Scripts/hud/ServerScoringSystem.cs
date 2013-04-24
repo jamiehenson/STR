@@ -61,12 +61,14 @@ public class ServerScoringSystem : MonoBehaviour {
         }
         yield return new WaitForSeconds(pauseDelay);
         // SEND BOSS HERE - Need to get confirmation that everyone has moved first!
-        Debug.Log("Send Boss");
         bossLevelManager.CreateBoss(4);
     }
 
     IEnumerator BossClearedIE() {
         // Inform all LevelManagers that the boss is complete
+        foreach (LevelManager levMan in levelManagers) {
+            levMan.WarpAnimation();
+        }
         yield return new WaitForSeconds(pauseDelay);
         foreach (LevelManager levMan in levelManagers) {
             levMan.BossCleared(pauseDelay);
