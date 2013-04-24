@@ -399,6 +399,7 @@ public class Commander : MonoBehaviour {
 
     public void WarpAnimation() {
         if (Network.isServer) {
+            bossDeployed = true;
             for (int i = 1; i < 5; i++) {
                 if (activeCharacters[i]) {
                     GameObject character = GameObject.Find("Character" + i);
@@ -412,7 +413,6 @@ public class Commander : MonoBehaviour {
     public void SendToBoss() {
         if (Network.isServer) {
             networkView.RPC("moveBossUniverse", RPCMode.All);
-            bossDeployed = true;
             ClearScreen();   
         }
     }
