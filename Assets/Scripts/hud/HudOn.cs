@@ -437,7 +437,6 @@ public class HudOn : MonoBehaviour {
 		vortexCountdownNum = 4;
 		vortexLeadsTo = vortexTo;
 		StartCoroutine("VortexCountdown");
-		StartCoroutine(Vortex.playerShrink(charModel));
 	}
 
 	public void leftVortex() {
@@ -450,7 +449,6 @@ public class HudOn : MonoBehaviour {
 			StopCoroutine ("Vortex.playerShrink");
 			inVortexCountdown = false;
 		}
-		StartCoroutine(Vortex.playerGrow(charModel));
 	}
 
 	public void setManager(PlayerManager m) {
