@@ -191,7 +191,7 @@ public class HudOn : MonoBehaviour {
 					Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
 					vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
 					vortexScript.inUniverse = currentUniverse;
-					vortexScript.setLabel(vortpoint,"Vortex");
+					vortexScript.setLabel(vortpoint,systemNames[vortexScript.leadsToUniverse-1]);
 					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
                     vortex.tag = "vortex";

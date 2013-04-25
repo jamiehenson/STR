@@ -53,7 +53,7 @@ public class Vortex : MonoBehaviour {
 
     public static IEnumerator shrink(GameObject vortex)
     {
-		Vortex script = vortex.GetComponent<Vortex>();
+		Vortex script = vortex.GetComponentInChildren<Vortex>();
 
 		// I hate STR
 		if (script != null && !script.isBeingShrunk) {
