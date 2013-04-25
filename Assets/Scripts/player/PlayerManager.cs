@@ -31,6 +31,8 @@ public class PlayerManager : MonoBehaviour {
     //Scoring System variables
     private bool myCharacter;
     private int characterNum;
+
+	public static PlayerManager Instance;
 	
 	public void changeWeapon(int type){
 		wepStats = WeaponHandler.GetWeaponStats(activeChar, type);
@@ -60,6 +62,7 @@ public class PlayerManager : MonoBehaviour {
 	public void Start()
 	{
 		movement = gameObject.GetComponent<PlayerMovement>();
+
 		if (Network.isServer)
         {
             Debug.Log("Instantiate");
@@ -161,6 +164,7 @@ public class PlayerManager : MonoBehaviour {
         myCharacter = true;
         characterNum = charNum;
 		HudOn.Instance.setManager(this);
+		Instance = this;
     }
 
     /* Called in HudOn class, Start() */
