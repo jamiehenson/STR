@@ -178,7 +178,7 @@ public class HudOn : MonoBehaviour {
                 }
 				
 				int currentUniverse = manager.universeNumber;
-
+				print("Manager says current universe is: "+currentUniverse);
                 // Make n-1 new ones
                 for (int i = 0; i < playercount - 1; i++)
                 {
@@ -190,6 +190,7 @@ public class HudOn : MonoBehaviour {
                     vortex.name = "vortex" + (i + 1);
 					Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
 					vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
+					vortexScript.inUniverse = currentUniverse;
 					vortexScript.setLabel(vortpoint,"Vortex");
 					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);

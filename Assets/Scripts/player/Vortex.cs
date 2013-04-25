@@ -5,12 +5,14 @@ public class Vortex : MonoBehaviour {
     private bool scaleswitch;
     private int i;
 	public int leadsToUniverse;
+	public int inUniverse;
     private float growth = 0.015f;
 	public Vector3 vortPos;
 	public string label;
 	private Texture2D bg;
 	public static bool labelIsSet = false;
 	private Font deco = (Font) Resources.Load ("Belgrad");
+	public bool isBeingShrunk = false;
 
 	public static IEnumerator playerGrow(GameObject player)
     {
@@ -51,15 +53,22 @@ public class Vortex : MonoBehaviour {
 
     public static IEnumerator shrink(GameObject vortex)
     {
-		labelIsSet = false;
-		float x = 1;
-        while (x > 0)
-        {
-            x -= 0.04f;
-            vortex.transform.localScale = new Vector3(x, x, x);
-            yield return new WaitForSeconds(0.005f);
-        }
-        Destroy(vortex);
+		Vortex script = vortex.GetComponent<Vortex>();
+
+		// I hate STR
+		if (script != null && !script.isBeingShrunk) {
+			script.isBeingShrunk = true;
+
+			labelIsSet = false;
+			float x = 1;
+	        while (x > 0)
+	        {
+	            x -= 0.04f;
+	            vortex.transform.localScale = new Vector3(x, x, x);
+	            yield return new WaitForSeconds(0.005f);
+	        }
+	        Destroy(vortex);
+		}
     }
 
 	public void setLabel(Vector3 pos, string lab)
@@ -73,7 +82,9 @@ public class Vortex : MonoBehaviour {
 
 	public void OnGUI()
 	{
-		if (labelIsSet)
+		int currentUniverse = PlayerManager.Instance.universeNumber;
+
+		if (labelIsSet && currentUniverse == inUniverse)
 		{
 			Vector3 screenPoint = Camera.main.ViewportToScreenPoint(vortPos);
 			screenPoint.y = (Screen.height/2 - (screenPoint.y - Screen.height/2)); // Flip y about center line (lord knows why)
