@@ -25,8 +25,9 @@ public class Server : MonoBehaviour {
     private static int ID = 1;
     public static int finalNumberofPlayers;
     public string takenNames;
+
     public string[] playerNames;
-    public Dictionary<int, string> playerName;
+    public string[] playerFlags;
 
     // Use this for initialization
     void Start() {
@@ -59,7 +60,7 @@ public class Server : MonoBehaviour {
         Log.Note("Count Universe: " + countUniverse);
 		// Initalise private memeber variables
         playerNames = new string[countUniverse + 1];
-        playerName = new Dictionary<int, string>();
+		playerFlags = new string[countUniverse + 1];
         finalNumberofPlayers = countUniverse;
         universe = new Transform[countUniverse+2];
         characterView = new NetworkView[countUniverse+1];
@@ -148,23 +149,38 @@ public class Server : MonoBehaviour {
         /* GUI part*/
         for(int i = 1; i <ID; i++)
         {
-            GUI.Label(new Rect(60, 200 + (20 * i), 300, 100), i + ". Player " + playerName[i] + "has joined the game.");
+            GUI.Label(new Rect(60, 200 + (20 * i), 300, 100), i + ". Player " + playerNames[i] + "has joined the game.");
         }
         /* Check if a new player has connected. */
         if (!manualGoAhead)
         {
+//<<<<<<< HEAD
            if (ID <= countUniverse && GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && ID == nextPlayerID )
+//=======
+            // Debug.Log(ID); // Ahhh maddie!!!!! Sorry forgot about that one! Hey guys it's me
+//            if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
+//>>>>>>> f7b70f54cf
             {
-                if (playerName.ContainsValue(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
+                if (Misc.ArrayContains(playerNames, GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
                     GameObject.Find("Character" + ID).GetComponent<PlayerManager>().updatePlayerNameS(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() + "'");
                 PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
-                Debug.Log("Add " + manager.getPlayerName());
-                playerName.Add(ID, manager.getPlayerName());
+//<<<<<<< HEAD
+//                Debug.Log("Add " + manager.getPlayerName());
+//                playerName.Add(ID, manager.getPlayerName());
+//=======
+                Debug.Log("Player :" + manager.getPlayerName() + "has connected");
+                playerNames[ID] = manager.getPlayerName();
+				playerFlags[ID] = manager.getFlag();
+                //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
+//>>>>>>> f7b70f54cf
                 GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().updatePlayerNames(ID, manager.getPlayerName());
                 manager.updatePlayerNames(ID, manager.getPlayerName());
+				manager.updatePlayerFlags(ID, manager.getFlag());
                 ID++;
+//<<<<<<< HEAD
+//=======
+                takenNames = takenNames + " " + manager.getPlayerName();
             }
-
         }
         /* End*/
 
