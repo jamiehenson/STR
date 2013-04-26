@@ -6,6 +6,11 @@ public class Vortex : MonoBehaviour {
     private int i;
 	public int leadsToUniverse;
     private float growth = 0.015f;
+	public float screenPositionX;
+	public float screenPositionY;
+	public string label;
+	private bool labelIsSet = false;
+	private Font deco = (Font) Resources.Load ("Belgrad");
 
     public static IEnumerator grow(GameObject vortex)
     {
@@ -31,6 +36,31 @@ public class Vortex : MonoBehaviour {
         Destroy(vortex);
     }
 
+	public void setLabel(float x, float y, string lab) {
+		screenPositionX = x;
+		screenPositionY = y;
+		label = lab;
+		labelIsSet = true;
+	}
+
+	public void OnGUI() {
+
+		if (labelIsSet) {
+			Vector3 viewPort = new Vector3(screenPositionX,screenPositionY,0);
+			Vector3 screenPoint = Camera.main.ViewportToScreenPoint(viewPort);
+			print ("screenPoint = "+screenPoint);
+			int x = 10;
+			int y = 5;
+			GUIStyle style = new GUIStyle();
+	    	style.font = deco;
+			style.normal.textColor = Color.white;
+			style.fontStyle = FontStyle.Bold;
+			style.fontSize = 20;
+			style.normal.background = HudOn.fillTex(1,1,Color.black);
+			GUI.Label(new Rect(screenPoint.x,screenPoint.y,x,y), label, style);
+		}
+	}
+
     void Start()
     {
         StartCoroutine(grow(gameObject));
@@ -53,6 +83,7 @@ public class Vortex : MonoBehaviour {
             transform.localScale += new Vector3(-growth, 0, -growth);
             i--;
         }
+
 	}
 
     void OnCollisionEnter(Collision collision)
