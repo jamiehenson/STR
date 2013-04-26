@@ -6,64 +6,98 @@ public class Vortex : MonoBehaviour {
     private int i;
 	public int leadsToUniverse;
     private float growth = 0.015f;
-	public float screenPositionX;
-	public float screenPositionY;
+	public Vector3 vortPos;
 	public string label;
-	private bool labelIsSet = false;
+	private Texture2D bg;
+	public static bool labelIsSet = false;
 	private Font deco = (Font) Resources.Load ("Belgrad");
 
-    public static IEnumerator grow(GameObject vortex)
+	public static IEnumerator playerGrow(GameObject player)
+    {
+        double o = player.transform.localScale.x;
+		float x = 0;
+        player.transform.localScale = new Vector3(0, 0, 0);
+        while (x <= o)
+        {
+            x += 0.004f;
+            player.transform.localScale = new Vector3(x, x, x);
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+
+	public static IEnumerator playerShrink(GameObject player)
+    {
+		labelIsSet = false;
+		float x = player.transform.localScale.x;
+        while (x > 0)
+        {
+            x -= 0.0002f;
+            player.transform.localScale = new Vector3(x, x, x);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+	public static IEnumerator grow(GameObject vortex)
     {
         float x = 0;
         vortex.transform.localScale = new Vector3(0, 0, 0);
         while (x <= 4)
         {
-            x += 0.05f;
+            x += 0.06f;
             vortex.transform.localScale = new Vector3(x, 0, x);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.005f);
         }
     }
 
     public static IEnumerator shrink(GameObject vortex)
     {
-        float x = 1;
+		labelIsSet = false;
+		float x = 1;
         while (x > 0)
         {
-            x -= 0.01f;
+            x -= 0.04f;
             vortex.transform.localScale = new Vector3(x, x, x);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.005f);
         }
         Destroy(vortex);
     }
 
-	public void setLabel(float x, float y, string lab) {
-		screenPositionX = x;
-		screenPositionY = y;
+	public void setLabel(Vector3 pos, string lab)
+	{
+		vortPos = pos;
 		label = lab;
 		labelIsSet = true;
 	}
 
-	public void OnGUI() {
 
-		if (labelIsSet) {
-			Vector3 viewPort = new Vector3(screenPositionX,screenPositionY,0);
-			Vector3 screenPoint = Camera.main.ViewportToScreenPoint(viewPort);
-			print ("screenPoint = "+screenPoint);
+
+	public void OnGUI()
+	{
+		if (labelIsSet)
+		{
+			Vector3 screenPoint = Camera.main.ViewportToScreenPoint(vortPos);
+			screenPoint.y = (Screen.height/2 - (screenPoint.y - Screen.height/2)); // Flip y about center line (lord knows why)
+			int bgw = 140; // Vortex note bg width
+			int bgh = 30; // Vortex note bg height
 			int x = 10;
 			int y = 5;
 			GUIStyle style = new GUIStyle();
 	    	style.font = deco;
 			style.normal.textColor = Color.white;
+			style.alignment = TextAnchor.MiddleCenter;
 			style.fontStyle = FontStyle.Bold;
-			style.fontSize = 20;
-			style.normal.background = HudOn.fillTex(1,1,Color.black);
-			GUI.Label(new Rect(screenPoint.x,screenPoint.y,x,y), label, style);
+			style.fontSize = 18;
+			label = label.ToUpper();
+			GUI.DrawTexture(new Rect(screenPoint.x-(bgw/2-5),screenPoint.y-(bgh/2)-40,bgw,bgh),bg,ScaleMode.StretchToFill, true, 0);
+			GUI.Label(new Rect(screenPoint.x,screenPoint.y-40,x,y), label, style);
 		}
 	}
 
     void Start()
     {
-        StartCoroutine(grow(gameObject));
+		StopCoroutine("shrink");
+		StartCoroutine(grow(gameObject));
+		bg = (Texture2D) Resources.Load ("menu/blankfull");
     }
 
 	void Update () {
@@ -83,7 +117,6 @@ public class Vortex : MonoBehaviour {
             transform.localScale += new Vector3(-growth, 0, -growth);
             i--;
         }
-
 	}
 
     void OnCollisionEnter(Collision collision)
@@ -91,6 +124,7 @@ public class Vortex : MonoBehaviour {
 		GameObject obj = collision.gameObject;
 		if (obj.tag == "Player" && obj.GetComponent<PlayerMovement>().myCharacter)
 			HudOn.Instance.enteredVortex(leadsToUniverse);
+			HudOn.vortpointOut = gameObject.transform.position;
     }
 	
 	void OnCollisionExit(Collision collision)
