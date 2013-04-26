@@ -77,7 +77,7 @@ public class Server : MonoBehaviour {
             universe[i] = obj;
             
 			// Rename it to something useful and pass name to clients
-            universe[i].transform.Find("Managers/OriginManager").GetComponent<Universe>().SetOrigin(pos);
+            universe[i].transform.Find("Managers/OriginManager").GetComponent<Universe>().origin = pos;
             obj.name = "Universe" + i;
             viewIDNameMapping.Add(obj.networkView.viewID, obj.name);
 			
