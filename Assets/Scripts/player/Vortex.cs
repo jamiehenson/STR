@@ -57,14 +57,14 @@ public class Vortex : MonoBehaviour {
 
     public static IEnumerator shrink(GameObject vortex)
     {
-		yield break;
+		//yield break;
 
 		labelIsSet = false;
 		float x = 1;
         while (x > 0)
         {
             x -= 0.04f;
-            vortex.transform.localScale = new Vector3(x, x, x);
+            //vortex.transform.localScale = new Vector3(x, x, x);
             yield return new WaitForSeconds(0.005f);
         }
         Destroy(vortex);
