@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviour {
 	public WeaponStats wepStats;
     public static float damageMultiplier;
     public static float energyMultiplier;
+	public static PlayerManager Instance;
 
     //Scoring System variables
     private bool myCharacter;
@@ -55,6 +56,10 @@ public class PlayerManager : MonoBehaviour {
 	[RPC]
 	public void changeWeaponRPC(int type){
 		changeWeapon(type);
+	}
+
+	public void Awake() {
+		Instance = this;
 	}
 
 	public void Start()
@@ -168,7 +173,7 @@ public class PlayerManager : MonoBehaviour {
     public void activateCharacter(int charNum)
     {
         myCharacter = true;
-        characterNum = charNum;
+        universeNumber = charNum;
 		HudOn.Instance.setManager(this);
     }
 

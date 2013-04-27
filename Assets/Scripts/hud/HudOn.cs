@@ -235,11 +235,18 @@ public class HudOn : MonoBehaviour {
 
     private int universeN()
     {
+		PlayerManager manager = PlayerManager.Instance;
+
+		if (manager == null)
+			return -1;
+		else
+			return manager.universeNumber;
+		/*
         int length = transform.name.Length;
         string num = transform.name.Substring(length - 1, 1);
 		print ("Num = "+num);
         if ("0123456789".Contains(num)) return (int.Parse(num));
-        else return -1;
+        else return -1;*/
     }
 
     /* Can't use it and moved all its contents to Start() as InitialiseStats() is not static anymore
@@ -278,8 +285,8 @@ public class HudOn : MonoBehaviour {
 
 	void startWithManager(){
 		onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
-
-        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+		print ("I think universeN() = "+universeN() );
+        manager = GameObject.Find("Character" + manager.universeNumber).GetComponent<PlayerManager>();
       
         /* Was in Awake() */
         if (manager.activeCharN == null) manager.activeCharN = "tester";
@@ -371,6 +378,7 @@ public class HudOn : MonoBehaviour {
 
 		// Universe (or rather, star system) name
 		int uniNo = manager.universeNumber;
+		
 		GUI.Label (new Rect (-5,Screen.height-universe.height/2,universe.width,universe.height),universe);
 		GUI.Label (new Rect (6,Screen.height-universe.height/2+14,200,50),"LOCATION:",coStyle);
 		GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),systemNames[uniNo-1],speedStyle);
