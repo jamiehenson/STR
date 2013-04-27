@@ -18,7 +18,7 @@ public class Bridge : MonoBehaviour {
         }
         else {
             Network.isMessageQueueRunning = true;
-            client = GameObject.Find("Network").GetComponent<OnlineClient>();
+            client = GameObject.Find("Client Scripts").GetComponent<OnlineClient>();
             print("Client Bridge initial" + Network.player);
             networkView.RPC("clientBridgeLoaded", RPCMode.Server, Network.player);
         }

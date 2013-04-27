@@ -21,6 +21,9 @@ public class HudOn : MonoBehaviour {
 	private Vector3 charScale;
 	public static Vector3 vortpointOut;
 	private bool showCountdown;
+	public static float score;
+	public static bool gameOver;
+	private static bool gameOverBeenDetected;
     WeaponHandler weaponHandler;
 
     PlayerManager manager;
@@ -39,12 +42,6 @@ public class HudOn : MonoBehaviour {
 		energyTitle = "ENERGY", 
 		bankTitle = "WARP";
 
-    // This seems a logical place to keep track of the score
-   // public float score = 0;
-   // public static bool gameOver = false;
-      public static float score;
-      public static bool gameOver;
-	
 	public static Texture2D fillTex(int width, int height, Color col)
     {
         Color[] pix = new Color[width*height];
@@ -118,10 +115,22 @@ public class HudOn : MonoBehaviour {
     }
 	
 	void Update() {
-        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
-        if (gameOver)
-        {
+		// Check if names have been sent from the server. If not then we canot
+		// determin our character, so stop.
+		if (manager == null) {
+			GameObject c = GameObject.Find("Character" + universeN());
+
+			if (c == null) // Still not been set
+				return;
+			else
+				manager = c.GetComponent<PlayerManager>();
+		}
+
+		// The headOut coroutine should only be called once, so check if it
+		// needs to be called and hasn't already
+        if (gameOver && !gameOverBeenDetected){
             StartCoroutine("headOut");
+			gameOverBeenDetected = true;
         }
 
         // Update player stats
@@ -264,6 +273,12 @@ public class HudOn : MonoBehaviour {
 		deco = (Font) Resources.Load ("Belgrad");
 
 		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
+		gameOverBeenDetected = false;
+
+		for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
+
+        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+		//onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
       
@@ -307,6 +322,8 @@ public class HudOn : MonoBehaviour {
 	}
 
 	void OnGUI () {
+		if (manager == null)
+			return;
 
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
