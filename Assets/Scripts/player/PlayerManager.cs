@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour {
 
     //Scoring System variables
     private bool myCharacter;
+    private int characterNum;
 	
 	public void changeWeapon(int type){
 		wepStats = WeaponHandler.GetWeaponStats(activeChar, type);
@@ -175,6 +176,7 @@ public class PlayerManager : MonoBehaviour {
         myCharacter = true;
         universeNumber = charNum;
 		HudOn.Instance.setManager(this);
+		Instance = this;
     }
 
     /* Called in HudOn class, Start() */

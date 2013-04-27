@@ -18,12 +18,14 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
+
 	private Vector3 charScale;
 	public static Vector3 vortpointOut;
 	private bool showCountdown;
 	public static float score;
 	public static bool gameOver;
 	private static bool gameOverBeenDetected;
+
     WeaponHandler weaponHandler;
     public static int countUniverse;
     PlayerManager manager = null;
@@ -190,7 +192,7 @@ public class HudOn : MonoBehaviour {
                 }
 				
 				int currentUniverse = manager.universeNumber;
-
+				print("Manager says current universe is: "+currentUniverse);
                 // Make n-1 new ones
                 for (int i = 0; i < playercount - 1; i++)
                 {
@@ -202,7 +204,8 @@ public class HudOn : MonoBehaviour {
                     vortex.name = "vortex" + (i + 1);
 					Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
 					vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
-					vortexScript.setLabel(vortpoint,"Vortex");
+					vortexScript.inUniverse = currentUniverse;
+					vortexScript.setLabel(vortpoint,systemNames[vortexScript.leadsToUniverse-1]);
 					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
                     vortex.tag = "vortex";
@@ -268,6 +271,7 @@ public class HudOn : MonoBehaviour {
 		gameOver = false;
 		Instance = this;
 
+		gameOverBeenDetected = false;
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
 		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");
@@ -477,11 +481,11 @@ public class HudOn : MonoBehaviour {
 		vortexCountdownNum = 4;
 		vortexLeadsTo = vortexTo;
 		StartCoroutine("VortexCountdown");
-		StartCoroutine(Vortex.playerShrink(charModel));
 	}
 
 	public void leftVortex() {
 		print("Left Vortex");
+
 		Vortex.labelIsSet = false;
 		
 		if (inVortexCountdown) {
@@ -489,7 +493,6 @@ public class HudOn : MonoBehaviour {
 			//StopCoroutine ("Vortex.playerShrink");
 			inVortexCountdown = false;
 		}
-		StartCoroutine(Vortex.playerGrow(charModel));
 	}
 
 	public void setManager(PlayerManager m) {

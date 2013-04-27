@@ -5,12 +5,14 @@ public class Vortex : MonoBehaviour {
     private bool scaleswitch;
     private int i;
 	public int leadsToUniverse;
+	public int inUniverse;
     private float growth = 0.015f;
 	public Vector3 vortPos;
 	public string label;
 	private Texture2D bg;
 	public static bool labelIsSet = false;
 	private Font deco = (Font) Resources.Load ("Belgrad");
+	public bool isBeingShrunk = false;
 
 	public static IEnumerator playerGrow(GameObject player)
     {
@@ -81,7 +83,9 @@ public class Vortex : MonoBehaviour {
 
 	public void OnGUI()
 	{
-		if (labelIsSet)
+		int currentUniverse = PlayerManager.Instance.universeNumber;
+
+		if (labelIsSet && currentUniverse == inUniverse)
 		{
 			Vector3 screenPoint = Camera.main.ViewportToScreenPoint(vortPos);
 			screenPoint.y = (Screen.height/2 - (screenPoint.y - Screen.height/2)); // Flip y about center line (lord knows why)
