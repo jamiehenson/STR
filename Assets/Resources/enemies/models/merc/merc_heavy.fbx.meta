@@ -1,0 +1,135 @@
+fileFormatVersion: 2
+guid: ed63c4d674e566a42a94c0615cbeb71c
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: body
+    100002: cockPIt
+    100004: cockPit2
+    100006: gunRing
+    100008: gunRing1
+    100010: gunRing2
+    100012: gunRing3
+    100014: jet1
+    100016: jet2
+    100018: jet3
+    100020: jet4
+    100022: lowerBarrel
+    100024: lowerBarrelMount
+    100026: //RootNode
+    100028: upperBarrel
+    100030: upperBarrelMount
+    400000: body
+    400002: cockPIt
+    400004: cockPit2
+    400006: gunRing
+    400008: gunRing1
+    400010: gunRing2
+    400012: gunRing3
+    400014: jet1
+    400016: jet2
+    400018: jet3
+    400020: jet4
+    400022: lowerBarrel
+    400024: lowerBarrelMount
+    400026: //RootNode
+    400028: upperBarrel
+    400030: upperBarrelMount
+    2300000: body
+    2300002: cockPIt
+    2300004: cockPit2
+    2300006: gunRing
+    2300008: gunRing1
+    2300010: gunRing2
+    2300012: gunRing3
+    2300014: jet1
+    2300016: jet2
+    2300018: jet3
+    2300020: jet4
+    2300022: lowerBarrel
+    2300024: lowerBarrelMount
+    2300026: upperBarrel
+    2300028: upperBarrelMount
+    3300000: body
+    3300002: cockPIt
+    3300004: cockPit2
+    3300006: gunRing
+    3300008: gunRing1
+    3300010: gunRing2
+    3300012: gunRing3
+    3300014: jet1
+    3300016: jet2
+    3300018: jet3
+    3300020: jet4
+    3300022: lowerBarrel
+    3300024: lowerBarrelMount
+    3300026: upperBarrel
+    3300028: upperBarrelMount
+    4300000: body
+    4300002: upperBarrel
+    4300004: upperBarrelMount
+    4300006: lowerBarrelMount
+    4300008: lowerBarrel
+    4300010: jet1
+    4300012: jet2
+    4300014: jet3
+    4300016: jet4
+    4300018: gunRing
+    4300020: gunRing1
+    4300022: gunRing2
+    4300024: gunRing3
+    4300026: cockPIt
+    4300028: cockPit2
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
