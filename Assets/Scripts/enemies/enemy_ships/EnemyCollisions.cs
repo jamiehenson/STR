@@ -46,7 +46,6 @@ public class EnemyCollisions : MonoBehaviour {
     {
         if (Network.isClient)
             return;
-        bool hit = false;
         if (universeN() != -1)
         {
             
@@ -63,7 +62,6 @@ public class EnemyCollisions : MonoBehaviour {
                     PlayerCollisions.WeaponBoom(gameObject, 1);
                     //beamSmack.Play();
                     health = health - (WeaponHandler.beamDamage);
-                    hit = true;
                     break;
                 case "PlayerCannon":
                     // Do what we want for cannon
@@ -72,7 +70,6 @@ public class EnemyCollisions : MonoBehaviour {
                     //cannonSmack.Play();
                     iTween.MoveBy(gameObject, eManager.speed * (collided.rigidbody.velocity / 7), 1f);
                     health = health - (WeaponHandler.cannonDamage);
-                    hit = true;
                     break;
                 case "PlayerMine":
                     // Do what we want for mine
@@ -93,13 +90,11 @@ public class EnemyCollisions : MonoBehaviour {
                     Network.Destroy(collided);
                     beamSmack.Play();
                     health = health - (WeaponHandler.mineDamage);
-                    hit = true;
                     break;
                 case "MineFrag":
                     beamSmack.Play();
                     health = health - (WeaponHandler.mineFragmentDamage);
                     Network.Destroy(collided);
-                    hit = true;
                     break;
                 case "Enemy":
                     // Do what we want for hitting anther enemy (not yet perfected)
@@ -119,7 +114,6 @@ public class EnemyCollisions : MonoBehaviour {
                     networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), scoreAddition);
                 }
                 manager.updateScore(scoreAddition);
-                int points = eManager.killPoints;
                 Network.Destroy(gameObject);
                 PlayerCollisions.Boom(gameObject);
                 //HudOn.score += points;

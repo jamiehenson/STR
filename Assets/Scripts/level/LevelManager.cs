@@ -5,13 +5,11 @@ using System.Collections.Generic;
 public class LevelManager : MonoBehaviour {
     // Level stats
     private int stage = 0;
-    private float changeTime = 10;
     private Commander enemyGen;
     private HudOn hudOn;
     private int universeNum;
 
     private List<string> levelNames = new List<string>();
-    private int stagesBeforeBoss = 3;
 
     // ******Determine by which prefab is the script called***** 
     private int universeN() {
@@ -124,12 +122,15 @@ public class LevelManager : MonoBehaviour {
         levelNames.Add("ZUG");
     }
 
+    public void WarpAnimation() {
+        enemyGen.WarpAnimation();
+    }
+
     public void LevelIncrease() {
         stage++;
         int level = Random.Range(0, levelNames.Count);
         string thisLevelName = levelNames[level];
         // Difficulty increases ahoy!
-        int[] changedVars = enemyGen.IncreaseDifficulty();
         levelNames.Remove(thisLevelName);
         if (levelNames.Count == 0) InitializeLevelNames();
         // Put a toast informing about level/difficulty increase here?
@@ -166,80 +167,4 @@ public class LevelManager : MonoBehaviour {
             StartCoroutine("BossClearedIE", wait);
         }
     }
-
-    // Used to time different stages and increment difficulty progression
-    /*IEnumerator StageProgression() {
-        yield return new WaitForSeconds(2);
-        for (int j = 0; j < stagesBeforeBoss; j++) {
-            
-            stage++;
-            // Pick a random level name
-            if (stage != 1) {
-                int level = Random.Range(0, levelNames.Count);
-                string thisLevelName = levelNames[level];
-                //Debug.Log(thisLevelName + " " + universeNum);
-                string toastText = "NOW ENTERING " + thisLevelName;
-                // Make more difficult
-                int[] changedVars = enemyGen.IncreaseDifficulty();
-                for (int i = 0; i < changedVars.Length; i++) {
-                    toastText = toastText + "\n" + enemyGen.GetDiffVarFromInt(changedVars[i]);
-                }
-                //StartCoroutine(Toast(toastText));
-                // Needs tweaking - has to be for every character in that universe
-                //networkView.RPC("PlaceToast", RPCMode.Others, universeNum, toastText);
-                for (int i = 1; i < enemyGen.activeCharacters.Length; i++) {
-                    if (enemyGen.activeCharacters[i]) {
-                        //networkView.RPC("PlaceToast", RPCMode.Others, i, toastText);
-                    }
-                }
-                levelNames.Remove(thisLevelName);
-                if (levelNames.Count == 0) InitializeLevelNames();
-            }
-            // Wait a certain amount of time          
-            yield return new WaitForSeconds(changeTime);
-        }
-        // Deploy boss here and halt all enemy distribution
-        //StartCoroutine(Toast("BOSS INCOMING"));
-        yield return new WaitForSeconds(3);
-        //StartCoroutine("StageProgression");
-        //hudOn.StopScore();
-        enemyGen.DeployBoss();
-    }*/
-
-    /*IEnumerator Toast(string notetext) {
-        GameObject toast = new GameObject("Toast");
-        toast.AddComponent("GUIText");
-        toast.guiText.font = (Font)Resources.Load("Belgrad");
-        toast.guiText.fontSize = (Screen.width > 1000) ? 40 : 24;
-        toast.transform.position = new Vector3(0.5f, 0.5f, 0);
-        toast.guiText.anchor = TextAnchor.MiddleCenter;
-        toast.guiText.text = notetext;
-        toast.guiText.material.color = Color.white;
-        toast.guiText.alignment = TextAlignment.Center;
-        iTween.FadeTo(toast, 1f, 1f);
-        yield return new WaitForSeconds(1.5f);
-        iTween.FadeTo(toast, 0f, 1f);
-        yield return new WaitForSeconds(1f);
-        Destroy(toast);
-    }*/
-
-    /*IEnumerator BossClearedEnumerator() {     
-        //StartCoroutine("Toast", "CONGRATULATIONS");
-        yield return new WaitForSeconds(5);
-        //hudOn.StartScore();
-        StartCoroutine("StageProgression");
-        enemyGen.BossDestroyed();
-    }*/
-
-    /*public void BossCleared() {
-        StartCoroutine("BossClearedEnumerator");
-    }*/
-
-    /*[RPC]
-    void PlaceToast(int camNum, string toastText) {
-        if (Network.isClient && GameObject.Find("Camera " + camNum)) {
-            HudOn hOn = GameObject.Find("Camera " + camNum).GetComponent<HudOn>();
-            hOn.ToastWrapper(toastText);
-        }
-    }*/
 }

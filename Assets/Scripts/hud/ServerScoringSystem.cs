@@ -7,11 +7,10 @@ public class ServerScoringSystem : MonoBehaviour {
     public bool initialized;
 
     private float levelTime = 10; // in seconds
-    private int pauseDelay = 3; // in seconds
+    private int pauseDelay = 2; // in seconds
     private int stagesBeforeBoss = 3;
     private LevelManager[] levelManagers = new LevelManager[4];
     private BossLevelManager bossLevelManager;
-    int stage = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -40,13 +39,6 @@ public class ServerScoringSystem : MonoBehaviour {
         }
     }
 
-    // TEMP FOR TESTING
-    IEnumerator SendBoss() {
-        yield return new WaitForSeconds(10);
-        Debug.Log("Boss Clear");
-        BossCleared();
-    }
-
     // Used to time different stages and increment difficulty progression
     IEnumerator TimeLevels() {
         yield return new WaitForSeconds(pauseDelay);
@@ -58,21 +50,25 @@ public class ServerScoringSystem : MonoBehaviour {
             }
             // Wait a certain amount of time
             yield return new WaitForSeconds(levelTime);
-        }      
+        }
+        foreach (LevelManager levMan in levelManagers) {
+            levMan.WarpAnimation();
+        }
         yield return new WaitForSeconds(pauseDelay);
         // Inform LevelManagers about incoming boss
         foreach (LevelManager levMan in levelManagers) {
             levMan.BossComing(pauseDelay);
         }
         yield return new WaitForSeconds(pauseDelay);
-        // SEND BOSS HERE
-        Debug.Log("Send Boss");
+        // SEND BOSS HERE - Need to get confirmation that everyone has moved first!
         bossLevelManager.CreateBoss(4);
     }
 
     IEnumerator BossClearedIE() {
         // Inform all LevelManagers that the boss is complete
-        Debug.Log("BOSS CLEARED");
+        foreach (LevelManager levMan in levelManagers) {
+            levMan.WarpAnimation();
+        }
         yield return new WaitForSeconds(pauseDelay);
         foreach (LevelManager levMan in levelManagers) {
             levMan.BossCleared(pauseDelay);

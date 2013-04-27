@@ -52,7 +52,6 @@ public class FlowingBGMain : MonoBehaviour {
 			{
 				obj.particleSystem.startColor = new Color(Random.Range (0.5f,1), Random.Range (0.5f,1), Random.Range (0.5f,1), 1.0f);
 			}
-			NetworkViewID id = obj.networkView.viewID;
 			Vector3 forceToApply = new Vector3(5,0,0);
 			obj.rigidbody.AddForce(forceToApply);
 		    obj.rigidbody.freezeRotation = true;

@@ -22,8 +22,8 @@ public class HudOn : MonoBehaviour {
 	public static Vector3 vortpointOut;
 	private bool showCountdown;
     WeaponHandler weaponHandler;
+
     PlayerManager manager;
-	OnlineClient onlineClient;
     public static int countUniverse;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
@@ -266,7 +266,6 @@ public class HudOn : MonoBehaviour {
 		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
-		onlineClient = GameObject.Find ("Network").GetComponent<OnlineClient>();
       
         /* Was in Awake() */
         if (manager.activeCharN == null) manager.activeCharN = "tester";
@@ -292,6 +291,7 @@ public class HudOn : MonoBehaviour {
             weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
 			charScale = GameObject.Find("Character" + PlayerNumber).transform.localScale;
 			charModel = GameObject.Find("Character" + PlayerNumber);
+
             setWeapon(1);
         }
 
@@ -430,7 +430,7 @@ public class HudOn : MonoBehaviour {
 		{
 			print ("In vortex: "+vortexCountdownNum);
 			vortexCountdownNum--;
-
+            // ANIMATE HERE AT 2
 			yield return new WaitForSeconds(1);
 		}
 		manager.movement.changeUniverse(vortexLeadsTo);

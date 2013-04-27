@@ -45,7 +45,6 @@ public class BossCollisions : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (Network.isClient)
             return;
-        bool hit = false;
         if (universeN() != -1) {
 
             GameObject collided = other.gameObject;
@@ -60,7 +59,6 @@ public class BossCollisions : MonoBehaviour {
                     PlayerCollisions.WeaponBoom(gameObject, 1);
                     //beamSmack.Play();
                     health = health - (WeaponHandler.beamDamage);
-                    hit = true;
                     break;
                 case "PlayerCannon":
                     // Do what we want for cannon
@@ -69,7 +67,6 @@ public class BossCollisions : MonoBehaviour {
                     //cannonSmack.Play();
                     iTween.MoveBy(gameObject, eManager.speed * (collided.rigidbody.velocity / 7), 1f);
                     health = health - (WeaponHandler.cannonDamage);
-                    hit = true;
                     break;
                 case "PlayerMine":
                     // Do what we want for mine
@@ -88,13 +85,11 @@ public class BossCollisions : MonoBehaviour {
                     Network.Destroy(collided);
                     beamSmack.Play();
                     health = health - (WeaponHandler.mineDamage);
-                    hit = true;
                     break;
                 case "MineFrag":
                     beamSmack.Play();
                     health = health - (WeaponHandler.mineFragmentDamage);
                     Network.Destroy(collided);
-                    hit = true;
                     break;
                 case "Enemy":
                     // Do what we want for hitting anther enemy (not yet perfected)
@@ -112,7 +107,6 @@ public class BossCollisions : MonoBehaviour {
                     networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), scoreAddition);
                 }
                 manager.updateScore(scoreAddition);
-                int points = eManager.killPoints;
                 Network.Destroy(gameObject);
                 PlayerCollisions.Boom(gameObject);
                 //HudOn.score += points;

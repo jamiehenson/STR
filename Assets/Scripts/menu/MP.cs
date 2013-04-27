@@ -173,7 +173,6 @@ public class MP : MonoBehaviour
             subheader.GetComponent<TextMesh>().text = "CHOOSE AN ONLINE SERVER TO JOIN";
             heading1.GetComponent<TextMesh>().text = "AVAILABLE SERVERS";
 
-			GameObject browserbg = GameObject.Find("SBrowserBG");
             serverNameBox.renderer.enabled = false;
             foreach (GameObject component in playerdetails) component.renderer.enabled = true;
             proceed.renderer.enabled = false;

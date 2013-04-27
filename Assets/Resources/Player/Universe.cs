@@ -53,9 +53,4 @@ public class Universe : MonoBehaviour {
 		
 		return universe.GetComponent<Universe>().origin;
 	}
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
