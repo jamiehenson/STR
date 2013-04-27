@@ -263,7 +263,7 @@ public class HudOn : MonoBehaviour {
 		universe = (Texture2D) Resources.Load ("hud/bottomleft");
 		deco = (Font) Resources.Load ("Belgrad");
 
-		for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
+		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 
         manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
 		onlineClient = GameObject.Find ("Network").GetComponent<OnlineClient>();
@@ -434,7 +434,7 @@ public class HudOn : MonoBehaviour {
 			yield return new WaitForSeconds(1);
 		}
 		manager.movement.changeUniverse(vortexLeadsTo);
-		charModel.transform.localScale = charScale;
+		//charModel.transform.localScale = charScale;
 		showCountdown = false;
 	}
 
