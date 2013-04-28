@@ -385,7 +385,11 @@ public class HudOn : MonoBehaviour {
 		
 		GUI.Label (new Rect (-5,Screen.height-universe.height/2,universe.width,universe.height),universe);
 		GUI.Label (new Rect (6,Screen.height-universe.height/2+14,200,50),"LOCATION:",coStyle);
-		GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),systemNames[uniNo-1],speedStyle);
+
+		if (uniNo != 0)
+			GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),systemNames[uniNo-1],speedStyle);
+		else
+			GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),"MORT",speedStyle);
 
 		GUI.Label (new Rect (70,5,200,50),charName,hudStyle);
 		GUI.Label (new Rect (75,21,40,20),hullTitle,smallStyle);
