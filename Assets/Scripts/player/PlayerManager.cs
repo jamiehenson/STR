@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerManager : MonoBehaviour {
     // Player stats
     private int score;
+
     private float hitPoints;
     private float energyLevel;
     private float startHP, startEnergy;
@@ -12,9 +13,9 @@ public class PlayerManager : MonoBehaviour {
     private int bankSize = 10000;
     public static bool bankFull;
     public static float speed;
-    public static string playername;
+    public static string playername, flagname;
     private GameObject xp;
-    public string[] playerNames;
+    public string[] playerNames, playerFlags;
 	public PlayerMovement movement;
     private string myPlayerName;
 	
@@ -27,9 +28,11 @@ public class PlayerManager : MonoBehaviour {
 	public WeaponStats wepStats;
     public static float damageMultiplier;
     public static float energyMultiplier;
+	public static PlayerManager Instance;
 
     //Scoring System variables
     private bool myCharacter;
+    private int characterNum;
 	
 	public void changeWeapon(int type){
 		wepStats = WeaponHandler.GetWeaponStats(activeChar, type);
@@ -45,18 +48,32 @@ public class PlayerManager : MonoBehaviour {
         networkView.RPC("updatePlayerNameC", RPCMode.AllBuffered, pos, s);
     }
 
+	public void updatePlayerFlags(int pos, string s)
+    {
+        playerFlags[pos] = s;
+        networkView.RPC("updatePlayerFlagC", RPCMode.AllBuffered, pos, s);
+    }
+
 	[RPC]
 	public void changeWeaponRPC(int type){
 		changeWeapon(type);
 	}
 
-	public void Start(){
+	public void Awake() {
+		Instance = this;
+	}
+
+	public void Start()
+	{
 		movement = gameObject.GetComponent<PlayerMovement>();
         myPlayerName = playername;
+
 		if (Network.isServer)
         {
             playerNames = new string[Server.numberOfPlayers() + 1];
-            networkView.RPC("intantiatePlayerNames", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
+            networkView.RPC("instantiatePlayerNames", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
+			playerFlags = new string[Server.numberOfPlayers() + 1];
+            networkView.RPC("instantiatePlayerFlags", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
         }
 	}
 
@@ -102,7 +119,6 @@ public class PlayerManager : MonoBehaviour {
         return bankSize;
     }
 
-
     /*Hit Points call functions*/
     public float getHitPoints()
     {
@@ -145,6 +161,11 @@ public class PlayerManager : MonoBehaviour {
         networkView.RPC("updatePlayerName", RPCMode.Others, myPlayerName);
     }
 
+	public string getFlag()
+    {
+        return flagname;
+    }
+
     public string getActiveChar()
     {
         return activeChar;
@@ -153,6 +174,9 @@ public class PlayerManager : MonoBehaviour {
     public void activateCharacter(int charNum)
     {
         myCharacter = true;
+        universeNumber = charNum;
+		HudOn.Instance.setManager(this);
+		Instance = this;
     }
 
     /* Called in HudOn class, Start() */
@@ -162,6 +186,7 @@ public class PlayerManager : MonoBehaviour {
         if (Network.isClient)
         {
             networkView.RPC("updatePlayerName", RPCMode.Server, playername);
+			networkView.RPC("updatePlayerFlag", RPCMode.Server, flagname);
             switch (activeChar)
             {
                 case "china":
@@ -216,7 +241,6 @@ public class PlayerManager : MonoBehaviour {
 
     void Update()
     {
-
         if (Network.isClient && myCharacter)
         {
             switch (wepType)
@@ -250,15 +274,28 @@ public class PlayerManager : MonoBehaviour {
     }
 
     [RPC]
-    void intantiatePlayerNames(int count)
+    void instantiatePlayerNames(int count)
     {
         playerNames = new string[count];
     }
+
+	[RPC]
+	void instantiatePlayerFlags(int count)
+	{
+		Debug.Log("The flags are done, aren't they kids?");
+		playerFlags = new string[count];
+	}
 
     [RPC]
     void updatePlayerNameC(int pos, string s)
     {
         playerNames[pos] = s;
+    }
+
+	[RPC]
+    void updatePlayerFlagC(int pos, string s)
+    {
+        playerFlags[pos] = s;
     }
 
     [RPC]
@@ -293,6 +330,12 @@ public class PlayerManager : MonoBehaviour {
         {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<HudOn>().updateName(myPlayerName);
         }
+    }
+
+	[RPC]
+    void updatePlayerFlag(string pflag)
+    {
+        flagname = pflag;
     }
 
     [RPC]

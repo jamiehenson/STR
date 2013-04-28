@@ -53,11 +53,9 @@ public class FiringHandler : MonoBehaviour {
                     mousePos.z = camDist;
                     Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
 
-                    if (fireDirection.x > 0.2)
-                    {
-                        networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, manager.wepStats.wepType);
-                        // Update fire stats
-                    }
+                    // Send message to fire
+                    networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, manager.wepStats.wepType);
+                    // Update fire stats
                     
                     timer = 0;
 

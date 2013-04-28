@@ -205,7 +205,7 @@ public class Commander : MonoBehaviour {
 
     // ******General Functions******
     void Start() {
-		enemyPrefabs = Resources.LoadAll("enemies/enemytypes", typeof(GameObject));
+		enemyPrefabs = Resources.LoadAll("enemies/enemytypes/test", typeof(GameObject));
         
         if (Network.isServer)
         {

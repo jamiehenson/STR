@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 	public void Start()
 	{
 		if (Application.loadedLevelName == "OnlineClient")
-			onlineClient = GameObject.Find("Network").GetComponent<OnlineClient>();
+			onlineClient = GameObject.Find("Client Scripts").GetComponent<OnlineClient>();
 		else if (Application.loadedLevelName == "server")
 			server = GameObject.Find("Network").GetComponent<Server>();
 
@@ -101,13 +101,6 @@ public class PlayerMovement : MonoBehaviour {
 		gameObject.transform.position = position;
 	}
 
-    [RPC]
-    public void rotateArm(float angle)
-    {
-        Transform arm = transform.Find("rightArm");
-        if (angle >= -45 && angle <= 50) arm.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
-    }
-
 	// Update is called once per frame
 	void Update () 
 	{
@@ -115,19 +108,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 	        float vertDist = PlayerManager.speed * Input.GetAxis("Vertical") * Time.deltaTime;
 	        float horDist = PlayerManager.speed * Input.GetAxis("Horizontal") * Time.deltaTime;
-
-            /* Rotate arm */
-            Transform arm = transform.Find("rightArm");
-            Vector3 mouse_pos = Input.mousePosition;
-            mouse_pos.z = 15;
-            Vector3 object_pos = Camera.main.WorldToScreenPoint(arm.transform.position);
-            mouse_pos.x = mouse_pos.x - object_pos.x;
-            mouse_pos.y = mouse_pos.y - object_pos.y;
-            // Calculate rotation angle
-            float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-            networkView.RPC("rotateArm", RPCMode.All, angle);
-            /*End arm rotation*/
-
+			
 			// If R is pressed, rotate the character, toggling 90 degrees
 			//if (Input.GetButtonDown("Rotate Character")) charRotate = true;
 			
