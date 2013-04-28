@@ -37,13 +37,9 @@ public class Universe : MonoBehaviour {
         if (Network.isServer) active = act;
     }*/
 	
-	[RPC]
-	public void SetOrigin(Vector3 o) {
-		if (Network.isServer)
-			networkView.RPC ("SetOrigin", RPCMode.OthersBuffered, o);
+	void OnSerializeNetworkView( BitStream stream, NetworkMessageInfo info) {
 
-		origin = o;
-		Start ();
+			stream.Serialize(ref origin);
 	}
 	
 	public static Vector3 PositionOfOrigin(int universeNum) {
