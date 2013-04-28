@@ -154,7 +154,9 @@ public class EnemyMovement : MonoBehaviour {
 					Vector3 fireDirection = character.transform.position - transform.position;
 					Vector3 force = fireDirection.normalized * eManager.force * 2 * typeForceMultiplier;
         			fireDirection.y = Random.Range(fireDirection.y - firingOffset, fireDirection.y + firingOffset);
-					networkView.RPC("fireBullet", RPCMode.All, gameObject.transform.position, gameObject.transform.rotation, targetID, fireDirection, force);
+					Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation, 200);
+					NetworkViewID bulletID = bullet.networkView.viewID;
+					networkView.RPC("fireBullet", RPCMode.All, gameObject.transform.position, gameObject.transform.rotation, targetID, bulletID, fireDirection, force);
 
                 }
                 yield return new WaitForSeconds(eManager.firingDelay);
@@ -164,11 +166,12 @@ public class EnemyMovement : MonoBehaviour {
     }
 
 	[RPC]
-	void fireBullet(Vector3 startPosition, Quaternion startRotation, NetworkViewID targetID, Vector3 fireDir, Vector3 force) {
+	void fireBullet(Vector3 startPosition, Quaternion startRotation, NetworkViewID targetID, NetworkViewID bulletID, Vector3 fireDir, Vector3 force) {
 		// Get target
 		Debug.Log ("I am being told to fire");
 		GameObject character = NetworkView.Find (targetID).gameObject;
-		Transform bullet = (Transform)Instantiate(bulletPrefab, startPosition, startRotation);
+
+		GameObject bullet = NetworkView.Find (bulletID).gameObject;
         EnemyBulletSettings ebs = bullet.GetComponent<EnemyBulletSettings>();
 
         bullet.transform.LookAt(character.transform, Vector3.forward);
@@ -177,7 +180,7 @@ public class EnemyMovement : MonoBehaviour {
         Physics.IgnoreCollision(bullet.collider, gameObject.collider);
         bullet.rigidbody.AddForce(force);
         bullet.rigidbody.freezeRotation = true;
-        ebs.damage = eManager.weaponPower;
+        //ebs.damage = eManager.weaponPower;
 	}
 
     IEnumerator LerpEnemy() {
