@@ -28,8 +28,8 @@ public class Commander : MonoBehaviour {
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
     private float beltGap = 1f;
-    private int astProb = 1000000f;
-
+    private int astProb = 1000000;
+	
     private float leftMoveLimit;
 
     // Enemy generation positioning stats
