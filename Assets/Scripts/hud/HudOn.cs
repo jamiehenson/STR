@@ -13,12 +13,23 @@ public class HudOn : MonoBehaviour {
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount = 4;
-	private GameObject toast;
+	private GameObject toast, charModel;
+	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
-    PlayerManager manager;
+
+	private Vector3 charScale;
+	public static Vector3 vortpointOut;
+	private bool showCountdown;
+	public static float score;
+	public static bool gameOver;
+	private static bool gameOverBeenDetected;
+
+    WeaponHandler weaponHandler;
     public static int countUniverse;
+    PlayerManager manager = null;
+	OnlineClient onlineClient;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
 	
@@ -33,12 +44,6 @@ public class HudOn : MonoBehaviour {
 		energyTitle = "ENERGY", 
 		bankTitle = "WARP";
 
-    // This seems a logical place to keep track of the score
-   // public float score = 0;
-   // public static bool gameOver = false;
-      public static float score;
-      public static bool gameOver;
-	
 	public static Texture2D fillTex(int width, int height, Color col)
     {
         Color[] pix = new Color[width*height];
@@ -112,10 +117,16 @@ public class HudOn : MonoBehaviour {
     }
 	
 	void Update() {
-        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
-        if (gameOver)
-        {
+		// Check if names have been sent from the server. If not then we canot
+		// determin our character, so stop.
+		if (manager == null)
+			return;
+
+		// The headOut coroutine should only be called once, so check if it
+		// needs to be called and hasn't already
+        if (gameOver && !gameOverBeenDetected){
             StartCoroutine("headOut");
+			gameOverBeenDetected = true;
         }
 
         // Update player stats
@@ -155,7 +166,11 @@ public class HudOn : MonoBehaviour {
 
                 // Destroy existing vortices
                 GameObject[] vortices = GameObject.FindGameObjectsWithTag("vortex");
-                foreach (GameObject existingVortex in vortices) StartCoroutine(Vortex.shrink(existingVortex));
+                foreach (GameObject existingVortex in vortices)
+				{
+					Vortex.labelIsSet = false;
+					StartCoroutine(Vortex.shrink(existingVortex));
+				}
 
                 GameObject vortex = (GameObject)Resources.Load("Player/vortex");
                 float[] xvals = new float[playercount - 1];
@@ -177,7 +192,7 @@ public class HudOn : MonoBehaviour {
                 }
 				
 				int currentUniverse = manager.universeNumber;
-
+				print("Manager says current universe is: "+currentUniverse);
                 // Make n-1 new ones
                 for (int i = 0; i < playercount - 1; i++)
                 {
@@ -187,8 +202,10 @@ public class HudOn : MonoBehaviour {
                     Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
                     GameObject obj = (GameObject)Instantiate(vortex, vort, Quaternion.identity);
                     vortex.name = "vortex" + (i + 1);
-					obj.GetComponentInChildren<Vortex>().leadsToUniverse =
-						(i + 1 >= currentUniverse) ? i+2 : i+1;
+					Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
+					vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
+					vortexScript.inUniverse = currentUniverse;
+					vortexScript.setLabel(vortpoint,systemNames[vortexScript.leadsToUniverse-1]);
 					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
                     vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
                     vortex.tag = "vortex";
@@ -221,10 +238,18 @@ public class HudOn : MonoBehaviour {
 
     private int universeN()
     {
+		PlayerManager manager = PlayerManager.Instance;
+
+		if (manager == null)
+			return -1;
+		else
+			return manager.universeNumber;
+		/*
         int length = transform.name.Length;
         string num = transform.name.Substring(length - 1, 1);
+		print ("Num = "+num);
         if ("0123456789".Contains(num)) return (int.Parse(num));
-        else return -1;
+        else return -1;*/
     }
 
     /* Can't use it and moved all its contents to Start() as InitialiseStats() is not static anymore
@@ -245,10 +270,27 @@ public class HudOn : MonoBehaviour {
 		score = 0;
 		gameOver = false;
 		Instance = this;
-        countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length-1;
-		for (int i = 0; i < countUniverse; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 
-        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+		gameOverBeenDetected = false;
+		main = (Texture2D) Resources.Load ("hud/topleft");
+		speed = (Texture2D) Resources.Load ("hud/topright");
+		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");
+		universe = (Texture2D) Resources.Load ("hud/bottomleft");
+		deco = (Font) Resources.Load ("Belgrad");
+
+		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
+		gameOverBeenDetected = false;
+	}
+
+		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
+
+        //manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
+		//onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
+
+	void startWithManager(){
+		onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
+		print ("I think universeN() = "+universeN() );
+        manager = GameObject.Find("Character" + manager.universeNumber).GetComponent<PlayerManager>();
       
         /* Was in Awake() */
         if (manager.activeCharN == null) manager.activeCharN = "tester";
@@ -265,19 +307,18 @@ public class HudOn : MonoBehaviour {
 		wepBox1 = (Texture2D) Resources.Load ("hud/wepBox1Off");
 		wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2Off");
 		wepBox3 = (Texture2D) Resources.Load ("hud/wepBox3Off");
-        flag = (Texture2D)Resources.Load("hud/" + PlayerManager.activeChar);
-		
+		flag = (Texture2D) Resources.Load ("menu/flags/"+manager.getFlag());
         charName = MP.playerName;
 
         if (Network.isClient)
         {
+            int PlayerNumber = int.Parse(GameObject.FindGameObjectWithTag("MainCamera").name.Substring(GameObject.FindGameObjectWithTag("MainCamera").name.Length - 1, 1));
+            weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
+			charScale = GameObject.Find("Character" + PlayerNumber).transform.localScale;
+			charModel = GameObject.Find("Character" + PlayerNumber);
+
             setWeapon(1);
         }
-
-		if (Network.isServer)
-		{
-
-		}
 
         startHP = manager.getStartHP();
         startEnergy = manager.getStartEnergy();
@@ -286,10 +327,13 @@ public class HudOn : MonoBehaviour {
 		health.normal.background = fillTex(1,1,new Color(0.8f,0f,0f,1f));
 		energy.normal.background = fillTex(1,1,new Color(0f,0f,0.8f,1f));
 		bank.normal.background = fillTex (1,1,new Color(0f,0.8f,0f,1f));
+
         charName = manager.getPlayerName();
 	}
 
 	void OnGUI () {
+		if (manager == null)
+			return;
 
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
@@ -297,11 +341,11 @@ public class HudOn : MonoBehaviour {
 		universe = (Texture2D) Resources.Load ("hud/bottomleft");
 		
 		deco = (Font) Resources.Load ("Belgrad");
-		
+
 		GUI.Label (new Rect (-130,-20,main.width,main.height), main);
 		GUI.Label (new Rect (Screen.width-speed.width+15,-20,speed.width,speed.height), speed);
 		GUI.Label (new Rect (Screen.width-leaderboard.width+80,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
-		GUI.Label (new Rect (0,0,64,64),flag);
+		GUI.DrawTexture (new Rect (2,-2,64,48),flag,ScaleMode.StretchToFill);
 
 		GUIStyle hudStyle = new GUIStyle();
     	hudStyle.font = deco;
@@ -313,14 +357,18 @@ public class HudOn : MonoBehaviour {
     	coStyle.font = deco;
 		coStyle.normal.textColor = Color.white;
 		coStyle.fontStyle = FontStyle.Italic;
-		coStyle.fontSize = 12;
+		coStyle.fontSize = 14;
 		
 		GUIStyle speedStyle = new GUIStyle();
     	speedStyle.font = deco;
 		speedStyle.normal.textColor = Color.white;
-		//speedStyle.fontSize = 72;
-        speedStyle.fontSize = 38;
-		
+        speedStyle.fontSize = 34;
+
+		GUIStyle largeStyle = new GUIStyle();
+    	largeStyle.font = deco;
+		largeStyle.normal.textColor = Color.white;
+        largeStyle.fontSize = 40;
+
 		GUIStyle wepStyle = new GUIStyle();
     	wepStyle.font = deco;
 		wepStyle.normal.textColor = Color.white;
@@ -334,9 +382,14 @@ public class HudOn : MonoBehaviour {
 
 		// Universe (or rather, star system) name
 		int uniNo = manager.universeNumber;
+		
 		GUI.Label (new Rect (-5,Screen.height-universe.height/2,universe.width,universe.height),universe);
-		GUI.Label (new Rect (5,Screen.height-universe.height/2+15,200,50),"LOCATION:",coStyle);
-		GUI.Label (new Rect (5,Screen.height-universe.height/2+30,200,50),systemNames[uniNo],speedStyle);
+		GUI.Label (new Rect (6,Screen.height-universe.height/2+14,200,50),"LOCATION:",coStyle);
+
+		if (uniNo != 0)
+			GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),systemNames[uniNo-1],speedStyle);
+		else
+			GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),"MORT",speedStyle);
 
 		GUI.Label (new Rect (70,5,200,50),charName,hudStyle);
 		GUI.Label (new Rect (75,21,40,20),hullTitle,smallStyle);
@@ -353,22 +406,24 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (115,45,energyBank/(bankSize/hudBarSize),10),"",bank);
 		
 		// Speed and gear indicator
-        GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + manager.getScore(), speedStyle);
+        GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + manager.getScore(), largeStyle);
 		GUI.Label (new Rect (Screen.width-240,100,200,40),gearReady,hudStyle);
 		
 		// Scoreboard indicator
-		GUI.Label (new Rect (Screen.width-120,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",coStyle);
-        for (int i = 1; i <= countUniverse; i++)
+		GUI.Label (new Rect (Screen.width-150,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",hudStyle);
+        for (int i = 1; i <= 4; i++)
         {
             PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
-            GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 20 + i*20, 40, 40), score.playerNames[i] + " :" +score.getScore() , coStyle);
+			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
+            GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 22 + i*25, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
+            GUI.Label(new Rect(Screen.width - 155, Screen.height / 2 - leaderboard.height / 2 + 10 + i*25, 35, 35), playerFlag);
         }
 		
 		// Weapons initialisation
         int wepBoxSize = 48;
 		GUI.Label (new Rect (-10,10,wepBoxSize,wepBoxSize), wepBox1);
-		GUI.Label (new Rect (7,10,wepBoxSize,wepBoxSize), wepBox2);
-        GUI.Label(new Rect(24,10,wepBoxSize,wepBoxSize), wepBox3);
+		GUI.Label (new Rect (10,10,wepBoxSize,wepBoxSize), wepBox2);
+        GUI.Label(new Rect(30,10,wepBoxSize,wepBoxSize), wepBox3);
 		GUI.Label (new Rect (7,47,200,64), wepName, wepStyle);
 
         // Add a crosshair
@@ -378,11 +433,31 @@ public class HudOn : MonoBehaviour {
         Rect position = new Rect(Input.mousePosition.x - (crossTex.width / 2), (Screen.height - Input.mousePosition.y) - (crossTex.height / 2), crossTex.width, crossTex.height);
         GUI.DrawTexture(position, crossTex);
         Screen.showCursor = false;
+
+		// Show vortex timer
+		if (showCountdown)
+		{
+			Vector3 screenPoint = Camera.main.WorldToScreenPoint(vortpointOut);
+			screenPoint.y = (Screen.height/2 - (screenPoint.y - Screen.height/2)); // Flip y about center line (lord knows why)
+			int x = 100;
+			int y = 100;
+
+			// Counter style - yes, I included another style here, shoot me
+			GUIStyle style = new GUIStyle();
+	    	style.font = deco;
+			style.normal.textColor = Color.white;
+			style.alignment = TextAnchor.MiddleCenter;
+			style.fontStyle = FontStyle.Bold;
+			style.fontSize = 70;
+
+			GUI.Label(new Rect(screenPoint.x,screenPoint.y,10,10), vortexCountdownNum.ToString(), style);
+		}
 	}	
 	
 	// Vortex logic
 	IEnumerator VortexCountdown()
 	{
+		showCountdown = true;
 		while (vortexCountdownNum != 0)
 		{
 			print ("In vortex: "+vortexCountdownNum);
@@ -390,67 +465,42 @@ public class HudOn : MonoBehaviour {
             // ANIMATE HERE AT 2
 			yield return new WaitForSeconds(1);
 		}
-		
 		manager.movement.changeUniverse(vortexLeadsTo);
+		//charModel.transform.localScale = charScale;
+		showCountdown = false;
 	}
-	
-	public void enteredVortex(int vortexTo) {
+
+	public void enteredVortex(int vortexTo)
+	{
 		print ("LEADS TO "+vortexTo);
 		print("Entered Vortex");
 		
-		if (inVortexCountdown){
+		if (inVortexCountdown)
+		{
 			StopCoroutine("VortexCountdown");
+			StopCoroutine ("Vortex.playerGrow");
 			inVortexCountdown = false;
 		}
 		
 		vortexCountdownNum = 4;
 		vortexLeadsTo = vortexTo;
-		StartCoroutine("VortexCountdown");		
+		StartCoroutine("VortexCountdown");
 	}
-	
+
 	public void leftVortex() {
 		print("Left Vortex");
+
+		Vortex.labelIsSet = false;
 		
-		if (inVortexCountdown){
-			StopCoroutine("VortexCountdown");
+		if (inVortexCountdown) {
+			//StopCoroutine("VortexCountdown");
+			//StopCoroutine ("Vortex.playerShrink");
 			inVortexCountdown = false;
 		}
 	}
 
-	private string generateSystemNames()
-	{
-		ArrayList greek = new ArrayList();
-		greek.Add("alpha");
-		greek.Add("beta");
-		greek.Add("gamma");
-		greek.Add("delta");
-		greek.Add("epsilon");
-		greek.Add("zeta");
-		greek.Add("eta");
-		greek.Add("theta");
-		greek.Add("iota");
-		greek.Add("kappa");
-		greek.Add("lambda");
-		greek.Add("mu");
-		greek.Add("nu");
-		greek.Add("xi");
-		greek.Add("omicron");
-		greek.Add("pi");
-		greek.Add("rho");
-		greek.Add("sigma");
-		greek.Add("tau");
-		greek.Add("upsilon");
-		greek.Add("phi");
-		greek.Add("chi");
-		greek.Add("psi");
-		greek.Add("omega");
-		string system = (string) greek[(int) Random.Range(0,greek.Count)] + "-" + Random.Range(0,20).ToString();
-		return system.ToUpper();
-	}
-
-	[RPC]
-	private void setSystemName(int i, string name)
-	{
-		systemNames[i] = name;
+	public void setManager(PlayerManager m) {
+		manager = m;
+		startWithManager();
 	}
 }

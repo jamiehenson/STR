@@ -9,7 +9,7 @@ public class MP : MonoBehaviour
     public static bool joinScreen, hostScreen, openBox;
     public static string playerName, serverName, playerLimit, coPilotName;
     private Font deco;
-    private Texture2D coPilotFlag;
+    public static Texture2D coPilotFlag;
     public static bool refresh;
     private bool startServer;
     public static HostData[] hostData;
@@ -22,7 +22,7 @@ public class MP : MonoBehaviour
     private float btnW = Screen.width * 0.4f;
     private float btnH = Screen.width * 0.05f;
 	
-	private GameObject header, subheader, heading1, heading2, playerNameText, serverNameBox, serverNameBoxText, serverLimitBox, serverLimitBoxText, proceed, proceedtext, refreshbutton, flagbg, coPilot, flagBox;
+	private GameObject header, subheader, heading1, heading2, playerNameText, serverNameBox, serverNameBoxText, serverLimitBox, serverLimitBoxText, proceed, proceedtext, refreshbutton, flagbg, coPilot, flagBox, flagBoxMain;
 	private GameObject[] playerdetails, playerballs;
 
     void Start()
@@ -52,6 +52,7 @@ public class MP : MonoBehaviour
         flagbg = GameObject.Find("SBrowserBG");
 		coPilot = GameObject.Find ("SCoPilot");
 		flagBox = GameObject.Find("SFlag");
+		flagBoxMain = GameObject.Find("SFlagMain");
 		playerNameText = GameObject.Find ("SPlayerNameText");
 		flags = Resources.LoadAll("menu/flags", typeof(Texture2D));
 
@@ -59,6 +60,7 @@ public class MP : MonoBehaviour
 		coPilot.GetComponent<TextMesh>().text = coPilotName;
 		coPilotFlag = (Texture2D) flags[Random.Range(0,flags.Length)];
 		flagBox.GetComponent<Renderer>().material.mainTexture = coPilotFlag;
+		flagBoxMain.GetComponent<Renderer>().material.mainTexture = coPilotFlag;
 
         MasterServer.ipAddress = "54.243.193.180";
         MasterServer.port = 23466;
@@ -162,7 +164,7 @@ public class MP : MonoBehaviour
 			{
 				GUI.Label (new Rect(0,0,Screen.width,Screen.height),bgTex);
 				GUI.Label (new Rect(Screen.width/2-90,Screen.height/4+10,200,40),"WHAT'S YOUR NAME?",exitStyleBig);
-				playerName = GUI.TextField(new Rect((Screen.width / 2)-(Screen.width / 6), Screen.height / 4 + (Screen.width / 18), Screen.width/3, Screen.width/12), playerName, 10, field);
+				playerName = GUI.TextField(new Rect((Screen.width / 2)-(Screen.width / 5), Screen.height / 4 + (Screen.width / 18), Screen.width/2.5f, Screen.width/12), playerName, 10, field);
 				playerName = playerName.ToUpper();
 				if (GUI.Button(new Rect(Screen.width/2-Screen.width/8,Screen.height*0.65f,Screen.width/4,Screen.height/10),"DONE",field2)) openBox = false;
 			}
@@ -181,6 +183,7 @@ public class MP : MonoBehaviour
 			serverLimitBox.renderer.enabled = false;
 			coPilot.renderer.enabled = true;
 			flagBox.renderer.enabled = true;
+			flagBoxMain.renderer.enabled = true;
 			serverNameBoxText.renderer.enabled = false;
 			serverLimitBoxText.renderer.enabled = false;
 			playerNameText.renderer.enabled = true;
@@ -235,6 +238,7 @@ public class MP : MonoBehaviour
 			heading2.renderer.enabled = true;
 			coPilot.renderer.enabled = false;
 			flagBox.renderer.enabled = false;
+			flagBoxMain.renderer.enabled = false;
 			playerNameText.renderer.enabled = false;
 
             GameObject browserbg = GameObject.Find("SBrowserBG");
@@ -254,6 +258,7 @@ public class MP : MonoBehaviour
                     hostnb = i;	
                     joinScreen = false;
                     PlayerManager.playername = playerName;
+					PlayerManager.flagname = coPilotFlag.name;
                     Application.LoadLevel("OnlineClient");
                 }
             }

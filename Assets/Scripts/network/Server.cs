@@ -25,8 +25,9 @@ public class Server : MonoBehaviour {
     private static int ID = 1;
     public static int finalNumberofPlayers;
     public string takenNames;
+
     public string[] playerNames;
-    public Dictionary<int, string> playerName;
+    public string[] playerFlags;
 
     // Use this for initialization
     void Start() {
@@ -59,7 +60,7 @@ public class Server : MonoBehaviour {
         Log.Note("Count Universe: " + countUniverse);
 		// Initalise private memeber variables
         playerNames = new string[countUniverse + 1];
-        playerName = new Dictionary<int, string>();
+		playerFlags = new string[countUniverse + 1];
         finalNumberofPlayers = countUniverse;
         universe = new Transform[countUniverse+2];
         characterView = new NetworkView[countUniverse+1];
@@ -126,6 +127,7 @@ public class Server : MonoBehaviour {
         bridge.updateUniverseNames(viewIDNameMapping, player);
         bridge.updateCharacterNames(viewIDChNameMapping, player);
 
+		changeSystemNames();
     }
 
 	// When player disconnects, log event
@@ -143,28 +145,46 @@ public class Server : MonoBehaviour {
 
     void OnGUI()
     {
+		if (GameObject.Find("Character" + ID) == null)
+			return;
+		
         int x = 400;
         /* Notify server which player has connected. */
         /* GUI part*/
         for(int i = 1; i <ID; i++)
         {
-            GUI.Label(new Rect(60, 200 + (20 * i), 300, 100), i + ". Player " + playerName[i] + "has joined the game.");
+            GUI.Label(new Rect(60, 200 + (20 * i), 300, 100), i + ". Player " + playerNames[i] + "has joined the game.");
         }
         /* Check if a new player has connected. */
         if (!manualGoAhead)
         {
+//<<<<<<< HEAD
            if (ID <= countUniverse && GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && ID == nextPlayerID )
+//=======
+            // Debug.Log(ID); // Ahhh maddie!!!!! Sorry forgot about that one! Hey guys it's me
+//            if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
+//>>>>>>> f7b70f54cf
             {
-                if (playerName.ContainsValue(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
+                if (Misc.ArrayContains(playerNames, GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
                     GameObject.Find("Character" + ID).GetComponent<PlayerManager>().updatePlayerNameS(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() + "'");
                 PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
-                Debug.Log("Add " + manager.getPlayerName());
-                playerName.Add(ID, manager.getPlayerName());
+//<<<<<<< HEAD
+//                Debug.Log("Add " + manager.getPlayerName());
+//                playerName.Add(ID, manager.getPlayerName());
+//=======
+                Debug.Log("Player :" + manager.getPlayerName() + "has connected");
+                playerNames[ID] = manager.getPlayerName();
+				playerFlags[ID] = manager.getFlag();
+                //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
+//>>>>>>> f7b70f54cf
                 GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().updatePlayerNames(ID, manager.getPlayerName());
                 manager.updatePlayerNames(ID, manager.getPlayerName());
+				manager.updatePlayerFlags(ID, manager.getFlag());
                 ID++;
+//<<<<<<< HEAD
+//=======
+                takenNames = takenNames + " " + manager.getPlayerName();
             }
-
         }
         /* End*/
 
@@ -198,12 +218,52 @@ public class Server : MonoBehaviour {
 		GUI.Label(new Rect(Screen.width/4, Screen.height*0.75f, Screen.width/2, 200), playersJoined);
     }
 
-    public static int numberOfPlayers()
-    {
+    public static int numberOfPlayers() {
         return finalNumberofPlayers;
     }
 
 	public void moveCamera(int universeNum, NetworkPlayer player){
 		bridge.moveCamera(universeNum, player);
+	}
+
+	public void changeSystemNames() {
+		bridge.systemNames = new List<string>(4);
+
+
+		for (int i=0; i<4; i++)
+			bridge.systemNames.Add(generateSystemNames());
+
+		bridge.sendSystemNames();
+	}
+
+	public string generateSystemNames()
+	{
+		ArrayList greek = new ArrayList();
+		greek.Add("alpha");
+		greek.Add("beta");
+		greek.Add("gamma");
+		greek.Add("delta");
+		greek.Add("epsilon");
+		greek.Add("zeta");
+		greek.Add("eta");
+		greek.Add("theta");
+		greek.Add("iota");
+		greek.Add("kappa");
+		greek.Add("lambda");
+		greek.Add("mu");
+		greek.Add("nu");
+		greek.Add("xi");
+		greek.Add("omicron");
+		greek.Add("pi");
+		greek.Add("rho");
+		greek.Add("sigma");
+		greek.Add("tau");
+		greek.Add("upsilon");
+		greek.Add("phi");
+		greek.Add("chi");
+		greek.Add("psi");
+		greek.Add("omega");
+		string system = (string) greek[(int) Random.Range(0,greek.Count)] + "-" + Random.Range(0,20).ToString();
+		return system.ToUpper();
 	}
 }
