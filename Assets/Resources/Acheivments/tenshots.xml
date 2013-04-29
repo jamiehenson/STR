@@ -1,0 +1,9 @@
+<acheivement>
+	<name>Ten Shots</name>
+	<message>Beginner Shooter</message>
+	<score>1000</score>
+
+	<requirments>
+		<requirment metric="shots" comparision=">">10</requirment>	
+	</requirments>
+</acheivement>
