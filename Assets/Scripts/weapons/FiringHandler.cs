@@ -59,6 +59,8 @@ public class FiringHandler : MonoBehaviour {
                     
                     timer = 0;
 
+					// Tell AchievementSystem
+					AchievementSystem.playerFired();
                 }
             }
         }

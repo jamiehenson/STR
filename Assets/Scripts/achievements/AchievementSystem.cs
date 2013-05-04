@@ -8,11 +8,14 @@ using System.Collections.Generic;
 
 public class AchievementSystem : MonoBehaviour {
 	private static List<Achievement> achievements = new List<Achievement>();
+	private static Metrics metrics;
 	private static bool beenSetup = false;
 
 	public static void MenuStarted() {
 		if (!beenSetup)
 			Setup();
+
+		metrics = new Metrics();
 	}
 
 	private static void Setup() {
@@ -51,5 +54,26 @@ public class AchievementSystem : MonoBehaviour {
 		}
 
 		achievements.Add(newAchievement);
+	}
+
+	private static void checkAchievements() {
+		foreach (Achievement achievement in achievements) {
+			achievement.updateMetrics(metrics);
+		}
+	}
+
+	public static void playerFired() {
+		metrics.shots++;
+		checkAchievements();
+	}
+
+	public static void killedEnemy() {
+		metrics.kills++;
+		checkAchievements();
+	}
+
+	public static void nextLevel() {
+		metrics.levels++;
+		checkAchievements();
 	}
 }

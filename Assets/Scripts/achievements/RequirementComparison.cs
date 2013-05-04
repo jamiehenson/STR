@@ -12,17 +12,20 @@ public abstract class RequirementComparison {
 
 	public static RequirementComparison newRequirementComparision(string op, int v){
 		switch (op) {
-			case("<"):
+			case("&lt;"):
 				return new RequirementComparisonLT(v);
 				break;
-			case("<="):
+			case("&lt;="):
 				return new RequirementComparisonLE(v);
 				break;
-			case(">"):
+			case("&gt;"):
 				return new RequirementComparisonGT(v);
 				break;
-			case(">="):
+			case("&gt;="):
 				return new RequirementComparisonGE(v);
+				break;
+			default:
+				Debug.Log ("Comparision not known");
 				break;
 		}
 		return null;

@@ -12,6 +12,8 @@ public abstract class Requirement {
 
 	public static Requirement newRequirement(string metric, string op, int v){
 		RequirementComparison c = RequirementComparison.newRequirementComparision(op, v);
+		if (c == null)
+			Debug.Log ("comp is null");
 
 		switch (metric) {
 			case("shots"):
