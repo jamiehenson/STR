@@ -154,7 +154,7 @@ public class EnemyMovement : MonoBehaviour {
 					Vector3 fireDirection = character.transform.position - transform.position;
 					Vector3 force = fireDirection.normalized * eManager.force * 2 * typeForceMultiplier;
         			fireDirection.y = Random.Range(fireDirection.y - firingOffset, fireDirection.y + firingOffset);
-					Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation, 200);
+					Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position - new Vector3(-10,0,0), gameObject.transform.rotation, 200);
 					NetworkViewID bulletID = bullet.networkView.viewID;
 					networkView.RPC("fireBullet", RPCMode.All, gameObject.transform.position, gameObject.transform.rotation, targetID, bulletID, fireDirection, force);
 
@@ -168,7 +168,7 @@ public class EnemyMovement : MonoBehaviour {
 	[RPC]
 	void fireBullet(Vector3 startPosition, Quaternion startRotation, NetworkViewID targetID, NetworkViewID bulletID, Vector3 fireDir, Vector3 force) {
 		// Get target
-		Debug.Log ("I am being told to fire");
+		Debug.Log ("I am being told to fire: "+bulletID);
 		GameObject character = NetworkView.Find (targetID).gameObject;
 
 		GameObject bullet = NetworkView.Find (bulletID).gameObject;
