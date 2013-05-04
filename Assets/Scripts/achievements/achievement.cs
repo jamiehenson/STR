@@ -36,6 +36,8 @@ public class Achievement {
 	}
 
 	private void Achieved() {
-		Debug.Log ("Achevement completed");
+		AchievementMessage am = new AchievementMessage();
+		am.message = "New Achievement!\n"+message+"\n+"+score;
+		AchievementSystem.newAchievementMessage(am);
 	}
 }

@@ -9,6 +9,10 @@ using System.Collections.Generic;
 public class AchievementSystem : MonoBehaviour {
 	private static List<Achievement> achievements = new List<Achievement>();
 	private static Metrics metrics;
+	private static Queue<AchievementMessage> messages;
+	private static bool showingMessage;
+	private static AchievementMessage currentMessage;
+	private static Time startedShowingMessage;
 	private static bool beenSetup = false;
 
 	public static void MenuStarted() {
@@ -16,6 +20,8 @@ public class AchievementSystem : MonoBehaviour {
 			Setup();
 
 		metrics = new Metrics();
+		messages = new Queue<AchievementMessage>();
+		showingMessage = false;
 	}
 
 	private static void Setup() {
@@ -76,4 +82,28 @@ public class AchievementSystem : MonoBehaviour {
 		metrics.levels++;
 		checkAchievements();
 	}
+
+	public static void newAchievementMessage(AchievementMessage message) {
+		HudOn.Instance.ToastWrapper(message.message);
+	}
+	/*
+	public void OnGUI()
+	{
+		/*
+			Vector3 screenPoint = Camera.main.ViewportToScreenPoint(vortPos);
+			screenPoint.y = (Screen.height/2 - (screenPoint.y - Screen.height/2)); // Flip y about center line (lord knows why)
+			int bgw = 140; // Vortex note bg width
+			int bgh = 30; // Vortex note bg height
+			int x = 10;
+			int y = 5;
+			GUIStyle style = new GUIStyle();
+	    	style.font = deco;
+			style.normal.textColor = Color.white;
+			style.alignment = TextAnchor.MiddleCenter;
+			style.fontStyle = FontStyle.Bold;
+			style.fontSize = 18;
+			label = label.ToUpper();
+			GUI.DrawTexture(new Rect(screenPoint.x-(bgw/2-5),screenPoint.y-(bgh/2)-40,bgw,bgh),bg,ScaleMode.StretchToFill, true, 0);
+			GUI.Label(new Rect(screenPoint.x,screenPoint.y-40,x,y), label, style);*//*
+	}*/
 }
