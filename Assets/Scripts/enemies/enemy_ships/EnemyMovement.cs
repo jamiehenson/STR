@@ -50,21 +50,22 @@ public class EnemyMovement : MonoBehaviour {
             case 3: bulletPrefab = heavyWeapon; typeForceMultiplier = 0.6f; break;
             case 4: bulletPrefab = superheavyWeapon; typeForceMultiplier = 0.3f; break;
             default: break;
-        }     
-    }
+        }
 
-    void Start() {
-		if (Network.isServer)
-        	networkView.RPC("modifyName", RPCMode.All, gameObject.name);
-		
-        positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
+		positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
         universeNb = int.Parse(name.Substring(name.Length-1, 1));
         Vector3 forceDir = Vector3.zero;
         eManager = gameObject.GetComponent<EnemyManager>();
+
+		print ("In start");
+		if (eManager == null)
+			print ("Its null");
+		else
+			print ("It isn't null");
         commander = transform.parent.parent.FindChild("Managers/EnemyManager").GetComponent<Commander>();
         setUpEnemy();
 
-        int enemyType = eManager.enemyType;
+        enemyType = eManager.enemyType;
         switch (enemyType)
         {
             case 1: bulletPrefab = lightWeapon; typeForceMultiplier = 2.2f; break;
@@ -84,8 +85,6 @@ public class EnemyMovement : MonoBehaviour {
         // NEED to do this not based on position, but on a FIXED stopZ (due to rotation issues)
         /*GameObject character = GameObject.Find("Character"+universeNb);
         stopZ = character.transform.position.z;*/
-
-
 
         stopZ = positions.baseZ;
 		// Send to client
@@ -117,6 +116,13 @@ public class EnemyMovement : MonoBehaviour {
 		if (Network.isServer)
         	StartCoroutine(Shoot());
         StartCoroutine(LerpEnemy());
+    }
+
+    void Start() {
+		if (Network.isServer)
+        	networkView.RPC("modifyName", RPCMode.All, gameObject.name);
+		
+
     }
 	/*
 	[RPC]
@@ -226,6 +232,9 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     void Update() {
+		if (eManager == null)
+			return;
+
         switch (eManager.direction)
         {
             case 1:
