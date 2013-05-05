@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Server : MonoBehaviour {
 
-    private int playerCount = 0;
+    //private int playerCount = 0;
     public static string gameName = "STD"; // I think this should be STR ?
     public Transform playerUniversePrefab;
     public static int countUniverse;
@@ -21,7 +21,7 @@ public class Server : MonoBehaviour {
     public bool startGame, manualGoAhead;
     public static string serverAddress;
     public GUIStyle buttonStyle;
-	private string playersJoined;
+	private string playersJoined = "";
     private static int ID = 1;
     public static int finalNumberofPlayers;
     public string takenNames;

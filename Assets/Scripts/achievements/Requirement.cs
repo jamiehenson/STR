@@ -18,15 +18,14 @@ public abstract class Requirement {
 		switch (metric) {
 			case("shots"):
 				return new RequirementShots(c);
-				break;
 			case("kills"):
 				return new RequirementKills(c);
-				break;
 			case("levels"):
 				return new RequirementLevels(c);
-				break;
+			default:
+				Debug.Log ("Metric unknown");
+				return null;
 		}
-		return null;
 	}
 }
 

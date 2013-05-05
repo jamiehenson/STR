@@ -81,7 +81,7 @@ public class FiringHandler : MonoBehaviour {
 		//weaponHandler.Update();
 		
 		// Place Weapon
-		Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z);
+		//Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z);
 		//Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
         Transform arm = transform.Find("rightArm");
         float angle = arm.transform.rotation.z * 100;

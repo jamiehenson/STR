@@ -17,7 +17,7 @@ public class Vortex : MonoBehaviour {
 	public static IEnumerator playerGrow(GameObject player)
     {
 		yield break;
-
+		/*
         double o = player.transform.localScale.x;
 		float x = 0;
         player.transform.localScale = new Vector3(0, 0, 0);
@@ -26,12 +26,14 @@ public class Vortex : MonoBehaviour {
             x += 0.004f;
             player.transform.localScale = new Vector3(x, x, x);
             yield return new WaitForSeconds(0.05f);
-        }
+        }*/
     }
 
 	public static IEnumerator playerShrink(GameObject player)
     {
 		yield break;
+
+		/*
 		print ("No no no no no, I got here!");
 		labelIsSet = false;
 		float x = player.transform.localScale.x;
@@ -40,13 +42,14 @@ public class Vortex : MonoBehaviour {
             x -= 0.0002f;
             player.transform.localScale = new Vector3(x, x, x);
             yield return new WaitForSeconds(0.1f);
-        }
+        }*/
     }
 
 	public static IEnumerator grow(GameObject vortex)
     {
 		yield break;
 
+		/*
         float x = 0;
         vortex.transform.localScale = new Vector3(0, 0, 0);
         while (x <= 4)
@@ -54,7 +57,7 @@ public class Vortex : MonoBehaviour {
             x += 0.06f;
             vortex.transform.localScale = new Vector3(x, 0, x);
             yield return new WaitForSeconds(0.005f);
-        }
+        }*/
     }
 
     public static IEnumerator shrink(GameObject vortex)

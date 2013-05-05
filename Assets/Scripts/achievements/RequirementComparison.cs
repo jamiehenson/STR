@@ -14,21 +14,16 @@ public abstract class RequirementComparison {
 		switch (op) {
 			case("&lt;"):
 				return new RequirementComparisonLT(v);
-				break;
 			case("&lt;="):
 				return new RequirementComparisonLE(v);
-				break;
 			case("&gt;"):
 				return new RequirementComparisonGT(v);
-				break;
 			case("&gt;="):
 				return new RequirementComparisonGE(v);
-				break;
 			default:
 				Debug.Log ("Comparision not known");
-				break;
+				return null;
 		}
-		return null;
 	}
 }
 

@@ -9,9 +9,6 @@ using System.Collections.Generic;
 public class AchievementSystem : MonoBehaviour {
 	private static List<Achievement> achievements = new List<Achievement>();
 	private static Metrics metrics;
-	private static Queue<AchievementMessage> messages;
-	private static bool showingMessage;
-	private static AchievementMessage currentMessage;
 	private static Time startedShowingMessage;
 	private static bool beenSetup = false;
 
@@ -20,8 +17,6 @@ public class AchievementSystem : MonoBehaviour {
 			Setup();
 
 		metrics = new Metrics();
-		messages = new Queue<AchievementMessage>();
-		showingMessage = false;
 	}
 
 	private static void Setup() {
@@ -43,7 +38,7 @@ public class AchievementSystem : MonoBehaviour {
 		root.Load(file.FullName);
 		XmlElement doc = root.DocumentElement;
 
-		string name = doc.SelectSingleNode("name").InnerXml;
+		//string name = doc.SelectSingleNode("name").InnerXml;
 		string message = doc.SelectSingleNode("message").InnerXml;
 		int score = int.Parse(doc.SelectSingleNode("score").InnerXml);
 

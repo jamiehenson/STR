@@ -13,23 +13,23 @@ public class HudOn : MonoBehaviour {
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount = 4;
-	private GameObject toast, charModel;
+	private GameObject toast;//, charModel;
 	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
 
-	private Vector3 charScale;
+	//private Vector3 charScale;
 	public static Vector3 vortpointOut;
 	private bool showCountdown;
 	public static float score;
 	public static bool gameOver;
 	private static bool gameOverBeenDetected;
 
-    WeaponHandler weaponHandler;
+    //WeaponHandler weaponHandler;
     public static int countUniverse;
     PlayerManager manager = null;
-	OnlineClient onlineClient;
+	//OnlineClient onlineClient;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
 	
@@ -288,7 +288,7 @@ public class HudOn : MonoBehaviour {
 		//onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
 
 	void startWithManager(){
-		onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
+		//onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
 		print ("I think universeN() = "+universeN() );
         manager = GameObject.Find("Character" + manager.universeNumber).GetComponent<PlayerManager>();
       
@@ -312,10 +312,10 @@ public class HudOn : MonoBehaviour {
 
         if (Network.isClient)
         {
-            int PlayerNumber = int.Parse(GameObject.FindGameObjectWithTag("MainCamera").name.Substring(GameObject.FindGameObjectWithTag("MainCamera").name.Length - 1, 1));
-            weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
-			charScale = GameObject.Find("Character" + PlayerNumber).transform.localScale;
-			charModel = GameObject.Find("Character" + PlayerNumber);
+            //int PlayerNumber = int.Parse(GameObject.FindGameObjectWithTag("MainCamera").name.Substring(GameObject.FindGameObjectWithTag("MainCamera").name.Length - 1, 1));
+            //weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
+			//charScale = GameObject.Find("Character" + PlayerNumber).transform.localScale;
+			//charModel = GameObject.Find("Character" + PlayerNumber);
 
             setWeapon(1);
         }
@@ -439,8 +439,8 @@ public class HudOn : MonoBehaviour {
 		{
 			Vector3 screenPoint = Camera.main.WorldToScreenPoint(vortpointOut);
 			screenPoint.y = (Screen.height/2 - (screenPoint.y - Screen.height/2)); // Flip y about center line (lord knows why)
-			int x = 100;
-			int y = 100;
+			//int x = 100;
+			//int y = 100;
 
 			// Counter style - yes, I included another style here, shoot me
 			GUIStyle style = new GUIStyle();

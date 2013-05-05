@@ -14,7 +14,7 @@ public class AsteroidCollisions : MonoBehaviour {
     private bool exploded;
 
     PlayerManager manager;
-    private bool showScore;
+    //private bool showScore = false;
 
     // Destroy asteroid on collision with the character
     [RPC]
@@ -155,7 +155,7 @@ public class AsteroidCollisions : MonoBehaviour {
     [RPC]
     void showedScore()
     {
-        showScore = true;
+        //showScore = true;
     }
 
     void OnDestroy() {

@@ -4,7 +4,7 @@ using System.Collections;
 public class Exit : MonoBehaviour {
 	public static bool goingOut;
 	private Font deco;
-    private Texture2D bg;
+    //private Texture2D bg;
 	
 	void Start () {
 		goingOut = false;
@@ -12,7 +12,7 @@ public class Exit : MonoBehaviour {
 		GameObject PopExit = GameObject.Find ("PopExit");
 		GameObject Exit = GameObject.Find ("Exit");
 		iTween.FadeTo(Exit, 0.3f, 0.1f);
-        bg = (Texture2D)Resources.Load("menu/blank");
+        //bg = (Texture2D)Resources.Load("menu/blank");
 		iTween.FadeTo(PopExit,0.5f,0.1f);
 	}
 

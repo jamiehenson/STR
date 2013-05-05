@@ -19,7 +19,7 @@ using System.Reflection;
 // and client is larger than 100 ms.
 public class GraduallyUpdateState : MonoBehaviour {
 	
-	Component targetController;
+	//Component targetController;
 	FieldInfo isMovingFieldInfo;
 		
 	internal struct  State
@@ -76,11 +76,12 @@ public class GraduallyUpdateState : MonoBehaviour {
 	}
 	
 	// Convert field info from character controller script to a local bool variable
+	/*
 	bool targetIsMoving {
 		get {
 			return (bool) isMovingFieldInfo.GetValue(targetController);
 		}
-	}
+	}*/
 	
 	IEnumerator MonitorLocalMovement() {
 		while (true) {
