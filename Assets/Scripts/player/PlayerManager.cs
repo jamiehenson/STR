@@ -4,7 +4,12 @@ using System.Collections;
 public class PlayerManager : MonoBehaviour {
     // Player stats
     private int score;
-
+	
+	// Lives
+	public int lives;
+    public string loser = "";
+	
+	//Stats
     private float hitPoints;
     private float energyLevel;
     private float startHP, startEnergy;
@@ -82,6 +87,11 @@ public class PlayerManager : MonoBehaviour {
         return energyLevel;
     }
 
+    public int getLives()
+    {
+        return lives;
+    }
+
     /* Score functions*/
     public int getScore()
     {
@@ -93,7 +103,7 @@ public class PlayerManager : MonoBehaviour {
         score = score + s;
     }
 
-    /* End of core functions*/
+    /* End of Score functions*/
     public void updateEnergyLevel(float val)
     {
         energyLevel = energyLevel + val;
@@ -175,6 +185,7 @@ public class PlayerManager : MonoBehaviour {
     {
         myCharacter = true;
         universeNumber = charNum;
+        networkView.RPC("updateCharacterNum", RPCMode.Server, charNum);
 		HudOn.Instance.setManager(this);
 		Instance = this;
     }
@@ -187,6 +198,7 @@ public class PlayerManager : MonoBehaviour {
         {
             networkView.RPC("updatePlayerName", RPCMode.Server, playername);
 			networkView.RPC("updatePlayerFlag", RPCMode.Server, flagname);
+            
             switch (activeChar)
             {
                 case "china":
@@ -232,7 +244,9 @@ public class PlayerManager : MonoBehaviour {
             energyLevel = startEnergy;
             score = 0;
             WeaponHandler.ScaleDamages(damageMultiplier);
+            
             networkView.RPC("updateStartEnergy", RPCMode.Server, startEnergy);
+			networkView.RPC("updateStartHP", RPCMode.Server, startHP);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
         }
@@ -241,7 +255,8 @@ public class PlayerManager : MonoBehaviour {
 
     void Update()
     {
-        if (Network.isClient && myCharacter)
+        
+		if (Network.isClient && myCharacter)
         {
             switch (wepType)
             {
@@ -259,20 +274,63 @@ public class PlayerManager : MonoBehaviour {
             }
             networkView.RPC("updateWepDrain", RPCMode.Server, selectedWepDrain);
         }
-
+        Debug.Log("Available lives:" + lives);
         // Recharge power supply
         if (Network.isServer)
         {
             if (energyLevel > 0 && energyLevel <= startEnergy && Time.timeScale != 0) energyLevel += (startEnergy / 800);
             if (energyLevel <= 0) energyLevel = 1;
-            if (hitPoints < 0) hitPoints = 0;
+			// Update number of lives
+            if (hitPoints < 0)
+				{
+                    loser = playerNames[characterNum];
+					hitPoints = startHP;
+					lives--;
+                    Debug.Log("Minus lives:" + characterNum);
+                    networkView.RPC("updateLives", RPCMode.Others, lives, loser);
+
+				}
+			
             if (!bankFull) energyBank += (startEnergy / 1500);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
+			
             networkView.RPC("updatePlayerScore", RPCMode.All, score);
         }
     }
 
+    [RPC]
+    public void updateCharacterNum(int c)
+    {
+        characterNum = c;
+
+    }
+
+    public void initLivesServer(int count)
+    {
+        lives = count;
+        Debug.Log("Start lives " + lives);
+        networkView.RPC("initLivesClient", RPCMode.Others, lives);
+
+    }
+
+    [RPC]
+    void initLivesClient(int count)
+    {
+        lives = count;
+        Debug.Log("Start lives " + lives);
+        GameObject.Find("Client Scripts").GetComponent<HudOn>().startLives(lives);
+    }
+
+	[RPC]
+    void updateLives(int count, string s)
+    {
+        lives = count;
+        loser = s;
+        Debug.Log("Current lives " + lives);
+        GameObject.Find("Client Scripts").GetComponent<HudOn>().updateLives(lives, loser);
+    }
+	
     [RPC]
     void instantiatePlayerNames(int count)
     {
@@ -319,6 +377,12 @@ public class PlayerManager : MonoBehaviour {
     void updateStartEnergy(float e)
     {
         startEnergy = e;
+    }
+	
+	[RPC]
+    void updateStartHP(float e)
+    {
+        startHP = e;
     }
 
     [RPC]
