@@ -155,11 +155,13 @@ public class HudOn : MonoBehaviour {
 
         if (energyBank / (bankSize / hudBarSize) >= hudBarSize || true) // Always true, for testing
         {
-            manager.resetEnergyBank(manager.getBankSize());
+			manager.resetEnergyBank(manager.getBankSize());
             gearReady = "WARP DRIVE READY!";
             PlayerManager.bankFull = true;
             if (Input.GetKeyDown("space"))
             {
+				stopVortices(); // Kill the current vortices
+
                 manager.resetEnergyBank(0);
                 PlayerManager.bankFull = false;
                 gearReady = "";
@@ -175,6 +177,7 @@ public class HudOn : MonoBehaviour {
                 GameObject vortex = (GameObject)Resources.Load("Player/vortex");
                 float[] xvals = new float[playercount - 1];
                 float[] yvals = new float[playercount - 1];
+
                 float chunkX = (float)0.5f / (playercount - 1);
                 float chunkY = (float)0.8f / (playercount - 1);
                 for (int i = 0; i < playercount - 1; i++)
@@ -462,6 +465,7 @@ public class HudOn : MonoBehaviour {
             // ANIMATE HERE AT 2
 			yield return new WaitForSeconds(1);
 		}
+		stopVortices();
 		manager.movement.changeUniverse(vortexLeadsTo);
 		//charModel.transform.localScale = charScale;
 		showCountdown = false;
@@ -496,5 +500,14 @@ public class HudOn : MonoBehaviour {
 	public void setManager(PlayerManager m) {
 		manager = m;
 		startWithManager();
+	}
+
+	public void stopVortices() {
+		leftVortex(); // Stop countdown
+
+		GameObject[] vorties = GameObject.FindGameObjectsWithTag("vortex");
+		foreach (GameObject vortex in vorties) {
+			Destroy(vortex);
+		}
 	}
 }
