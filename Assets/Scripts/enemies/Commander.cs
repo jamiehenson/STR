@@ -41,13 +41,11 @@ public class Commander : MonoBehaviour {
     // Difficulty stats (numbered for selection, some merged into 1 "setting")
     private int numDiffVars = 4;
     /*0*/
-    //private int beltLevels = 3;
-    private int beltLevels = 1;
+    private int beltLevels = 3;
     /*1a*/
-    private int minAstsInBelt = 1;
+    private int minAstsInBelt = 5;
     /*1b*/
-    //private int maxAstsInBelt = 3;
-    private int maxAstsInBelt = 1;
+    private int maxAstsInBelt = 7;
     /*2*/
     private int enemyTotalStrength = 5;
     /*3*/
@@ -57,11 +55,9 @@ public class Commander : MonoBehaviour {
 
     // Hardest Poss Difficulty Stats
     /*1a*/
-    //private int hardestMinAstsInBelt = 6;
-    private int hardestMinAstsInBelt = 1;
+    private int hardestMinAstsInBelt = 20;
     /*1b*/
-    //private int hardestMaxAstsInBelt = 10;
-    private int hardestMaxAstsInBelt = 1;
+    private int hardestMaxAstsInBelt = 30;
     /*3a*/
     private float hardestMinEnemyClearanceTime = 10;
     /*3b*/
@@ -134,7 +130,7 @@ public class Commander : MonoBehaviour {
 
     void CreateAsteroid() {
         float y = Random.Range(positions.bottomBorder, positions.topBorder);
-        Vector3 astPosition = new Vector3(positions.rightBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Random.Range(positions.baseZ + 5, positions.baseZ - 5));
+        Vector3 astPosition = new Vector3(positions.rightBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Random.Range(positions.baseZ + 10, positions.baseZ - 10));
         Transform asteroid = (Transform)Network.Instantiate(asteroidPrefab, astPosition, new Quaternion(0, 0, 0, 0), 100+universeN());
         asteroid.name = "Asteroid" + universeN();
         asteroid.transform.parent = transform.parent.parent.FindChild("Enemies");
@@ -319,7 +315,7 @@ public class Commander : MonoBehaviour {
         switch (varNum) {
             case 0:
                 // Alter beltLevels
-                //beltLevels++;
+                beltLevels++;
                 break;
             case 1:
                 // Alter minAstsInBelt or maxAstsInBelt
