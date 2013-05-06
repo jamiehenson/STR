@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     public PlayerManager playerManager;
     public OnlineClient onlineClient;
     public Server server;
+    private FiringHandler firingHandler;
     GameObject character;
 
     // Helper vars
@@ -18,9 +19,6 @@ public class PlayerMovement : MonoBehaviour {
     private float vertDist, horDist;
     private Vector3 startingRot, startingPos, camStartingPos;
 
-    // For the laser pointer
-    Object material;
-
 	public void Start()
 	{
 		if (Application.loadedLevelName == "OnlineClient")
@@ -29,6 +27,7 @@ public class PlayerMovement : MonoBehaviour {
 			server = GameObject.Find("Network").GetComponent<Server>();
 
 		playerManager = gameObject.GetComponent<PlayerManager>();
+        firingHandler = GetComponent<FiringHandler>();
 		
         startingPos = gameObject.transform.position;
 		startingRot = new Vector3(0,0,0);	
@@ -39,13 +38,15 @@ public class PlayerMovement : MonoBehaviour {
     public void SetCamForBoss() {
         camtoggle = true;
         rottoggle = true;
-        gameObject.GetComponent<FiringHandler>().fireDepth = 30;
+        firingHandler.rotated = true;
+        //firingHandler.fireDepth = 100;
     }
 
     public void SetCamAfterBoss() {
         camtoggle = false;
         rottoggle = true;
-        gameObject.GetComponent<FiringHandler>().fireDepth = 15;
+        firingHandler.rotated = false;
+        //firingHandler.fireDepth = 15;
     }
 
     public void activateCharacter(int charNum, int univNum)
@@ -94,11 +95,13 @@ public class PlayerMovement : MonoBehaviour {
         //iTween.MoveBy(Camera.main.gameObject, new Vector3(direction * 20, 0, direction * -15), 2);
         if (cameraBehind) {
             iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x, origin.y, origin.z + 0.1f), 2);
-            gameObject.GetComponent<FiringHandler>().fireDepth = 15;
+            firingHandler.rotated = false;
+            //firingHandler.fireDepth = 15;
         }
         else {
             iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
-            gameObject.GetComponent<FiringHandler>().fireDepth = 30;
+            firingHandler.rotated = true;
+            //firingHandler.fireDepth = 100;
         }
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
         //iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, positions.baseZ), 1);
@@ -123,12 +126,6 @@ public class PlayerMovement : MonoBehaviour {
 		{
 	        float vertDist = PlayerManager.speed * Input.GetAxis("Vertical") * Time.deltaTime;
 	        float horDist = PlayerManager.speed * Input.GetAxis("Horizontal") * Time.deltaTime;
-			
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = 15;
-            LineRenderer beam = GetComponent<LineRenderer>();
-            beam.SetPosition(0, gameObject.transform.position);
-            beam.SetPosition(1, Camera.main.ScreenToWorldPoint(mousePos));
             
 			// If R is pressed, rotate the character, toggling 90 degrees
 			//if (Input.GetButtonDown("Rotate Character")) charRotate = true;

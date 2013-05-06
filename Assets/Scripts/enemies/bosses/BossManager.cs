@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BossManager : MonoBehaviour {
 
+    private Commander commander;
+
     // Enemy stats
     // Enemy type is set ahead of instantiation for next enemy type
     public int enemyType = 1;
@@ -23,7 +25,52 @@ public class BossManager : MonoBehaviour {
     // 2 - From Top
     // 3 - From Right
     // 4 - From Bottom
-    public int direction = 1;
+    public int direction = 4;
+
+    public virtual void Start() {
+        if (Network.isServer) {
+            gameObject.name = "Boss0";
+            commander = transform.parent.parent.FindChild("Managers/EnemyManager").GetComponent<Commander>();
+        }
+    }
+
+    public int PickTarget() {
+        int activeChars = 0;
+        print(commander.activeCharacters.Length);
+        for (int i = 0; i < commander.activeCharacters.Length; i++) {
+            if (commander.activeCharacters[i] == true) activeChars++;
+        }
+        if (activeChars == 0) return -1;
+        int index = Random.Range(0, activeChars);
+        return index;
+    }
+
+    // Used for firing
+    public virtual IEnumerator Shoot() {
+        while (true) {
+            //if (inPlane) {
+            //    //targetPlayer = comman
+            //    int targetPlayer = PickTarget();
+            //    if (targetPlayer != -1) {
+            //        Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation, 100 + universeNb);
+            //        GameObject character = GameObject.Find("Character" + targetPlayer);
+            //        EnemyBulletSettings ebs = bullet.GetComponent<EnemyBulletSettings>();
+            //        Vector3 fireDirection = character.transform.position - gameObject.transform.position;
+            //        fireDirection.y = Random.Range(fireDirection.y - firingOffset, fireDirection.y + firingOffset);
+            //        bullet.transform.LookAt(character.transform, Vector3.forward);
+            //        bullet.transform.Rotate(new Vector3(90, 0, 90));
+            //        bullet.name = "EnemyBullet";
+            //        Physics.IgnoreCollision(bullet.collider, gameObject.collider);
+            //        bullet.rigidbody.AddForce(fireDirection.normalized * bossManager.force * 2 * typeForceMultiplier);
+            //        bullet.rigidbody.freezeRotation = true;
+            //        ebs.damage = bossManager.weaponPower;
+            //    }
+            //    yield return new WaitForSeconds(bossManager.firingDelay);
+            //}
+            //else yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(5f);
+        }
+    }
 
     public void changeType(int type) {
         enemyType = type;

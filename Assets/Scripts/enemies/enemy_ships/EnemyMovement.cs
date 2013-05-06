@@ -140,7 +140,7 @@ public class EnemyMovement : MonoBehaviour {
                 //targetPlayer = comman
                 int targetPlayer = PickTarget();
                 if (targetPlayer != -1) {
-                    Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation, 100 + universeNb);
+                    Transform bullet = (Transform)Network.Instantiate(bulletPrefab, transform.position, transform.rotation, 100 + universeNb);
                     GameObject character = GameObject.Find("Character" + targetPlayer);
                     EnemyBulletSettings ebs = bullet.GetComponent<EnemyBulletSettings>();
                     Vector3 fireDirection = character.transform.position - gameObject.transform.position;

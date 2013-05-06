@@ -1,0 +1,113 @@
+fileFormatVersion: 2
+guid: 93fbfcd622c304548ba0562f982f2861
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Cornea
+    100002: Cornea 1
+    100004: Eyeball
+    100006: EyeBoss
+    100008: //RootNode
+    100010: EyeBossModel
+    100012: polySurface1
+    100014: polySurface2
+    100016: polySurface3
+    100018: polySurface4
+    100020: polySurface5
+    100022: pSphere3
+    100024: pSphere4
+    100026: Pupil
+    100028: Shield
+    100030: transform10
+    100032: transform11
+    100034: transform12
+    100036: transform13
+    100038: transform14
+    100040: transform3
+    100042: transform4
+    100044: transform5
+    100046: transform6
+    100048: transform7
+    100050: transform8
+    100052: transform9
+    400000: Cornea
+    400002: Cornea 1
+    400004: Eyeball
+    400006: EyeBoss
+    400008: //RootNode
+    400010: EyeBossModel
+    400012: polySurface1
+    400014: polySurface2
+    400016: polySurface3
+    400018: polySurface4
+    400020: polySurface5
+    400022: pSphere3
+    400024: pSphere4
+    400026: Pupil
+    400028: Shield
+    400030: transform10
+    400032: transform11
+    400034: transform12
+    400036: transform13
+    400038: transform14
+    400040: transform3
+    400042: transform4
+    400044: transform5
+    400046: transform6
+    400048: transform7
+    400050: transform8
+    400052: transform9
+    2300000: EyeBoss
+    3300000: EyeBoss
+    4300000: EyeBoss
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 1
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

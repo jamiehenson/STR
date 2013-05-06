@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour {
     private int universeNum;
 
     private List<string> levelNames = new List<string>();
-    private int stagesBeforeBoss = 3;
+    private int stagesBeforeBoss = 1;
 
     // ******Determine by which prefab is the script called***** 
     private int universeN() {

@@ -7,91 +7,97 @@ public class FiringHandler : MonoBehaviour {
     //private string bulletName;
 	//private float bulletSpeed, bulletRate;
 	//private int bulletType;
+    public bool rotated = false;
+    private Vector3 gunPosition;
+    public float fireDepth = 15;
+
+    PlayerManager manager;
 	private WeaponHandler weaponHandler;
 	private float timer = 0;
     private bool instantiated;
-    private int player;
     private bool myCharacter;
+    private int player;
     private int characterNum;
-    public float fireDepth = 15;
-    PlayerManager manager;
 
-    public void activateCharacter(int num)
-    {
+    public void activateCharacter(int num) {
         myCharacter = true;
         characterNum = num;
         Debug.Log("Activate");
     }
 
-	void Start()
-    {
-        weaponHandler = gameObject.GetComponent<WeaponHandler>(); 
+	void Start() {
+        weaponHandler = gameObject.GetComponent<WeaponHandler>();
 	}
 
-    private int universeN()
-    {
+    private int universeN() {
         int length = transform.name.Length;
         string num = transform.name.Substring(length - 1, 1);
         if ("0123456789".Contains(num)) return (int.Parse(num));
         else return -1;
     }
-
 	
 	void Update () {
-		//bulletType = WeaponHandler.wepType;
-		//bulletPrefab = WeaponHandler.wepPrefab;
-		//bulletSpeed = WeaponHandler.wepSpeed;
-		//bulletRate = WeaponHandler.wepRate;
-        //bulletName = WeaponHandler.wepName;
-        
-        if (universeN() != -1)
-        {
+        if (universeN() != -1) {
             manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
             timer += Time.deltaTime;
 
+            gunPosition = new Vector3(transform.position.x + 3, transform.position.y + 2, transform.position.z);
+            Vector3 mousePos = Input.mousePosition;
+            if (rotated) mousePos.z = gunPosition.z + fireDepth;
+            else mousePos.z = fireDepth;
+
+            // Cast a ray from the cursor into the screen
+            Vector3 lookAt; // = Camera.main.ScreenToWorldPoint(mousePos) - gunPosition;
+            Ray ray = new Ray(Camera.main.ScreenToWorldPoint(mousePos), Vector3.right);
+
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 20)) {
+                lookAt = hit.point;
+            }
+            else lookAt = ray.origin;
+
+            LineRenderer beam = GetComponent<LineRenderer>();
+            beam.SetPosition(0, gunPosition);
+            beam.SetPosition(1, lookAt);
+            Vector3 dir = lookAt - gunPosition;
+
             // Is player firing?
-            if (Network.isClient && myCharacter && Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0)
-            {
+            if (Network.isClient && myCharacter && Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0){
                 // Can I fire?
-                if (manager.getEnergyLevel() - manager.getSelectedWepDrain() >= 0)
-                {
-                    // Calculate the position to fire at
-                    float camDist = (transform.position - Camera.main.transform.position).z;
-                    //camDist = 15;
-                    Vector3 mousePos = Input.mousePosition;
-                    mousePos.z = fireDepth;
-                    Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
+                if (manager.getEnergyLevel() - manager.getSelectedWepDrain() >= 0) {
+                    //Vector3 dir = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
+
+                    //if (Physics.Raycast(transform.position, dir, out hit, 1000.0f))
+                    //    beam.SetPosition(1, hit.point);
+                    //else beam.SetPosition(1, Camera.main.ScreenToWorldPoint(mousePos));
+                    
+                    //Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
 
                     // Send message to fire
-                    networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, manager.wepStats.wepType);
+                    networkView.RPC("fireWeapon", RPCMode.Server, lookAt, dir, manager.wepStats.wepType);
                     // Update fire stats
                     
                     timer = 0;
-
                 }
             }
         }
 	}
 
     [RPC]
-    void fireAnimation(int n)
-    {
+    void fireAnimation(int n) {
         GameObject.Find("Character" + n).animation.Play("RightHandMove");
     }
 	
 	[RPC]
-	void fireWeapon(Vector3 lookAt, Vector3 fireDirection, int bulletType)
-	{
+	void fireWeapon(Vector3 lookAt, Vector3 fireDirection, int bulletType) {
         manager.updateEnergyLevel(-manager.getSelectedWepDrain());
 		// Update the WeaponHandler about the type (not the best way to do it)
 		//weaponHandler.wepType = bulletType;
 		//weaponHandler.Update();
 		
-		// Place Weapon
-		Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z);
 		//Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
        
-		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startPos, transform.rotation,200);
+		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, gunPosition, transform.rotation, 200);
         bullet.name = bullet.name + universeN();
         networkView.RPC("fireAnimation", RPCMode.All, universeN());
 		Physics.IgnoreCollision(bullet.collider, transform.collider);
@@ -103,8 +109,7 @@ public class FiringHandler : MonoBehaviour {
 	}
 
 	[RPC]
-	void setupWeapon(NetworkViewID id, Vector3 lookAt, Vector3 forceToApply, int bulletType)
-	{
+	void setupWeapon(NetworkViewID id, Vector3 lookAt, Vector3 forceToApply, int bulletType) {
 		NetworkView bulletNV = NetworkView.Find (id);
 		if (bulletNV == null) {
 			Log.Warning("During setupWeapon, unable to find player from their ID");
@@ -112,7 +117,7 @@ public class FiringHandler : MonoBehaviour {
 		}
 		
 		GameObject bullet = bulletNV.gameObject;
-		bullet.transform.LookAt(lookAt, Vector3.forward);
+        bullet.transform.LookAt(lookAt); //, Vector3.forward
 	    bullet.transform.Rotate(new Vector3(90, 0, 90));
 		if (bulletType == 3)
 	    	bullet.transform.Rotate(new Vector3(0, 0, 90));

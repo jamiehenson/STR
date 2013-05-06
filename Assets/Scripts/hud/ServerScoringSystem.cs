@@ -8,7 +8,7 @@ public class ServerScoringSystem : MonoBehaviour {
 
     private float levelTime = 10; // in seconds
     private int pauseDelay = 3; // in seconds
-    private int stagesBeforeBoss = 3;
+    private int stagesBeforeBoss = 1;//3;
     private LevelManager[] levelManagers = new LevelManager[4];
     private BossLevelManager bossLevelManager;
     int stage = 0;
@@ -67,7 +67,7 @@ public class ServerScoringSystem : MonoBehaviour {
         yield return new WaitForSeconds(pauseDelay);
         // SEND BOSS HERE
         Debug.Log("Send Boss");
-        bossLevelManager.CreateBoss(4);
+        bossLevelManager.CreateBoss();
     }
 
     IEnumerator BossClearedIE() {

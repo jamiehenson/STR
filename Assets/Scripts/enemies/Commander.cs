@@ -8,7 +8,6 @@
  * Script enabled from Universe.cs
  * */
 
-
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -257,8 +256,7 @@ public class Commander : MonoBehaviour {
 		enemyPrefabs = Resources.LoadAll("enemies/enemytypes", typeof(GameObject));
         bossPrefabs = Resources.LoadAll("enemies/bosses", typeof(GameObject));
         
-        if (Network.isServer)
-        {
+        if (Network.isServer) {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
             activeCharacters = new bool[countUniverse+1];
             activeCharacters[universeN()] = true;

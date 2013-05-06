@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BossCollisions : MonoBehaviour {
 
-    private BossManager eManager;
+    private EyeBossManager eManager;
     private BossMovement eMove;
 
     private float health;
@@ -22,8 +22,8 @@ public class BossCollisions : MonoBehaviour {
     private bool showScore;
 
     void Start() {
-        eManager = gameObject.GetComponent<BossManager>();
-        eMove = gameObject.GetComponent<BossMovement>();
+        eManager = GetComponent<EyeBossManager>();
+        eMove = GetComponent<BossMovement>();
         health = eManager.health;
         enemyBar = HudOn.fillTex(60, 10, new Color(1f, 0f, 0f, 1f));
     }
@@ -36,7 +36,7 @@ public class BossCollisions : MonoBehaviour {
     }
 
     void Update() {
-        Vector3 viewPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        Vector3 viewPos = Camera.main.WorldToScreenPoint(transform.position);
         screenX = viewPos.x;
         screenY = Screen.height - (viewPos.y + 1);
         remainingHealth = health / eManager.health;
@@ -152,7 +152,7 @@ public class BossCollisions : MonoBehaviour {
 
     void OnDestroy() {
         if (Network.isServer) {
-            GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().BossCleared();
+            GameObject.Find("Universe" + (0) + "/Managers/LevelManager").GetComponent<BossLevelManager>().BossDestroyed();
         }
     }
 }

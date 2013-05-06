@@ -6,6 +6,10 @@ public class PlayerCollisions : MonoBehaviour {
     public AudioSource smack;
     PlayerManager manager;
 
+    void start() {
+        manager = GetComponent<PlayerManager>();
+    }
+
     [RPC]
     public void destroyObject()
     {
@@ -75,6 +79,27 @@ public class PlayerCollisions : MonoBehaviour {
                 Network.Destroy(gameObject);
             }
         }*/
+    }
+
+    void OnCollisionStay(Collision collision) {
+        if (Network.isClient)
+            return;
+        GameObject collided = collision.collider.gameObject;
+        string collidedName = collided.name;
+
+        print(collidedName);
+
+        switch (collidedName) {
+            case "BeamCollider":
+                manager.updateHitPoints(manager.getHitPoints() * -0.01f);
+                break;
+            default:
+                break;
+        }
+        if (manager.getHitPoints() <= 0) {
+            Boom(gameObject);
+            Network.Destroy(gameObject);
+        }
     }
 
     void OnDestroy() {
