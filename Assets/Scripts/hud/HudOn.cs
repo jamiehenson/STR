@@ -485,15 +485,12 @@ public class HudOn : MonoBehaviour {
 	}
 
 	public void leftVortex() {
-		print("Left Vortex");
+		print("In leftVortex");
+		StopCoroutine("VortexCountdown");
 
 		Vortex.labelIsSet = false;
-		
-		if (inVortexCountdown) {
-			//StopCoroutine("VortexCountdown");
-			//StopCoroutine ("Vortex.playerShrink");
-			inVortexCountdown = false;
-		}
+		inVortexCountdown = false;
+		showCountdown = false;
 	}
 
 	public void setManager(PlayerManager m) {
