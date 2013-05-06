@@ -36,6 +36,9 @@ public class EnemyCollisions : MonoBehaviour {
     }
 
     void Update() {
+		if (Camera.main == null)
+			return;
+
         Vector3 viewPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         screenX = viewPos.x;
         screenY = Screen.height - (viewPos.y + 1);
