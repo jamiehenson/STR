@@ -20,7 +20,7 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
     public int startLivesNb;
-    public bool initialized;
+    private bool initialized =false;
 
 	//private Vector3 charScale;
 	public static Vector3 vortpointOut;
@@ -352,8 +352,9 @@ public class HudOn : MonoBehaviour {
 			return;
         if (!initialized)
         {
+            Debug.Log("Playercount" + playercount);
             playercount = Server.numberOfPlayers();
-            systemNames = new string[playercount + 1];
+            systemNames = new string[playercount + 2];
             initialized = true;
         }
 		main = (Texture2D) Resources.Load ("hud/topleft");

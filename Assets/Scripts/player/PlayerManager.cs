@@ -274,7 +274,7 @@ public class PlayerManager : MonoBehaviour {
             }
             networkView.RPC("updateWepDrain", RPCMode.Server, selectedWepDrain);
         }
-        Debug.Log("Available lives:" + lives);
+        //Debug.Log("Available lives:" + lives);
         // Recharge power supply
         if (Network.isServer)
         {
@@ -286,7 +286,6 @@ public class PlayerManager : MonoBehaviour {
                     loser = playerNames[characterNum];
 					hitPoints = startHP;
 					lives--;
-                    Debug.Log("Minus lives:" + characterNum);
                     networkView.RPC("updateLives", RPCMode.Others, lives, loser);
 
 				}
