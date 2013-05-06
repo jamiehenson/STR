@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Server : MonoBehaviour {
 
     //private int playerCount = 0;
-    public static string gameName = "STD"; // I think this should be STR ?
+    public static string gameName = "The Great Adventures of Mort"; // I think this should be STR ?
     public Transform playerUniversePrefab;
     public static int countUniverse;
     public Transform[] universe;
@@ -195,6 +195,7 @@ public class Server : MonoBehaviour {
             {
                 print("LETS GO");
                 startGame = true;
+                // Only do for the actual number of players?
                 for (int i = 1; i <= countUniverse; i++)
                 {
                     // Enable enemy generation

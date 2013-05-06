@@ -282,7 +282,6 @@ public class PlayerManager : MonoBehaviour {
 	[RPC]
 	void instantiatePlayerFlags(int count)
 	{
-		Debug.Log("The flags are done, aren't they kids?");
 		playerFlags = new string[count];
 	}
 
