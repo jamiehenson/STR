@@ -174,7 +174,7 @@ public class EnemyMovement : MonoBehaviour {
 	[RPC]
 	void fireBullet(Vector3 startPosition, Quaternion startRotation, NetworkViewID targetID, NetworkViewID bulletID, Vector3 fireDir, Vector3 force) {
 		// Get target
-		Debug.Log ("I am being told to fire: "+bulletID);
+		//Debug.Log ("I am being told to fire: "+bulletID);
 		GameObject character = NetworkView.Find (targetID).gameObject;
 
 		GameObject bullet = NetworkView.Find (bulletID).gameObject;
@@ -186,7 +186,7 @@ public class EnemyMovement : MonoBehaviour {
         Physics.IgnoreCollision(bullet.collider, gameObject.collider);
         bullet.rigidbody.AddForce(force);
         bullet.rigidbody.freezeRotation = true;
-        //ebs.damage = eManager.weaponPower;
+        ebs.damage = eManager.weaponPower;
 	}
 
     IEnumerator LerpEnemy() {
