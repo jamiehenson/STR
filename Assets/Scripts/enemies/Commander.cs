@@ -195,14 +195,14 @@ public class Commander : MonoBehaviour {
 
 		//GameObject enemyPrefab = (GameObject) enemyPrefabs[Random.Range (0,enemyPrefabs.Length)];
         GameObject enemyPrefab = enemyTypes[currType, type-1];
-        Transform enemy = (Transform)Network.Instantiate(enemyPrefab.transform, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0),100+universeN());
+        Transform enemy = (Transform)Network.Instantiate(enemyPrefab.transform, new Vector3(x, y, z), Quaternion.Euler(new Vector3 (0, 180, 0)),100+universeN());
 
 		enemy.name = "Enemy" + universeN();
         enemy.transform.parent = transform.parent.parent.FindChild("Enemies");
 		
         EnemyManager eMan = enemy.GetComponent<EnemyManager>();
         eMan.direction = dir;
-        eMan.changeType(type);
+        //eMan.changeType(type);
         enemyCount[universeN()]++;
     }
 
