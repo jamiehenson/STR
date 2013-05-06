@@ -242,8 +242,8 @@ public class PlayerMovement : MonoBehaviour {
     public void AnimateWarp(int chNum) {
         if (characterNum == chNum) {
             GameObject warpAni = (GameObject) Resources.Load("bg/trans");
-            if (camtoggle) Instantiate(warpAni, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)));
-            else Instantiate(warpAni, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+            if (camtoggle) Instantiate(warpAni, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+            else Instantiate(warpAni, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
         }
     }
 
