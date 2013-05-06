@@ -28,14 +28,16 @@ public class BackgroundGenerator : MonoBehaviour
 				Transform spawnObj = (Transform) objects[objChoice];
 
 				float prob = 0;
+				bool solid = false;
 
 				switch(spawnObj.name)
 				{
-					case "moon1": prob = 0.2f; break;
-					case "sun1": prob = 0.1f; break;
+					case "moon1": prob = 0.2f; solid = true; break;
+					case "sun1": prob = 0.1f; solid = true; break;
 					case "debris1": prob = 0.75f; break;
 					case "debris2": prob = 0.7f; break;
-					case "yellow1": prob = 0.2f; break;
+					case "grey1": prob = 0.4f; solid = true; break;
+					case "yellow1": prob = 0.2f; solid = true; break;
 					case "morticles": prob = 0.05f; break;
 					case "gasPocket1": prob = 0.7f; break;
 					case "gasPocket2": prob = 0.7f; break;
@@ -48,6 +50,7 @@ public class BackgroundGenerator : MonoBehaviour
 					obj.name = spawnObj.name;
 					if (obj.name == "gasPocket1") obj.particleSystem.startColor = new Color(Random.Range (0.5f,1), Random.Range (0.5f,1), Random.Range (0.5f,1), 1.0f);
 					if (obj.name == "gasPocket2") obj.particleSystem.startColor = new Color(Random.Range (0.5f,1), Random.Range (0.5f,1), Random.Range (0.5f,1), 1.0f);
+					if (solid) obj.localScale = new Vector3(Random.Range (0.5f,1.5f),Random.Range (0.5f,1.5f),Random.Range (0.5f,1.5f));
 				}
 			}
 			yield return new WaitForSeconds(1);

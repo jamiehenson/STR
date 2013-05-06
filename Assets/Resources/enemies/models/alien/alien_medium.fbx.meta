@@ -1,0 +1,124 @@
+fileFormatVersion: 2
+guid: 36605cbf071bd42428d9de3d12068ef0
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: beam
+    100004: body
+    100006: claw1
+    100008: claw2
+    100010: claw3
+    100012: claw4
+    100014: claw5
+    100016: claw6
+    100018: claws
+    100020: tentacle1
+    100022: tentacle2
+    100024: tentacle3
+    100026: tentacle4
+    100028: weapon
+    400000: //RootNode
+    400002: beam
+    400004: body
+    400006: claw1
+    400008: claw2
+    400010: claw3
+    400012: claw4
+    400014: claw5
+    400016: claw6
+    400018: claws
+    400020: tentacle1
+    400022: tentacle2
+    400024: tentacle3
+    400026: tentacle4
+    400028: weapon
+    2300000: beam
+    2300002: body
+    2300004: claw1
+    2300006: claw2
+    2300008: claw3
+    2300010: claw4
+    2300012: claw5
+    2300014: claw6
+    2300016: tentacle1
+    2300018: tentacle2
+    2300020: tentacle3
+    2300022: tentacle4
+    3300000: beam
+    3300002: body
+    3300004: claw1
+    3300006: claw2
+    3300008: claw3
+    3300010: claw4
+    3300012: claw5
+    3300014: claw6
+    3300016: tentacle1
+    3300018: tentacle2
+    3300020: tentacle3
+    3300022: tentacle4
+    4300000: body
+    4300002: beam
+    4300004: claw1
+    4300006: claw2
+    4300008: claw3
+    4300010: claw4
+    4300012: claw5
+    4300014: claw6
+    4300016: tentacle1
+    4300018: tentacle2
+    4300020: tentacle3
+    4300022: tentacle4
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
