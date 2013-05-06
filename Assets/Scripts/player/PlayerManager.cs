@@ -286,7 +286,6 @@ public class PlayerManager : MonoBehaviour {
                     loser = playerNames[characterNum];
 					hitPoints = startHP;
 					lives--;
-                    Debug.Log("Minus lives:" + characterNum);
                     networkView.RPC("updateLives", RPCMode.Others, lives, loser);
 
 				}

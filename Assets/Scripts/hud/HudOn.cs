@@ -20,7 +20,7 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
     public int startLivesNb;
-    public bool initialized;
+    private bool initialized =false;
 
 	//private Vector3 charScale;
 	public static Vector3 vortpointOut;
@@ -377,7 +377,6 @@ public class HudOn : MonoBehaviour {
 
 
 	void OnGUI () {
-
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
 		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");

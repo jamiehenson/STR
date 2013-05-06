@@ -91,7 +91,7 @@ public class FiringHandler : MonoBehaviour {
         if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
         float valY = Mathf.Sin(angle) * 3.2f +transform.position.y + 1.8f;
         Vector3 startP = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
-        //Vector3 startP = new Vector3(Mathf.Abs(valX), valY, 15);
+
         //Debug.Log("Bullet position " + valX + ", " + valY + " Angle " + " , " + Mathf.Cos(angle));
 		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startP, transform.rotation,200);
         bullet.name = bullet.name + universeN();
