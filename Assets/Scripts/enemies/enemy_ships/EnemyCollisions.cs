@@ -50,6 +50,7 @@ public class EnemyCollisions : MonoBehaviour {
         {
             
             GameObject collided = other.gameObject;
+            Debug.Log(collided);
             // Need to switch from name-based system to tag-based
             string collidedTag = collided.tag;
             string characterNum = collided.name.Substring(collided.name.Length -1, 1);
@@ -106,7 +107,7 @@ public class EnemyCollisions : MonoBehaviour {
                     // Do nothing!
                     break;
             }
-            if (health <= 0 )
+            if (health <= 0)
             {
                 int scoreAddition = (int)(100 * transform.localScale.x);
                 if ("0123456789".Contains(characterNum))
@@ -150,9 +151,17 @@ public class EnemyCollisions : MonoBehaviour {
             StartCoroutine(XP("+" + score));
 
         }
-
     }
 
+	[RPC]
+    void bars(int camNum, int score)
+    {
+        if (Network.isClient && GameObject.Find("Camera " + camNum))
+        {
+            StartCoroutine(XP("+" + score));
+
+        }
+    }
 
     void OnDestroy() {
         if (Network.isServer)

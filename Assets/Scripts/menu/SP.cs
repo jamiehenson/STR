@@ -9,6 +9,9 @@ public class SP : MonoBehaviour
 		GameObject SP = GameObject.Find ("SP Button");
 		iTween.FadeTo(SP, 0.3f, 0.1f);	
 		iTween.FadeTo(PopSP,0.5f,0.1f);
+
+		// Tell Achievement System to setup
+		AchievementSystem.MenuStarted();
 	}
 
 	void OnMouseEnter()

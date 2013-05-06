@@ -20,9 +20,9 @@ public class MenuGUI : MonoBehaviour {
 		
 		if (ShowCredits.credOn) {
 			GUI.Label (new Rect (0,0,Screen.width,Screen.height), credz);
-            float yButPos = ((((Screen.height)/4)*3)+15);
-            float xButPos = (Screen.width/2)-50;
-			if (GUI.Button(new Rect(xButPos,yButPos, 100, 30), "Close")) ShowCredits.credOn = false;
+            float yButPos = (((Screen.height)/4)-10);
+            float xButPos = (Screen.width*0.65f)-100;
+			if (GUI.Button(new Rect(xButPos,yButPos, 200, 30), "Close")) ShowCredits.credOn = false;
 		}
 
         if (Input.GetKeyDown("escape") && Exit.goingOut == false){

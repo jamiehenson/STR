@@ -132,7 +132,7 @@ public class EnemyMovement : MonoBehaviour {
 
     void setUpEnemy() {     
         gameObject.rigidbody.freezeRotation = true;
-        gameObject.renderer.material.color = eManager.color;
+        //gameObject.renderer.material.color = eManager.color;
     }
 
     int PickTarget() {

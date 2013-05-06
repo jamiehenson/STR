@@ -10,15 +10,14 @@ public class AsteroidMovement : MonoBehaviour {
     string asteroidName;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         if (Network.isServer)
         {
             networkView.RPC("modifyName", RPCMode.All, gameObject.name);
             Positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
             gameObject.rigidbody.AddForce(Vector3.left * (astBaseForce + Random.Range(-forceOffset, forceOffset)));
-
         }
-
 	}
 
     [RPC]

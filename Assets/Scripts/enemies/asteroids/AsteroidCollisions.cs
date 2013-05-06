@@ -14,15 +14,15 @@ public class AsteroidCollisions : MonoBehaviour {
     private bool exploded;
 
     PlayerManager manager;
-    private bool showScore;
+    //private bool showScore = false;
 
     // Destroy asteroid on collision with the character
-    [RPC]
+    /*[RPC]
     void destroyAfterExplosion()
     {
-        //Network.Destroy(gameObject);
+        Network.Destroy(gameObject);
         Instantiate(explosion, transform.position, transform.rotation);
-    }
+    }*/
 
 
 
@@ -54,7 +54,6 @@ public class AsteroidCollisions : MonoBehaviour {
         Destroy(xp);
     }
 
-    // Set to destroy all in their path!
     void OnTriggerEnter(Collider other) {
 		if (Network.isClient)
 			return;
@@ -74,8 +73,13 @@ public class AsteroidCollisions : MonoBehaviour {
                     Network.Destroy(collided);
                     break;
                 case "Player":
+                    // Player takes damage
                     manager.updateHitPoints(-asteroidDamage * gameObject.transform.localScale.x);
-                    health = 0;
+                    // Asteroid explosion effect happens on all clients
+                    //networkView.RPC("destroyAfterExplosion", RPCMode.Others);
+                    Network.Instantiate(explosion, transform.position, transform.rotation, 200);
+                    // Destroy the asteroid everywhere
+                    Network.Destroy(gameObject);
                     break;
                 case "PlayerBeam":
                     // Do what we want for beam
@@ -112,7 +116,7 @@ public class AsteroidCollisions : MonoBehaviour {
                             Physics.IgnoreCollision(fragment.collider, gameObject.collider);
                             fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * force);
                         }
-                        networkView.RPC("destroyAfterExplosion", RPCMode.Server);
+                        
                     }
                     Network.Destroy(collided);
                     hit = true;
@@ -155,7 +159,7 @@ public class AsteroidCollisions : MonoBehaviour {
     [RPC]
     void showedScore()
     {
-        showScore = true;
+        //showScore = true;
     }
 
     void OnDestroy() {

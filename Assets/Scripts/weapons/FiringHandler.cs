@@ -59,6 +59,8 @@ public class FiringHandler : MonoBehaviour {
                     
                     timer = 0;
 
+					// Tell AchievementSystem
+					AchievementSystem.playerFired();
                 }
             }
         }
@@ -79,10 +81,19 @@ public class FiringHandler : MonoBehaviour {
 		//weaponHandler.Update();
 		
 		// Place Weapon
-		Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z);
+		//Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z);
 		//Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
-       
-		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startPos, transform.rotation,200);
+        Transform arm = transform.Find("rightArm");
+        float angle = arm.transform.rotation.z * 100;
+        if (angle < 0) angle = 360 + angle;
+        angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
+        float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
+        if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
+        float valY = Mathf.Sin(angle) * 3.2f +transform.position.y + 1.8f;
+        Vector3 startP = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
+        //Vector3 startP = new Vector3(Mathf.Abs(valX), valY, 15);
+        Debug.Log("Bullet position " + valX + ", " + valY + " Angle " + " , " + Mathf.Cos(angle));
+		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startP, transform.rotation,200);
         bullet.name = bullet.name + universeN();
         networkView.RPC("fireAnimation", RPCMode.All, universeN());
 		Physics.IgnoreCollision(bullet.collider, transform.collider);

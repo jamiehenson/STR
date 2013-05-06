@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class Server : MonoBehaviour {
 
-    private int playerCount = 0;
-    public static string gameName = "STD"; // I think this should be STR ?
+    //private int playerCount = 0;
+    public static string gameName = "The Great Adventures of Mort"; // I think this should be STR ?
     public Transform playerUniversePrefab;
     public static int countUniverse;
     public Transform[] universe;
@@ -21,7 +21,7 @@ public class Server : MonoBehaviour {
     public bool startGame, manualGoAhead;
     public static string serverAddress;
     public GUIStyle buttonStyle;
-	private string playersJoined;
+	private string playersJoined = "";
     private static int ID = 1;
     public static int finalNumberofPlayers;
     public string takenNames;
@@ -195,6 +195,7 @@ public class Server : MonoBehaviour {
             {
                 print("LETS GO");
                 startGame = true;
+                // Only do for the actual number of players?
                 for (int i = 1; i <= countUniverse; i++)
                 {
                     // Enable enemy generation

@@ -30,7 +30,7 @@ public class MP : MonoBehaviour
 		// Set static vars
 		joinScreen = false;
 		hostScreen = false;
-		playerName = "HOLYER";
+		playerName = FetchPlayerName();
 		playerLimit="4";
 		hostData = null;
 		playerdetails = null;
@@ -56,7 +56,7 @@ public class MP : MonoBehaviour
 		playerNameText = GameObject.Find ("SPlayerNameText");
 		flags = Resources.LoadAll("menu/flags", typeof(Texture2D));
 
-		coPilotName = FetchPlayerName();
+		coPilotName = FetchCoPilotName();
 		coPilot.GetComponent<TextMesh>().text = coPilotName;
 		coPilotFlag = (Texture2D) flags[Random.Range(0,flags.Length)];
 		flagBox.GetComponent<Renderer>().material.mainTexture = coPilotFlag;
@@ -265,7 +265,58 @@ public class MP : MonoBehaviour
         }	
     }
 
-	private string FetchPlayerName() {
+    private string FetchPlayerName() 
+    {
+        ArrayList player = new ArrayList();
+            player.Add("Bennett");
+            player.Add("Bogacz");
+            player.Add("Burghardt");
+            player.Add("Calway");
+            player.Add("Campbell");
+            player.Add("Cater");
+            player.Add("Cliff");
+            player.Add("Clifford");
+            player.Add("Coyle");
+            player.Add("Cristianini");
+            player.Add("Dalton");
+            player.Add("Eder");
+            player.Add("Flach");
+            player.Add("Fraser");
+            player.Add("Ghadafi");
+            player.Add("Gibson");
+            player.Add("Gregory");
+            player.Add("Hall");
+            player.Add("Hollis");
+            player.Add("Holyer");
+            player.Add("Houghton");
+            player.Add("Jalsenius");
+            player.Add("Kovacs");
+            player.Add("Marshall");
+            player.Add("May");
+            player.Add("Mayol-Cuevas");
+            player.Add("Mirmehdi");
+            player.Add("Oswald");
+            player.Add("Page");
+            player.Add("Preist");
+            player.Add("Ray");
+            player.Add("Reinhard");
+            player.Add("Schien");
+            player.Add("Scutt");
+            player.Add("Smart");
+            player.Add("Stam");
+            player.Add("Subramanian");
+            player.Add("Warinschi");
+            player.Add("Lawry");
+            player.Add("Rossiter");
+            player.Add("Cameron");
+            player.Add("Bernhard");
+            player.Add("Walkerdine");
+
+        string winner = (string) player[(int) Random.Range(0,player.Count)];
+        return winner.ToUpper();
+    }
+
+	private string FetchCoPilotName() {
         ArrayList rank = new ArrayList();
             rank.Add("Pvt. ");
             rank.Add("Sgt. ");
@@ -318,8 +369,8 @@ public class MP : MonoBehaviour
             player.Add("Timms");
             player.Add("Uttamchandani");
             player.Add("Webb");
+            player.Add("Warburton");
             player.Add("Whiteley");
-            player.Add("Wybourn");
 		string winner = (string)  rank[(int) Random.Range(0,rank.Count)] + player[(int) Random.Range(0,player.Count)];
 		return winner.ToUpper();
 	}
