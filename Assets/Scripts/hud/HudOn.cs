@@ -227,9 +227,6 @@ public class HudOn : MonoBehaviour {
 		toast.guiText.anchor = TextAnchor.MiddleCenter;
 		toast.guiText.text = notetext;
 		toast.guiText.material.color = Color.white;
-		iTween.FadeTo(toast,0f,0.01f);
-		yield return new WaitForSeconds(2);
-		iTween.FadeTo(toast,1f,1f);
 		yield return new WaitForSeconds(4);
 		iTween.FadeTo(toast,0f,1f);
 		yield return new WaitForSeconds(1);

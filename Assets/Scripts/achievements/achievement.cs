@@ -37,7 +37,8 @@ public class Achievement {
 
 	private void Achieved() {
 		AchievementMessage am = new AchievementMessage();
-		am.message = "New Achievement!\n"+message+"\n+"+score;
+		message = message.ToUpper();
+		am.message = "ACHIEVEMENT UNLOCKED!\n"+message+"\n+"+score;
 		AchievementSystem.newAchievementMessage(am);
 	}
 }
