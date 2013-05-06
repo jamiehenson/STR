@@ -1,0 +1,156 @@
+fileFormatVersion: 2
+guid: b0c06cce40cca0549985218fc17096e8
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: back
+    100004: back 1
+    100006: beam
+    100008: beam 1
+    100010: blobLeft
+    100012: blobRight
+    100014: blobs
+    100016: body
+    100018: front
+    100020: front 1
+    100022: left
+    100024: left 1
+    100026: maw
+    100028: middle
+    100030: middle 1
+    100032: right
+    100034: right 1
+    100036: shield
+    100038: shield 1
+    100040: spikes
+    100042: weapons
+    100044: wingInner
+    100046: wingOuter
+    100048: wings
+    400000: //RootNode
+    400002: back
+    400004: back 1
+    400006: beam
+    400008: beam 1
+    400010: blobLeft
+    400012: blobRight
+    400014: blobs
+    400016: body
+    400018: front
+    400020: front 1
+    400022: left
+    400024: left 1
+    400026: maw
+    400028: middle
+    400030: middle 1
+    400032: right
+    400034: right 1
+    400036: shield
+    400038: shield 1
+    400040: spikes
+    400042: weapons
+    400044: wingInner
+    400046: wingOuter
+    400048: wings
+    2300000: back
+    2300002: back 1
+    2300004: beam
+    2300006: beam 1
+    2300008: blobLeft
+    2300010: blobRight
+    2300012: body
+    2300014: front
+    2300016: front 1
+    2300018: maw
+    2300020: middle
+    2300022: middle 1
+    2300024: shield
+    2300026: shield 1
+    2300028: wingInner
+    2300030: wingOuter
+    3300000: back
+    3300002: back 1
+    3300004: beam
+    3300006: beam 1
+    3300008: blobLeft
+    3300010: blobRight
+    3300012: body
+    3300014: front
+    3300016: front 1
+    3300018: maw
+    3300020: middle
+    3300022: middle 1
+    3300024: shield
+    3300026: shield 1
+    3300028: wingInner
+    3300030: wingOuter
+    4300000: wingOuter
+    4300002: wingInner
+    4300004: blobLeft
+    4300006: blobRight
+    4300008: beam
+    4300010: shield
+    4300012: beam
+    4300014: shield
+    4300016: front
+    4300018: middle
+    4300020: back
+    4300022: front
+    4300024: middle
+    4300026: back
+    4300028: body
+    4300030: maw
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
