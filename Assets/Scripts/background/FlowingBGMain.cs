@@ -6,31 +6,32 @@ public class FlowingBGMain : MonoBehaviour {
 	public int spawnProbability = 200;
 	public Transform BG;
 	private bool notcopied = true;
+	private Vector3 startPos;
 	
 	private Object[] spacePix, objects;
 	
 	void Start () 
 	{
+		startPos = gameObject.transform.position;
 		spacePix = Resources.LoadAll("bg/space", typeof(Texture2D));
 		objects = Resources.LoadAll("bg/randomObjects", typeof(Transform));
 		gameObject.renderer.material.mainTexture = (Texture2D) spacePix[Random.Range (0,spacePix.Length)];
 	}
-	
-	// Update is called once per frame
+
 	void Update () 
 	{
 		if (Network.isClient)
 		{
-			transform.Translate(Vector3.right * Time.deltaTime * 1);
+			transform.Translate(Vector3.right * Time.deltaTime * 2);
 			if (transform.position.x < 0 && notcopied) {
-				Transform newBG = (Transform) Network.Instantiate (BG, new Vector3(430,0,120), new Quaternion(0,0,0,0),200);
+				Transform newBG = (Transform) Network.Instantiate (BG, new Vector3(startPos.x+100,0,120), new Quaternion(0,0,0,0),200);
 				newBG.renderer.material.mainTexture = (Texture2D) spacePix[Random.Range (0,spacePix.Length)];
 				newBG.name = "BG slice";
 				newBG.transform.Rotate(new Vector3(90, 180, 0));
 				notcopied = false;
 			}
-			if (transform.position.x < -400) Destroy(gameObject);
-			
+			if (transform.position.x < startPos.x-2000) Destroy(gameObject);
+
 			networkView.RPC("makeBGelement", RPCMode.Server);
 		}
 	}
