@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BackgroundGenerator : MonoBehaviour 
 {
-    private int spawnProbability = 30;
+    public int spawnProbability = 10;
 	private Object[] objects;
 	
 	void Start () 
@@ -41,6 +41,20 @@ public class BackgroundGenerator : MonoBehaviour
 					case "morticles": prob = 0.05f; break;
 					case "gasPocket1": prob = 0.7f; break;
 					case "gasPocket2": prob = 0.7f; break;
+					case "rock1": prob = 0.8f; solid = true; break;
+					case "rock2": prob = 0.7f; solid = true; break;
+					case "rock3": prob = 0.9f; solid = true; break;
+					case "rock4": prob = 0.6f; solid = true; break;
+					case "rock5": prob = 0.7f; solid = true; break;
+					case "rock6": prob = 0.9f; solid = true; break;
+					case "corner1": prob = 0.7f; solid = true; break;
+					case "cylinder1": prob = 0.7f; solid = true; break;
+					case "cylinder2": prob = 0.7f; solid = true; break;
+					case "cylinder3": prob = 0.75f; solid = true; break;
+					case "cylinder4": prob = 0.7f; solid = true; break;
+					case "wing1": prob = 0.7f; solid = true; break;
+					case "grid1": prob = 0.6f; solid = true; break;
+					case "grid2": prob = 0.6f; solid = true; break;
 					default: prob = 1; break;
 				}
 

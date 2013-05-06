@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: eac25ec7ed09ca64ba83deeb62bea17d
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: loftedSurface1
+    100004: loftedSurface10
+    100006: loftedSurface11
+    100008: loftedSurface12
+    100010: loftedSurface2
+    100012: loftedSurface3
+    100014: loftedSurface4
+    100016: loftedSurface5
+    100018: loftedSurface6
+    100020: loftedSurface7
+    100022: loftedSurface8
+    100024: loftedSurface9
+    100026: place3dTexture1
+    100028: place3dTexture2
+    100030: place3dTexture3
+    100032: place3dTexture4
+    100034: place3dTexture5
+    100036: place3dTexture6
+    100038: polySurface11
+    400000: //RootNode
+    400002: loftedSurface1
+    400004: loftedSurface10
+    400006: loftedSurface11
+    400008: loftedSurface12
+    400010: loftedSurface2
+    400012: loftedSurface3
+    400014: loftedSurface4
+    400016: loftedSurface5
+    400018: loftedSurface6
+    400020: loftedSurface7
+    400022: loftedSurface8
+    400024: loftedSurface9
+    400026: place3dTexture1
+    400028: place3dTexture2
+    400030: place3dTexture3
+    400032: place3dTexture4
+    400034: place3dTexture5
+    400036: place3dTexture6
+    400038: polySurface11
+    2300000: loftedSurface1
+    2300002: loftedSurface10
+    2300004: loftedSurface11
+    2300006: loftedSurface12
+    2300008: loftedSurface2
+    2300010: loftedSurface3
+    2300012: loftedSurface4
+    2300014: loftedSurface5
+    2300016: loftedSurface6
+    2300018: loftedSurface7
+    2300020: loftedSurface8
+    2300022: loftedSurface9
+    2300024: polySurface11
+    3300000: loftedSurface1
+    3300002: loftedSurface10
+    3300004: loftedSurface11
+    3300006: loftedSurface12
+    3300008: loftedSurface2
+    3300010: loftedSurface3
+    3300012: loftedSurface4
+    3300014: loftedSurface5
+    3300016: loftedSurface6
+    3300018: loftedSurface7
+    3300020: loftedSurface8
+    3300022: loftedSurface9
+    3300024: polySurface11
+    4300000: loftedSurface1
+    4300002: loftedSurface2
+    4300004: loftedSurface3
+    4300006: loftedSurface4
+    4300008: loftedSurface5
+    4300010: loftedSurface6
+    4300012: loftedSurface7
+    4300014: loftedSurface8
+    4300016: loftedSurface9
+    4300018: loftedSurface10
+    4300020: loftedSurface11
+    4300022: loftedSurface12
+    4300024: polySurface11
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
