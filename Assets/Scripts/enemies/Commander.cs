@@ -18,6 +18,9 @@ public class Commander : MonoBehaviour {
     // For keeping track of numbers
     public static int[] asteroidCount;
     public static int[] enemyCount;
+
+    private int currType = 0;
+    public GameObject[,] enemyTypes = new GameObject[3, 4];
 	
 	private Object[] enemyPrefabs;
     public Transform asteroidPrefab;
@@ -28,7 +31,7 @@ public class Commander : MonoBehaviour {
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
     private float beltGap = 1f;
-    private int astProb = 2;
+    private int astProb = 1;
 
     private float leftMoveLimit;
 
@@ -38,11 +41,13 @@ public class Commander : MonoBehaviour {
     // Difficulty stats (numbered for selection, some merged into 1 "setting")
     private int numDiffVars = 4;
     /*0*/
-    private int beltLevels = 3;
+    //private int beltLevels = 3;
+    private int beltLevels = 1;
     /*1a*/
     private int minAstsInBelt = 1;
     /*1b*/
-    private int maxAstsInBelt = 3;
+    //private int maxAstsInBelt = 3;
+    private int maxAstsInBelt = 1;
     /*2*/
     private int enemyTotalStrength = 5;
     /*3*/
@@ -52,9 +57,11 @@ public class Commander : MonoBehaviour {
 
     // Hardest Poss Difficulty Stats
     /*1a*/
-    private int hardestMinAstsInBelt = 6;
+    //private int hardestMinAstsInBelt = 6;
+    private int hardestMinAstsInBelt = 1;
     /*1b*/
-    private int hardestMaxAstsInBelt = 10;
+    //private int hardestMaxAstsInBelt = 10;
+    private int hardestMaxAstsInBelt = 1;
     /*3a*/
     private float hardestMinEnemyClearanceTime = 10;
     /*3b*/
@@ -186,7 +193,8 @@ public class Commander : MonoBehaviour {
                 break;
         }
 
-		GameObject enemyPrefab = (GameObject) enemyPrefabs[Random.Range (0,enemyPrefabs.Length)];
+		//GameObject enemyPrefab = (GameObject) enemyPrefabs[Random.Range (0,enemyPrefabs.Length)];
+        GameObject enemyPrefab = enemyTypes[currType, type-1];
         Transform enemy = (Transform)Network.Instantiate(enemyPrefab.transform, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0),100+universeN());
         enemy.name = "Enemy" + universeN();
         enemy.transform.parent = transform.parent.parent.FindChild("Enemies");
@@ -205,8 +213,21 @@ public class Commander : MonoBehaviour {
 
     // ******General Functions******
     void Start() {
-		enemyPrefabs = Resources.LoadAll("enemies/enemytypes/test", typeof(GameObject));
-        
+		//enemyPrefabs = Resources.LoadAll("enemies/enemytypes/test", typeof(GameObject));
+        // Hard coded. Can't be arsed to mess around with a more flexible solution
+        enemyTypes[0,0] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_light", typeof(GameObject));
+        enemyTypes[0,1] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_medium", typeof(GameObject));
+        enemyTypes[0,2] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_heavy", typeof(GameObject));
+        enemyTypes[0,3] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_superheavy", typeof(GameObject));
+        enemyTypes[1,0] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_light", typeof(GameObject));
+        enemyTypes[1,1] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_medium", typeof(GameObject));
+        enemyTypes[1,2] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_heavy", typeof(GameObject));
+        enemyTypes[1,3] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_superheavy", typeof(GameObject));
+        enemyTypes[2,0] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_light", typeof(GameObject));
+        enemyTypes[2,1] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_medium", typeof(GameObject));
+        enemyTypes[2,2] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_heavy", typeof(GameObject));
+        enemyTypes[2,3] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_superheavy", typeof(GameObject));
+        currType = Random.Range(0, 3);
         if (Network.isServer)
         {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
@@ -293,7 +314,7 @@ public class Commander : MonoBehaviour {
         switch (varNum) {
             case 0:
                 // Alter beltLevels
-                beltLevels++;
+                //beltLevels++;
                 break;
             case 1:
                 // Alter minAstsInBelt or maxAstsInBelt
@@ -441,6 +462,8 @@ public class Commander : MonoBehaviour {
 
     public void ResumeGame() {
         bossDeployed = false;
+        // Pick a new enemy type
+        currType = Random.Range(0, 3);
     }
 
     /* Notify Server Commander script about post warp positions*/
