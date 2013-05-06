@@ -20,7 +20,7 @@ public class Commander : MonoBehaviour {
     public static int[] enemyCount;
 
     private int currType = 0;
-    public GameObject[,] enemyTypes = new GameObject[3, 4];
+    public GameObject[,] enemyTypes = new GameObject[4, 4];
 	
 	private Object[] enemyPrefabs;
     public Transform asteroidPrefab;
@@ -228,7 +228,11 @@ public class Commander : MonoBehaviour {
         enemyTypes[2,1] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_medium", typeof(GameObject));
         enemyTypes[2,2] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_heavy", typeof(GameObject));
         enemyTypes[2,3] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_superheavy", typeof(GameObject));
-        currType = Random.Range(0, 3);
+        enemyTypes[3, 0] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_light", typeof(GameObject));
+        enemyTypes[3, 1] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_medium", typeof(GameObject));
+        enemyTypes[3, 2] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_heavy", typeof(GameObject));
+        enemyTypes[3, 3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
+        currType = Random.Range(0, 4);
         if (Network.isServer)
         {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
@@ -464,7 +468,7 @@ public class Commander : MonoBehaviour {
     public void ResumeGame() {
         bossDeployed = false;
         // Pick a new enemy type
-        currType = Random.Range(0, 3);
+        currType = Random.Range(0, 4);
     }
 
     /* Notify Server Commander script about post warp positions*/
