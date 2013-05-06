@@ -9,7 +9,7 @@ public class ServerScoringSystem : MonoBehaviour {
     private float levelTime = 10; // in seconds
     private int pauseDelay = 2; // in seconds
     private int stagesBeforeBoss = 3;
-    private LevelManager[] levelManagers = new LevelManager[4];
+    private LevelManager[] levelManagers;
     private BossLevelManager bossLevelManager;
 
 	// Use this for initialization
@@ -25,6 +25,7 @@ public class ServerScoringSystem : MonoBehaviour {
         int players = Server.numberOfPlayers();
         if (!initialized) {
             playerNames = new string[players + 1];
+            levelManagers = new LevelManager[players +1];
             initialized = true;
         }
 

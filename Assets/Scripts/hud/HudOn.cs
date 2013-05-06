@@ -9,15 +9,18 @@ public class HudOn : MonoBehaviour {
 	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard;
 	private Font deco;
 	private string charName, wepName, gearReady;
-	public string[] systemNames = new string[4];
+	public string[] systemNames;
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
+    public int lives, currentLives;
 	public int wepType, bankSize;
-	private int hudBarSize = 150, playercount = 4;
+	private int hudBarSize = 150, playercount;
 	private GameObject toast;//, charModel;
 	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
+    public int startLivesNb;
+    public bool initialized;
 
 	//private Vector3 charScale;
 	public static Vector3 vortpointOut;
@@ -56,6 +59,18 @@ public class HudOn : MonoBehaviour {
         return result;
     }
 
+    public void updateLives(int c, string s)
+    {
+        lives = c;
+        ToastWrapper(s +"lost in battle! " + lives + "lives remaining.");
+    }
+
+    public void startLives(int c)
+    {
+        lives = c;
+        startLivesNb = lives;
+        ToastWrapper("You have " + lives + "lives. Keep them hidden, keep them safe!");
+    }
     public void updateName(string s)
     {
         charName = s;
@@ -323,6 +338,7 @@ public class HudOn : MonoBehaviour {
         startHP = manager.getStartHP();
         startEnergy = manager.getStartEnergy();
         bankSize = manager.getBankSize();
+        lives = manager.getLives();
 
 		health.normal.background = fillTex(1,1,new Color(0.8f,0f,0f,1f));
 		energy.normal.background = fillTex(1,1,new Color(0f,0f,0.8f,1f));
@@ -334,7 +350,12 @@ public class HudOn : MonoBehaviour {
 	void OnGUI () {
 		if (manager == null)
 			return;
-
+        if (!initialized)
+        {
+            playercount = Server.numberOfPlayers();
+            systemNames = new string[playercount + 1];
+            initialized = true;
+        }
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
 		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");
@@ -403,15 +424,14 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (115,35,energyLevel/(startEnergy/hudBarSize),10),"",energy);
 		
 		// Power bank
-		GUI.Label (new Rect (115,45,energyBank/(bankSize/hudBarSize),10),"",bank);
-		
+            GUI.Label(new Rect(115, 45, lives / (startLivesNb*100 / hudBarSize), 10), "",bank);
 		// Speed and gear indicator
         GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + manager.getScore(), largeStyle);
 		GUI.Label (new Rect (Screen.width-240,100,200,40),gearReady,hudStyle);
 		
 		// Scoreboard indicator
 		GUI.Label (new Rect (Screen.width-150,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",hudStyle);
-        for (int i = 1; i <= 4; i++)
+        for (int i = 1; i <= playercount; i++)
         {
             PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
