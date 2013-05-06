@@ -50,70 +50,85 @@ public class EnemyMovement : MonoBehaviour {
             case 3: bulletPrefab = heavyWeapon; typeForceMultiplier = 0.6f; break;
             case 4: bulletPrefab = superheavyWeapon; typeForceMultiplier = 0.3f; break;
             default: break;
-        }     
+        }
+
+		positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
+        universeNb = int.Parse(name.Substring(name.Length-1, 1));
+        Vector3 forceDir = Vector3.zero;
+        eManager = gameObject.GetComponent<EnemyManager>();
+
+		print ("In start");
+		if (eManager == null)
+			print ("Its null");
+		else
+			print ("It isn't null");
+        commander = transform.parent.parent.FindChild("Managers/EnemyManager").GetComponent<Commander>();
+        setUpEnemy();
+
+        enemyType = eManager.enemyType;
+        switch (enemyType)
+        {
+            case 1: bulletPrefab = lightWeapon; typeForceMultiplier = 2.2f; break;
+            case 2: bulletPrefab = mediumWeapon; typeForceMultiplier = 1.5f; break;
+            case 3: bulletPrefab = heavyWeapon; typeForceMultiplier = 0.6f; break;
+            case 4: bulletPrefab = superheavyWeapon; typeForceMultiplier = 0.3f; break;
+            default: break;
+        }
+
+        // Set movement variables
+        minX = positions.rightMovementLimit + 2.5f;
+        //minX = positions.leftBorder;
+        maxX = positions.rightBorder;
+        minY = positions.bottomBorder;
+        maxY = positions.topBorder;
+
+        // NEED to do this not based on position, but on a FIXED stopZ (due to rotation issues)
+        /*GameObject character = GameObject.Find("Character"+universeNb);
+        stopZ = character.transform.position.z;*/
+
+        stopZ = positions.baseZ;
+		// Send to client
+		//networkView.RPC ("setStopZ", RPCMode.Others, stopZ);
+
+        // Check direction
+        switch (eManager.direction)
+        {
+            case 1:
+                forceDir = Vector3.right;
+                stop = Random.Range(minX, maxX);
+                break;
+            case 2:
+                forceDir = Vector3.down;
+                stop = Random.Range(minY, maxY);
+                break;
+            case 3:
+                forceDir = Vector3.left;
+                stop = Random.Range(minX, maxX);
+                break;
+            case 4:
+                forceDir = Vector3.up;
+                stop = Random.Range(minY, maxY);
+                break;
+            default:
+                break;
+        }
+        gameObject.rigidbody.AddForce(forceDir * eManager.force);
+		if (Network.isServer)
+        	StartCoroutine(Shoot());
+        StartCoroutine(LerpEnemy());
     }
 
     void Start() {
-        if (Network.isServer)
-        {
-            networkView.RPC("modifyName", RPCMode.All, gameObject.name);
-            positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
-            universeNb = int.Parse(name.Substring(name.Length-1, 1));
-            Vector3 forceDir = Vector3.zero;
-            eManager = gameObject.GetComponent<EnemyManager>();
-            commander = transform.parent.parent.FindChild("Managers/EnemyManager").GetComponent<Commander>();
-            setUpEnemy();
+		if (Network.isServer)
+        	networkView.RPC("modifyName", RPCMode.All, gameObject.name);
+		
 
-            int enemyType = eManager.enemyType;
-            switch (enemyType)
-            {
-                case 1: bulletPrefab = lightWeapon; typeForceMultiplier = 2.2f; break;
-                case 2: bulletPrefab = mediumWeapon; typeForceMultiplier = 1.5f; break;
-                case 3: bulletPrefab = heavyWeapon; typeForceMultiplier = 0.6f; break;
-                case 4: bulletPrefab = superheavyWeapon; typeForceMultiplier = 0.3f; break;
-                default: break;
-            }
-
-            // Set movement variables
-            minX = positions.rightMovementLimit + 2.5f;
-            //minX = positions.leftBorder;
-            maxX = positions.rightBorder;
-            minY = positions.bottomBorder;
-            maxY = positions.topBorder;
-
-            // NEED to do this not based on position, but on a FIXED stopZ (due to rotation issues)
-            /*GameObject character = GameObject.Find("Character"+universeNb);
-            stopZ = character.transform.position.z;*/
-
-            stopZ = positions.baseZ;
-
-            // Check direction
-            switch (eManager.direction)
-            {
-                case 1:
-                    forceDir = Vector3.right;
-                    stop = Random.Range(minX, maxX);
-                    break;
-                case 2:
-                    forceDir = Vector3.down;
-                    stop = Random.Range(minY, maxY);
-                    break;
-                case 3:
-                    forceDir = Vector3.left;
-                    stop = Random.Range(minX, maxX);
-                    break;
-                case 4:
-                    forceDir = Vector3.up;
-                    stop = Random.Range(minY, maxY);
-                    break;
-                default:
-                    break;
-            }
-            gameObject.rigidbody.AddForce(forceDir * eManager.force);
-            StartCoroutine(Shoot());
-            StartCoroutine(LerpEnemy());
-        }
     }
+	/*
+	[RPC]
+	void setStopZ(float z) {
+		stopZ = z;
+	}*/
 
     void setUpEnemy() {     
         gameObject.rigidbody.freezeRotation = true;
@@ -140,18 +155,15 @@ public class EnemyMovement : MonoBehaviour {
                 //targetPlayer = comman
                 int targetPlayer = PickTarget();
                 if (targetPlayer != -1) {
-                    Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation, 100 + universeNb);
-                    GameObject character = GameObject.Find("Character" + targetPlayer);
-                    EnemyBulletSettings ebs = bullet.GetComponent<EnemyBulletSettings>();
-                    Vector3 fireDirection = character.transform.position - gameObject.transform.position;
-                    fireDirection.y = Random.Range(fireDirection.y - firingOffset, fireDirection.y + firingOffset);
-                    bullet.transform.LookAt(character.transform, Vector3.forward);
-                    bullet.transform.Rotate(new Vector3(90, 0, 90));
-                    bullet.name = "EnemyBullet";
-                    Physics.IgnoreCollision(bullet.collider, gameObject.collider);
-                    bullet.rigidbody.AddForce(fireDirection.normalized * eManager.force * 2 * typeForceMultiplier);
-                    bullet.rigidbody.freezeRotation = true;
-                    ebs.damage = eManager.weaponPower;
+					GameObject character = GameObject.Find("Character" + targetPlayer);
+					NetworkViewID targetID = character.GetComponent<NetworkView>().viewID;
+					Vector3 fireDirection = character.transform.position - transform.position;
+					Vector3 force = fireDirection.normalized * eManager.force * 2 * typeForceMultiplier;
+        			fireDirection.y = Random.Range(fireDirection.y - firingOffset, fireDirection.y + firingOffset);
+					Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position - new Vector3(-10,0,0), gameObject.transform.rotation, 200);
+					NetworkViewID bulletID = bullet.networkView.viewID;
+					networkView.RPC("fireBullet", RPCMode.All, gameObject.transform.position, gameObject.transform.rotation, targetID, bulletID, fireDirection, force);
+
                 }
                 yield return new WaitForSeconds(eManager.firingDelay);
             }
@@ -159,13 +171,49 @@ public class EnemyMovement : MonoBehaviour {
         }
     }
 
+	[RPC]
+	void fireBullet(Vector3 startPosition, Quaternion startRotation, NetworkViewID targetID, NetworkViewID bulletID, Vector3 fireDir, Vector3 force) {
+		// Get target
+		//Debug.Log ("I am being told to fire: "+bulletID);
+		GameObject character = NetworkView.Find (targetID).gameObject;
+
+		GameObject bullet = NetworkView.Find (bulletID).gameObject;
+        EnemyBulletSettings ebs = bullet.GetComponent<EnemyBulletSettings>();
+
+        bullet.transform.LookAt(character.transform, Vector3.forward);
+        bullet.transform.Rotate(new Vector3(90, 0, 90));
+        bullet.name = "EnemyBullet";
+        Physics.IgnoreCollision(bullet.collider, gameObject.collider);
+        bullet.rigidbody.AddForce(force);
+        bullet.rigidbody.freezeRotation = true;
+        ebs.damage = eManager.weaponPower;
+	}
+
     IEnumerator LerpEnemy() {
         startPos = gameObject.transform.position;
-        randPos = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), stopZ);
+		float xPos = Random.Range(minX, maxX);
+		float yPos = Random.Range(minY, maxY);
+		networkView.RPC ("setTargetPosition", RPCMode.Others, xPos, yPos);
+		networkView.RPC ("setWaitingVar", RPCMode.Others, true);
+        randPos = new Vector3(xPos, yPos, stopZ);
+
         waiting = true;
         yield return new WaitForSeconds(eManager.moveDelay);
+		networkView.RPC ("setWaitingVar", RPCMode.Others, false);
         waiting = false;
     }
+
+	[RPC]
+	void setTargetPosition(float x, float y) {
+		randPos = new Vector3(x, y, stopZ);
+	}
+
+	[RPC]
+	void setWaitingVar(bool val) {
+		waiting = val;
+	}
+
+
 
     void move(float minMove, float maxMove) {
         if (minMove > maxMove && gameObject.transform.position.z > stopZ) {
@@ -179,31 +227,31 @@ public class EnemyMovement : MonoBehaviour {
         }
         if (inPlane) {
             if (waiting) gameObject.transform.position = Vector3.Lerp(transform.position, randPos, Time.deltaTime * eManager.speed);
-            else StartCoroutine(LerpEnemy());
+            else if (Network.isServer) StartCoroutine(LerpEnemy());
         }
     }
 
     void Update() {
-        if (Network.isServer)
+		if (eManager == null)
+			return;
+
+        switch (eManager.direction)
         {
-            switch (eManager.direction)
-            {
-                case 1:
-                    move(gameObject.transform.position.x, stop);
-                    break;
-                case 2:
-                    move(stop, gameObject.transform.position.y);
-                    break;
-                case 3:
-                    move(stop, gameObject.transform.position.x);
-                    break;
-                case 4:
-                    move(gameObject.transform.position.y, stop);
-                    break;
-                default:
-                    break;
+            case 1:
+                move(gameObject.transform.position.x, stop);
+                break;
+            case 2:
+                move(stop, gameObject.transform.position.y);
+                break;
+            case 3:
+                move(stop, gameObject.transform.position.x);
+                break;
+            case 4:
+                move(gameObject.transform.position.y, stop);
+                break;
+            default:
+                break;
             }
-        }
     }
 
 }
