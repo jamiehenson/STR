@@ -445,7 +445,7 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (115,35,energyLevel/(startEnergy/hudBarSize),10),"",energy);
 		
 		// Power bank
-            GUI.Label(new Rect(115, 45, lives / (startLivesNb*100 / hudBarSize), 10), "",bank);
+            GUI.Label(new Rect(115, 45, energyBank / (bankSize / hudBarSize), 10), "", bank);
 		// Speed and gear indicator
         GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + manager.getScore(), largeStyle);
 		GUI.Label (new Rect (Screen.width-240,100,200,40),gearReady,hudStyle);

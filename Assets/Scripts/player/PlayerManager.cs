@@ -8,7 +8,8 @@ public class PlayerManager : MonoBehaviour {
 	// Lives
 	public int lives;
     public string loser = "";
-	
+    public bool[] remainingUni;
+
 	//Stats
     private float hitPoints;
     private float energyLevel;
@@ -185,6 +186,7 @@ public class PlayerManager : MonoBehaviour {
     {
         myCharacter = true;
         universeNumber = charNum;
+        characterNum = charNum;
         networkView.RPC("updateCharacterNum", RPCMode.Server, charNum);
 		HudOn.Instance.setManager(this);
 		Instance = this;
@@ -281,15 +283,28 @@ public class PlayerManager : MonoBehaviour {
             if (energyLevel > 0 && energyLevel <= startEnergy && Time.timeScale != 0) energyLevel += (startEnergy / 800);
             if (energyLevel <= 0) energyLevel = 1;
 			// Update number of lives
-            if (hitPoints < 0)
+            if (hitPoints < 0 && lives>0)
 				{
                     loser = playerNames[characterNum];
 					hitPoints = startHP;
 					lives--;
                     networkView.RPC("updateLives", RPCMode.Others, lives, loser);
-
+                    if (lives <= playerNames.Length )
+                    {
+                        
+                        remainingUni[characterNum] = false;
+                        for (int i = 1; i <= GameObject.FindGameObjectsWithTag("Player").Length; i++)
+                        {
+                            if (remainingUni[i])
+                            {
+                                networkView.RPC("restrictUniverses", RPCMode.Others, i, characterNum);
+                                break;
+                            }
+                                
+                        }
+                    }
 				}
-			
+            else if (lives == 0) { }
             if (!bankFull) energyBank += (startEnergy / 1500);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
@@ -308,16 +323,34 @@ public class PlayerManager : MonoBehaviour {
     public void initLivesServer(int count)
     {
         lives = count;
-        Debug.Log("Start lives " + lives);
+        int c = GameObject.FindGameObjectsWithTag("Player").Length+1;
+        remainingUni = new bool[c];
+        for (int i = 1; i < c; i++) remainingUni[i] = true;
+            Debug.Log("Start lives " + lives);
         networkView.RPC("initLivesClient", RPCMode.Others, lives);
 
+    }
+
+    [RPC]
+    void restrictUniverses(int universe, int player)
+    {
+        if(player == characterNum)
+        {
+            PlayerMovement move = transform.GetComponent<PlayerMovement>();
+            Debug.Log("Change to uni " + universe);
+            move.changeUniverse(universe);
+            move.networkView.RPC("AnimateWarp", RPCMode.All, player);
+
+        }
     }
 
     [RPC]
     void initLivesClient(int count)
     {
         lives = count;
-        Debug.Log("Start lives " + lives);
+        int c = GameObject.FindGameObjectsWithTag("Player").Length + 1;
+        remainingUni = new bool[c];
+        for (int i = 1; i < c; i++) remainingUni[i] = true;
         GameObject.Find("Client Scripts").GetComponent<HudOn>().startLives(lives);
     }
 
