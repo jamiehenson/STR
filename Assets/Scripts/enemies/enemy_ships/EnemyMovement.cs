@@ -122,7 +122,7 @@ public class EnemyMovement : MonoBehaviour {
 		if (Network.isServer)
         	networkView.RPC("modifyName", RPCMode.All, gameObject.name);
 		
-
+		eManager = gameObject.GetComponent<EnemyManager>();
     }
 	/*
 	[RPC]
@@ -253,5 +253,4 @@ public class EnemyMovement : MonoBehaviour {
                 break;
             }
     }
-
 }
