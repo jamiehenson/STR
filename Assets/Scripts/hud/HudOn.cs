@@ -4,6 +4,7 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class HudOn : MonoBehaviour {
 	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard;
@@ -13,7 +14,6 @@ public class HudOn : MonoBehaviour {
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount = 4;
-	private GameObject toast;//, charModel;
 	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
@@ -30,6 +30,11 @@ public class HudOn : MonoBehaviour {
     public static int countUniverse;
     PlayerManager manager = null;
 	//OnlineClient onlineClient;
+
+	// Toasts
+	private GameObject toast;//, charModel;
+	private Queue<string> queuedToastMessages;
+	private int toastCountdown;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
 	
@@ -218,22 +223,31 @@ public class HudOn : MonoBehaviour {
 	}
 
     public void ToastWrapper(string notetext) {
-        StartCoroutine("Toast", notetext);
+        //StartCoroutine("Toast", notetext);
+		queuedToastMessages.Enqueue(notetext);
     }
 
-	IEnumerator Toast(string notetext) {
-		toast = new GameObject("Toast");
-		toast.AddComponent("GUIText");
-		toast.guiText.font = (Font) Resources.Load ("Belgrad");
-		toast.guiText.fontSize = (Screen.width > 1000) ? 40 : 24;
-		toast.transform.position = new Vector3(0.5f,0.5f,0);
-		toast.guiText.anchor = TextAnchor.MiddleCenter;
-		toast.guiText.text = notetext;
-		toast.guiText.material.color = Color.white;
-		yield return new WaitForSeconds(4);
-		iTween.FadeTo(toast,0f,1f);
-		yield return new WaitForSeconds(1);
-		Destroy(toast);
+	IEnumerator Toast() {
+		while (true) {
+			if (queuedToastMessages.Count == 0)
+				yield return new WaitForSeconds(1/15);
+			else {
+				// Display it
+				string notetext = queuedToastMessages.Dequeue();
+				toast = new GameObject("Toast");
+				toast.AddComponent("GUIText");
+				toast.guiText.font = (Font) Resources.Load ("Belgrad");
+				toast.guiText.fontSize = (Screen.width > 1000) ? 40 : 24;
+				toast.transform.position = new Vector3(0.5f,0.5f,0);
+				toast.guiText.anchor = TextAnchor.MiddleCenter;
+				toast.guiText.text = notetext;
+				toast.guiText.material.color = Color.white;
+				yield return new WaitForSeconds(4);
+				iTween.FadeTo(toast,0f,1f);
+				yield return new WaitForSeconds(1);
+				Destroy(toast);
+			}
+		}
 	}
 
     private int universeN()
@@ -280,6 +294,9 @@ public class HudOn : MonoBehaviour {
 
 		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 		gameOverBeenDetected = false;
+
+		queuedToastMessages = new Queue<string>();
+		StartCoroutine("Toast");
 	}
 
 		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
@@ -302,7 +319,7 @@ public class HudOn : MonoBehaviour {
 		iTween.CameraFadeAdd();
 		iTween.CameraFadeFrom(1.0f, 2.0f);
 
-        StartCoroutine(Toast("SURVIVE THE ENEMY ONSLAUGHT"));
+        ToastWrapper("SURVIVE THE ENEMY ONSLAUGHT");
 
 		wepBox1 = (Texture2D) Resources.Load ("hud/wepBox1Off");
 		wepBox2 = (Texture2D) Resources.Load ("hud/wepBox2Off");
