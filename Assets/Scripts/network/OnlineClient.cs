@@ -60,7 +60,7 @@ public class OnlineClient : MonoBehaviour
 	// When disconnected from server, go back to menu
     void OnDisconnectedFromServer()
     {
-        Application.LoadLevel("menu");
+       // Application.LoadLevel("menu");
     }
 	
 	// Update universe name
