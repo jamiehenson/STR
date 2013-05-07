@@ -283,7 +283,12 @@ public class PlayerManager : MonoBehaviour {
             if (energyLevel > 0 && energyLevel <= startEnergy && Time.timeScale != 0) energyLevel += (startEnergy / 800);
             if (energyLevel <= 0) energyLevel = 1;
 			// Update number of lives
-            if (hitPoints < 0 && lives>0)
+            if (lives == 1 && hitPoints<0)
+            {
+                Debug.Log("GAME END");
+                networkView.RPC("endGame", RPCMode.Others);
+            }
+            if (hitPoints < 0 && lives>1)
 				{
                     loser = playerNames[characterNum];
 					hitPoints = startHP;
@@ -306,11 +311,7 @@ public class PlayerManager : MonoBehaviour {
                         }
                     }
 				}
-            else if (lives == 0) 
-            {
-                Debug.Log("GAME END");
-                networkView.RPC("endGame", RPCMode.Others);
-            }
+            
             if (!bankFull) energyBank += (startEnergy / 1500);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
@@ -322,6 +323,8 @@ public class PlayerManager : MonoBehaviour {
     [RPC]
     void endGame()
     {
+        Network.Disconnect();
+        MasterServer.UnregisterHost();
         GameObject.Find("Client Scripts").GetComponent<HudOn>().updateGameOver();
     }
 
