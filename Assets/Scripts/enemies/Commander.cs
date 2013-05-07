@@ -16,6 +16,7 @@ using System.Collections.Generic;
 public class Commander : MonoBehaviour {
     
     // For keeping track of numbers
+    public int c;
     public static int[] asteroidCount;
     public static int[] enemyCount;
 	
@@ -62,7 +63,7 @@ public class Commander : MonoBehaviour {
 
     public Universe positions;
 
-    /* Keep track of characters in universe. <-- Easter present for Ben !!*/
+    /* Keep track of characters in universe.*/
     /* How it works: For each Commander script in each Universe, there is an activeCharacters bool array that
      * determines which character is active in the respective universe. The count is started for simplicity
      * from 1 (activeCharacters[1] refers to the status of the first character in the current universe).*/
@@ -71,8 +72,9 @@ public class Commander : MonoBehaviour {
     List<int> masterDiffStats = new List<int>();
 	
 	public static void SetupStatics() {
-		asteroidCount = new int[5];
-    	enemyCount = new int[5];	
+        int c = GameObject.FindGameObjectsWithTag("Player").Length;
+		asteroidCount = new int[c+1];
+    	enemyCount = new int[c+1];	
 	}
 
     // ******Used by enemies to pick a target player******
@@ -206,7 +208,7 @@ public class Commander : MonoBehaviour {
     // ******General Functions******
     void Start() {
 		enemyPrefabs = Resources.LoadAll("enemies/enemytypes/test", typeof(GameObject));
-        
+        int c = GameObject.FindGameObjectsWithTag("Player").Length;
         if (Network.isServer)
         {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
@@ -400,7 +402,7 @@ public class Commander : MonoBehaviour {
     public void WarpAnimation() {
         if (Network.isServer) {
             bossDeployed = true;
-            for (int i = 1; i < 5; i++) {
+            for (int i = 1; i <= c; i++) {
                 if (activeCharacters[i]) {
                     GameObject character = GameObject.Find("Character" + i);
                     PlayerMovement move = character.GetComponent<PlayerMovement>();

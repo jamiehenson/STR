@@ -248,6 +248,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 	public void changeUniverse(int universeNum) {
+        Debug.Log("Change universe");
 		networkView.RPC("changeUniverseRPC", RPCMode.Server, universeNum);
 	}
 
