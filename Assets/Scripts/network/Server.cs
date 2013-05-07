@@ -133,9 +133,10 @@ public class Server : MonoBehaviour {
         if (nextPlayerID == (countUniverse))
         {
             lives = countUniverse * 3;
-            // Start the game when all players are in the game.
             startGame = true;
             EnableGameplayScripts();
+            foreach( GameObject g in GameObject.FindGameObjectsWithTag("Player")) g.GetComponent<PlayerMovement>().updateStartGame();
+            // Start the game when all players are in the game.
         }
     }
 
