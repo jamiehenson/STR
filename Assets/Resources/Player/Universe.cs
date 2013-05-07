@@ -43,7 +43,7 @@ public class Universe : MonoBehaviour {
 	}
 	
 	public static Vector3 PositionOfOrigin(int universeNum) {
-		print ("numNum = "+universeNum);
+		//print ("numNum = "+universeNum);
 		GameObject universe = GameObject.Find("Universe" + universeNum + "/Managers/OriginManager");
 		
 		if (universe == null)

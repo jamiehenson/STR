@@ -18,13 +18,15 @@ public class Server : MonoBehaviour {
     public NetworkView[] characterView;
     public Commander commander;
     public LevelManager levMan;
-    public bool startGame, manualGoAhead;
+    public bool startGame = false;
+    public bool manualGoAhead = false;
     public static string serverAddress;
     public GUIStyle buttonStyle;
 	private string playersJoined = "";
     private static int ID = 1;
     public static int finalNumberofPlayers;
     public string takenNames;
+    public int lives;
 
     public string[] playerNames;
     public string[] playerFlags;
@@ -127,7 +129,14 @@ public class Server : MonoBehaviour {
         bridge.updateUniverseNames(viewIDNameMapping, player);
         bridge.updateCharacterNames(viewIDChNameMapping, player);
 
-		changeSystemNames();
+		changeSystemNames(countUniverse);
+        if (nextPlayerID == (countUniverse))
+        {
+            lives = countUniverse * 3;
+            // Start the game when all players are in the game.
+            startGame = true;
+
+        }
     }
 
 	// When player disconnects, log event
@@ -155,49 +164,51 @@ public class Server : MonoBehaviour {
         {
             GUI.Label(new Rect(60, 200 + (20 * i), 300, 100), i + ". Player " + playerNames[i] + "has joined the game.");
         }
+
         /* Check if a new player has connected. */
         if (!manualGoAhead)
         {
-//<<<<<<< HEAD
            if (ID <= countUniverse && GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && ID == nextPlayerID )
-//=======
-            // Debug.Log(ID); // Ahhh maddie!!!!! Sorry forgot about that one! Hey guys it's me
-//            if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
-//>>>>>>> f7b70f54cf
+
+
+            if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
+
             {
                 if (Misc.ArrayContains(playerNames, GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
                     GameObject.Find("Character" + ID).GetComponent<PlayerManager>().updatePlayerNameS(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() + "'");
                 PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
-//<<<<<<< HEAD
-//                Debug.Log("Add " + manager.getPlayerName());
-//                playerName.Add(ID, manager.getPlayerName());
-//=======
+
+             //  Debug.Log("Add " + manager.getPlayerName());
+               // playerName.Add(ID, manager.getPlayerName());
                 Debug.Log("Player :" + manager.getPlayerName() + "has connected");
                 playerNames[ID] = manager.getPlayerName();
 				playerFlags[ID] = manager.getFlag();
-                //GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
-//>>>>>>> f7b70f54cf
+                GUI.Label(new Rect(60, 60 + (20 * ID), 64, 64), "Player :" + manager.getPlayerName() + "has connected");
+
                 GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().updatePlayerNames(ID, manager.getPlayerName());
                 manager.updatePlayerNames(ID, manager.getPlayerName());
 				manager.updatePlayerFlags(ID, manager.getFlag());
                 ID++;
-//<<<<<<< HEAD
-//=======
                 takenNames = takenNames + " " + manager.getPlayerName();
             }
         }
         /* End*/
 
+        //if (GUI.Button(new Rect((Screen.width / 2) - x / 2, (Screen.height / 2) - x / 4, x, x / 2), "START GAME", buttonStyle)) manualGoAhead = true;
+
         /* Start the AI part of the game.*/
-        if (!startGame)
+        if (startGame)
         {
-            if (manualGoAhead)
-            {
-                print("LETS GO");
+         //   if (manualGoAhead)
+        //    {
+                Debug.Log("LETS GO");
+
                 startGame = true;
                 // Only do for the actual number of players?
                 for (int i = 1; i <= countUniverse; i++)
                 {
+                    //Initialize number of lives
+                    GameObject.Find("Character" + i).GetComponent<PlayerManager>().initLivesServer(lives);
                     // Enable enemy generation
                     commander = GameObject.Find("Universe" + i + "/Managers/EnemyManager").GetComponent<Commander>();
                     commander.enabled = true;
@@ -212,10 +223,10 @@ public class Server : MonoBehaviour {
 
                 // Enable timing
                 GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().StartTimer();
-            }
+            //}
         }
 
-        if (!manualGoAhead) if (GUI.Button(new Rect((Screen.width / 2) - x/2, (Screen.height / 2) - x/4, x, x/2), "START GAME", buttonStyle)) manualGoAhead = true;
+        
 		GUI.Label(new Rect(Screen.width/4, Screen.height*0.75f, Screen.width/2, 200), playersJoined);
     }
 
@@ -227,14 +238,14 @@ public class Server : MonoBehaviour {
 		bridge.moveCamera(universeNum, player);
 	}
 
-	public void changeSystemNames() {
-		bridge.systemNames = new List<string>(4);
+	public void changeSystemNames(int countUniverse) {
+		bridge.systemNames = new List<string>(countUniverse);
 
 
-		for (int i=0; i<4; i++)
+		for (int i=0; i<countUniverse; i++)
 			bridge.systemNames.Add(generateSystemNames());
 
-		bridge.sendSystemNames();
+		bridge.sendSystemNames(countUniverse);
 	}
 
 	public string generateSystemNames()
