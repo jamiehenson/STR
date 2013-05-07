@@ -157,28 +157,9 @@ public class Bridge : MonoBehaviour {
 			client.moveCamera(universeNum);
 	}
 
-  /*  public void sendCharacter(NetworkViewID viewID, Vector3 position, NetworkPlayer player)
-    {
-        if(Network.isClient)
-            networkView.RPC("createCharacter", RPCMode.Server, viewID, position, player);
-    }
-    [RPC]
-    public void createCharacter(NetworkViewID viewID, Vector3 position, NetworkPlayer player)
-    {
-        if (Network.isServer)
-        {
-            if(hasClientLoaded[player])
-                server.createCharacter(viewID, position, player);
-        }
-    }*/
 
-	public void sendSystemNames(NetworkPlayer player) {
-		for (int i=0; i<4; i++)
-			networkView.RPC("sendSystemNameRPC",player,i,systemNames[i]);
-	}
-
-	public void sendSystemNames() {
-		for (int i=0; i<4; i++)
+	public void sendSystemNames(int countUniverse) {
+		for (int i=0; i<countUniverse; i++)
 			networkView.RPC("sendSystemNameRPC",RPCMode.Others,i,systemNames[i]);
 	}
 
