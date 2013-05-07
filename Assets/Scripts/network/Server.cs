@@ -129,7 +129,7 @@ public class Server : MonoBehaviour {
         bridge.updateUniverseNames(viewIDNameMapping, player);
         bridge.updateCharacterNames(viewIDChNameMapping, player);
 
-		changeSystemNames();
+		changeSystemNames(countUniverse);
         if (nextPlayerID == (countUniverse))
         {
             lives = countUniverse * 3;
@@ -237,14 +237,14 @@ public class Server : MonoBehaviour {
 		bridge.moveCamera(universeNum, player);
 	}
 
-	public void changeSystemNames() {
-		bridge.systemNames = new List<string>(4);
+	public void changeSystemNames(int countUniverse) {
+		bridge.systemNames = new List<string>(countUniverse);
 
 
-		for (int i=0; i<4; i++)
+		for (int i=0; i<countUniverse; i++)
 			bridge.systemNames.Add(generateSystemNames());
 
-		bridge.sendSystemNames();
+		bridge.sendSystemNames(countUniverse);
 	}
 
 	public string generateSystemNames()

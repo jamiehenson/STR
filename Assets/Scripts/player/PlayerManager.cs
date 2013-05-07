@@ -6,8 +6,8 @@ public class PlayerManager : MonoBehaviour {
     private int score;
 	
 	// Lives
-	public int lives;
-    public string loser = "";
+	public static int lives = -1;
+    public static string loser = "";
     public bool[] remainingUni;
 
 	//Stats
@@ -288,15 +288,17 @@ public class PlayerManager : MonoBehaviour {
                     loser = playerNames[characterNum];
 					hitPoints = startHP;
 					lives--;
+                    Debug.Log("Remaining lives " + lives);
                     networkView.RPC("updateLives", RPCMode.Others, lives, loser);
-                    if (lives <= playerNames.Length )
+                    if (lives < playerNames.Length-1)
                     {
-                        
+                        Debug.Log("Restrict universe. Remaining lives : " + lives + " " + playerNames.Length);
                         remainingUni[characterNum] = false;
                         for (int i = 1; i <= GameObject.FindGameObjectsWithTag("Player").Length; i++)
                         {
                             if (remainingUni[i])
                             {
+                                Debug.Log("Warp to universe " + i + ".Lives " + lives);
                                 networkView.RPC("restrictUniverses", RPCMode.Others, i, characterNum);
                                 break;
                             }
@@ -304,13 +306,23 @@ public class PlayerManager : MonoBehaviour {
                         }
                     }
 				}
-            else if (lives == 0) { }
+            else if (lives == 0) 
+            {
+                Debug.Log("GAME END");
+                networkView.RPC("endGame", RPCMode.Others);
+            }
             if (!bankFull) energyBank += (startEnergy / 1500);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
 			
             networkView.RPC("updatePlayerScore", RPCMode.All, score);
         }
+    }
+
+    [RPC]
+    void endGame()
+    {
+        GameObject.Find("Client Scripts").GetComponent<HudOn>().updateGameOver();
     }
 
     [RPC]

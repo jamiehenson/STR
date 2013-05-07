@@ -11,7 +11,7 @@ public class HudOn : MonoBehaviour {
 	private string charName, wepName, gearReady;
 	public string[] systemNames;
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
-    public int lives, currentLives;
+    public static int lives, currentLives;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount;
 	private GameObject toast;//, charModel;
@@ -57,6 +57,11 @@ public class HudOn : MonoBehaviour {
         result.SetPixels(pix);
         result.Apply();
         return result;
+    }
+
+    public void updateGameOver()
+    {
+        gameOver = true;
     }
 
     public void updateLives(int c, string s)
