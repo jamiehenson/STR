@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
 	public PlayerManager playerManager;
 	public OnlineClient onlineClient;
 	public Server server;
+    public static bool startGame= false;
 	
 	public void Start()
 	{
@@ -30,6 +31,11 @@ public class PlayerMovement : MonoBehaviour {
 		rottoggle = true;
 	}
 
+    public void updateStartGame()
+    {
+        Debug.Log("Start moving");
+        startGame = true;
+    }
     public void SetCamForBoss() {
         camtoggle = true;
         rottoggle = true;
@@ -171,7 +177,8 @@ public class PlayerMovement : MonoBehaviour {
 	        }*/
 		}
       else if (Network.isServer)
-      {  
+      {
+          Debug.Log("Start Game Update" + startGame);
         if (vertDist != 0 || horDist != 0)
         {
             positions = GameObject.Find("Universe"+universeNum+"/Managers/OriginManager").GetComponent<Universe>();
@@ -213,11 +220,14 @@ public class PlayerMovement : MonoBehaviour {
     [RPC]
     public void moveCharacter(float vertdist, float hordist, bool rotate, bool rottog, bool cam)
     {
-        vertDist = vertdist;
-        horDist = hordist;
-		rotation = rotate;
-		rottoggle = rottog;
-		camtoggle = cam;
+        if (startGame)
+        {
+            vertDist = vertdist;
+            horDist = hordist;
+            rotation = rotate;
+            rottoggle = rottog;
+            camtoggle = cam;
+        }
     }
 
     [RPC]
