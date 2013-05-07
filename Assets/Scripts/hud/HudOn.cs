@@ -15,7 +15,6 @@ public class HudOn : MonoBehaviour {
     public static int lives, currentLives;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount;
-	private GameObject toast;//, charModel;
 	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
