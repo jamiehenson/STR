@@ -22,8 +22,9 @@ public class Commander : MonoBehaviour {
 
     private int currType = 0;
     public GameObject[,] enemyTypes = new GameObject[4, 4];
-	
-	private Object[] enemyPrefabs;
+
+    public GameObject[] astPrefabs = new GameObject[6];
+
     public Transform asteroidPrefab;
     private bool levelStarted = false;
     public bool bossDeployed = false;
@@ -42,13 +43,11 @@ public class Commander : MonoBehaviour {
     // Difficulty stats (numbered for selection, some merged into 1 "setting")
     private int numDiffVars = 4;
     /*0*/
-    //private int beltLevels = 3;
-    private int beltLevels = 1;
+    private int beltLevels = 3;
     /*1a*/
-    private int minAstsInBelt = 1;
+    private int minAstsInBelt = 5;
     /*1b*/
-    //private int maxAstsInBelt = 3;
-    private int maxAstsInBelt = 1;
+    private int maxAstsInBelt = 7;
     /*2*/
     private int enemyTotalStrength = 5;
     /*3*/
@@ -58,11 +57,9 @@ public class Commander : MonoBehaviour {
 
     // Hardest Poss Difficulty Stats
     /*1a*/
-    //private int hardestMinAstsInBelt = 6;
-    private int hardestMinAstsInBelt = 1;
+    private int hardestMinAstsInBelt = 20;
     /*1b*/
-    //private int hardestMaxAstsInBelt = 10;
-    private int hardestMaxAstsInBelt = 1;
+    private int hardestMaxAstsInBelt = 30;
     /*3a*/
     private float hardestMinEnemyClearanceTime = 10;
     /*3b*/
@@ -136,17 +133,19 @@ public class Commander : MonoBehaviour {
 
     void CreateAsteroid() {
         float y = Random.Range(positions.bottomBorder, positions.topBorder);
-        Vector3 astPosition = new Vector3(positions.rightBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Random.Range(positions.baseZ + 5, positions.baseZ - 5));
-        Transform asteroid = (Transform)Network.Instantiate(asteroidPrefab, astPosition, new Quaternion(0, 0, 0, 0), 100+universeN());
-        asteroid.name = "Asteroid" + universeN();
-        asteroid.transform.parent = transform.parent.parent.FindChild("Enemies");
+        GameObject astPre = astPrefabs[Random.Range(0, 5)];
         float sf = Random.Range(minAstScale, maxAstScale);
-        asteroid.localScale += new Vector3(sf, sf, sf);
+        astPre.transform.localScale += new Vector3(sf, sf, sf);
+        //Transform astPre = asteroidPrefab;
+        Vector3 astPosition = new Vector3(positions.rightBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Random.Range(positions.baseZ + 10, positions.baseZ - 10));
+        Transform asteroid = (Transform)Network.Instantiate(astPre.transform, astPosition, new Quaternion(0, 0, 0, 0), 100+universeN());
+        asteroid.name = "Asteroid" + universeN();
+        asteroid.transform.parent = transform.parent.parent.FindChild("Enemies"); 
         asteroidCount[universeN()]++;
     }
 
     // ******Enemy Wave Functions******
-
+     
     // Sends a wave of enemies, adding to the level of enemyTotalStrength
     void SendEnemyWave() {
         RotatePlayers(false, universeN());
@@ -216,30 +215,35 @@ public class Commander : MonoBehaviour {
 
     // ******General Functions******
     void Start() {
-		//enemyPrefabs = Resources.LoadAll("enemies/enemytypes/test", typeof(GameObject));
-        // Hard coded. Can't be arsed to mess around with a more flexible solution
-        enemyTypes[0,0] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_light", typeof(GameObject));
-        enemyTypes[0,1] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_medium", typeof(GameObject));
-        enemyTypes[0,2] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_heavy", typeof(GameObject));
-        enemyTypes[0,3] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_superheavy", typeof(GameObject));
-        enemyTypes[1,0] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_light", typeof(GameObject));
-        enemyTypes[1,1] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_medium", typeof(GameObject));
-        enemyTypes[1,2] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_heavy", typeof(GameObject));
-        enemyTypes[1,3] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_superheavy", typeof(GameObject));
-        enemyTypes[2,0] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_light", typeof(GameObject));
-        enemyTypes[2,1] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_medium", typeof(GameObject));
-        enemyTypes[2,2] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_heavy", typeof(GameObject));
-        enemyTypes[2,3] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_superheavy", typeof(GameObject));
-        enemyTypes[3, 0] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_light", typeof(GameObject));
-        enemyTypes[3, 1] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_medium", typeof(GameObject));
-        enemyTypes[3, 2] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_heavy", typeof(GameObject));
-        enemyTypes[3, 3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
-        currType = Random.Range(0, 4);
-
-	//	enemyPrefabs = Resources.LoadAll("enemies/enemytypes/test", typeof(GameObject));
         int c = GameObject.FindGameObjectsWithTag("Player").Length;
         if (Network.isServer)
         {
+            // Hard coded. Can't be arsed to mess around with a more flexible solution
+            enemyTypes[0, 0] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_light", typeof(GameObject));
+            enemyTypes[0, 1] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_medium", typeof(GameObject));
+            enemyTypes[0, 2] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_heavy", typeof(GameObject));
+            enemyTypes[0, 3] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_superheavy", typeof(GameObject));
+            enemyTypes[1, 0] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_light", typeof(GameObject));
+            enemyTypes[1, 1] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_medium", typeof(GameObject));
+            enemyTypes[1, 2] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_heavy", typeof(GameObject));
+            enemyTypes[1, 3] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_superheavy", typeof(GameObject));
+            enemyTypes[2, 0] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_light", typeof(GameObject));
+            enemyTypes[2, 1] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_medium", typeof(GameObject));
+            enemyTypes[2, 2] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_heavy", typeof(GameObject));
+            enemyTypes[2, 3] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_superheavy", typeof(GameObject));
+            enemyTypes[3, 0] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_light", typeof(GameObject));
+            enemyTypes[3, 1] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_medium", typeof(GameObject));
+            enemyTypes[3, 2] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_heavy", typeof(GameObject));
+            enemyTypes[3, 3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
+            currType = Random.Range(0, 4);
+
+            //astPrefabs[5] = (GameObject)Resources.Load("enemies/asteroids/asteroidtypes/rock1");
+            astPrefabs[0] = (GameObject)Resources.Load("enemies/asteroids/asteroidtypes/rock2");
+            astPrefabs[1] = (GameObject)Resources.Load("enemies/asteroids/asteroidtypes/rock3");
+            astPrefabs[2] = (GameObject)Resources.Load("enemies/asteroids/asteroidtypes/rock4");
+            astPrefabs[3] = (GameObject)Resources.Load("enemies/asteroids/asteroidtypes/rock5");
+            astPrefabs[4] = (GameObject)Resources.Load("enemies/asteroids/asteroidtypes/rock6");
+
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
             activeCharacters = new bool[countUniverse+1];
             activeCharacters[universeN()] = true;
@@ -324,7 +328,7 @@ public class Commander : MonoBehaviour {
         switch (varNum) {
             case 0:
                 // Alter beltLevels
-                //beltLevels++;
+                beltLevels++;
                 break;
             case 1:
                 // Alter minAstsInBelt or maxAstsInBelt
