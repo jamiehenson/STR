@@ -8,7 +8,7 @@ public class Vortex : MonoBehaviour {
 	public int inUniverse;
     private float growth = 0.015f;
 	public Vector3 vortPos;
-	public string label;
+	private string label;
 	private Texture2D bg;
 	public static bool labelIsSet = false;
 	private Font deco = (Font) Resources.Load ("Belgrad");
@@ -78,7 +78,7 @@ public class Vortex : MonoBehaviour {
 	public void setLabel(Vector3 pos, string lab)
 	{
 		vortPos = pos;
-		label = lab;
+		label = lab.ToUpper();
 		labelIsSet = true;
 	}
 
@@ -102,7 +102,6 @@ public class Vortex : MonoBehaviour {
 			style.alignment = TextAnchor.MiddleCenter;
 			style.fontStyle = FontStyle.Bold;
 			style.fontSize = 18;
-			label = label.ToUpper();
 			GUI.DrawTexture(new Rect(screenPoint.x-(bgw/2-5),screenPoint.y-(bgh/2)-40,bgw,bgh),bg,ScaleMode.StretchToFill, true, 0);
 			GUI.Label(new Rect(screenPoint.x,screenPoint.y-40,x,y), label, style);
 		}

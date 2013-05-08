@@ -182,7 +182,7 @@ public class HudOn : MonoBehaviour {
             setWeapon(t);
         }*/
 
-        if (energyBank / (bankSize / hudBarSize) >= hudBarSize || true) // Always true, for testing
+        if ((energyBank / (bankSize / hudBarSize) >= hudBarSize || true) && systemNames[0] != null) // Always true, for testing
         {
 			manager.resetEnergyBank(manager.getBankSize());
             gearReady = "WARP DRIVE READY!";
