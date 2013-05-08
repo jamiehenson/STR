@@ -1,0 +1,524 @@
+fileFormatVersion: 2
+guid: 94d7f38fa8bcfb3459ead0fa1c8f794e
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: beamGun
+    100002: body
+    100004: clawEdgeLeftBack
+    100006: clawEdgeLeftFront
+    100008: clawEdgeRightBack
+    100010: clawEdgeRightFront
+    100012: clawSide1LeftBack
+    100014: clawSide1LeftFront
+    100016: clawSide1RightBack
+    100018: clawSide1RightFront
+    100020: clawSide2LeftBack
+    100022: clawSide2LeftFront
+    100024: clawSide2RightBack
+    100026: clawSide2RightFront
+    100028: elbowPadRight
+    100030: footFrontLeft
+    100032: footFrontRight
+    100034: footLowerFrontLeft
+    100036: footLowerFrontRight
+    100038: footMiddleFrontLeft
+    100040: footMiddleFrontRight
+    100042: footNutsFrontLeft
+    100044: footNutsFrontRight
+    100046: footUpperFrontLeft
+    100048: footUpperFrontRight
+    100050: head
+    100052: jamie_russia:arm
+    100054: jamie_russia:armLower
+    100056: jamie_russia:armLower 1
+    100058: jamie_russia:armUpper
+    100060: jamie_russia:armUpper 1
+    100062: jamie_russia:elbowInner
+    100064: jamie_russia:elbowInner 1
+    100066: jamie_russia:elbowOuter
+    100068: jamie_russia:elbowOuter 1
+    100070: jamie_russia:foot2
+    100072: jamie_russia:foot3
+    100074: jamie_russia:footLower
+    100076: jamie_russia:footLower 1
+    100078: jamie_russia:footLower1
+    100080: jamie_russia:footLower1 1
+    100082: jamie_russia:footLower2
+    100084: jamie_russia:footLower3
+    100086: jamie_russia:footLower4
+    100088: jamie_russia:footMiddle
+    100090: jamie_russia:legLower
+    100092: jamie_russia:legUpper
+    100094: jamie_russia:nurbsToPoly1
+    100096: jamie_russia:nurbsToPoly2
+    100098: jamie_russia:nurbsToPoly3
+    100100: jamie_russia:pCylinder16
+    100102: jamie_russia:pCylinder20
+    100104: jamie_russia:pCylinder21
+    100106: jamie_russia:pCylinder22
+    100108: jamie_russia:pCylinder23
+    100110: jamie_russia:pCylinder24
+    100112: jamie_russia:pCylinder25
+    100114: jamie_russia:pCylinder26
+    100116: jamie_russia:polySurface3
+    100118: jamie_russia:polySurface5
+    100120: jamie_russia:pPlane1
+    100122: jamie_russia:pPlane1 1
+    100124: jamie_russia:pPlane2
+    100126: jamie_russia:pPlane2 1
+    100128: jamie_russia:pPlane3
+    100130: jamie_russia:pPlane3 1
+    100132: jamie_russia:pPlane4
+    100134: jamie_russia:pPlane4 1
+    100136: jamie_russia:shoulders
+    100138: jamie_russia:skirt
+    100140: jamie_russia:skirt1
+    100142: jets
+    100144: leftArm
+    100146: leftKnee
+    100148: leftLeg
+    100150: legs
+    100152: nut1
+    100154: nut10
+    100156: nut11
+    100158: nut12
+    100160: nut13
+    100162: nut14
+    100164: nut15
+    100166: nut16
+    100168: nut2
+    100170: nut3
+    100172: nut4
+    100174: nut5
+    100176: nut6
+    100178: nut7
+    100180: nut8
+    100182: nut9
+    100184: pCube1
+    100186: pCylinder1
+    100188: pCylinder26
+    100190: pCylinder27
+    100192: pSphere1
+    100194: pTorus1
+    100196: rightArm
+    100198: rightKnee
+    100200: rightLeg
+    100202: //RootNode
+    100204: shoulder
+    100206: topGun
+    100208: torso
+    400000: beamGun
+    400002: body
+    400004: clawEdgeLeftBack
+    400006: clawEdgeLeftFront
+    400008: clawEdgeRightBack
+    400010: clawEdgeRightFront
+    400012: clawSide1LeftBack
+    400014: clawSide1LeftFront
+    400016: clawSide1RightBack
+    400018: clawSide1RightFront
+    400020: clawSide2LeftBack
+    400022: clawSide2LeftFront
+    400024: clawSide2RightBack
+    400026: clawSide2RightFront
+    400028: elbowPadRight
+    400030: footFrontLeft
+    400032: footFrontRight
+    400034: footLowerFrontLeft
+    400036: footLowerFrontRight
+    400038: footMiddleFrontLeft
+    400040: footMiddleFrontRight
+    400042: footNutsFrontLeft
+    400044: footNutsFrontRight
+    400046: footUpperFrontLeft
+    400048: footUpperFrontRight
+    400050: head
+    400052: jamie_russia:arm
+    400054: jamie_russia:armLower
+    400056: jamie_russia:armLower 1
+    400058: jamie_russia:armUpper
+    400060: jamie_russia:armUpper 1
+    400062: jamie_russia:elbowInner
+    400064: jamie_russia:elbowInner 1
+    400066: jamie_russia:elbowOuter
+    400068: jamie_russia:elbowOuter 1
+    400070: jamie_russia:foot2
+    400072: jamie_russia:foot3
+    400074: jamie_russia:footLower
+    400076: jamie_russia:footLower 1
+    400078: jamie_russia:footLower1
+    400080: jamie_russia:footLower1 1
+    400082: jamie_russia:footLower2
+    400084: jamie_russia:footLower3
+    400086: jamie_russia:footLower4
+    400088: jamie_russia:footMiddle
+    400090: jamie_russia:legLower
+    400092: jamie_russia:legUpper
+    400094: jamie_russia:nurbsToPoly1
+    400096: jamie_russia:nurbsToPoly2
+    400098: jamie_russia:nurbsToPoly3
+    400100: jamie_russia:pCylinder16
+    400102: jamie_russia:pCylinder20
+    400104: jamie_russia:pCylinder21
+    400106: jamie_russia:pCylinder22
+    400108: jamie_russia:pCylinder23
+    400110: jamie_russia:pCylinder24
+    400112: jamie_russia:pCylinder25
+    400114: jamie_russia:pCylinder26
+    400116: jamie_russia:polySurface3
+    400118: jamie_russia:polySurface5
+    400120: jamie_russia:pPlane1
+    400122: jamie_russia:pPlane1 1
+    400124: jamie_russia:pPlane2
+    400126: jamie_russia:pPlane2 1
+    400128: jamie_russia:pPlane3
+    400130: jamie_russia:pPlane3 1
+    400132: jamie_russia:pPlane4
+    400134: jamie_russia:pPlane4 1
+    400136: jamie_russia:shoulders
+    400138: jamie_russia:skirt
+    400140: jamie_russia:skirt1
+    400142: jets
+    400144: leftArm
+    400146: leftKnee
+    400148: leftLeg
+    400150: legs
+    400152: nut1
+    400154: nut10
+    400156: nut11
+    400158: nut12
+    400160: nut13
+    400162: nut14
+    400164: nut15
+    400166: nut16
+    400168: nut2
+    400170: nut3
+    400172: nut4
+    400174: nut5
+    400176: nut6
+    400178: nut7
+    400180: nut8
+    400182: nut9
+    400184: pCube1
+    400186: pCylinder1
+    400188: pCylinder26
+    400190: pCylinder27
+    400192: pSphere1
+    400194: pTorus1
+    400196: rightArm
+    400198: rightKnee
+    400200: rightLeg
+    400202: //RootNode
+    400204: shoulder
+    400206: topGun
+    400208: torso
+    2300000: clawEdgeLeftBack
+    2300002: clawEdgeLeftFront
+    2300004: clawEdgeRightBack
+    2300006: clawEdgeRightFront
+    2300008: clawSide1LeftBack
+    2300010: clawSide1LeftFront
+    2300012: clawSide1RightBack
+    2300014: clawSide1RightFront
+    2300016: clawSide2LeftBack
+    2300018: clawSide2LeftFront
+    2300020: clawSide2RightBack
+    2300022: clawSide2RightFront
+    2300024: elbowPadRight
+    2300026: footLowerFrontLeft
+    2300028: footLowerFrontRight
+    2300030: footMiddleFrontLeft
+    2300032: footMiddleFrontRight
+    2300034: footUpperFrontLeft
+    2300036: footUpperFrontRight
+    2300038: head
+    2300040: jamie_russia:armLower
+    2300042: jamie_russia:armLower 1
+    2300044: jamie_russia:armUpper
+    2300046: jamie_russia:armUpper 1
+    2300048: jamie_russia:elbowInner
+    2300050: jamie_russia:elbowInner 1
+    2300052: jamie_russia:elbowOuter
+    2300054: jamie_russia:elbowOuter 1
+    2300056: jamie_russia:footLower
+    2300058: jamie_russia:footLower 1
+    2300060: jamie_russia:footLower1
+    2300062: jamie_russia:footLower1 1
+    2300064: jamie_russia:footLower2
+    2300066: jamie_russia:footLower3
+    2300068: jamie_russia:footLower4
+    2300070: jamie_russia:footMiddle
+    2300072: jamie_russia:legLower
+    2300074: jamie_russia:legUpper
+    2300076: jamie_russia:nurbsToPoly1
+    2300078: jamie_russia:nurbsToPoly2
+    2300080: jamie_russia:nurbsToPoly3
+    2300082: jamie_russia:pCylinder16
+    2300084: jamie_russia:pCylinder20
+    2300086: jamie_russia:pCylinder21
+    2300088: jamie_russia:pCylinder22
+    2300090: jamie_russia:pCylinder23
+    2300092: jamie_russia:pCylinder24
+    2300094: jamie_russia:pCylinder25
+    2300096: jamie_russia:pCylinder26
+    2300098: jamie_russia:polySurface3
+    2300100: jamie_russia:polySurface5
+    2300102: jamie_russia:pPlane1
+    2300104: jamie_russia:pPlane1 1
+    2300106: jamie_russia:pPlane2
+    2300108: jamie_russia:pPlane2 1
+    2300110: jamie_russia:pPlane3
+    2300112: jamie_russia:pPlane3 1
+    2300114: jamie_russia:pPlane4
+    2300116: jamie_russia:pPlane4 1
+    2300118: jamie_russia:shoulders
+    2300120: leftKnee
+    2300122: nut1
+    2300124: nut10
+    2300126: nut11
+    2300128: nut12
+    2300130: nut13
+    2300132: nut14
+    2300134: nut15
+    2300136: nut16
+    2300138: nut2
+    2300140: nut3
+    2300142: nut4
+    2300144: nut5
+    2300146: nut6
+    2300148: nut7
+    2300150: nut8
+    2300152: nut9
+    2300154: pCube1
+    2300156: pCylinder1
+    2300158: pCylinder26
+    2300160: pCylinder27
+    2300162: pSphere1
+    2300164: pTorus1
+    2300166: rightKnee
+    2300168: torso
+    3300000: clawEdgeLeftBack
+    3300002: clawEdgeLeftFront
+    3300004: clawEdgeRightBack
+    3300006: clawEdgeRightFront
+    3300008: clawSide1LeftBack
+    3300010: clawSide1LeftFront
+    3300012: clawSide1RightBack
+    3300014: clawSide1RightFront
+    3300016: clawSide2LeftBack
+    3300018: clawSide2LeftFront
+    3300020: clawSide2RightBack
+    3300022: clawSide2RightFront
+    3300024: elbowPadRight
+    3300026: footLowerFrontLeft
+    3300028: footLowerFrontRight
+    3300030: footMiddleFrontLeft
+    3300032: footMiddleFrontRight
+    3300034: footUpperFrontLeft
+    3300036: footUpperFrontRight
+    3300038: head
+    3300040: jamie_russia:armLower
+    3300042: jamie_russia:armLower 1
+    3300044: jamie_russia:armUpper
+    3300046: jamie_russia:armUpper 1
+    3300048: jamie_russia:elbowInner
+    3300050: jamie_russia:elbowInner 1
+    3300052: jamie_russia:elbowOuter
+    3300054: jamie_russia:elbowOuter 1
+    3300056: jamie_russia:footLower
+    3300058: jamie_russia:footLower 1
+    3300060: jamie_russia:footLower1
+    3300062: jamie_russia:footLower1 1
+    3300064: jamie_russia:footLower2
+    3300066: jamie_russia:footLower3
+    3300068: jamie_russia:footLower4
+    3300070: jamie_russia:footMiddle
+    3300072: jamie_russia:legLower
+    3300074: jamie_russia:legUpper
+    3300076: jamie_russia:nurbsToPoly1
+    3300078: jamie_russia:nurbsToPoly2
+    3300080: jamie_russia:nurbsToPoly3
+    3300082: jamie_russia:pCylinder16
+    3300084: jamie_russia:pCylinder20
+    3300086: jamie_russia:pCylinder21
+    3300088: jamie_russia:pCylinder22
+    3300090: jamie_russia:pCylinder23
+    3300092: jamie_russia:pCylinder24
+    3300094: jamie_russia:pCylinder25
+    3300096: jamie_russia:pCylinder26
+    3300098: jamie_russia:polySurface3
+    3300100: jamie_russia:polySurface5
+    3300102: jamie_russia:pPlane1
+    3300104: jamie_russia:pPlane1 1
+    3300106: jamie_russia:pPlane2
+    3300108: jamie_russia:pPlane2 1
+    3300110: jamie_russia:pPlane3
+    3300112: jamie_russia:pPlane3 1
+    3300114: jamie_russia:pPlane4
+    3300116: jamie_russia:pPlane4 1
+    3300118: jamie_russia:shoulders
+    3300120: leftKnee
+    3300122: nut1
+    3300124: nut10
+    3300126: nut11
+    3300128: nut12
+    3300130: nut13
+    3300132: nut14
+    3300134: nut15
+    3300136: nut16
+    3300138: nut2
+    3300140: nut3
+    3300142: nut4
+    3300144: nut5
+    3300146: nut6
+    3300148: nut7
+    3300150: nut8
+    3300152: nut9
+    3300154: pCube1
+    3300156: pCylinder1
+    3300158: pCylinder26
+    3300160: pCylinder27
+    3300162: pSphere1
+    3300164: pTorus1
+    3300166: rightKnee
+    3300168: torso
+    4300000: head
+    4300002: jamie_russia:polySurface3
+    4300004: jamie_russia:polySurface5
+    4300006: jamie_russia:nurbsToPoly1
+    4300008: jamie_russia:nurbsToPoly2
+    4300010: jamie_russia:nurbsToPoly3
+    4300012: jamie_russia:pCylinder21
+    4300014: jamie_russia:legLower
+    4300016: jamie_russia:legUpper
+    4300018: leftKnee
+    4300020: footLowerFrontLeft
+    4300022: footMiddleFrontLeft
+    4300024: footUpperFrontLeft
+    4300026: nut1
+    4300028: nut2
+    4300030: nut3
+    4300032: nut4
+    4300034: nut5
+    4300036: nut6
+    4300038: nut7
+    4300040: nut8
+    4300042: jamie_russia:pCylinder16
+    4300044: jamie_russia:pCylinder20
+    4300046: rightKnee
+    4300048: footLowerFrontRight
+    4300050: footMiddleFrontRight
+    4300052: footUpperFrontRight
+    4300054: nut9
+    4300056: nut10
+    4300058: nut11
+    4300060: nut12
+    4300062: nut13
+    4300064: nut14
+    4300066: nut15
+    4300068: nut16
+    4300070: jamie_russia:footLower
+    4300072: jamie_russia:footMiddle
+    4300074: jamie_russia:pCylinder26
+    4300076: pSphere1
+    4300078: jamie_russia:footLower2
+    4300080: clawSide1LeftFront
+    4300082: clawSide2LeftBack
+    4300084: clawSide2LeftFront
+    4300086: clawEdgeLeftFront
+    4300088: clawSide1LeftBack
+    4300090: clawEdgeLeftBack
+    4300092: jamie_russia:armUpper
+    4300094: jamie_russia:armLower
+    4300096: jamie_russia:elbowInner
+    4300098: jamie_russia:elbowOuter
+    4300100: pCube1
+    4300102: pCylinder1
+    4300104: clawSide2RightBack
+    4300106: clawSide1RightBack
+    4300108: clawSide1RightFront
+    4300110: clawSide2RightFront
+    4300112: clawEdgeRightBack
+    4300114: clawEdgeRightFront
+    4300116: jamie_russia:pCylinder24
+    4300118: jamie_russia:armLower
+    4300120: jamie_russia:pCylinder25
+    4300122: jamie_russia:elbowOuter
+    4300124: jamie_russia:elbowInner
+    4300126: jamie_russia:armUpper
+    4300128: pTorus1
+    4300130: pCylinder26
+    4300132: pCylinder27
+    4300134: elbowPadRight
+    4300136: torso
+    4300138: jamie_russia:footLower1
+    4300140: jamie_russia:footLower3
+    4300142: jamie_russia:footLower4
+    4300144: jamie_russia:footLower
+    4300146: jamie_russia:footLower1
+    4300148: jamie_russia:pCylinder22
+    4300150: jamie_russia:pCylinder23
+    4300152: jamie_russia:shoulders
+    4300154: jamie_russia:pPlane1
+    4300156: jamie_russia:pPlane2
+    4300158: jamie_russia:pPlane3
+    4300160: jamie_russia:pPlane4
+    4300162: jamie_russia:pPlane1
+    4300164: jamie_russia:pPlane2
+    4300166: jamie_russia:pPlane3
+    4300168: jamie_russia:pPlane4
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

@@ -86,6 +86,7 @@ public class Server : MonoBehaviour {
 			
 			// Instaniate charater in universe
             Vector3 position = new Vector3(pos.x - 8, pos.y, pos.z + 15);
+   
             Transform characterPlayer = (Transform)Network.Instantiate(characterPrefab, position, new Quaternion(0,0,0,0), i);
 			//characterPlayer.Rotate(new Vector3(0,180,0));
 			// Rename the character and pass name to clients
@@ -94,6 +95,7 @@ public class Server : MonoBehaviour {
             NetworkView nView = characterPlayer.GetComponent<NetworkView>(); 
             characterView[i] = nView;
             viewIDChNameMapping.Add(characterPlayer.networkView.viewID, characterPlayer.name);
+          //  GameObject.Find("Character1/usa_model").SetActive(true);
         }
 
         // Set up boss universe
@@ -202,7 +204,7 @@ public class Server : MonoBehaviour {
                 if (Misc.ArrayContains(playerNames, GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
                     GameObject.Find("Character" + ID).GetComponent<PlayerManager>().updatePlayerNameS(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() + "'");
                 PlayerManager manager = GameObject.Find("Character" + nextPlayerID).GetComponent<PlayerManager>();
-
+                
              //  Debug.Log("Add " + manager.getPlayerName());
                // playerName.Add(ID, manager.getPlayerName());
                 Debug.Log("Player :" + manager.getPlayerName() + "has connected");

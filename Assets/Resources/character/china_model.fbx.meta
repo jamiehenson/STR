@@ -1,0 +1,652 @@
+fileFormatVersion: 2
+guid: 71dadc71ed1494f41a785f1b8099d5f2
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: arm
+    100002: backJet
+    100004: barrel_thing
+    100006: barrel_thing 1
+    100008: bigCone
+    100010: bigCone1
+    100012: bigCone2
+    100014: bigCone3
+    100016: body
+    100018: bodyEnd
+    100020: bodyLine
+    100022: bottom
+    100024: bottom 1
+    100026: cabin
+    100028: cannonLeft
+    100030: cannonRight
+    100032: cannons
+    100034: //RootNode
+    100036: cone_bit
+    100038: cone_bit 1
+    100040: extrudedSurface2
+    100042: extrudedSurface6
+    100044: fins
+    100046: group2
+    100048: gunMount
+    100050: gunMount1
+    100052: hinge
+    100054: hinge 1
+    100056: left
+    100058: left 1
+    100060: legLeft
+    100062: legRight
+    100064: legs
+    100066: littleCone
+    100068: littleCone1
+    100070: littleCone2
+    100072: littleCone3
+    100074: loftedSurface10
+    100076: loftedSurface12
+    100078: loftedSurface13
+    100080: loftedSurface14
+    100082: loftedSurface15
+    100084: loftedSurface16
+    100086: loftedSurface6
+    100088: loftedSurface7
+    100090: loftedSurface7 1
+    100092: loftedSurface8
+    100094: loftedSurface8 1
+    100096: loftedSurface9
+    100098: mainArm
+    100100: neck
+    100102: noseLeft
+    100104: noseRight
+    100106: nurbsToPoly10
+    100108: nurbsToPoly11
+    100110: nurbsToPoly12
+    100112: nurbsToPoly13
+    100114: nurbsToPoly14
+    100116: nurbsToPoly15
+    100118: nurbsToPoly16
+    100120: nurbsToPoly17
+    100122: nurbsToPoly19
+    100124: nurbsToPoly21
+    100126: nurbsToPoly22
+    100128: nurbsToPoly23
+    100130: nurbsToPoly5
+    100132: nurbsToPoly6
+    100134: nurbsToPoly7
+    100136: nurbsToPoly8
+    100138: nurbsToPoly9
+    100140: pCone2
+    100142: pCone3
+    100144: pCube2
+    100146: pCube3
+    100148: pCube4
+    100150: pCube5
+    100152: pCylinder12
+    100154: pCylinder14
+    100156: pCylinder15
+    100158: pCylinder16
+    100160: pCylinder17
+    100162: pCylinder22
+    100164: pCylinder24
+    100166: pCylinder27
+    100168: pipeLeft
+    100170: pipeRight
+    100172: pipes
+    100174: place3dTexture1
+    100176: place3dTexture2
+    100178: polySurface3
+    100180: polySurface3 1
+    100182: polySurface4
+    100184: polySurface4 1
+    100186: polySurface5
+    100188: polySurface5 1
+    100190: polySurface6
+    100192: polySurface6 1
+    100194: polySurface7
+    100196: polySurface7 1
+    100198: pPipe1
+    100200: pPipe10
+    100202: pPipe11
+    100204: pPipe4
+    100206: pPipe5
+    100208: pPipe6
+    100210: pPipe7
+    100212: pPipe8
+    100214: pPipe9
+    100216: right
+    100218: right 1
+    100220: rightArm
+    100222: shoulder
+    100224: stick
+    100226: stick 1
+    100228: stick 2
+    100230: stick 3
+    100232: supportLower
+    100234: supportLower 1
+    100236: supportUpper
+    100238: supportUpper 1
+    100240: tailLowerLeft
+    100242: tailLowerRight
+    100244: tails
+    100246: tailUpperLeft
+    100248: tailUpperRight
+    100250: thingyLeft
+    100252: thingyRight
+    100254: top
+    100256: top 1
+    100258: turrets
+    100260: wingLeftInner
+    100262: wingLeftOuter
+    100264: wingRightInner
+    100266: wingRightOuter
+    100268: wings
+    400000: arm
+    400002: backJet
+    400004: barrel_thing
+    400006: barrel_thing 1
+    400008: bigCone
+    400010: bigCone1
+    400012: bigCone2
+    400014: bigCone3
+    400016: body
+    400018: bodyEnd
+    400020: bodyLine
+    400022: bottom
+    400024: bottom 1
+    400026: cabin
+    400028: cannonLeft
+    400030: cannonRight
+    400032: cannons
+    400034: //RootNode
+    400036: cone_bit
+    400038: cone_bit 1
+    400040: extrudedSurface2
+    400042: extrudedSurface6
+    400044: fins
+    400046: group2
+    400048: gunMount
+    400050: gunMount1
+    400052: hinge
+    400054: hinge 1
+    400056: left
+    400058: left 1
+    400060: legLeft
+    400062: legRight
+    400064: legs
+    400066: littleCone
+    400068: littleCone1
+    400070: littleCone2
+    400072: littleCone3
+    400074: loftedSurface10
+    400076: loftedSurface12
+    400078: loftedSurface13
+    400080: loftedSurface14
+    400082: loftedSurface15
+    400084: loftedSurface16
+    400086: loftedSurface6
+    400088: loftedSurface7
+    400090: loftedSurface7 1
+    400092: loftedSurface8
+    400094: loftedSurface8 1
+    400096: loftedSurface9
+    400098: mainArm
+    400100: neck
+    400102: noseLeft
+    400104: noseRight
+    400106: nurbsToPoly10
+    400108: nurbsToPoly11
+    400110: nurbsToPoly12
+    400112: nurbsToPoly13
+    400114: nurbsToPoly14
+    400116: nurbsToPoly15
+    400118: nurbsToPoly16
+    400120: nurbsToPoly17
+    400122: nurbsToPoly19
+    400124: nurbsToPoly21
+    400126: nurbsToPoly22
+    400128: nurbsToPoly23
+    400130: nurbsToPoly5
+    400132: nurbsToPoly6
+    400134: nurbsToPoly7
+    400136: nurbsToPoly8
+    400138: nurbsToPoly9
+    400140: pCone2
+    400142: pCone3
+    400144: pCube2
+    400146: pCube3
+    400148: pCube4
+    400150: pCube5
+    400152: pCylinder12
+    400154: pCylinder14
+    400156: pCylinder15
+    400158: pCylinder16
+    400160: pCylinder17
+    400162: pCylinder22
+    400164: pCylinder24
+    400166: pCylinder27
+    400168: pipeLeft
+    400170: pipeRight
+    400172: pipes
+    400174: place3dTexture1
+    400176: place3dTexture2
+    400178: polySurface3
+    400180: polySurface3 1
+    400182: polySurface4
+    400184: polySurface4 1
+    400186: polySurface5
+    400188: polySurface5 1
+    400190: polySurface6
+    400192: polySurface6 1
+    400194: polySurface7
+    400196: polySurface7 1
+    400198: pPipe1
+    400200: pPipe10
+    400202: pPipe11
+    400204: pPipe4
+    400206: pPipe5
+    400208: pPipe6
+    400210: pPipe7
+    400212: pPipe8
+    400214: pPipe9
+    400216: right
+    400218: right 1
+    400220: rightArm
+    400222: shoulder
+    400224: stick
+    400226: stick 1
+    400228: stick 2
+    400230: stick 3
+    400232: supportLower
+    400234: supportLower 1
+    400236: supportUpper
+    400238: supportUpper 1
+    400240: tailLowerLeft
+    400242: tailLowerRight
+    400244: tails
+    400246: tailUpperLeft
+    400248: tailUpperRight
+    400250: thingyLeft
+    400252: thingyRight
+    400254: top
+    400256: top 1
+    400258: turrets
+    400260: wingLeftInner
+    400262: wingLeftOuter
+    400264: wingRightInner
+    400266: wingRightOuter
+    400268: wings
+    2300000: arm
+    2300002: backJet
+    2300004: barrel_thing
+    2300006: barrel_thing 1
+    2300008: bigCone
+    2300010: bigCone1
+    2300012: bigCone2
+    2300014: bigCone3
+    2300016: body
+    2300018: bodyEnd
+    2300020: bodyLine
+    2300022: cabin
+    2300024: cone_bit
+    2300026: cone_bit 1
+    2300028: extrudedSurface2
+    2300030: extrudedSurface6
+    2300032: gunMount
+    2300034: gunMount1
+    2300036: hinge
+    2300038: hinge 1
+    2300040: legLeft
+    2300042: legRight
+    2300044: littleCone
+    2300046: littleCone1
+    2300048: littleCone2
+    2300050: littleCone3
+    2300052: loftedSurface10
+    2300054: loftedSurface12
+    2300056: loftedSurface13
+    2300058: loftedSurface14
+    2300060: loftedSurface15
+    2300062: loftedSurface16
+    2300064: loftedSurface6
+    2300066: loftedSurface7
+    2300068: loftedSurface7 1
+    2300070: loftedSurface8
+    2300072: loftedSurface8 1
+    2300074: loftedSurface9
+    2300076: neck
+    2300078: noseLeft
+    2300080: noseRight
+    2300082: nurbsToPoly10
+    2300084: nurbsToPoly11
+    2300086: nurbsToPoly12
+    2300088: nurbsToPoly13
+    2300090: nurbsToPoly14
+    2300092: nurbsToPoly15
+    2300094: nurbsToPoly16
+    2300096: nurbsToPoly17
+    2300098: nurbsToPoly19
+    2300100: nurbsToPoly21
+    2300102: nurbsToPoly22
+    2300104: nurbsToPoly23
+    2300106: nurbsToPoly5
+    2300108: nurbsToPoly6
+    2300110: nurbsToPoly7
+    2300112: nurbsToPoly8
+    2300114: nurbsToPoly9
+    2300116: pCone2
+    2300118: pCone3
+    2300120: pCube2
+    2300122: pCube3
+    2300124: pCube4
+    2300126: pCube5
+    2300128: pCylinder12
+    2300130: pCylinder14
+    2300132: pCylinder15
+    2300134: pCylinder16
+    2300136: pCylinder17
+    2300138: pCylinder22
+    2300140: pCylinder24
+    2300142: pCylinder27
+    2300144: pipeLeft
+    2300146: pipeRight
+    2300148: polySurface3
+    2300150: polySurface3 1
+    2300152: polySurface4
+    2300154: polySurface4 1
+    2300156: polySurface5
+    2300158: polySurface5 1
+    2300160: polySurface6
+    2300162: polySurface6 1
+    2300164: polySurface7
+    2300166: polySurface7 1
+    2300168: pPipe1
+    2300170: pPipe10
+    2300172: pPipe11
+    2300174: pPipe4
+    2300176: pPipe5
+    2300178: pPipe6
+    2300180: pPipe7
+    2300182: pPipe8
+    2300184: pPipe9
+    2300186: shoulder
+    2300188: stick
+    2300190: stick 1
+    2300192: stick 2
+    2300194: stick 3
+    2300196: supportLower
+    2300198: supportLower 1
+    2300200: supportUpper
+    2300202: supportUpper 1
+    2300204: thingyLeft
+    2300206: thingyRight
+    2300208: wingLeftInner
+    2300210: wingLeftOuter
+    2300212: wingRightInner
+    2300214: wingRightOuter
+    3300000: arm
+    3300002: backJet
+    3300004: barrel_thing
+    3300006: barrel_thing 1
+    3300008: bigCone
+    3300010: bigCone1
+    3300012: bigCone2
+    3300014: bigCone3
+    3300016: body
+    3300018: bodyEnd
+    3300020: bodyLine
+    3300022: cabin
+    3300024: cone_bit
+    3300026: cone_bit 1
+    3300028: extrudedSurface2
+    3300030: extrudedSurface6
+    3300032: gunMount
+    3300034: gunMount1
+    3300036: hinge
+    3300038: hinge 1
+    3300040: legLeft
+    3300042: legRight
+    3300044: littleCone
+    3300046: littleCone1
+    3300048: littleCone2
+    3300050: littleCone3
+    3300052: loftedSurface10
+    3300054: loftedSurface12
+    3300056: loftedSurface13
+    3300058: loftedSurface14
+    3300060: loftedSurface15
+    3300062: loftedSurface16
+    3300064: loftedSurface6
+    3300066: loftedSurface7
+    3300068: loftedSurface7 1
+    3300070: loftedSurface8
+    3300072: loftedSurface8 1
+    3300074: loftedSurface9
+    3300076: neck
+    3300078: noseLeft
+    3300080: noseRight
+    3300082: nurbsToPoly10
+    3300084: nurbsToPoly11
+    3300086: nurbsToPoly12
+    3300088: nurbsToPoly13
+    3300090: nurbsToPoly14
+    3300092: nurbsToPoly15
+    3300094: nurbsToPoly16
+    3300096: nurbsToPoly17
+    3300098: nurbsToPoly19
+    3300100: nurbsToPoly21
+    3300102: nurbsToPoly22
+    3300104: nurbsToPoly23
+    3300106: nurbsToPoly5
+    3300108: nurbsToPoly6
+    3300110: nurbsToPoly7
+    3300112: nurbsToPoly8
+    3300114: nurbsToPoly9
+    3300116: pCone2
+    3300118: pCone3
+    3300120: pCube2
+    3300122: pCube3
+    3300124: pCube4
+    3300126: pCube5
+    3300128: pCylinder12
+    3300130: pCylinder14
+    3300132: pCylinder15
+    3300134: pCylinder16
+    3300136: pCylinder17
+    3300138: pCylinder22
+    3300140: pCylinder24
+    3300142: pCylinder27
+    3300144: pipeLeft
+    3300146: pipeRight
+    3300148: polySurface3
+    3300150: polySurface3 1
+    3300152: polySurface4
+    3300154: polySurface4 1
+    3300156: polySurface5
+    3300158: polySurface5 1
+    3300160: polySurface6
+    3300162: polySurface6 1
+    3300164: polySurface7
+    3300166: polySurface7 1
+    3300168: pPipe1
+    3300170: pPipe10
+    3300172: pPipe11
+    3300174: pPipe4
+    3300176: pPipe5
+    3300178: pPipe6
+    3300180: pPipe7
+    3300182: pPipe8
+    3300184: pPipe9
+    3300186: shoulder
+    3300188: stick
+    3300190: stick 1
+    3300192: stick 2
+    3300194: stick 3
+    3300196: supportLower
+    3300198: supportLower 1
+    3300200: supportUpper
+    3300202: supportUpper 1
+    3300204: thingyLeft
+    3300206: thingyRight
+    3300208: wingLeftInner
+    3300210: wingLeftOuter
+    3300212: wingRightInner
+    3300214: wingRightOuter
+    4300000: noseLeft
+    4300002: noseRight
+    4300004: cabin
+    4300006: neck
+    4300008: shoulder
+    4300010: arm
+    4300012: thingyLeft
+    4300014: thingyRight
+    4300016: pipeLeft
+    4300018: pipeRight
+    4300020: legLeft
+    4300022: legRight
+    4300024: body
+    4300026: wingRightOuter
+    4300028: wingLeftOuter
+    4300030: wingLeftInner
+    4300032: wingRightInner
+    4300034: loftedSurface8
+    4300036: loftedSurface7
+    4300038: loftedSurface15
+    4300040: loftedSurface6
+    4300042: loftedSurface8
+    4300044: loftedSurface7
+    4300046: loftedSurface10
+    4300048: loftedSurface9
+    4300050: loftedSurface16
+    4300052: loftedSurface14
+    4300054: loftedSurface13
+    4300056: loftedSurface12
+    4300058: littleCone
+    4300060: bigCone
+    4300062: stick
+    4300064: littleCone1
+    4300066: bigCone1
+    4300068: bigCone2
+    4300070: littleCone2
+    4300072: bigCone3
+    4300074: littleCone3
+    4300076: stick
+    4300078: stick
+    4300080: stick
+    4300082: pCylinder17
+    4300084: pCylinder16
+    4300086: pCylinder15
+    4300088: pCylinder14
+    4300090: pCylinder12
+    4300092: pPipe1
+    4300094: pPipe4
+    4300096: pPipe5
+    4300098: pPipe6
+    4300100: pPipe7
+    4300102: pPipe8
+    4300104: pPipe9
+    4300106: pPipe10
+    4300108: pCylinder27
+    4300110: pPipe11
+    4300112: gunMount
+    4300114: gunMount1
+    4300116: supportLower
+    4300118: hinge
+    4300120: supportUpper
+    4300122: cone_bit
+    4300124: barrel_thing
+    4300126: barrel_thing
+    4300128: cone_bit
+    4300130: hinge
+    4300132: supportUpper
+    4300134: supportLower
+    4300136: pCylinder22
+    4300138: pCube2
+    4300140: pCube3
+    4300142: extrudedSurface2
+    4300144: pCone2
+    4300146: polySurface7
+    4300148: polySurface6
+    4300150: polySurface5
+    4300152: polySurface4
+    4300154: polySurface3
+    4300156: pCylinder24
+    4300158: pCone3
+    4300160: pCube4
+    4300162: pCube5
+    4300164: extrudedSurface6
+    4300166: polySurface3
+    4300168: polySurface7
+    4300170: polySurface6
+    4300172: polySurface5
+    4300174: polySurface4
+    4300176: bodyEnd
+    4300178: backJet
+    4300180: bodyLine
+    4300182: nurbsToPoly5
+    4300184: nurbsToPoly6
+    4300186: nurbsToPoly7
+    4300188: nurbsToPoly8
+    4300190: nurbsToPoly9
+    4300192: nurbsToPoly10
+    4300194: nurbsToPoly11
+    4300196: nurbsToPoly12
+    4300198: nurbsToPoly13
+    4300200: nurbsToPoly14
+    4300202: nurbsToPoly15
+    4300204: nurbsToPoly16
+    4300206: nurbsToPoly17
+    4300208: nurbsToPoly19
+    4300210: nurbsToPoly21
+    4300212: nurbsToPoly22
+    4300214: nurbsToPoly23
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
