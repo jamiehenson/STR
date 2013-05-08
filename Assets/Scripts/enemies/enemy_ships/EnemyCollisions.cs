@@ -53,9 +53,13 @@ public class EnemyCollisions : MonoBehaviour {
         {
             
             GameObject collided = other.gameObject;
-            Debug.Log(collided);
+            
             // Need to switch from name-based system to tag-based
             string collidedTag = collided.tag;
+            if (collidedTag == "PlayerBeam")
+            {
+                Debug.Log("BOOM");
+            }
             string characterNum = collided.name.Substring(collided.name.Length -1, 1);
             if ("0123456789".Contains(characterNum)) manager = GameObject.Find("Character" + characterNum ).GetComponent<PlayerManager>();
             switch (collidedTag)

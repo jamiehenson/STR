@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
       else if (Network.isServer)
       {
-          Debug.Log("Start Game Update" + startGame);
+          //Debug.Log("Start Game Update" + startGame);
         if (vertDist != 0 || horDist != 0)
         {
             positions = GameObject.Find("Universe"+universeNum+"/Managers/OriginManager").GetComponent<Universe>();
