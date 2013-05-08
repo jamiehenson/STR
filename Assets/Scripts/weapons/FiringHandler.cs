@@ -178,9 +178,12 @@ public class FiringHandler : MonoBehaviour {
 	    bullet.transform.Rotate(new Vector3(90, 0, 90));
 		if (bulletType == 3)
 	    	bullet.transform.Rotate(new Vector3(0, 0, 90));
-		
-		Physics.IgnoreCollision(gameObject.collider, bullet.collider);
+
 		// Add ignores for all characters if we want frendly fire off
+		GameObject[] characters = GameObject.FindGameObjectsWithTag("Player");
+		foreach(GameObject player in characters) {
+			Physics.IgnoreCollision(bullet.collider, player.collider);
+		}
 		
 		// Set up movement
 		bullet.rigidbody.AddForce(forceToApply);
