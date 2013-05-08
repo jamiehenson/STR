@@ -12,6 +12,12 @@ public class FiringHandler : MonoBehaviour {
     private int player;
     private bool myCharacter;
     PlayerManager manager;
+    public string model = "";
+
+    public void playerModel(string s)
+    {
+        model = s;
+    }
 
     public void activateCharacter(int num)
     {
@@ -54,7 +60,7 @@ public class FiringHandler : MonoBehaviour {
                     Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
 
                     // Send message to fire
-                    networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, manager.wepStats.wepType);
+                    networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, manager.wepStats.wepType, model);
                     // Update fire stats
                     
                     timer = 0;
@@ -73,7 +79,7 @@ public class FiringHandler : MonoBehaviour {
     }
 	
 	[RPC]
-	void fireWeapon(Vector3 lookAt, Vector3 fireDirection, int bulletType)
+	void fireWeapon(Vector3 lookAt, Vector3 fireDirection, int bulletType, string m)
 	{
         manager.updateEnergyLevel(-manager.getSelectedWepDrain());
 		// Update the WeaponHandler about the type (not the best way to do it)
@@ -83,16 +89,42 @@ public class FiringHandler : MonoBehaviour {
 		// Place Weapon
 		//Vector3 startPos = new Vector3(transform.position.x+3, transform.position.y, transform.position.z);
 		//Transform bullet = (Transform)Network.Instantiate(weaponHandler.wepPrefab, startPos, transform.rotation,200);
-        Transform arm = transform.Find("rightArm");
-        float angle = arm.transform.rotation.z * 100;
-        if (angle < 0) angle = 360 + angle;
-        angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
-        float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
-        if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
-        float valY = Mathf.Sin(angle) * 3.2f +transform.position.y + 1.8f;
-        Vector3 startP = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
+        Transform arm = transform.Find(m+"/rightArm");
+        Vector3 startP;
+        if (m == "usa")
+        {
+            float angle = arm.transform.rotation.z * 100;
+            if (angle < 0) angle = 360 + angle;
+            angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
+            float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
+            if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
+            float valY = Mathf.Sin(angle) * 3.2f + transform.position.y + 1.8f;
+            startP = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
+        }
+        else
+        {
+            float angle = arm.transform.rotation.z * 100;
+            if (angle < 0) angle = 360 + angle;
+            angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
+            float valX = Mathf.Cos(angle) + transform.position.x + 3.2f;
+            if (angle > 4.91)
+            {
+                valX = valX - 1 / Mathf.Cos(angle);
+                Debug.Log(angle);
+            }
+            else
+            {
+                valX = valX - 2 / Mathf.Cos(angle);
+                Debug.Log(angle);
+            }
+            float valY = Mathf.Sin(angle) * -5.2f + transform.Find("russia").position.y + 2.5f;
+            Debug.Log("bULLET pOSITION " + valX + "  " +valY);
+            startP = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
+ 
+        }
         //Vector3 startP = new Vector3(Mathf.Abs(valX), valY, 15);
         //Debug.Log("Bullet position " + valX + ", " + valY + " Angle " + " , " + Mathf.Cos(angle));
+        Debug.Log("Fire");
 		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startP, transform.rotation,200);
         bullet.name = bullet.name + universeN();
         networkView.RPC("fireAnimation", RPCMode.All, universeN());

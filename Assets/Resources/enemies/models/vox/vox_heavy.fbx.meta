@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f04a6e98f4403554da50018c6e1c8d4d
+guid: 50d5c39f8ee4b6a42afed9027def8143
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
@@ -25,10 +25,11 @@ ModelImporter:
     100038: midBand3
     100040: pCylinder1
     100042: pCylinder2
-    100044: set2_light:barrel
-    100046: set2_light:barrel1
-    100048: set2_light:barrelMount
-    100050: //RootNode
+    100044: rings
+    100046: set2_light:barrel
+    100048: set2_light:barrel1
+    100050: set2_light:barrelMount
+    100052: //RootNode
     400000: backBody
     400002: backBody1
     400004: backRing
@@ -51,10 +52,11 @@ ModelImporter:
     400038: midBand3
     400040: pCylinder1
     400042: pCylinder2
-    400044: set2_light:barrel
-    400046: set2_light:barrel1
-    400048: set2_light:barrelMount
-    400050: //RootNode
+    400044: rings
+    400046: set2_light:barrel
+    400048: set2_light:barrel1
+    400050: set2_light:barrelMount
+    400052: //RootNode
     2300000: backBody
     2300002: backBody1
     2300004: backRing
@@ -102,29 +104,31 @@ ModelImporter:
     3300042: set2_light:barrel1
     3300044: set2_light:barrelMount
     4300000: body
-    4300002: innerRing
-    4300004: backBody
-    4300006: joinPole
-    4300008: backRing
-    4300010: backRing1
-    4300012: joinPole1
-    4300014: backBody1
-    4300016: innerRing1
-    4300018: body1
-    4300020: joinPole2
-    4300022: set2_light:barrelMount
-    4300024: set2_light:barrel1
-    4300026: set2_light:barrel
-    4300028: barrelMount
-    4300030: barrel1
-    4300032: barrel
-    4300034: innerBarrel
-    4300036: midBand1
-    4300038: midBand2
-    4300040: pCylinder1
-    4300042: pCylinder2
-    4300044: midBand3
+    4300002: backBody
+    4300004: joinPole
+    4300006: joinPole1
+    4300008: backBody1
+    4300010: body1
+    4300012: joinPole2
+    4300014: set2_light:barrelMount
+    4300016: set2_light:barrel1
+    4300018: set2_light:barrel
+    4300020: barrelMount
+    4300022: barrel1
+    4300024: barrel
+    4300026: innerBarrel
+    4300028: midBand1
+    4300030: midBand2
+    4300032: pCylinder1
+    4300034: pCylinder2
+    4300036: midBand3
+    4300038: innerRing
+    4300040: backRing
+    4300042: backRing1
+    4300044: innerRing1
+    7400000: rotation
     9500000: //RootNode
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -137,11 +141,32 @@ ModelImporter:
     animationPositionError: .5
     animationScaleError: .5
     animationWrapMode: 0
-    clipAnimations: []
+    clipAnimations:
+    - name: rotation
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 20
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -175,5 +200,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   additionalBone: 1
-  animationType: 2
+  animationType: 1
   userData: 

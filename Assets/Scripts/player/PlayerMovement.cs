@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 	public OnlineClient onlineClient;
 	public Server server;
     public static bool startGame= false;
+    public string model = "";
 	
 	public void Start()
 	{
@@ -108,12 +109,21 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
     [RPC]
-    public void rotateArm(float angle)
+    public void rotateArm(float angle, string m)
     {
-        Transform arm = transform.Find("rightArm");
-        if (angle >= -45 && angle <= 50) arm.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
+        Transform arm = transform.Find(m +"/rightArm");
+        if(m =="usa")
+        {
+            if (angle >= -45 && angle <= 50) arm.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
+        }
+        else
+            if (angle >= -45 && angle <= 50) arm.transform.rotation = Quaternion.Euler(new Vector3(-angle, 90, 0));
     }
 
+    public void playerModel(string s)
+    {
+        model = s;
+    }
 	// Update is called once per frame
 	void Update () 
 	{
@@ -121,9 +131,8 @@ public class PlayerMovement : MonoBehaviour {
 		{
 	        float vertDist = PlayerManager.speed * Input.GetAxis("Vertical") * Time.deltaTime;
 	        float horDist = PlayerManager.speed * Input.GetAxis("Horizontal") * Time.deltaTime;
-
             /* Rotate arm */
-            Transform arm = transform.Find("rightArm");
+            Transform arm = transform.Find(model +"/rightArm");
             Vector3 mouse_pos = Input.mousePosition;
             mouse_pos.z = 15;
             Vector3 object_pos = Camera.main.WorldToScreenPoint(arm.transform.position);
@@ -131,7 +140,7 @@ public class PlayerMovement : MonoBehaviour {
             mouse_pos.y = mouse_pos.y - object_pos.y;
             // Calculate rotation angle
             float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-            networkView.RPC("rotateArm", RPCMode.All, angle);
+            networkView.RPC("rotateArm", RPCMode.All, angle, model);
             /*End arm rotation*/
 
 			// If R is pressed, rotate the character, toggling 90 degrees
@@ -178,7 +187,6 @@ public class PlayerMovement : MonoBehaviour {
 		}
       else if (Network.isServer)
       {
-          Debug.Log("Start Game Update" + startGame);
         if (vertDist != 0 || horDist != 0)
         {
             positions = GameObject.Find("Universe"+universeNum+"/Managers/OriginManager").GetComponent<Universe>();

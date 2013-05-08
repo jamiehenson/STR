@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour {
     private GameObject xp;
     public string[] playerNames, playerFlags;
 	public PlayerMovement movement;
+    public FiringHandler firingHandler;
     private string myPlayerName;
 	
 	public int universeNumber;
@@ -73,7 +74,9 @@ public class PlayerManager : MonoBehaviour {
 	{
 		movement = gameObject.GetComponent<PlayerMovement>();
         myPlayerName = playername;
-
+        movement.playerModel(activeChar);
+        firingHandler = gameObject.GetComponent<FiringHandler>();
+        firingHandler.playerModel(activeChar);
 		if (Network.isServer)
         {
             playerNames = new string[Server.numberOfPlayers() + 1];
@@ -168,7 +171,7 @@ public class PlayerManager : MonoBehaviour {
     public void updatePlayerNameS(string name)
     {
         myPlayerName = name;
-
+        
         networkView.RPC("updatePlayerName", RPCMode.Others, myPlayerName);
     }
 
@@ -200,7 +203,6 @@ public class PlayerManager : MonoBehaviour {
         {
             networkView.RPC("updatePlayerName", RPCMode.Server, playername);
 			networkView.RPC("updatePlayerFlag", RPCMode.Server, flagname);
-            
             switch (activeChar)
             {
                 case "china":
@@ -211,6 +213,8 @@ public class PlayerManager : MonoBehaviour {
                     energyMultiplier = 1f;
                     bankSize = 7000;
                     energyBank = 0;
+                  //  GameObject.Find("Character1/china_model").SetActive(true);
+
                     break;
                 case "usa":
                     startHP = 1000;
@@ -220,6 +224,7 @@ public class PlayerManager : MonoBehaviour {
                     energyMultiplier = 1.5f;
                     bankSize = 7000;
                     energyBank = 0;
+                  //  GameObject.Find("Character1/usa_model").SetActive(true);
                     break;
                 case "russia":
                     startHP = 750;
@@ -229,6 +234,7 @@ public class PlayerManager : MonoBehaviour {
                     energyMultiplier = 1.25f;
                     bankSize = 5000;
                     energyBank = 0;
+                 //   GameObject.Find("Character1/russia_model").SetActive(true);
                     break;
                 default:
                     startHP = 1000;
@@ -246,13 +252,28 @@ public class PlayerManager : MonoBehaviour {
             energyLevel = startEnergy;
             score = 0;
             WeaponHandler.ScaleDamages(damageMultiplier);
-            
+            networkView.RPC("updateCharacterModel", RPCMode.All, activeChar, characterNum);  
             networkView.RPC("updateStartEnergy", RPCMode.Server, startEnergy);
 			networkView.RPC("updateStartHP", RPCMode.Server, startHP);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
+          
         }
 
+    }
+ 
+    [RPC]
+    void updateCharacterModel(string activeC, int characterN)
+    {
+        Debug.Log("Activate " + "Character" + characterN + "/" + activeC);
+        if(activeC == "china") GameObject.Find("Character" + characterN + "/" + activeC).SetActive(true);
+        else GameObject.Find("Character" + characterN + "/china").SetActive(false);
+
+        if (activeC == "usa") GameObject.Find("Character" + characterN + "/" + activeC).SetActive(true);
+        else GameObject.Find("Character" + characterN + "/usa").SetActive(false);
+
+        if (activeC == "russia") GameObject.Find("Character" + characterN + "/" + activeC).SetActive(true);
+        else GameObject.Find("Character" + characterN + "/russia").SetActive(false);
     }
 
     void Update()
