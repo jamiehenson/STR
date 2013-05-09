@@ -8,7 +8,7 @@ public class Names : MonoBehaviour
 
 		str.Add("Space Turd Revolution");
 		str.Add("Superintendent Tony Robinson");
-		str.Add("Spanish Tour Guide");
+		str.Add("Spanish Tour Rep");
 		str.Add("Swedish Techno Remix");
 		str.Add("Suddenly, Thomas Realised...");
 		str.Add("Stylish Turkish Relaxation");
