@@ -18,7 +18,7 @@ public class Tint : MonoBehaviour
 
 	public void SetRandomColour()
 	{
-		float vibrance = 0.75f;
+		float vibrance = 0.6f;
 		Color[] colours = {new Color(vibrance,0,0), new Color(0,vibrance,0), new Color(0,0,vibrance), new Color(vibrance, vibrance, 0), new Color(0, vibrance, vibrance), new Color(vibrance, 0, vibrance)};
 
 		Color chosenOne = colours[Random.Range(0,colours.Length)];
