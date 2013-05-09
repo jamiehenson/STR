@@ -18,7 +18,9 @@ public class Tint : MonoBehaviour
 
 	public void SetRandomColour()
 	{
-		Color[] colours = {Color.red, Color.blue, Color.green, Color.magenta, Color.yellow, Color.cyan};
+		float vibrance = 0.75f;
+		Color[] colours = {new Color(vibrance,0,0), new Color(0,vibrance,0), new Color(0,0,vibrance), new Color(vibrance, vibrance, 0), new Color(0, vibrance, vibrance), new Color(vibrance, 0, vibrance)};
+
 		Color chosenOne = colours[Random.Range(0,colours.Length)];
 		RenderSettings.fog = true;
 		RenderSettings.fogDensity = Random.Range(0.0005f,0.001f);
