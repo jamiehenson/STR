@@ -261,9 +261,9 @@ public class Commander : MonoBehaviour {
         if (Network.isClient)
         {
             Debug.Log("Move to Boss universe " + cameraN());
-            PlayerManager manager = GameObject.Find("Character" + cameraN()).GetComponent<PlayerManager>();
-            manager.movement.changeUniverse(0);
-            manager.movement.SetCamForBoss();
+            PlayerMovement move = GameObject.Find("Character" + cameraN()).GetComponent<PlayerMovement>();
+            move.changeUniverse(0);
+            move.SetCamForBoss();
         }
     }
 
@@ -272,9 +272,9 @@ public class Commander : MonoBehaviour {
     {
         if (Network.isClient) {
             Debug.Log("Move back to universe " + cameraN());
-            PlayerManager manager = GameObject.Find("Character" + cameraN()).GetComponent<PlayerManager>();
-            manager.movement.changeUniverse(cameraN());
-            manager.movement.SetCamAfterBoss();
+            PlayerMovement move = GameObject.Find("Character" + cameraN()).GetComponent<PlayerMovement>();
+            move.changeUniverse(cameraN());
+            move.SetCamAfterBoss();
         }
     }
 
@@ -424,7 +424,7 @@ public class Commander : MonoBehaviour {
     public void WarpAnimation() {
         if (Network.isServer) {
             bossDeployed = true;
-            for (int i = 1; i < 5; i++) {
+            for (int i = 1; i <= Server.numberOfPlayers(); i++) {
                 if (activeCharacters[i]) {
                     GameObject character = GameObject.Find("Character" + i);
                     PlayerMovement move = character.GetComponent<PlayerMovement>();
@@ -436,7 +436,7 @@ public class Commander : MonoBehaviour {
 
     public void SendToBoss() {
         if (Network.isServer) {
-            networkView.RPC("moveBossUniverse", RPCMode.All);
+            networkView.RPC("moveBossUniverse", RPCMode.Others);
             ClearScreen();   
         }
     }

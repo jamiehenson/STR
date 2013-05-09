@@ -4,22 +4,27 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class HudOn : MonoBehaviour {
-    public int wepType, bankSize;
     public Rect position;
-    public string[] systemNames = new string[4];
 
 	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard;
 	private Font deco;
 	private string charName, wepName, gearReady;
+
+	public string[] systemNames;
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
-	private int hudBarSize = 150, playercount = 4;
-	private GameObject toast;//, charModel;
+    public int lives, currentLives;
+	public int wepType, bankSize;
+	private int hudBarSize = 150, playercount;
+
 	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
+    public int startLivesNb;
+    public bool initialized;
 
 	//private Vector3 charScale;
 	public static Vector3 vortpointOut;
@@ -32,6 +37,11 @@ public class HudOn : MonoBehaviour {
     public static int countUniverse;
     PlayerManager manager = null;
 	//OnlineClient onlineClient;
+
+	// Toasts
+	private GameObject toast;//, charModel;
+	private Queue<string> queuedToastMessages;
+	private int toastCountdown;
 	
 	public static HudOn Instance; // Singleton var so vortex can access (Is there a better method?)
 	
@@ -58,6 +68,18 @@ public class HudOn : MonoBehaviour {
         return result;
     }
 
+    public void updateLives(int c, string s)
+    {
+        lives = c;
+        ToastWrapper(s +"lost in battle! " + lives + "lives remaining.");
+    }
+
+    public void startLives(int c)
+    {
+        lives = c;
+        startLivesNb = lives;
+        ToastWrapper("You have " + lives + "lives. Keep them hidden, keep them safe!");
+    }
     public void updateName(string s)
     {
         charName = s;
@@ -157,11 +179,13 @@ public class HudOn : MonoBehaviour {
 
         if (energyBank / (bankSize / hudBarSize) >= hudBarSize || true) // Always true, for testing
         {
-            manager.resetEnergyBank(manager.getBankSize());
+			manager.resetEnergyBank(manager.getBankSize());
             gearReady = "WARP DRIVE READY!";
             PlayerManager.bankFull = true;
             if (Input.GetKeyDown("space"))
             {
+				stopVortices(); // Kill the current vortices
+
                 manager.resetEnergyBank(0);
                 PlayerManager.bankFull = false;
                 gearReady = "";
@@ -175,64 +199,81 @@ public class HudOn : MonoBehaviour {
 				}
 
                 GameObject vortex = (GameObject)Resources.Load("Player/vortex");
-                float[] xvals = new float[playercount - 1];
-                float[] yvals = new float[playercount - 1];
-                float chunkX = (float)0.5f / (playercount - 1);
-                float chunkY = (float)0.8f / (playercount - 1);
-                for (int i = 0; i < playercount - 1; i++)
-                {
-                    xvals[i] = Random.Range(0 + (i * chunkX), (i + 1) * chunkX);
-                    yvals[i] = Random.Range(0 + (i * chunkY), (i + 1) * chunkY);
-                }
 
-                for (var i = (playercount - 2); i > 0; i--)
-                {
-                    int t = Random.Range(0, i);
-                    float temp = yvals[i];
-                    yvals[i] = yvals[t];
-                    yvals[t] = temp;
-                }
-				
-				int currentUniverse = manager.universeNumber;
-				print("Manager says current universe is: "+currentUniverse);
-                // Make n-1 new ones
-                for (int i = 0; i < playercount - 1; i++)
-                {
-                    float x = xvals[i];
-                    float y = yvals[i];
-                    Vector3 vortpoint = new Vector3(x, y, 15);
-                    Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
-                    GameObject obj = (GameObject)Instantiate(vortex, vort, Quaternion.identity);
-                    vortex.name = "vortex" + (i + 1);
-					Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
-					vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
-					vortexScript.inUniverse = currentUniverse;
-					vortexScript.setLabel(vortpoint,systemNames[vortexScript.leadsToUniverse-1]);
-					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
-                    vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
-                    vortex.tag = "vortex";
+                if (playercount != 1) {
+                    VortexLaunch(vortex);
                 }
             }
         }
 	}
 
-    public void ToastWrapper(string notetext) {
-        StartCoroutine("Toast", notetext);
+    private void VortexLaunch(GameObject vortex) {
+        float[] xvals = new float[playercount - 1];
+        float[] yvals = new float[playercount - 1];
+
+        float chunkX = (float)0.5f / (playercount - 1);
+        float chunkY = (float)0.8f / (playercount - 1);
+        for (int i = 0; i < playercount - 1; i++)
+        {
+            xvals[i] = Random.Range(0 + (i * chunkX), (i + 1) * chunkX);
+            yvals[i] = Random.Range(0 + (i * chunkY), (i + 1) * chunkY);
+        }
+
+        for (var i = (playercount - 2); i > 0; i--)
+        {
+            int t = Random.Range(0, i);
+            float temp = yvals[i];
+            yvals[i] = yvals[t];
+            yvals[t] = temp;
+        }
+				
+		int currentUniverse = manager.universeNumber;
+		print("Manager says current universe is: "+currentUniverse);
+        // Make n-1 new ones
+        for (int i = 0; i < playercount - 1; i++)
+        {
+            float x = xvals[i];
+            float y = yvals[i];
+            Vector3 vortpoint = new Vector3(x, y, 15);
+            Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
+            GameObject obj = (GameObject)Instantiate(vortex, vort, Quaternion.identity);
+            vortex.name = "vortex" + (i + 1);
+			Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
+			vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
+			vortexScript.inUniverse = currentUniverse;
+			vortexScript.setLabel(vortpoint,systemNames[vortexScript.leadsToUniverse-1]);
+			print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
+            vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
+            vortex.tag = "vortex";
+        }
     }
 
-	IEnumerator Toast(string notetext) {
-		toast = new GameObject("Toast");
-		toast.AddComponent("GUIText");
-		toast.guiText.font = (Font) Resources.Load ("Belgrad");
-		toast.guiText.fontSize = (Screen.width > 1000) ? 40 : 24;
-		toast.transform.position = new Vector3(0.5f,0.5f,0);
-		toast.guiText.anchor = TextAnchor.MiddleCenter;
-		toast.guiText.text = notetext;
-		toast.guiText.material.color = Color.white;
-		yield return new WaitForSeconds(4);
-		iTween.FadeTo(toast,0f,1f);
-		yield return new WaitForSeconds(1);
-		Destroy(toast);
+    public void ToastWrapper(string notetext) {
+        //StartCoroutine("Toast", notetext);
+		queuedToastMessages.Enqueue(notetext);
+    }
+
+	IEnumerator Toast() {
+		while (true) {
+			if (queuedToastMessages.Count == 0)
+				yield return new WaitForSeconds(1/15);
+			else {
+				// Display it
+				string notetext = queuedToastMessages.Dequeue();
+				toast = new GameObject("Toast");
+				toast.AddComponent("GUIText");
+				toast.guiText.font = (Font) Resources.Load ("Belgrad");
+				toast.guiText.fontSize = (Screen.width > 1000) ? 40 : 24;
+				toast.transform.position = new Vector3(0.5f,0.5f,0);
+				toast.guiText.anchor = TextAnchor.MiddleCenter;
+				toast.guiText.text = notetext;
+				toast.guiText.material.color = Color.white;
+				yield return new WaitForSeconds(4);
+				iTween.FadeTo(toast,0f,1f);
+				yield return new WaitForSeconds(1);
+				Destroy(toast);
+			}
+		}
 	}
 
     private int universeN()
@@ -270,6 +311,8 @@ public class HudOn : MonoBehaviour {
 		gameOver = false;
 		Instance = this;
 
+        playercount = Server.numberOfPlayers();
+
 		gameOverBeenDetected = false;
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
@@ -279,6 +322,9 @@ public class HudOn : MonoBehaviour {
 
 		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 		gameOverBeenDetected = false;
+
+		queuedToastMessages = new Queue<string>();
+		StartCoroutine("Toast");
 	}
 
 		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
@@ -301,7 +347,7 @@ public class HudOn : MonoBehaviour {
 		iTween.CameraFadeAdd();
 		iTween.CameraFadeFrom(1.0f, 2.0f);
 
-        StartCoroutine(Toast("SURVIVE THE ENEMY ONSLAUGHT"));
+        ToastWrapper("SURVIVE THE ENEMY ONSLAUGHT");
 
         if (PlayerManager.activeChar == "china") crossTex = (Texture2D)Resources.Load("hud/crossChi");
         else if (PlayerManager.activeChar == "usa") crossTex = (Texture2D)Resources.Load("hud/crossUSA");
@@ -326,6 +372,7 @@ public class HudOn : MonoBehaviour {
         startHP = manager.getStartHP();
         startEnergy = manager.getStartEnergy();
         bankSize = manager.getBankSize();
+        lives = manager.getLives();
 
 		health.normal.background = fillTex(1,1,new Color(0.8f,0f,0f,1f));
 		energy.normal.background = fillTex(1,1,new Color(0f,0f,0.8f,1f));
@@ -334,9 +381,10 @@ public class HudOn : MonoBehaviour {
         charName = manager.getPlayerName();
 	}
 
+    
+
+
 	void OnGUI () {
-		if (manager == null)
-			return;
 
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
@@ -406,15 +454,14 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (115,35,energyLevel/(startEnergy/hudBarSize),10),"",energy);
 		
 		// Power bank
-		GUI.Label (new Rect (115,45,energyBank/(bankSize/hudBarSize),10),"",bank);
-		
+            GUI.Label(new Rect(115, 45, lives / (startLivesNb*100 / hudBarSize), 10), "",bank);
 		// Speed and gear indicator
         GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + manager.getScore(), largeStyle);
 		GUI.Label (new Rect (Screen.width-240,100,200,40),gearReady,hudStyle);
 		
 		// Scoreboard indicator
 		GUI.Label (new Rect (Screen.width-150,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",hudStyle);
-        for (int i = 1; i <= 4; i++)
+        for (int i = 1; i <= playercount; i++)
         {
             PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
@@ -465,6 +512,7 @@ public class HudOn : MonoBehaviour {
             // ANIMATE HERE AT 2
 			yield return new WaitForSeconds(1);
 		}
+		stopVortices();
 		manager.movement.changeUniverse(vortexLeadsTo);
 		//charModel.transform.localScale = charScale;
 		showCountdown = false;
@@ -499,5 +547,14 @@ public class HudOn : MonoBehaviour {
 	public void setManager(PlayerManager m) {
 		manager = m;
 		startWithManager();
+	}
+
+	public void stopVortices() {
+		leftVortex(); // Stop countdown
+
+		GameObject[] vorties = GameObject.FindGameObjectsWithTag("vortex");
+		foreach (GameObject vortex in vorties) {
+			Destroy(vortex);
+		}
 	}
 }

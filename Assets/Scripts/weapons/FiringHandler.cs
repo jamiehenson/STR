@@ -97,6 +97,7 @@ public class FiringHandler : MonoBehaviour {
 		//weaponHandler.wepType = bulletType;
 		//weaponHandler.Update();
 
+
         Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, gunPosition, transform.rotation, 200);
 
         bullet.name = bullet.name + universeN();

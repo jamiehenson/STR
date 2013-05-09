@@ -27,7 +27,7 @@ public class EyeBossManager : BossManager
             cannons    = GameObject.FindGameObjectsWithTag("BossCannon");
             initStats();
 
-            //StartCoroutine(Shoot());
+            StartCoroutine(Shoot());
             StartCoroutine(Beam());
         }
     }
@@ -35,7 +35,7 @@ public class EyeBossManager : BossManager
     void initStats() {
         if (Network.isServer) {
             gameObject.name     = "Boss0";
-            health              = characters.Length*100;
+            health              = characters.Length*200;
             beamPower           = 0.01f;
             cannonPower         = 10f;
             killPoints          = 10000;
@@ -77,7 +77,6 @@ public class EyeBossManager : BossManager
         }
     }
 
-    // TO FIX - BOSS WILL ALWAYS FIRE AT PLAYER 1
     IEnumerator Beam() {
         while (true) {
             if (inPlane) {
@@ -96,15 +95,19 @@ public class EyeBossManager : BossManager
 
                     // Play the charging animation on all of the clients
                     networkView.RPC("chargingAnimation", RPCMode.All);
+                    
                     chargingBeam.Play();
                     while (chargingBeam.isPlaying) {
                         yield return new WaitForSeconds(0.1f);
                     }
-
-                    chargedBeam.transform.LookAt(character.transform, Vector3.forward);
+                    Vector3 aimPos = character.transform.position;
+                    chargedBeam.transform.LookAt(aimPos, Vector3.forward);
                     //networkView.RPC("aimWeapon", RPCMode.All, character);
 
-                    GameObject beamCollider = (GameObject)Network.Instantiate(beamColliderPrefab, character.transform.position, Quaternion.identity, 100);
+                    networkView.RPC("chargedAnimation", RPCMode.All);
+                    chargedBeam.Play();
+                    //GameObject beamCollider = (GameObject)Network.Instantiate(beamColliderPrefab, character.transform.position, Quaternion.identity, 100);
+                    GameObject beamCollider = (GameObject)Network.Instantiate(beamColliderPrefab, aimPos, Quaternion.identity, 100);
                     beamCollider.name = "BeamCollider";
                     EnemyBulletSettings weaponSettings = beamCollider.GetComponent<EnemyBulletSettings>();
                     weaponSettings.damage = beamPower;
