@@ -8,7 +8,6 @@
  * Script enabled from Universe.cs
  * */
 
-
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -216,25 +215,24 @@ public class Commander : MonoBehaviour {
     void Start() {
 		//enemyPrefabs = Resources.LoadAll("enemies/enemytypes/test", typeof(GameObject));
         // Hard coded. Can't be arsed to mess around with a more flexible solution
-        enemyTypes[0,0] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_light", typeof(GameObject));
-        enemyTypes[0,1] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_medium", typeof(GameObject));
-        enemyTypes[0,2] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_heavy", typeof(GameObject));
-        enemyTypes[0,3] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_superheavy", typeof(GameObject));
-        enemyTypes[1,0] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_light", typeof(GameObject));
-        enemyTypes[1,1] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_medium", typeof(GameObject));
-        enemyTypes[1,2] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_heavy", typeof(GameObject));
-        enemyTypes[1,3] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_superheavy", typeof(GameObject));
-        enemyTypes[2,0] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_light", typeof(GameObject));
-        enemyTypes[2,1] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_medium", typeof(GameObject));
-        enemyTypes[2,2] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_heavy", typeof(GameObject));
-        enemyTypes[2,3] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_superheavy", typeof(GameObject));
-        enemyTypes[3, 0] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_light", typeof(GameObject));
-        enemyTypes[3, 1] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_medium", typeof(GameObject));
-        enemyTypes[3, 2] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_heavy", typeof(GameObject));
-        enemyTypes[3, 3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
+        enemyTypes[0,0] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_light", typeof(GameObject));
+        enemyTypes[0,1] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_medium", typeof(GameObject));
+        enemyTypes[0,2] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_heavy", typeof(GameObject));
+        enemyTypes[0,3] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_superheavy", typeof(GameObject));
+        enemyTypes[1,0] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_light", typeof(GameObject));
+        enemyTypes[1,1] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_medium", typeof(GameObject));
+        enemyTypes[1,2] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_heavy", typeof(GameObject));
+        enemyTypes[1,3] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_superheavy", typeof(GameObject));
+        enemyTypes[2,0] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_light", typeof(GameObject));
+        enemyTypes[2,1] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_medium", typeof(GameObject));
+        enemyTypes[2,2] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_heavy", typeof(GameObject));
+        enemyTypes[2,3] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_superheavy", typeof(GameObject));
+        enemyTypes[3,0] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_light", typeof(GameObject));
+        enemyTypes[3,1] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_medium", typeof(GameObject));
+        enemyTypes[3,2] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_heavy", typeof(GameObject));
+        enemyTypes[3,3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
         currType = Random.Range(0, 4);
-        if (Network.isServer)
-        {
+        if (Network.isServer) {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
             activeCharacters = new bool[countUniverse+1];
             activeCharacters[universeN()] = true;

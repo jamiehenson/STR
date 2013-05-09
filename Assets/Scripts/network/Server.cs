@@ -9,27 +9,36 @@ public class Server : MonoBehaviour {
     public Transform playerUniversePrefab;
     public static int countUniverse;
     public Transform[] universe;
-    private Bridge bridge;
     public Transform characterPrefab;
     public Transform Networkbridge;
-    private int nextPlayerID = 0;
-    private Dictionary<NetworkViewID, string> viewIDNameMapping;
-    private Dictionary<NetworkViewID, string> viewIDChNameMapping;
+    public Dictionary<int, string> playerName;
     public NetworkView[] characterView;
     public Commander commander;
     public LevelManager levMan;
     public bool startGame = false;
     public bool manualGoAhead = false;
     public static string serverAddress;
+
     public GUIStyle buttonStyle;
-	private string playersJoined = "";
-    private static int ID = 1;
     public static int finalNumberofPlayers;
+    public static string serverAddress;
     public string takenNames;
     public int lives;
 
+
     public string[] playerNames;
     public string[] playerFlags;
+
+	private string playersJoined = "";
+    private static int ID = 1;
+
+    //public bool startGame, manualGoAhead;   
+
+    private Dictionary<NetworkViewID, string> viewIDNameMapping;
+    private Dictionary<NetworkViewID, string> viewIDChNameMapping;
+    private Bridge bridge;
+    private int playerCount = 0;
+    private int nextPlayerID = 0;
 
     // Use this for initialization
     void Start() {
@@ -56,7 +65,7 @@ public class Server : MonoBehaviour {
             Log.Note("Registered MasterServer");
     }
 
-    // When sever is initalise, set it up
+    // When server is initalised, set it updoes 
     void OnServerInitialized() {
         Log.Note("Initialized Server" + MasterServer.ipAddress+ MasterServer.port);
         Log.Note("Count Universe: " + countUniverse);
@@ -69,12 +78,12 @@ public class Server : MonoBehaviour {
         viewIDNameMapping = new Dictionary<NetworkViewID, string>();
         viewIDChNameMapping = new Dictionary<NetworkViewID, string>();
 		
-		// Initanitate the bridge
+		// Instantiate the bridge
         Network.Instantiate(Networkbridge, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), 99);
 		
 		// Set up each universe
         for (int i = 1; i <= countUniverse; i++) {
-			// Instaniate in correct position
+            // Instantiate in correct position
             Vector3 pos = new Vector3(0 + (i * 10000), 0, 0);
             Transform obj = (Transform)Network.Instantiate(playerUniversePrefab, pos, new Quaternion(0, 0, 0, 0), 99);
             universe[i] = obj;
@@ -83,8 +92,8 @@ public class Server : MonoBehaviour {
             universe[i].transform.Find("Managers/OriginManager").GetComponent<Universe>().origin = pos;
             obj.name = "Universe" + i;
             viewIDNameMapping.Add(obj.networkView.viewID, obj.name);
-			
-			// Instaniate charater in universe
+
+            // Instantiate charater in universe
             Vector3 position = new Vector3(pos.x - 8, pos.y, pos.z + 15);
             Transform characterPlayer = (Transform)Network.Instantiate(characterPrefab, position, new Quaternion(0,0,0,0), i);
 			//characterPlayer.Rotate(new Vector3(0,180,0));
@@ -108,7 +117,7 @@ public class Server : MonoBehaviour {
 			
     }
 
-	// When a player is connected , set it up correctly
+	// When a player is connected, set it up correctly
     void OnPlayerConnected(NetworkPlayer player) {
         nextPlayerID = nextPlayerID + 1;
 		

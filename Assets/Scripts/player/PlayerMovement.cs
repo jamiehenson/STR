@@ -2,21 +2,24 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
-    public bool myCharacter;
-    private float vertDist;
-    private float horDist;
-	private bool rotation, rottoggle=true, camtoggle=false, rotexception;
-    private Vector3 startingPos;
-    private int universeNum = 1;
+
+    // Object reference vars
     public Universe positions;
-    private int characterNum;
-	public bool charRotate;
+    public PlayerManager playerManager;
+    public OnlineClient onlineClient;
+    public Server server;
+    private FiringHandler firingHandler;
+    GameObject character;
+
+    // Helper vars
+    public bool myCharacter;
+    public bool charRotate;
     public bool isRotating = false;
-	private Vector3 camStartingPos;
-	public PlayerManager playerManager;
-	public OnlineClient onlineClient;
-	public Server server;
-	
+    private bool rotation, rottoggle = true, camtoggle = false, rotexception;
+    private int characterNum, universeNum = 1;
+    private float vertDist, horDist;
+    private Vector3 startingRot, startingPos, camStartingPos;
+
 	public void Start()
 	{
 		if (Application.loadedLevelName == "OnlineClient")
@@ -25,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
 			server = GameObject.Find("Network").GetComponent<Server>();
 
 		playerManager = gameObject.GetComponent<PlayerManager>();
+        firingHandler = GetComponent<FiringHandler>();
         startingPos = gameObject.transform.position;
 		camtoggle = false;
 		rottoggle = true;
@@ -33,11 +37,15 @@ public class PlayerMovement : MonoBehaviour {
     public void SetCamForBoss() {
         camtoggle = true;
         rottoggle = true;
+        firingHandler.rotated = true;
+        //firingHandler.fireDepth = 100;
     }
 
     public void SetCamAfterBoss() {
         camtoggle = false;
         rottoggle = true;
+        firingHandler.rotated = false;
+        //firingHandler.fireDepth = 15;
     }
 
     public void activateCharacter(int charNum, int univNum)
@@ -70,7 +78,6 @@ public class PlayerMovement : MonoBehaviour {
         if (Network.isClient && myCharacter) {
             StartCoroutine(rotateCamera(camtoggle, universe));
             //gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
-            
             //rotexception = true;
             camtoggle = !camtoggle;
             networkView.RPC("moveCharacter", RPCMode.Server, 1 + vertDist, horDist, rotation, rottoggle, camtoggle);
@@ -82,9 +89,19 @@ public class PlayerMovement : MonoBehaviour {
         isRotating = true;
 		int direction = (cameraBehind) ? 1 : -1;
         Vector3 origin = Universe.PositionOfOrigin(universe);
-        if (cameraBehind) iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x, origin.y, origin.z + 0.1f), 2);
-        else iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
+
+        if (cameraBehind) {
+            iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x, origin.y, origin.z + 0.1f), 2);
+            firingHandler.rotated = false;
+            //firingHandler.fireDepth = 15;
+        }
+        else {
+            iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
+            firingHandler.rotated = true;
+            //firingHandler.fireDepth = 60;
+        }
         gameObject.transform.position = new Vector3(origin.x, gameObject.transform.position.y, gameObject.transform.position.z);
+
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
         iTween.MoveTo(gameObject, new Vector3(startingPos.x, gameObject.transform.position.y, gameObject.transform.position.z), 1);
 		yield return new WaitForSeconds(2);

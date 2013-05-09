@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BossCollisions : MonoBehaviour {
 
-    private BossManager eManager;
+    private EyeBossManager eManager;
     private BossMovement eMove;
 
     private float health;
@@ -22,9 +22,9 @@ public class BossCollisions : MonoBehaviour {
     private bool showScore;
 
     void Start() {
-        eManager = gameObject.GetComponent<BossManager>();
-        eMove = gameObject.GetComponent<BossMovement>();
-        health = eManager.health;
+        eManager = GetComponent<EyeBossManager>();
+        eMove    = GetComponent<BossMovement>();
+        health   = eManager.health;
         enemyBar = HudOn.fillTex(60, 10, new Color(1f, 0f, 0f, 1f));
     }
 
@@ -36,7 +36,7 @@ public class BossCollisions : MonoBehaviour {
     }
 
     void Update() {
-        Vector3 viewPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        Vector3 viewPos = Camera.main.WorldToScreenPoint(transform.position);
         screenX = viewPos.x;
         screenY = Screen.height - (viewPos.y + 1);
         remainingHealth = health / eManager.health;
@@ -65,7 +65,6 @@ public class BossCollisions : MonoBehaviour {
                     Network.Destroy(collided);
                     PlayerCollisions.WeaponBoom(gameObject, 2);
                     //cannonSmack.Play();
-                    iTween.MoveBy(gameObject, eManager.speed * (collided.rigidbody.velocity / 7), 1f);
                     health = health - (WeaponHandler.cannonDamage);
                     break;
                 case "PlayerMine":
@@ -74,13 +73,13 @@ public class BossCollisions : MonoBehaviour {
                         Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
                         fragment.name = "Mine Fragment";
                         Physics.IgnoreCollision(fragment.collider, gameObject.collider);
-                        fragment.rigidbody.AddForce((Random.insideUnitSphere.normalized * 2) * eManager.force);
+                        fragment.rigidbody.AddForce((Random.insideUnitSphere.normalized * 2) * eManager.forceMultiplier);
                     }
                     for (int i = 0; i < 20; i++) {
                         Transform fragment = (Transform)Instantiate(MineFrag, gameObject.transform.position, Random.rotation);
                         fragment.name = "Mine Fragment";
                         Physics.IgnoreCollision(fragment.collider, gameObject.collider);
-                        fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * eManager.force);
+                        fragment.rigidbody.AddForce((Random.insideUnitCircle.normalized) * eManager.forceMultiplier);
                     }
                     Network.Destroy(collided);
                     beamSmack.Play();
@@ -102,11 +101,10 @@ public class BossCollisions : MonoBehaviour {
                     break;
             }
             if (health <= 0) {
-                int scoreAddition = (int)(100 * transform.localScale.x);
                 if ("0123456789".Contains(characterNum)) {
-                    networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), scoreAddition);
+                    networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), eManager.killPoints);
                 }
-                manager.updateScore(scoreAddition);
+                manager.updateScore(eManager.killPoints);
                 Network.Destroy(gameObject);
                 PlayerCollisions.Boom(gameObject);
                 //HudOn.score += points;
@@ -146,7 +144,7 @@ public class BossCollisions : MonoBehaviour {
 
     void OnDestroy() {
         if (Network.isServer) {
-            GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().BossCleared();
+            GameObject.Find("Universe" + (0) + "/Managers/LevelManager").GetComponent<BossLevelManager>().BossDestroyed();
         }
     }
 }

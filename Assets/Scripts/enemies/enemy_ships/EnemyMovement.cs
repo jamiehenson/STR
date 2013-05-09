@@ -158,7 +158,6 @@ public class EnemyMovement : MonoBehaviour {
 					Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position - new Vector3(-10,0,0), gameObject.transform.rotation, 200);
 					NetworkViewID bulletID = bullet.networkView.viewID;
 					networkView.RPC("fireBullet", RPCMode.All, gameObject.transform.position, gameObject.transform.rotation, targetID, bulletID, fireDirection, force);
-
                 }
                 yield return new WaitForSeconds(eManager.firingDelay);
             }

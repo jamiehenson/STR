@@ -2,7 +2,9 @@ fileFormatVersion: 2
 guid: ac59d34f72be51e41a3396b7c0c036d4
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - asteroidPrefab: {fileID: 400012, guid: 44794b454d490a9428affd91f94db450, type: 2}
+  - positions: {instanceID: 0}
   executionOrder: 200
   icon: {instanceID: 0}
   userData: 

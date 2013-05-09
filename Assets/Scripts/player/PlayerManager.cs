@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour {
 
     //Scoring System variables
     private bool myCharacter;
-    private int characterNum;
+    public int characterNum;
 	
 	public void changeWeapon(int type){
 		wepStats = WeaponHandler.GetWeaponStats(activeChar, type);
