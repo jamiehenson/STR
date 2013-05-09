@@ -4,7 +4,7 @@ using System.Collections;
 public class AsteroidMovement : MonoBehaviour {
 
     private float leftLimit;
-    private float astBaseForce = 300f;
+    private float astBaseForce = 200f;
     private float forceOffset = 25f;
     public Universe Positions;
     string asteroidName;

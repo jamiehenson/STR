@@ -29,7 +29,7 @@ public class Commander : MonoBehaviour {
     private float minAstScale = 0.0f;
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
-    private float beltGap = 1f;
+    private float beltGap = 2f;
     private int astProb = 3;
 
     private float leftMoveLimit;
