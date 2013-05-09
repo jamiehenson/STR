@@ -9,7 +9,6 @@ public class PlayerCollisions : MonoBehaviour {
     void Start() {
         if (Network.isServer) {
             manager = GetComponent<PlayerManager>();
-            Debug.Log(manager);
         }
     }
 
@@ -88,12 +87,13 @@ public class PlayerCollisions : MonoBehaviour {
     }
 
     void OnCollisionStay(Collision collision) {
-        if (Network.isServer) {
+        //if (Network.isServer) {
             GameObject collided = collision.collider.gameObject;
             string collidedName = collided.name;
-
+            Debug.Log(collidedName);
             switch (collidedName) {
                 case "BeamCollider":
+                    Debug.Log("collided beamcollider");
                     EnemyBulletSettings ebs = collided.GetComponent<EnemyBulletSettings>();
                     manager.updateHitPoints(manager.getHitPoints() * -ebs.damage);
                     break;
@@ -104,7 +104,7 @@ public class PlayerCollisions : MonoBehaviour {
             //    Boom(gameObject);
             //    Network.Destroy(gameObject);
             //}
-        }
+        //}
     }
 
     IEnumerator DeathTimeout() {

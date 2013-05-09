@@ -104,12 +104,13 @@ public class EyeBossManager : BossManager
                     chargedBeam.transform.LookAt(character.transform, Vector3.forward);
                     //networkView.RPC("aimWeapon", RPCMode.All, character);
 
-                    networkView.RPC("chargedAnimation", RPCMode.All);
-                    chargedBeam.Play();
                     GameObject beamCollider = (GameObject)Network.Instantiate(beamColliderPrefab, character.transform.position, Quaternion.identity, 100);
                     beamCollider.name = "BeamCollider";
                     EnemyBulletSettings weaponSettings = beamCollider.GetComponent<EnemyBulletSettings>();
                     weaponSettings.damage = beamPower;
+
+                    networkView.RPC("chargedAnimation", RPCMode.All);
+                    chargedBeam.Play();
                     while (chargedBeam.isPlaying) {
                         yield return new WaitForSeconds(0.1f);
                     }
