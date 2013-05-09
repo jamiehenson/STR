@@ -33,7 +33,7 @@ public class FiringHandler : MonoBehaviour {
 	void Start() {
         weaponHandler = GetComponent<WeaponHandler>();
         beam = GetComponent<LineRenderer>();
-        arm = transform.Find("rightArm");
+        arm = transform.Find(model + "/rightArm");
 	}
 
     private int universeN() {
@@ -47,7 +47,6 @@ public class FiringHandler : MonoBehaviour {
         if (universeN() != -1) {
             manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
             timer += Time.deltaTime;
-
             // Calculate position just in front of the player's arm
             float angle = arm.transform.rotation.z * 100;
             if (angle < 0) angle = 360 + angle;
@@ -66,22 +65,24 @@ public class FiringHandler : MonoBehaviour {
             Ray ray = new Ray(Camera.main.ScreenToWorldPoint(mousePos), Vector3.right);
 
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100)) {
+            if (Physics.Raycast(ray, out hit, 100))
+            {
                 lookAt = hit.point;
             }
             else lookAt = ray.origin;
             Vector3 dir = lookAt - gunPosition;
 
+            
             if (Network.isClient && myCharacter) {
-
-                beam.SetPosition(0, gunPosition);
                 beam.SetPosition(1, lookAt); 
+                beam.SetPosition(0, gunPosition);
+
 
                 if (Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0) {
                     // Can I fire?
                     if (manager.getEnergyLevel() - manager.getSelectedWepDrain() >= 0) {
                         // Send message to fire
-                        networkView.RPC("fireWeapon", RPCMode.Server, lookAt, dir, manager.wepStats.wepType);
+                        networkView.RPC("fireWeapon", RPCMode.Server, lookAt, dir, manager.wepStats.wepType, model);
                         // Update fire stats
 
                         timer = 0;
