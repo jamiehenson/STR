@@ -41,33 +41,34 @@ public class FiringHandler : MonoBehaviour {
             manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
             timer += Time.deltaTime;
 
+            // Calculate position just in front of the player's arm
+            float angle = arm.transform.rotation.z * 100;
+            if (angle < 0) angle = 360 + angle;
+            angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
+            float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
+            if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
+            float valY = Mathf.Sin(angle) * 3.2f + transform.position.y + 1.8f;
+            gunPosition = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
+
+            Vector3 mousePos = Input.mousePosition;
+            if (rotated) mousePos.z = gunPosition.z;
+            else mousePos.z = gunPosition.z;
+
+            // Cast a ray from the cursor into the screen
+            Vector3 lookAt; // = Camera.main.ScreenToWorldPoint(mousePos) - gunPosition;
+            Ray ray = new Ray(Camera.main.ScreenToWorldPoint(mousePos), Vector3.right);
+
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100)) {
+                lookAt = hit.point;
+            }
+            else lookAt = ray.origin;
+            Vector3 dir = lookAt - gunPosition;
+
             if (Network.isClient && myCharacter) {
-                // Calculate position just in front of the player's arm
-                float angle = arm.transform.rotation.z * 100;
-                if (angle < 0) angle = 360 + angle;
-                angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
-                float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
-                if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
-                float valY = Mathf.Sin(angle) * 3.2f + transform.position.y + 1.8f;
-                gunPosition = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
-
-                Vector3 mousePos = Input.mousePosition;
-                if (rotated) mousePos.z = gunPosition.z;
-                else mousePos.z = gunPosition.z;
-
-                // Cast a ray from the cursor into the screen
-                Vector3 lookAt; // = Camera.main.ScreenToWorldPoint(mousePos) - gunPosition;
-                Ray ray = new Ray(Camera.main.ScreenToWorldPoint(mousePos), Vector3.right);
-
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 100)) {
-                    lookAt = hit.point;
-                }
-                else lookAt = ray.origin;
 
                 beam.SetPosition(0, gunPosition);
-                beam.SetPosition(1, lookAt);
-                Vector3 dir = lookAt - gunPosition;
+                beam.SetPosition(1, lookAt); 
 
                 if (Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0) {
                     // Can I fire?
