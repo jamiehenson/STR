@@ -312,7 +312,6 @@ public class HudOn : MonoBehaviour {
 		gameOver = false;
 		Instance = this;
 
-        playercount = Server.numberOfPlayers();
 
 		gameOverBeenDetected = false;
 		main = (Texture2D) Resources.Load ("hud/topleft");
@@ -335,6 +334,8 @@ public class HudOn : MonoBehaviour {
 
 	void startWithManager(){
 		//onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
+		
+        playercount = GameObject.FindGameObjectsWithTag("Player").Length;
 		print ("I think universeN() = "+universeN() );
         manager = GameObject.Find("Character" + manager.universeNumber).GetComponent<PlayerManager>();
       
@@ -433,7 +434,7 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (-5,Screen.height-universe.height/2,universe.width,universe.height),universe);
 		GUI.Label (new Rect (6,Screen.height-universe.height/2+14,200,50),"LOCATION:",coStyle);
 
-		if (uniNo != 0)
+		if (manager != null && uniNo != 0)
 			GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),systemNames[uniNo-1],speedStyle);
 		else
 			GUI.Label (new Rect (10,Screen.height-universe.height/2+30,200,50),"MORT",speedStyle);
@@ -457,6 +458,7 @@ public class HudOn : MonoBehaviour {
 		
 		// Scoreboard indicator
 		GUI.Label (new Rect (Screen.width-150,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",hudStyle);
+		
         for (int i = 1; i <= playercount; i++)
         {
             PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
