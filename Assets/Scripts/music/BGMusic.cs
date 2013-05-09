@@ -21,6 +21,16 @@ public class BGMusic : MonoBehaviour
 		if (!audioplayer.isPlaying) PlayRandomTrack();
 	}
 
+	public void PlayBossTrack()
+	{
+		Object[] clips = Resources.LoadAll("music/boss");
+		audioplayer.clip = (AudioClip) clips[Random.Range (0,clips.Length)];
+		audioplayer.Play();
+		audioplayer.loop = false;
+		audioplayer.volume = 1;
+		if (!audioplayer.isPlaying) PlayRandomTrack();
+	}
+
 	public void PlayTrack(string trackname)
 	{
 		Object track = Resources.Load("music/ingame/" + trackname);
