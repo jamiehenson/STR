@@ -27,7 +27,7 @@ public class EyeBossManager : BossManager
             cannons    = GameObject.FindGameObjectsWithTag("BossCannon");
             initStats();
 
-            //StartCoroutine(Shoot());
+            StartCoroutine(Shoot());
             StartCoroutine(Beam());
         }
     }
@@ -36,7 +36,7 @@ public class EyeBossManager : BossManager
         if (Network.isServer) {
             gameObject.name     = "Boss0";
             health              = characters.Length*200;
-            beamPower           = 0.1f;
+            beamPower           = 0.01f;
             cannonPower         = 10f;
             killPoints          = 10000;
             speed               = 0.3f;
