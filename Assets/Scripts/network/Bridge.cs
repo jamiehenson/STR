@@ -17,7 +17,9 @@ public class Bridge : MonoBehaviour {
 
 	void Awake() {
 		Instance = this;
-		hudon = GameObject.Find("Client Scripts").GetComponent<HudOn>();
+		
+		if (Network.isClient)
+			hudon = GameObject.Find("Client Scripts").GetComponent<HudOn>();
 	}
 
     // Use this for initialization
