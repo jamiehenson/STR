@@ -274,7 +274,7 @@ public class PlayerManager : MonoBehaviour {
             }
             networkView.RPC("updateWepDrain", RPCMode.Server, selectedWepDrain);
         }
-        Debug.Log("Available lives:" + lives);
+        //Debug.Log("Available lives:" + lives);
         // Recharge power supply
         if (Network.isServer)
         {

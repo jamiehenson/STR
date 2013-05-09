@@ -57,11 +57,6 @@ public class EnemyMovement : MonoBehaviour {
         Vector3 forceDir = Vector3.zero;
         eManager = gameObject.GetComponent<EnemyManager>();
 
-		print ("In start");
-		if (eManager == null)
-			print ("Its null");
-		else
-			print ("It isn't null");
         commander = transform.parent.parent.FindChild("Managers/EnemyManager").GetComponent<Commander>();
         setUpEnemy();
 

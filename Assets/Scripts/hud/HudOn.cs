@@ -195,47 +195,54 @@ public class HudOn : MonoBehaviour {
 				}
 
                 GameObject vortex = (GameObject)Resources.Load("Player/vortex");
-                float[] xvals = new float[playercount - 1];
-                float[] yvals = new float[playercount - 1];
 
-                float chunkX = (float)0.5f / (playercount - 1);
-                float chunkY = (float)0.8f / (playercount - 1);
-                for (int i = 0; i < playercount - 1; i++)
-                {
-                    xvals[i] = Random.Range(0 + (i * chunkX), (i + 1) * chunkX);
-                    yvals[i] = Random.Range(0 + (i * chunkY), (i + 1) * chunkY);
-                }
-
-                for (var i = (playercount - 2); i > 0; i--)
-                {
-                    int t = Random.Range(0, i);
-                    float temp = yvals[i];
-                    yvals[i] = yvals[t];
-                    yvals[t] = temp;
-                }
-				
-				int currentUniverse = manager.universeNumber;
-				print("Manager says current universe is: "+currentUniverse);
-                // Make n-1 new ones
-                for (int i = 0; i < playercount - 1; i++)
-                {
-                    float x = xvals[i];
-                    float y = yvals[i];
-                    Vector3 vortpoint = new Vector3(x, y, 15);
-                    Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
-                    GameObject obj = (GameObject)Instantiate(vortex, vort, Quaternion.identity);
-                    vortex.name = "vortex" + (i + 1);
-					Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
-					vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
-					vortexScript.inUniverse = currentUniverse;
-					vortexScript.setLabel(vortpoint,systemNames[vortexScript.leadsToUniverse-1]);
-					print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
-                    vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
-                    vortex.tag = "vortex";
+                if (playercount != 1) {
+                    VortexLaunch(vortex);
                 }
             }
         }
 	}
+
+    private void VortexLaunch(GameObject vortex) {
+        float[] xvals = new float[playercount - 1];
+        float[] yvals = new float[playercount - 1];
+
+        float chunkX = (float)0.5f / (playercount - 1);
+        float chunkY = (float)0.8f / (playercount - 1);
+        for (int i = 0; i < playercount - 1; i++)
+        {
+            xvals[i] = Random.Range(0 + (i * chunkX), (i + 1) * chunkX);
+            yvals[i] = Random.Range(0 + (i * chunkY), (i + 1) * chunkY);
+        }
+
+        for (var i = (playercount - 2); i > 0; i--)
+        {
+            int t = Random.Range(0, i);
+            float temp = yvals[i];
+            yvals[i] = yvals[t];
+            yvals[t] = temp;
+        }
+				
+		int currentUniverse = manager.universeNumber;
+		print("Manager says current universe is: "+currentUniverse);
+        // Make n-1 new ones
+        for (int i = 0; i < playercount - 1; i++)
+        {
+            float x = xvals[i];
+            float y = yvals[i];
+            Vector3 vortpoint = new Vector3(x, y, 15);
+            Vector3 vort = Camera.main.ViewportToWorldPoint(vortpoint);
+            GameObject obj = (GameObject)Instantiate(vortex, vort, Quaternion.identity);
+            vortex.name = "vortex" + (i + 1);
+			Vortex vortexScript = obj.GetComponentInChildren<Vortex>();
+			vortexScript.leadsToUniverse = (i + 1 >= currentUniverse) ? i+2 : i+1;
+			vortexScript.inUniverse = currentUniverse;
+			vortexScript.setLabel(vortpoint,systemNames[vortexScript.leadsToUniverse-1]);
+			print("Just made vortext for "+obj.GetComponentInChildren<Vortex>().leadsToUniverse);
+            vortex.transform.rotation = Quaternion.AngleAxis(270, Vector3.up);
+            vortex.tag = "vortex";
+        }
+    }
 
     public void ToastWrapper(string notetext) {
         //StartCoroutine("Toast", notetext);
@@ -299,6 +306,8 @@ public class HudOn : MonoBehaviour {
 		score = 0;
 		gameOver = false;
 		Instance = this;
+
+        playercount = Server.numberOfPlayers();
 
 		gameOverBeenDetected = false;
 		main = (Texture2D) Resources.Load ("hud/topleft");
@@ -364,15 +373,11 @@ public class HudOn : MonoBehaviour {
         charName = manager.getPlayerName();
 	}
 
+    
+
+
 	void OnGUI () {
-		if (manager == null)
-			return;
-        if (!initialized)
-        {
-            playercount = Server.numberOfPlayers();
-            systemNames = new string[playercount + 1];
-            initialized = true;
-        }
+
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
 		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");

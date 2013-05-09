@@ -252,7 +252,9 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
     IEnumerator ChangeUniverseIE(object[] pars) {
+        Debug.Log("Pre rotation loop");
         while (isRotating) yield return new WaitForSeconds(0.5f);
+        Debug.Log("Post rotation loop");
         UniverseMove(pars);
     }
 

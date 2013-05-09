@@ -135,7 +135,7 @@ public class Server : MonoBehaviour {
             lives = countUniverse * 3;
             // Start the game when all players are in the game.
             startGame = true;
-
+            EnableGameplayScripts();
         }
     }
 
@@ -150,6 +150,30 @@ public class Server : MonoBehaviour {
 			Misc.CleanStatics();
 			Application.LoadLevel("menu");
 		}
+    }
+
+    void EnableGameplayScripts() {
+        Debug.Log("LETS GO");
+
+        startGame = false;
+        // Only do for the actual number of players?
+        for (int i = 1; i <= countUniverse; i++) {
+            //Initialize number of lives
+            GameObject.Find("Character" + i).GetComponent<PlayerManager>().initLivesServer(lives);
+            // Enable enemy generation
+            commander = GameObject.Find("Universe" + i + "/Managers/EnemyManager").GetComponent<Commander>();
+            commander.enabled = true;
+
+            // Enable level progression (needs to start AFTER commander)
+            LevelManager levMan = GameObject.Find("Universe" + i + "/Managers/LevelManager").GetComponent<LevelManager>();
+            levMan.enabled = true;
+        }
+        // Enable boss level
+        BossLevelManager blm = GameObject.Find("Universe" + 0 + "/Managers/LevelManager").GetComponent<BossLevelManager>();
+        blm.enabled = true;
+
+        // Enable timing
+        GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().StartTimer();
     }
 
     void OnGUI()
@@ -168,7 +192,7 @@ public class Server : MonoBehaviour {
         /* Check if a new player has connected. */
         if (!manualGoAhead)
         {
-           if (ID <= countUniverse && GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && ID == nextPlayerID )
+           //if (ID <= countUniverse && GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && ID == nextPlayerID )
 
 
             if (GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName() != null && !takenNames.Contains(GameObject.Find("Character" + ID).GetComponent<PlayerManager>().getPlayerName()))
@@ -194,39 +218,6 @@ public class Server : MonoBehaviour {
         }
         /* End*/
 
-        //if (GUI.Button(new Rect((Screen.width / 2) - x / 2, (Screen.height / 2) - x / 4, x, x / 2), "START GAME", buttonStyle)) manualGoAhead = true;
-
-        /* Start the AI part of the game.*/
-        if (startGame)
-        {
-         //   if (manualGoAhead)
-        //    {
-                Debug.Log("LETS GO");
-
-                startGame = true;
-                // Only do for the actual number of players?
-                for (int i = 1; i <= countUniverse; i++)
-                {
-                    //Initialize number of lives
-                    GameObject.Find("Character" + i).GetComponent<PlayerManager>().initLivesServer(lives);
-                    // Enable enemy generation
-                    commander = GameObject.Find("Universe" + i + "/Managers/EnemyManager").GetComponent<Commander>();
-                    commander.enabled = true;
-
-                    // Enable level progression (needs to start AFTER commander)
-                    LevelManager levMan = GameObject.Find("Universe" + i + "/Managers/LevelManager").GetComponent<LevelManager>();
-                    levMan.enabled = true;
-                }
-                // Enable boss level
-                BossLevelManager blm = GameObject.Find("Universe" + 0 + "/Managers/LevelManager").GetComponent<BossLevelManager>();
-                blm.enabled = true;
-
-                // Enable timing
-                GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().StartTimer();
-            //}
-        }
-
-        
 		GUI.Label(new Rect(Screen.width/4, Screen.height*0.75f, Screen.width/2, 200), playersJoined);
     }
 

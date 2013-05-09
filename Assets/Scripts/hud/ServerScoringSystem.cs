@@ -25,7 +25,7 @@ public class ServerScoringSystem : MonoBehaviour {
         int players = Server.numberOfPlayers();
         if (!initialized) {
             playerNames = new string[players + 1];
-            levelManagers = new LevelManager[players +1];
+            levelManagers = new LevelManager[players];
             initialized = true;
         }
 
