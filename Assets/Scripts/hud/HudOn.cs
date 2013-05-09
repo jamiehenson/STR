@@ -7,9 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class HudOn : MonoBehaviour {
-    public int wepType, bankSize;
     public Rect position;
-    public string[] systemNames = new string[4];
 
 	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard;
 	private Font deco;

@@ -35,8 +35,8 @@ public class EyeBossManager : BossManager
     void initStats() {
         if (Network.isServer) {
             gameObject.name     = "Boss0";
-            health              = characters.Length*100;
-            beamPower           = 0.01f;
+            health              = characters.Length*200;
+            beamPower           = 0.1f;
             cannonPower         = 10f;
             killPoints          = 10000;
             speed               = 0.3f;
@@ -77,7 +77,6 @@ public class EyeBossManager : BossManager
         }
     }
 
-    // TO FIX - BOSS WILL ALWAYS FIRE AT PLAYER 1
     IEnumerator Beam() {
         while (true) {
             if (inPlane) {

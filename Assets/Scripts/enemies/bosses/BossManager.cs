@@ -39,7 +39,7 @@ public class BossManager : MonoBehaviour {
     public int PickTarget() {
         GameObject[] activeChars = GameObject.FindGameObjectsWithTag("Player");
         if (activeChars.Length == 0) return -1;
-        int index = Random.Range(1, activeChars.Length);
+        int index = Random.Range(1, activeChars.Length+1);
         return index;
     }
 

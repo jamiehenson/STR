@@ -17,7 +17,6 @@ public class Server : MonoBehaviour {
     public LevelManager levMan;
     public bool startGame = false;
     public bool manualGoAhead = false;
-    public static string serverAddress;
 
     public GUIStyle buttonStyle;
     public static int finalNumberofPlayers;
