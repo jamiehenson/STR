@@ -35,7 +35,7 @@ public class EyeBossManager : BossManager
     void initStats() {
         if (Network.isServer) {
             gameObject.name     = "Boss0";
-            health              = characters.Length*200;
+            health              = characters.Length*300;
             beamPower           = 0.01f;
             cannonPower         = 10f;
             killPoints          = 10000;
