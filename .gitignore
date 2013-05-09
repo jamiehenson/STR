@@ -171,3 +171,6 @@ Temp
 ProjectSettings/EditorSettings.asset
 Builds/
 *.userprefs
+
+# Ben's jedit files
+*~
