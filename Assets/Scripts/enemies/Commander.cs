@@ -29,7 +29,7 @@ public class Commander : MonoBehaviour {
     private float minAstScale = 0.0f;
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
-    private float beltGap = 1f;
+    private float beltGap = 2f;
     private int astProb = 3;
 
     private float leftMoveLimit;
@@ -40,13 +40,11 @@ public class Commander : MonoBehaviour {
     // Difficulty stats (numbered for selection, some merged into 1 "setting")
     private int numDiffVars = 4;
     /*0*/
-    //private int beltLevels = 3;
-    private int beltLevels = 1;
+    private int beltLevels = 3;
     /*1a*/
-    private int minAstsInBelt = 1;
+    private int minAstsInBelt = 3;
     /*1b*/
-    //private int maxAstsInBelt = 3;
-    private int maxAstsInBelt = 1;
+    private int maxAstsInBelt = 5;
     /*2*/
     private int enemyTotalStrength = 5;
     /*3*/
@@ -56,11 +54,9 @@ public class Commander : MonoBehaviour {
 
     // Hardest Poss Difficulty Stats
     /*1a*/
-    //private int hardestMinAstsInBelt = 6;
-    private int hardestMinAstsInBelt = 1;
+    private int hardestMinAstsInBelt = 20;
     /*1b*/
-    //private int hardestMaxAstsInBelt = 10;
-    private int hardestMaxAstsInBelt = 1;
+    private int hardestMaxAstsInBelt = 20;
     /*3a*/
     private float hardestMinEnemyClearanceTime = 10;
     /*3b*/
