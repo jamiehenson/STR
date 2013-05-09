@@ -3,15 +3,18 @@ using System.Collections;
 
 public class FiringHandler : MonoBehaviour {
 	
-	//private Transform bulletPrefab;
-    //private string bulletName;
-	//private float bulletSpeed, bulletRate;
-	//private int bulletType;
+    public bool rotated = false;
+    public float fireDepth = 15;
+
+    PlayerManager manager;
+    LineRenderer beam;
+    Transform arm;
+    private Vector3 gunPosition;
+	private WeaponHandler weaponHandler;
+
 	private float timer = 0;
     private bool instantiated;
-    private int player;
     private bool myCharacter;
-    PlayerManager manager;
     public string model = "";
 
     public void playerModel(string s)
@@ -19,63 +22,81 @@ public class FiringHandler : MonoBehaviour {
         model = s;
     }
 
-    public void activateCharacter(int num)
-    {
+
+    private int player;
+    private int characterNum;
+
+    public void activateCharacter(int num) {
         myCharacter = true;
-        Debug.Log("Activate");
     }
 
-    private int universeN()
-    {
+	void Start() {
+        weaponHandler = GetComponent<WeaponHandler>();
+        beam = GetComponent<LineRenderer>();
+        arm = transform.Find("rightArm");
+	}
+
+    private int universeN() {
         int length = transform.name.Length;
         string num = transform.name.Substring(length - 1, 1);
         if ("0123456789".Contains(num)) return (int.Parse(num));
         else return -1;
     }
-
 	
 	void Update () {
-		//bulletType = WeaponHandler.wepType;
-		//bulletPrefab = WeaponHandler.wepPrefab;
-		//bulletSpeed = WeaponHandler.wepSpeed;
-		//bulletRate = WeaponHandler.wepRate;
-        //bulletName = WeaponHandler.wepName;
-        
-        if (universeN() != -1)
-        {
+        if (universeN() != -1) {
             manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
             timer += Time.deltaTime;
 
-            // Is player firing?
-            if (Network.isClient && myCharacter && Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0)
-            {
-                // Can I fire?
-                if (manager.getEnergyLevel() - manager.getSelectedWepDrain() >= 0)
-                {
-                    // Calculate the position to fire at
-                    float camDist = (transform.position - Camera.main.transform.position).z;
-                    camDist = 15;
-                    Vector3 mousePos = Input.mousePosition;
-                    mousePos.z = camDist;
-                    Vector3 fireDirection = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
+            // Calculate position just in front of the player's arm
+            float angle = arm.transform.rotation.z * 100;
+            if (angle < 0) angle = 360 + angle;
+            angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
+            float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
+            if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
+            float valY = Mathf.Sin(angle) * 3.2f + transform.position.y + 1.8f;
+            gunPosition = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
 
-                    // Send message to fire
-                    networkView.RPC("fireWeapon", RPCMode.Server, Camera.main.ScreenToWorldPoint(mousePos), fireDirection, manager.wepStats.wepType, model);
-                    // Update fire stats
-                    
-                    timer = 0;
+            Vector3 mousePos = Input.mousePosition;
+            if (rotated) mousePos.z = gunPosition.z;
+            else mousePos.z = gunPosition.z;
 
-					// Tell AchievementSystem
-					AchievementSystem.playerFired();
+            // Cast a ray from the cursor into the screen
+            Vector3 lookAt; // = Camera.main.ScreenToWorldPoint(mousePos) - gunPosition;
+            Ray ray = new Ray(Camera.main.ScreenToWorldPoint(mousePos), Vector3.right);
+
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100)) {
+                lookAt = hit.point;
+            }
+            else lookAt = ray.origin;
+            Vector3 dir = lookAt - gunPosition;
+
+            if (Network.isClient && myCharacter) {
+
+                beam.SetPosition(0, gunPosition);
+                beam.SetPosition(1, lookAt); 
+
+                if (Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0) {
+                    // Can I fire?
+                    if (manager.getEnergyLevel() - manager.getSelectedWepDrain() >= 0) {
+                        // Send message to fire
+                        networkView.RPC("fireWeapon", RPCMode.Server, lookAt, dir, manager.wepStats.wepType);
+                        // Update fire stats
+
+                        timer = 0;
+
+                        // Tell AchievementSystem
+                        AchievementSystem.playerFired();
+                    }
                 }
             }
         }
 	}
 
     [RPC]
-    void fireAnimation(int n)
-    {
-      //  GameObject.Find("Character" + n).animation.Play("RightHandMove");
+    void fireAnimation(int n) {
+        //GameObject.Find("Character" + n).animation.Play("RightHandMove");
     }
 	
 	[RPC]
@@ -142,13 +163,12 @@ public class FiringHandler : MonoBehaviour {
 		
 		// Tell everyone to set up its movement
 		NetworkViewID id = bullet.networkView.viewID;
-		Vector3 forceToApply = fireDirection.normalized * manager.wepStats.wepSpeed;
+        Vector3 forceToApply = fireDirection.normalized * manager.wepStats.wepSpeed;
 		networkView.RPC("setupWeapon", RPCMode.All, id, lookAt, forceToApply, bulletType);
 	}
 
 	[RPC]
-	void setupWeapon(NetworkViewID id, Vector3 lookAt, Vector3 forceToApply, int bulletType)
-	{
+	void setupWeapon(NetworkViewID id, Vector3 lookAt, Vector3 forceToApply, int bulletType) {
 		NetworkView bulletNV = NetworkView.Find (id);
 		if (bulletNV == null) {
 			Log.Warning("During setupWeapon, unable to find player from their ID");
@@ -156,7 +176,7 @@ public class FiringHandler : MonoBehaviour {
 		}
 		
 		GameObject bullet = bulletNV.gameObject;
-		bullet.transform.LookAt(lookAt, Vector3.forward);
+        bullet.transform.LookAt(lookAt); //, Vector3.forward
 	    bullet.transform.Rotate(new Vector3(90, 0, 90));
 		if (bulletType == 3)
 	    	bullet.transform.Rotate(new Vector3(0, 0, 90));

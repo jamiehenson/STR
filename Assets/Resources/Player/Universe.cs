@@ -9,18 +9,16 @@ public class Universe : MonoBehaviour {
     public float topBorder;
     public float bottomBorder;
     public float rightMovementLimit;
-    public float width = (float)10;
-    public float height = (float)8.0;
+    public float width = 10.0f;
+    public float height = 8.0f;
     public float baseZ = 15;
-    public float generationOffset = 5;
-    
+    public float generationOffset = 5.0f; 
 
 	// Use this for initialization
 	void Start () {
-
-        leftBorder = origin.x-width;
+        leftBorder = origin.x - width;
         rightBorder = origin.x + width - 1;
-        rightMovementLimit = origin.x - (float)5;
+        rightMovementLimit = origin.x - 5.0f;
         bottomBorder = origin.y - height;
         topBorder = origin.y + height;
 	}
@@ -37,13 +35,11 @@ public class Universe : MonoBehaviour {
         if (Network.isServer) active = act;
     }*/
 	
-	void OnSerializeNetworkView( BitStream stream, NetworkMessageInfo info) {
-
-			stream.Serialize(ref origin);
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
+		stream.Serialize(ref origin);
 	}
 	
 	public static Vector3 PositionOfOrigin(int universeNum) {
-		//print ("numNum = "+universeNum);
 		GameObject universe = GameObject.Find("Universe" + universeNum + "/Managers/OriginManager");
 		
 		if (universe == null)

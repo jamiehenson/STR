@@ -6,12 +6,19 @@ public class PlayerCollisions : MonoBehaviour {
     public AudioSource smack;
     PlayerManager manager;
 
+    void Start() {
+        if (Network.isServer) {
+            manager = GetComponent<PlayerManager>();
+        }
+    }
+
     [RPC]
     public void destroyObject()
     {
         Destroy(gameObject);
     }
 
+    // This function actually returns the player's number
     private int universeN()
     {
         int length = transform.name.Length;
@@ -47,40 +54,60 @@ public class PlayerCollisions : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision collision) {
-		if (Network.isClient)
-			return;
-        manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
-        GameObject collided = collision.collider.gameObject;
-        //string collidedName = collided.name;
-        string tag = collided.tag;
+        if (Network.isServer) {
+            GameObject collided = collision.collider.gameObject;
+            string tag = collided.tag;
 
-        switch (tag) {
-            case "EnemyWeapon":
-                // Do what we want for EnemyBullet
-                Network.Destroy(collided);
-               // smack.Play();
-                EnemyBulletSettings bulletSettings = collided.GetComponent<EnemyBulletSettings>();
-                manager.updateHitPoints(-bulletSettings.damage);
-                break;           
-            default:
-                // Do nothing!
-                break;
-        }
-      /*  if (manager.getHitPoints() <= 0)
-        {
-            Boom(gameObject);
-            if (Network.isServer)
-            {
-                networkView.RPC("destroyObject", RPCMode.All);
-                Network.Destroy(gameObject);
+            switch (tag) {
+                case "EnemyWeapon":
+                    Network.Destroy(collided);
+                    // smack.Play();
+                    EnemyBulletSettings bulletSettings = collided.GetComponent<EnemyBulletSettings>();
+                    manager.updateHitPoints(-bulletSettings.damage);
+                    break;
+                case "BossBeam":
+                    Debug.Log("BossBeam collided!");
+                    EnemyBulletSettings ebs = collided.GetComponent<EnemyBulletSettings>();
+                    manager.updateHitPoints(manager.getHitPoints() * -ebs.damage);
+                    break;
+                default:
+                    break;
             }
-        }*/
-        /*if (manager.getHitPoints() <= 0) {
-            Boom(gameObject);
-            gameObject.SetActive(false);
-            networkView.RPC("ChangePlayerActiveState", RPCMode.Others, false);
-            StartCoroutine("DeathTimeout");
-        }*/
+            /*  if (manager.getHitPoints() <= 0)
+              {
+                  Boom(gameObject);
+                  if (Network.isServer)
+                  {
+                      networkView.RPC("destroyObject", RPCMode.All);
+                      Network.Destroy(gameObject);
+                  }
+              }*/
+            /*if (manager.getHitPoints() <= 0) {
+                Boom(gameObject);
+                gameObject.SetActive(false);
+                networkView.RPC("ChangePlayerActiveState", RPCMode.Others, false);
+                StartCoroutine("DeathTimeout");
+            }*/
+        }
+    }
+
+    void OnCollisionStay(Collision collision) {
+        //if (Network.isServer) {
+            GameObject collided = collision.collider.gameObject;
+
+            switch (collided.tag) {
+                case "BossBeam":
+                    EnemyBulletSettings ebs = collided.GetComponent<EnemyBulletSettings>();
+                    manager.updateHitPoints(manager.getHitPoints() * -ebs.damage);
+                    break;
+                default:
+                    break;
+            }
+            //if (manager.getHitPoints() <= 0) {
+            //    Boom(gameObject);
+            //    Network.Destroy(gameObject);
+            //}
+        //}
     }
 
     IEnumerator DeathTimeout() {
@@ -95,7 +122,6 @@ public class PlayerCollisions : MonoBehaviour {
             gameObject.SetActive(active);
         }
     }
-
 
     void OnDestroy() {
         HudOn.gameOver = true;

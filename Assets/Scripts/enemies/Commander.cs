@@ -8,7 +8,6 @@
  * Script enabled from Universe.cs
  * */
 
-
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ public class Commander : MonoBehaviour {
     private float minAstScale = 0.0f;
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
-    private float beltGap = 1f;
+    private float beltGap = 2f;
     private int astProb = 3;
 
     private float leftMoveLimit;
@@ -42,13 +41,11 @@ public class Commander : MonoBehaviour {
     // Difficulty stats (numbered for selection, some merged into 1 "setting")
     private int numDiffVars = 4;
     /*0*/
-    //private int beltLevels = 3;
-    private int beltLevels = 1;
+    private int beltLevels = 3;
     /*1a*/
-    private int minAstsInBelt = 1;
+    private int minAstsInBelt = 3;
     /*1b*/
-    //private int maxAstsInBelt = 3;
-    private int maxAstsInBelt = 1;
+    private int maxAstsInBelt = 5;
     /*2*/
     private int enemyTotalStrength = 5;
     /*3*/
@@ -58,11 +55,9 @@ public class Commander : MonoBehaviour {
 
     // Hardest Poss Difficulty Stats
     /*1a*/
-    //private int hardestMinAstsInBelt = 6;
-    private int hardestMinAstsInBelt = 1;
+    private int hardestMinAstsInBelt = 20;
     /*1b*/
-    //private int hardestMaxAstsInBelt = 10;
-    private int hardestMaxAstsInBelt = 1;
+    private int hardestMaxAstsInBelt = 20;
     /*3a*/
     private float hardestMinEnemyClearanceTime = 10;
     /*3b*/
@@ -217,22 +212,22 @@ public class Commander : MonoBehaviour {
     // ******General Functions******
     void Start() {
         // Hard coded. Can't be arsed to mess around with a more flexible solution
-        enemyTypes[0,0] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_light", typeof(GameObject));
-        enemyTypes[0,1] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_medium", typeof(GameObject));
-        enemyTypes[0,2] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_heavy", typeof(GameObject));
-        enemyTypes[0,3] = (GameObject) Resources.Load("enemies/enemytypes/vox/vox_superheavy", typeof(GameObject));
-        enemyTypes[1,0] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_light", typeof(GameObject));
-        enemyTypes[1,1] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_medium", typeof(GameObject));
-        enemyTypes[1,2] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_heavy", typeof(GameObject));
-        enemyTypes[1,3] = (GameObject) Resources.Load("enemies/enemytypes/crim/crim_superheavy", typeof(GameObject));
-        enemyTypes[2,0] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_light", typeof(GameObject));
-        enemyTypes[2,1] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_medium", typeof(GameObject));
-        enemyTypes[2,2] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_heavy", typeof(GameObject));
-        enemyTypes[2,3] = (GameObject) Resources.Load("enemies/enemytypes/merc/merc_superheavy", typeof(GameObject));
-        enemyTypes[3, 0] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_light", typeof(GameObject));
-        enemyTypes[3, 1] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_medium", typeof(GameObject));
-        enemyTypes[3, 2] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_heavy", typeof(GameObject));
-        enemyTypes[3, 3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
+        enemyTypes[0,0] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_light", typeof(GameObject));
+        enemyTypes[0,1] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_medium", typeof(GameObject));
+        enemyTypes[0,2] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_heavy", typeof(GameObject));
+        enemyTypes[0,3] = (GameObject)Resources.Load("enemies/enemytypes/vox/vox_superheavy", typeof(GameObject));
+        enemyTypes[1,0] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_light", typeof(GameObject));
+        enemyTypes[1,1] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_medium", typeof(GameObject));
+        enemyTypes[1,2] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_heavy", typeof(GameObject));
+        enemyTypes[1,3] = (GameObject)Resources.Load("enemies/enemytypes/crim/crim_superheavy", typeof(GameObject));
+        enemyTypes[2,0] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_light", typeof(GameObject));
+        enemyTypes[2,1] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_medium", typeof(GameObject));
+        enemyTypes[2,2] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_heavy", typeof(GameObject));
+        enemyTypes[2,3] = (GameObject)Resources.Load("enemies/enemytypes/merc/merc_superheavy", typeof(GameObject));
+        enemyTypes[3,0] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_light", typeof(GameObject));
+        enemyTypes[3,1] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_medium", typeof(GameObject));
+        enemyTypes[3,2] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_heavy", typeof(GameObject));
+        enemyTypes[3,3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
         currType = Random.Range(0, 4);
 
         int c = GameObject.FindGameObjectsWithTag("Player").Length;

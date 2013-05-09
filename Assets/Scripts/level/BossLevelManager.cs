@@ -5,21 +5,22 @@ public class BossLevelManager : MonoBehaviour {
     // Used to control the sending of a boss
     // Effectively Commander and LevelManager rolled into 1 for bosses
 
-    private int universeN = 0;
     private Object[] bossPrefabs;
-    private float leftMoveLimit;
     private Universe positions;
+    private int universeN = 0; 
+    private float leftMoveLimit;
+    
 
     void Start() {
         if (Network.isServer) {
-            bossPrefabs = Resources.LoadAll("enemies/bosses", typeof(GameObject));
+            bossPrefabs = Resources.LoadAll("enemies/bosses/Prefabs", typeof(GameObject));
             positions = transform.parent.FindChild("OriginManager").GetComponent<Universe>();
             leftMoveLimit = positions.rightMovementLimit + 2.5f;
         }
     }
 
     // Creates an enemy of the given type
-    public void CreateBoss(int type) {
+    public void CreateBoss() {
         if (Network.isServer) {
             // ROTATION NEEDS TO GO HERE
             // Directions:
@@ -27,41 +28,46 @@ public class BossLevelManager : MonoBehaviour {
             // 2 - From Top
             // 3 - From Right
             // 4 - From Bottom
-            int dir = 3;
+            int dir = 4;
             float x = 0, y = 0, z = 0;
-            float genZ = positions.baseZ;
+
             switch (dir) {
                 case 1:
-                    x = positions.leftBorder - positions.generationOffset;
-                    y = Random.Range(positions.bottomBorder, positions.topBorder);
-                    z = genZ + 2;
+                    x = positions.origin.x + 60;
+                    y = positions.origin.y; //Random.Range(positions.bottomBorder, positions.topBorder);
+                    z = positions.baseZ; //positions.leftBorder - positions.generationOffset;;
                     break;
                 case 2:
-                    x = Random.Range(leftMoveLimit, positions.rightBorder);
-                    y = positions.topBorder + positions.generationOffset;
-                    z = genZ + 4;
+                    x = positions.origin.x + 60;
+                    y = positions.origin.y + 100;
+                    z = positions.baseZ; //Random.Range(leftMoveLimit, positions.rightBorder);
                     break;
                 case 3:
-                    x = positions.rightBorder + positions.generationOffset;
+                    x = positions.origin.x + 60;
                     y = Random.Range(positions.bottomBorder, positions.topBorder);
-                    z = genZ + 6;
+                    z = positions.baseZ; //positions.rightBorder + positions.generationOffset;
                     break;
                 case 4:
-                    x = Random.Range(leftMoveLimit, positions.rightBorder);
-                    y = positions.bottomBorder - positions.generationOffset;
-                    z = genZ + 8;
+                    x = positions.origin.x + 60;
+                    y = positions.origin.y - 100;
+                    z = positions.baseZ; //Random.Range(leftMoveLimit, positions.rightBorder);
                     break;
                 default:
                     break;
             }
-            GameObject enemyPrefab = (GameObject)bossPrefabs[Random.Range(0, bossPrefabs.Length)];
-            Transform enemy = (Transform)Network.Instantiate(enemyPrefab.transform, new Vector3(x, y, z), new Quaternion(0, 0, 0, 0), 100 + universeN);
-            enemy.name = "Enemy" + universeN;
-            enemy.transform.parent = transform.parent.parent.FindChild("Enemies");
+            GameObject bossPrefab = (GameObject)bossPrefabs[Random.Range(0, bossPrefabs.Length)];
+            Transform boss = (Transform)Network.Instantiate(bossPrefab.transform, new Vector3(x, y, z), Quaternion.Euler(0, 270, 0), 100 + universeN);
+            boss.transform.parent = transform.parent.parent.FindChild("Enemies");
 
-            BossManager bMan = enemy.GetComponent<BossManager>();
+            boss.name = "boss0";
+            EyeBossManager bMan = boss.GetComponent<EyeBossManager>();  
             bMan.direction = dir;
-            bMan.changeType(type);
+        }
+    }
+
+    public void BossDestroyed() {
+        if (Network.isServer) {
+            GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().BossCleared();
         }
     }
 }
