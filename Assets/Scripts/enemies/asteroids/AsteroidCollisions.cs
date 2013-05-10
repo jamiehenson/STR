@@ -76,10 +76,10 @@ public class AsteroidCollisions : MonoBehaviour {
                     // Player takes damage
                     manager.updateHitPoints(-asteroidDamage * gameObject.transform.localScale.x);
                     // Asteroid explosion effect happens on all clients
-                    networkView.RPC("destroyAfterExplosion", RPCMode.Others);
-                    //Network.Instantiate(explosion, transform.position, transform.rotation, 200);
+                    //networkView.RPC("destroyAfterExplosion", RPCMode.Others);
+                    Network.Instantiate(explosion, transform.position, transform.rotation, 200);
                     // Destroy the asteroid everywhere
-                    //Network.Destroy(gameObject);
+                    Network.Destroy(gameObject);
                     break;
                 case "PlayerBeam":
                     // Do what we want for beam
