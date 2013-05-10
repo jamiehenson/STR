@@ -14,8 +14,13 @@ public class AsteroidMovement : MonoBehaviour {
     {
         if (Network.isServer)
         {
-            networkView.RPC("modifyName", RPCMode.All, gameObject.name);
-            Positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
+            if (!gameObject.name.StartsWith("rock"))
+            {
+                networkView.RPC("modifyName", RPCMode.All, gameObject.name);
+                Debug.Log("Problem" + gameObject.name);
+
+                Positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
+            }
             gameObject.rigidbody.AddForce(Vector3.left * (astBaseForce + Random.Range(-forceOffset, forceOffset)));
         }
 	}
@@ -25,7 +30,7 @@ public class AsteroidMovement : MonoBehaviour {
     {
         gameObject.name = name;
         int universeNb = int.Parse(name.Substring(name.Length-1, 1));
-        gameObject.transform.parent = GameObject.Find("Universe"+universeNb+"Enemies").transform;
+        gameObject.transform.parent = GameObject.Find("Universe"+universeNb+"/Enemies").transform;
         Positions = transform.parent.parent.FindChild("Managers/OriginManager").GetComponent<Universe>();
         gameObject.rigidbody.AddForce(Vector3.left * (astBaseForce + Random.Range(-forceOffset, forceOffset)));
 
