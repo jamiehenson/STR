@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BackgroundGenerator : MonoBehaviour 
 {
-    public int spawnProbability = 10;
+    public int spawnProbability = 8;
 	private Object[] objects;
 	
 	void Start () 
