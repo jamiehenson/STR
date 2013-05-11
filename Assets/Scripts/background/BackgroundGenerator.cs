@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BackgroundGenerator : MonoBehaviour 
 {
-    public int spawnProbability = 8;
+    public int spawnProbability = 5;
 	private Object[] objects;
 	
 	void Start () 
@@ -22,7 +22,7 @@ public class BackgroundGenerator : MonoBehaviour
 			int objY = Random.Range(-80,80);
 			int objZ = Random.Range(70,110);
 					
-			if (diceRoller == 4) 
+			if (diceRoller >= 4)
 			{
 				int objChoice = Random.Range (0,objects.Length);
 				Transform spawnObj = (Transform) objects[objChoice];
@@ -32,20 +32,20 @@ public class BackgroundGenerator : MonoBehaviour
 
 				switch(spawnObj.name)
 				{
-					case "moon1": prob = 0.2f; solid = true; break;
-					case "sun1": prob = 0.1f; solid = true; break;
+					case "moon1": prob = 0.4f; solid = true; break;
+					case "sun1": prob = 0.3f; solid = true; break;
 					case "debris1": prob = 0.75f; break;
 					case "debris2": prob = 0.7f; break;
-					case "grey1": prob = 0.4f; solid = true; break;
-					case "yellow1": prob = 0.2f; solid = true; break;
-					case "morticles": prob = 0.05f; break;
+					case "grey1": prob = 0.6f; solid = true; break;
+					case "yellow1": prob = 0.4f; solid = true; break;
+					case "morticles": prob = 0.3f; break;
 					case "gasPocket1": prob = 0.7f; break;
 					case "gasPocket2": prob = 0.7f; break;
-					case "rock1": prob = 0.8f; solid = true; break;
-					case "rock2": prob = 0.7f; solid = true; break;
+					case "rock1": prob = 0.9f; solid = true; break;
+					case "rock2": prob = 0.9f; solid = true; break;
 					case "rock3": prob = 0.9f; solid = true; break;
-					case "rock4": prob = 0.6f; solid = true; break;
-					case "rock5": prob = 0.7f; solid = true; break;
+					case "rock4": prob = 0.9f; solid = true; break;
+					case "rock5": prob = 0.9f; solid = true; break;
 					case "rock6": prob = 0.9f; solid = true; break;
 					case "corner1": prob = 0.7f; solid = true; break;
 					case "cylinder1": prob = 0.7f; solid = true; break;
@@ -53,12 +53,12 @@ public class BackgroundGenerator : MonoBehaviour
 					case "cylinder3": prob = 0.75f; solid = true; break;
 					case "cylinder4": prob = 0.7f; solid = true; break;
 					case "wing1": prob = 0.7f; solid = true; break;
-					case "grid1": prob = 0.6f; solid = true; break;
-					case "grid2": prob = 0.6f; solid = true; break;
+					case "grid1": prob = 0.8f; solid = true; break;
+					case "grid2": prob = 0.85f; solid = true; break;
 					default: prob = 1; break;
 				}
 
-				if (prob >= Random.Range (0f,1f))
+				if (prob >= Random.Range (0.0f,1.0f))
 				{
 					Transform obj = (Transform) Instantiate(spawnObj, new Vector3(objX,objY,objZ), new Quaternion(0,0,0,0));
 					obj.name = spawnObj.name;
@@ -67,7 +67,7 @@ public class BackgroundGenerator : MonoBehaviour
 					if (solid) obj.localScale = new Vector3(Random.Range (0.5f,1.5f),Random.Range (0.5f,1.5f),Random.Range (0.5f,1.5f));
 				}
 			}
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(0.4f);
 		}
 	}
 }

@@ -361,7 +361,9 @@ public class PlayerManager : MonoBehaviour {
         lives = count;
         int c = GameObject.FindGameObjectsWithTag("Player").Length+1;
         remainingUni = new bool[c];
-        for (int i = 1; i < c; i++) remainingUni[i] = true;
+
+		// CHANGED TO 1 TO REDUCE GAME TIME FROM A BILLION YEARS TO ONE YEAR
+        for (int i = 1; i < 2; i++) remainingUni[i] = true;
             Debug.Log("Start lives " + lives);
         networkView.RPC("initLivesClient", RPCMode.Others, lives);
 

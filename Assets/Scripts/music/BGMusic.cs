@@ -3,11 +3,17 @@ using System.Collections;
 
 public class BGMusic : MonoBehaviour
 {
-	public AudioSource audioplayer;
+	public AudioSource audioplayer, ambientplayer;
 
 	void Start ()
 	{
 		PlayRandomTrack();
+		PlayAmbientTrack();
+	}
+
+	void Update()
+	{
+		if (!audioplayer.isPlaying) PlayRandomTrack();
 	}
 
 	public void PlayRandomTrack()
@@ -18,7 +24,15 @@ public class BGMusic : MonoBehaviour
 		audioplayer.loop = false;
 		audioplayer.volume = 1;
 		audioplayer.pitch = 1 + (Random.Range(0,1));
-		if (!audioplayer.isPlaying) PlayRandomTrack();
+	}
+
+	public void PlayAmbientTrack()
+	{
+		Object[] clips = Resources.LoadAll("music/ambient");
+		ambientplayer.clip = (AudioClip) clips[Random.Range (0,clips.Length)];
+		ambientplayer.Play();
+		ambientplayer.loop = true;
+		ambientplayer.volume = 0.4f;
 	}
 
 	public void PlayBossTrack()
