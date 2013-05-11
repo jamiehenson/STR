@@ -72,7 +72,7 @@ public class EnemyMovement : MonoBehaviour {
 
         // Set movement variables
         minX = positions.rightMovementLimit + 2.5f;
-        maxX = positions.rightBorder;
+        maxX = positions.rightXBorder;
         minY = positions.bottomBorder;
         maxY = positions.topBorder;
 

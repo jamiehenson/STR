@@ -28,7 +28,6 @@ public class PlayerMovement : MonoBehaviour {
     private float vertDist, horDist;
     private Vector3 startingRot;
 
-
 	public void Start()
 	{
 		if (Application.loadedLevelName == "OnlineClient")
@@ -163,26 +162,26 @@ public class PlayerMovement : MonoBehaviour {
 			if (rottoggle && !camtoggle) 
 			{
 				gameObject.transform.Translate(horDist, vertDist, 0);
-				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
+				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftXBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
 			}
 	
 			// When rotated to face into the screen
 			else if (!rottoggle && !camtoggle)
 			{
 				gameObject.transform.Translate(0,vertDist,-horDist);
-				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightBorder), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), transform.position.z);
+                gameObject.transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, positions.bottomRotatedBorder, positions.topRotatedBorder), Mathf.Clamp(transform.position.z, positions.rightZBorder, positions.leftZBorder));
 			}
 				
 			else if (rottoggle && camtoggle)
 			{
 				gameObject.transform.Translate(0,vertDist,-horDist);
-				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightBorder), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), transform.position.z);
+                gameObject.transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, positions.bottomRotatedBorder, positions.topRotatedBorder), Mathf.Clamp(transform.position.z, positions.rightZBorder, positions.leftZBorder));
 			}			
 			
 			else
 			{
 				gameObject.transform.Translate(0,vertDist,-horDist);
-				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightBorder), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), transform.position.z);
+                gameObject.transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, positions.bottomRotatedBorder, positions.topRotatedBorder), Mathf.Clamp(transform.position.z, positions.rightZBorder, positions.leftZBorder));
 			}           
         }
 		if (rotation)

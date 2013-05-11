@@ -125,7 +125,7 @@ public class Commander : MonoBehaviour {
 
     void CreateAsteroid() {
         float y = Random.Range(positions.bottomBorder, positions.topBorder);
-        Vector3 astPosition = new Vector3(positions.rightBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Random.Range(positions.baseZ + 5, positions.baseZ - 5));
+        Vector3 astPosition = new Vector3(positions.rightXBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Random.Range(positions.baseZ + 5, positions.baseZ - 5));
         Transform asteroid = (Transform)Network.Instantiate(asteroidPrefab, astPosition, new Quaternion(0, 0, 0, 0), 100+universeN());
         asteroid.name = "Asteroid" + universeN();
         asteroid.transform.parent = transform.parent.parent.FindChild("Enemies");
@@ -161,22 +161,22 @@ public class Commander : MonoBehaviour {
         float genZ = positions.baseZ;
         switch (dir) {
             case 1:
-                x = positions.leftBorder - positions.generationOffset;
+                x = positions.leftXBorder - positions.generationOffset;
                 y = Random.Range(positions.bottomBorder, positions.topBorder);
                 z = genZ + 2;
                 break;
             case 2:
-                x = Random.Range(leftMoveLimit, positions.rightBorder);
+                x = Random.Range(leftMoveLimit, positions.rightXBorder);
                 y = positions.topBorder + positions.generationOffset;
                 z = genZ + 4;
                 break;
             case 3:
-                x = positions.rightBorder + positions.generationOffset;
+                x = positions.rightXBorder + positions.generationOffset;
                 y = Random.Range(positions.bottomBorder, positions.topBorder);
                 z = genZ + 6;
                 break;
             case 4:
-                x = Random.Range(leftMoveLimit, positions.rightBorder);
+                x = Random.Range(leftMoveLimit, positions.rightXBorder);
                 y = positions.bottomBorder - positions.generationOffset;
                 z = genZ + 8;
                 break;
