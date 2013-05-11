@@ -19,8 +19,10 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 camStartingPos;
     public static bool startGame= false;
     public string model = "";
-	
 
+    // Indicator for how far from the universe position the player needs to be when rotated
+    private int baseRotDepth = -8;
+    
     private bool rotation, rottoggle = true, camtoggle = false, rotexception;
     private int characterNum, universeNum = 1;
     private float vertDist, horDist;
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour {
 		playerManager = gameObject.GetComponent<PlayerManager>();
         firingHandler = GetComponent<FiringHandler>();
         startingPos = gameObject.transform.position;
+        Debug.Log("SPos " + characterNum + ": " + startingPos);
 		camtoggle = false;
 		rottoggle = true;
 	}
@@ -50,6 +53,7 @@ public class PlayerMovement : MonoBehaviour {
         camtoggle = true;
         rottoggle = true;
         firingHandler.rotated = true;
+        gameObject.networkView.RPC("FixCharDepth", RPCMode.Server);
         //firingHandler.fireDepth = 100;
     }
 
@@ -99,7 +103,8 @@ public class PlayerMovement : MonoBehaviour {
     [RPC]
     private void FixCharDepth() {
         if (Network.isServer) {
-            gameObject.transform.position = new Vector3(startingPos.x, gameObject.transform.position.y, gameObject.transform.position.z);
+            Vector3 uniPos = Universe.PositionOfOrigin(gameObject.GetComponent<PlayerManager>().universeNumber);
+            gameObject.transform.position = new Vector3(uniPos.x + baseRotDepth, gameObject.transform.position.y, gameObject.transform.position.z);
         }
     }
 
