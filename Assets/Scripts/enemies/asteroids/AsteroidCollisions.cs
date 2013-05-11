@@ -20,7 +20,6 @@ public class AsteroidCollisions : MonoBehaviour {
     [RPC]
     void destroyAfterExplosion()
     {
-        //Network.Destroy(gameObject);
         Instantiate(explosion, transform.position, transform.rotation);
     }
 
@@ -138,10 +137,6 @@ public class AsteroidCollisions : MonoBehaviour {
                 networkView.RPC("scoreXP", RPCMode.All, universeN(), scoreAddition);
                 Network.Instantiate(explosion, transform.position, transform.rotation, 0);
                 Network.Destroy(gameObject);
-                
-                //HudOn.score += scoreAddition;
-
-                //StartCoroutine(XP("+" + scoreAddition));
             }
         }
     }
@@ -152,7 +147,6 @@ public class AsteroidCollisions : MonoBehaviour {
         if (Network.isClient && GameObject.Find("Camera " + camNum))
         {
             StartCoroutine(XP("+" + score));
-           //s networkView.RPC("showedScore", RPCMode.Server);
         }
     }
 

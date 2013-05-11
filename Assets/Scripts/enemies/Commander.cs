@@ -223,7 +223,6 @@ public class Commander : MonoBehaviour {
         enemyTypes[3,3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
         currType = Random.Range(0, 4);
 
-        int c = GameObject.FindGameObjectsWithTag("Player").Length;
         if (Network.isServer)
         {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;

@@ -22,18 +22,6 @@ public class Universe : MonoBehaviour {
         bottomBorder = origin.y - height;
         topBorder = origin.y + height;
 	}
-
-   /*public void activateUniverse(bool act)
-    {
-        if(Network.isClient) active = act;
-        networkView.RPC("activateUniverse", RPCMode.Server, act);
-    }
-
-    [RPC]
-    void activateUniverse(bool act)
-    {
-        if (Network.isServer) active = act;
-    }*/
 	
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
 		stream.Serialize(ref origin);

@@ -10,7 +10,6 @@ public class FiringHandler : MonoBehaviour {
     LineRenderer beam;
     Transform arm;
     private Vector3 gunPosition;
-	private WeaponHandler weaponHandler;
 
 	private float timer = 0;
     private bool instantiated;
@@ -31,7 +30,6 @@ public class FiringHandler : MonoBehaviour {
     }
 
 	void Start() {
-        weaponHandler = GetComponent<WeaponHandler>();
         beam = GetComponent<LineRenderer>();
         arm = transform.Find(model + "/rightArm");
 	}

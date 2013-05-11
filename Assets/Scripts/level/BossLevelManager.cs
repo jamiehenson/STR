@@ -7,15 +7,12 @@ public class BossLevelManager : MonoBehaviour {
 
     private Object[] bossPrefabs;
     private Universe positions;
-    private int universeN = 0; 
-    private float leftMoveLimit;
-    
+    private int universeN = 0;    
 
     void Start() {
         if (Network.isServer) {
             bossPrefabs = Resources.LoadAll("enemies/bosses/Prefabs", typeof(GameObject));
             positions = transform.parent.FindChild("OriginManager").GetComponent<Universe>();
-            leftMoveLimit = positions.rightMovementLimit + 2.5f;
         }
     }
 

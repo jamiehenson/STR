@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool rotation, rottoggle = true, camtoggle = false, rotexception;
     private int characterNum, universeNum = 1;
     private float vertDist, horDist;
-    private Vector3 startingRot, startingPos;
+    private Vector3 startingRot;
 
 
 	public void Start()
@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour {
 
 		playerManager = gameObject.GetComponent<PlayerManager>();
         firingHandler = GetComponent<FiringHandler>();
-        startingPos = gameObject.transform.position;
 		camtoggle = false;
 		rottoggle = true;
 	}

@@ -29,8 +29,6 @@ public class EndGame : MonoBehaviour {
 		teammate1score.guiText.text = "TEAMMATE1: " + endIndividualScore + "...";
 		GameObject teammate2score = GameObject.Find ("T2 Score");
 		teammate2score.guiText.text = "TEAMMATE2: " + endIndividualScore + "...";
-		
-		//StartCoroutine(HSController.PostScores,name,score,kills,deaths);
 
 		LoadTwitterUserInfo();
 	}

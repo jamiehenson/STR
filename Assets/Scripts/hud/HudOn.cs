@@ -24,7 +24,6 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
     public int startLivesNb;
-    private bool initialized =false;
 
 	public static Vector3 vortpointOut;
 	private bool showCountdown;

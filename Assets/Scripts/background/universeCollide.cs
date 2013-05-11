@@ -10,7 +10,6 @@ public class universeCollide : MonoBehaviour {
             string collidedName = collided.name;
             if (collidedName.StartsWith("Asteroid"))
             {
-                Debug.Log("Asteroid Collision Here");
                 Network.Destroy(collided.gameObject);
             }
             switch (collidedName)

@@ -33,7 +33,6 @@ public class Server : MonoBehaviour {
     private Dictionary<NetworkViewID, string> viewIDNameMapping;
     private Dictionary<NetworkViewID, string> viewIDChNameMapping;
     private Bridge bridge;
-    private int playerCount = 0;
     private int nextPlayerID = 0;
 
     // Use this for initialization
@@ -185,7 +184,6 @@ public class Server : MonoBehaviour {
 		if (GameObject.Find("Character" + ID) == null)
 			return;
 		
-        int x = 400;
         /* Notify server which player has connected. */
         /* GUI part*/
         for(int i = 1; i <ID; i++)
