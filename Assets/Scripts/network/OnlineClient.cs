@@ -38,6 +38,7 @@ public class OnlineClient : MonoBehaviour
 
         // Set camPos to bgPos + 1000 to z
         Vector3 camPos = new Vector3(origin.x, origin.y, origin.z + 0.1f);
+        Debug.Log("camera positons " + camPos);
         Camera = (Transform)Instantiate(camPrefab, camPos, new Quaternion(0, 0, 0, 0));
         Camera.name = "Camera " + num;
 		
