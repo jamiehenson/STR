@@ -32,7 +32,7 @@ public class BGMusic : MonoBehaviour
 		ambientplayer.clip = (AudioClip) clips[Random.Range (0,clips.Length)];
 		ambientplayer.Play();
 		ambientplayer.loop = true;
-		ambientplayer.volume = 0.1f;
+		ambientplayer.volume = 0.2f;
 	}
 
 	public void PlayBossTrack()

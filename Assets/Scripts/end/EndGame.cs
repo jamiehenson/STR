@@ -26,6 +26,8 @@ public class EndGame : MonoBehaviour {
 	
 	void Start()
 	{
+		Screen.showCursor = true;
+
 		heading = GenerateEndHeader();
 		subheading = GenerateEndSubHeader();
 		teamscores = GenerateTeamScore();
