@@ -479,7 +479,7 @@ public class HudOn : MonoBehaviour {
 		
         for (int i = 1; i <= playercount; i++)
         {
-			int spacer = 40;
+			int spacer = 35;
 			PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
             GUI.Label(new Rect(Screen.width - 90, Screen.height / 2 - leaderboard.height / 2 + 22 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
