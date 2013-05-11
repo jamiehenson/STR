@@ -387,9 +387,6 @@ public class HudOn : MonoBehaviour {
         charName = manager.getPlayerName();
 	}
 
-    
-
-
 	void OnGUI () {
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
@@ -400,7 +397,7 @@ public class HudOn : MonoBehaviour {
 
 		GUI.Label (new Rect (-130,-20,main.width,main.height), main);
 		GUI.Label (new Rect (Screen.width-speed.width+15,-20,speed.width,speed.height), speed);
-		GUI.Label (new Rect (Screen.width-leaderboard.width+80,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
+		GUI.Label (new Rect (Screen.width-leaderboard.width+50,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
 		GUI.DrawTexture (new Rect (2,-2,64,48),flag,ScaleMode.StretchToFill);
 
 		GUIStyle hudStyle = new GUIStyle();
@@ -461,18 +458,21 @@ public class HudOn : MonoBehaviour {
 		// Power bank
             GUI.Label(new Rect(115, 45, energyBank / (bankSize / hudBarSize), 10), "", bank);
 		// Speed and gear indicator
-        GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "" + manager.getScore(), largeStyle);
-		GUI.Label (new Rect (Screen.width-240,100,200,40),gearReady,hudStyle);
+        GUI.Label (new Rect (Screen.width - 140, 10, 200, 50), "" + manager.getScore(), largeStyle);
+		GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "TEAM LIVES: ", hudStyle);
+		GUI.Label (new Rect (Screen.width - 240,100,200,40),gearReady,hudStyle);
 		
 		// Scoreboard indicator
 		GUI.Label (new Rect (Screen.width-150,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",hudStyle);
 		
         for (int i = 1; i <= playercount; i++)
         {
-            PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
+			int spacer = 40;
+			PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
-            GUI.Label(new Rect(Screen.width - 120, Screen.height / 2 - leaderboard.height / 2 + 22 + i*25, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
-            GUI.Label(new Rect(Screen.width - 155, Screen.height / 2 - leaderboard.height / 2 + 10 + i*25, 35, 35), playerFlag);
+            GUI.Label(new Rect(Screen.width - 900, Screen.height / 2 - leaderboard.height / 2 + 22 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
+            GUI.Label(new Rect(Screen.width - 125, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), playerFlag);
+			GUI.Label(new Rect(Screen.width - 70, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), "MORTIVERSE");
         }
 		
 		// Weapons initialisation
