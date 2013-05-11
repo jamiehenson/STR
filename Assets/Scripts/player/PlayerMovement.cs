@@ -53,14 +53,12 @@ public class PlayerMovement : MonoBehaviour {
         rottoggle = true;
         firingHandler.rotated = true;
         gameObject.networkView.RPC("FixCharDepth", RPCMode.Server);
-        //firingHandler.fireDepth = 100;
     }
 
     public void SetCamAfterBoss() {
         camtoggle = false;
         rottoggle = true;
         firingHandler.rotated = false;
-        //firingHandler.fireDepth = 15;
     }
 
     public void activateCharacter(int charNum, int univNum)
@@ -71,29 +69,10 @@ public class PlayerMovement : MonoBehaviour {
         networkView.RPC("updateUniverse", RPCMode.Server, universeNum, characterNum);
     }
 	
-	// Rotation procedures. Made into a coroutine, so that it is uninterruptable
-	public IEnumerator rotateChar(bool toggle)
-	{
-		/*int direction = (toggle) ? 1 : -1;
-		
-		if (toggle)
-    	{
-			iTween.MoveTo(gameObject, new Vector3(startingPos.x, startingPos.y, positions.baseZ), 1);
-			iTween.RotateTo(gameObject, startingRot, 1);
-		}
-		else
-		{
-			iTween.MoveTo(gameObject, new Vector3(startingPos.x + 4, startingPos.y - 2, positions.baseZ - 5), 1);
-			iTween.RotateBy(gameObject, new Vector3(0, direction * 0.25f, 0), 1);
-		}*/
-		yield return new WaitForSeconds(1f);	
-	}
 	
     public void PubRotateCam(int universe) {
         if (Network.isClient && myCharacter) {
             StartCoroutine(rotateCamera(camtoggle, universe));
-            //gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
-            //rotexception = true;
             camtoggle = !camtoggle;
             networkView.RPC("moveCharacter", RPCMode.Server, 1 + vertDist, horDist, rotation, rottoggle, camtoggle);
         }
@@ -116,12 +95,10 @@ public class PlayerMovement : MonoBehaviour {
         if (cameraBehind) {
             iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x, origin.y, origin.z + 0.1f), 2);
             firingHandler.rotated = false;
-            //firingHandler.fireDepth = 15;
         }
         else {
             iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
             firingHandler.rotated = true;
-            //firingHandler.fireDepth = 60;
         }
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
         gameObject.networkView.RPC("FixCharDepth", RPCMode.Server);
@@ -173,48 +150,8 @@ public class PlayerMovement : MonoBehaviour {
             float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
             networkView.RPC("rotateArm", RPCMode.All, angle, model);
             /*End arm rotation*/
-
-			// If R is pressed, rotate the character, toggling 90 degrees
-			//if (Input.GetButtonDown("Rotate Character")) charRotate = true;
-			
-			/*if (Input.GetKeyDown("t")) 
-			{
-				StartCoroutine("rotateCamera",camtoggle);
-				rotexception = true;
-				camtoggle = !camtoggle;
-                PubRotateCam(universeNum);
-			}*/
-			
-			/*if (rotexception) 
-			{
-				if (camtoggle == true) 
-				{
-					rotation = true; 
-					rottoggle = true;
-				}
-				else if (camtoggle == false) rottoggle = true;
-				rotexception = false;
-			}
-			else if (charRotate && camtoggle == false) 
-			{
-				rotation = true;
-				rottoggle = !rottoggle;
-			} 
-			else rotation = false;
-			
-			charRotate = false;*/
 						
 	        networkView.RPC("moveCharacter", RPCMode.Server, vertDist, horDist, rotation, rottoggle, camtoggle);
-
-			/*
-	        // Warp between universes
-	        string x = Input.inputString;
-	        if (x.Equals("4") || x.Equals("5") || x.Equals("6") || x.Equals("7"))
-	        {
-	            int num = int.Parse(x);
-	            OnlineClient.moveUniverse(num-3 , characterNum);
-	            networkView.RPC("updateUniverse", RPCMode.Server, num-3, characterNum);
-	        }*/
 		}
       else if (Network.isServer)
       {
@@ -321,7 +258,6 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 diffFromOrigin = characterPosition - curOrigin;
 
         Vector3 newPosition = newOrigin + diffFromOrigin;
-        //character.transform.position = newPosition;
         transform.position = newPosition;
 
         server.moveCamera(newUniverseNum, info.sender);

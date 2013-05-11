@@ -79,12 +79,6 @@ public class Commander : MonoBehaviour {
     	enemyCount = new int[c+1];	
 	}
 
-    // ******Used by enemies to pick a target player******
-    /*public static int pickTarget() {
-        // Pick randomly from the array
-        return 1;
-    }*/
-
     // ******Determine by which prefab is the script called***** 
     private int universeN()
     {
@@ -199,7 +193,6 @@ public class Commander : MonoBehaviour {
 		
         EnemyManager eMan = enemy.GetComponent<EnemyManager>();
         eMan.direction = dir;
-        //eMan.changeType(type);
         enemyCount[universeN()]++;
     }
 
@@ -415,16 +408,6 @@ public class Commander : MonoBehaviour {
         return changed;
     }
 
-    /*public void DeployBoss() {
-        // Clear all enemies/asteroids from the screen
-        // Pick a boss and send them out!
-        // Resume usual enemy generation techniques
-        RotatePlayers(true);
-        bossDeployed = true;
-        ClearScreen();
-        CreateBoss(4);
-    }*/
-
     public void WarpAnimation() {
         if (Network.isServer) {
             bossDeployed = true;
@@ -449,13 +432,6 @@ public class Commander : MonoBehaviour {
     public void BringBackFromBoss() {
         if (Network.isServer) {
             networkView.RPC("moveInitialUniverse", RPCMode.All);
-            /*for (int i = 1; i < 5; i++) {
-                if (activeCharacters[i]) {
-                    GameObject character = GameObject.Find("Character" + i);
-                    PlayerMovement move = character.GetComponent<PlayerMovement>();
-                    move.SetCamAfterBoss();
-                }
-            }*/
         }
     }
 

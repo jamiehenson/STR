@@ -22,7 +22,6 @@ public class BossLevelManager : MonoBehaviour {
     // Creates an enemy of the given type
     public void CreateBoss() {
         if (Network.isServer) {
-            // ROTATION NEEDS TO GO HERE
             // Directions:
             // 1 - From Left
             // 2 - From Top

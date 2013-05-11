@@ -72,18 +72,11 @@ public class EnemyMovement : MonoBehaviour {
 
         // Set movement variables
         minX = positions.rightMovementLimit + 2.5f;
-        //minX = positions.leftBorder;
         maxX = positions.rightBorder;
         minY = positions.bottomBorder;
         maxY = positions.topBorder;
 
-        // NEED to do this not based on position, but on a FIXED stopZ (due to rotation issues)
-        /*GameObject character = GameObject.Find("Character"+universeNb);
-        stopZ = character.transform.position.z;*/
-
         stopZ = positions.baseZ;
-		// Send to client
-		//networkView.RPC ("setStopZ", RPCMode.Others, stopZ);
 
         // Check direction
         switch (eManager.direction)
@@ -119,15 +112,9 @@ public class EnemyMovement : MonoBehaviour {
 		
 		eManager = gameObject.GetComponent<EnemyManager>();
     }
-	/*
-	[RPC]
-	void setStopZ(float z) {
-		stopZ = z;
-	}*/
 
     void setUpEnemy() {     
         gameObject.rigidbody.freezeRotation = true;
-        //gameObject.renderer.material.color = eManager.color;
     }
 
     int PickTarget() {
@@ -136,7 +123,6 @@ public class EnemyMovement : MonoBehaviour {
             if (commander.activeCharacters[i] == true) {
                 activeChars.Add(i);
             }
-          //  print(i + ": " + commander.activeCharacters[i] + " " + universeNb);
         }
         if (activeChars.Count == 0) return -1;
         int index = Random.Range(0, activeChars.Count);
@@ -147,7 +133,6 @@ public class EnemyMovement : MonoBehaviour {
     IEnumerator Shoot() {
         while (true) {
             if (inPlane) {
-                //targetPlayer = comman
                 int targetPlayer = PickTarget();
                 if (targetPlayer != -1) {
 					GameObject character = GameObject.Find("Character" + targetPlayer);
@@ -168,7 +153,6 @@ public class EnemyMovement : MonoBehaviour {
 	[RPC]
 	void fireBullet(Vector3 startPosition, Quaternion startRotation, NetworkViewID targetID, NetworkViewID bulletID, Vector3 fireDir, Vector3 force) {
 		// Get target
-		//Debug.Log ("I am being told to fire: "+bulletID);
 		GameObject character = NetworkView.Find (targetID).gameObject;
 
 		GameObject bullet = NetworkView.Find (bulletID).gameObject;

@@ -13,9 +13,5 @@ public class scrolling : MonoBehaviour {
         stars.startSpeed = speed;
         stars.emissionRate = speed;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

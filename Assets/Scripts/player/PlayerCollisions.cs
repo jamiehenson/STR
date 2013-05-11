@@ -44,7 +44,6 @@ public class PlayerCollisions : MonoBehaviour {
     {
         GameObject beamCrackle = (GameObject)Resources.Load("weapons/beamCrackle");
         GameObject cannonCrackle = (GameObject)Resources.Load("weapons/cannonCrackle");
-       // Vector3 standard = gameObject.transform.position;
         Vector3 asteroid = new Vector3(gameObject.transform.position.x - (0.7f*gameObject.transform.localScale.x), gameObject.transform.position.y, gameObject.transform.position.z);
         if (Network.isServer)
         {
@@ -61,7 +60,6 @@ public class PlayerCollisions : MonoBehaviour {
             switch (tag) {
                 case "EnemyWeapon":
                     Network.Destroy(collided);
-                    // smack.Play();
                     EnemyBulletSettings bulletSettings = collided.GetComponent<EnemyBulletSettings>();
                     manager.updateHitPoints(-bulletSettings.damage);
                     break;
@@ -73,26 +71,10 @@ public class PlayerCollisions : MonoBehaviour {
                 default:
                     break;
             }
-            /*  if (manager.getHitPoints() <= 0)
-              {
-                  Boom(gameObject);
-                  if (Network.isServer)
-                  {
-                      networkView.RPC("destroyObject", RPCMode.All);
-                      Network.Destroy(gameObject);
-                  }
-              }*/
-            /*if (manager.getHitPoints() <= 0) {
-                Boom(gameObject);
-                gameObject.SetActive(false);
-                networkView.RPC("ChangePlayerActiveState", RPCMode.Others, false);
-                StartCoroutine("DeathTimeout");
-            }*/
         }
     }
 
     void OnCollisionStay(Collision collision) {
-        //if (Network.isServer) {
             GameObject collided = collision.collider.gameObject;
 
             switch (collided.tag) {
@@ -103,11 +85,6 @@ public class PlayerCollisions : MonoBehaviour {
                 default:
                     break;
             }
-            //if (manager.getHitPoints() <= 0) {
-            //    Boom(gameObject);
-            //    Network.Destroy(gameObject);
-            //}
-        //}
     }
 
     IEnumerator DeathTimeout() {

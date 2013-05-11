@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Server : MonoBehaviour {
 
-    //private int playerCount = 0;
     public static string gameName = "The Great Adventures of Mort"; // I think this should be STR ?
     public Transform playerUniversePrefab;
     public static int countUniverse;
@@ -30,8 +29,6 @@ public class Server : MonoBehaviour {
 
 	private string playersJoined = "";
     private static int ID = 1;
-
-    //public bool startGame, manualGoAhead;   
 
     private Dictionary<NetworkViewID, string> viewIDNameMapping;
     private Dictionary<NetworkViewID, string> viewIDChNameMapping;
@@ -96,7 +93,6 @@ public class Server : MonoBehaviour {
             Vector3 position = new Vector3(pos.x - 8, pos.y, pos.z + 15);
    
             Transform characterPlayer = (Transform)Network.Instantiate(characterPrefab, position, new Quaternion(0,0,0,0), i);
-			//characterPlayer.Rotate(new Vector3(0,180,0));
 			// Rename the character and pass name to clients
             characterPlayer.name = "Character" + i;
 			characterPlayer.GetComponent<PlayerManager>().universeNumber = i;
@@ -153,9 +149,6 @@ public class Server : MonoBehaviour {
 	// When player disconnects, log event
     void OnPlayerDisconnected() {
 		Log.Warning("In OnPlayerDisconnected, connects = "+Network.connections.Length);
-		//GameObject activeChar = GameObject.Find("Character" + nextPlayerID);
-		//PlayerManager pm = activeChar.GetComponent<PlayerManager>();
-		//string playername = pm.returnName();
         //playersJoined = playersJoined + "Character " + nextPlayerID + ": " + playername + " has left the game...\n";
 		if (Network.connections.Length == 1) { // Go back to menu
 			Misc.CleanStatics();
