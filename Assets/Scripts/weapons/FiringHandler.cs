@@ -39,6 +39,15 @@ public class FiringHandler : MonoBehaviour {
         if ("0123456789".Contains(num)) return (int.Parse(num));
         else return -1;
     }
+
+	[RPC]
+	private void PlayNetworkShot(string wDir, int univ) {
+		if (Network.isClient) {
+			if (manager.universeNumber == univ) {
+				GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayShot(wDir);
+			}
+		}
+	}
 	
 	void Update () {
         if (universeN() != -1) {
@@ -69,16 +78,30 @@ public class FiringHandler : MonoBehaviour {
             else lookAt = ray.origin;
             Vector3 dir = lookAt - gunPosition;
 
-            
             if (Network.isClient && myCharacter) {
                 beam.SetPosition(1, lookAt); 
                 beam.SetPosition(0, gunPosition);
 
-				//GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayTrack("beam");
-
                 if (Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0) {
                     // Can I fire?
                     if (manager.getEnergyLevel() - manager.getSelectedWepDrain() >= 0) {
+						int wType = manager.wepType;
+
+						string wDir = "";
+
+						switch(wType)
+						{
+							case 1: wDir = "beam";
+								break;
+							case 2: wDir = "cannon";
+								break;
+							case 3: wDir = "mine";
+								break;
+							default: wDir = "beam";
+								break;
+						}
+						networkView.RPC("PlayNetworkShot", RPCMode.All, wDir, manager.universeNumber);
+
                         // Send message to fire
                         networkView.RPC("fireWeapon", RPCMode.Server, lookAt, dir, manager.wepStats.wepType, model);
                         // Update fire stats
