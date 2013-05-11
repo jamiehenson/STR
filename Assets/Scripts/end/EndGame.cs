@@ -8,6 +8,14 @@ public class EndGame : MonoBehaviour {
 	public static int[] scores;
 	public static string[] names;
 
+	// Website stuff
+	private string secretKey = "blobbo";
+    private string addScoreURL = "http://jh47.com/str/addscore.php?";
+    private string highscoreURL = "http://jh47.com/str/getscores.php";
+	private string killsURL = "http://jh47.com/str/getkills.php";
+	private string deathsURL = "http://jh47.com/str/getdeaths.php";
+
+	// Twitter stuff
     const string PLAYER_PREFS_TWITTER_USER_ID           = "STR_Game";
     const string PLAYER_PREFS_TWITTER_USER_SCREEN_NAME  = "STR";
     const string PLAYER_PREFS_TWITTER_USER_TOKEN        = "1396863306-Wxc36ezyhrlRNy95kJFz9czx5JtT7t6rrOwVog1";
@@ -24,18 +32,28 @@ public class EndGame : MonoBehaviour {
 		indvscores = GenerateIndvScores();
 		twitstring = GenerateTwitString();
 
+		StartCoroutine(GetScores());
+		StartCoroutine(GetKills());
+		StartCoroutine(GetDeaths());
+
 		GameObject header = GameObject.Find ("Header");
 		header.guiText.text = heading;
 		GameObject subheader = GameObject.Find ("Subheader");
 		subheader.guiText.text = subheading;
 		GameObject finalscore = GameObject.Find ("Team");
-		finalscore.guiText.text = "TEAM SCORE... \n" + teamscores;
+		finalscore.guiText.text = "TEAM SCORE... \n  " + teamscores;
 		GameObject youscore = GameObject.Find ("Indv");
-		youscore.guiText.text = "INDIVIDUAL SCORES... \n" + indvscores;
+		youscore.guiText.text = "INDIVIDUAL SCORES... \n  " + indvscores;
 
-		//StartCoroutine(HSController.PostScores,name,endIndividualScore,kills,deaths);
+		// Post to website
+		for (int i = 0; i < names.Length; i++) StartCoroutine(PostScores(names[i],scores[i],0,0));
 
+		// Sort twitter out
 		LoadTwitterUserInfo();
+
+		// Post to twitter
+		StartCoroutine(Twitter.API.PostTweet(twitstring, "eEIcGZ2AY6StgnPj793yQ", "mEWCEdNR4eNiKAl3fBQmOipijjuY6N7zh4V2AKSaYQ", m_AccessTokenResponse,
+                           new Twitter.PostTweetCallback(this.OnPostTweet)));
 	}
 	
 	string GenerateEndHeader() {
@@ -49,18 +67,50 @@ public class EndGame : MonoBehaviour {
 		return winner.ToUpper();
 	}
 
+	string GenerateGood() {
+		ArrayList player = new ArrayList();
+            player.Add("Top gun!");
+            player.Add("Winner!");
+            player.Add("Like a boss!");
+            player.Add("Good work!");
+            player.Add("Owned.");
+            player.Add("How it's done.");
+            player.Add("Head honcho");
+            player.Add("Big Daddy");
+            player.Add("Stone cold killa");
+            player.Add("Tactical victory");
+            player.Add("The crowd goes wild!");
+            player.Add("Prime");
+		string winner = (string) player[(int) Random.Range(0,player.Count)];
+		return winner.ToUpper();
+	}
+
+	string GenerateBad() {
+		ArrayList player = new ArrayList();
+            player.Add("Shameful");
+            player.Add("What was that?");
+            player.Add("Boooooo.");
+            player.Add("A puppy cried.");
+            player.Add("Once more, with enthusiasm.");
+            player.Add("Cadet");
+            player.Add("Nub.");
+            player.Add("Rookie error.");
+		string winner = (string) player[(int) Random.Range(0,player.Count)];
+		return winner.ToUpper();
+	}
+
 	string GenerateTwitString()
 	{
 		string allname = "";
 		foreach (string name in names) allname = allname + ", " + name;
-		return allname + " got " + GenerateTeamScore() + " in #STR";
+		return (allname + " got " + GenerateTeamScore() + " in #STR").Remove(0,1);
 	}
 
 	string GenerateTeamScore()
 	{
 		int sum = 0;
 		foreach (int i in scores) sum += i;
-		return "  " + sum.ToString();
+		return sum.ToString();
 	}
 
 	string GenerateIndvScores()
@@ -71,8 +121,8 @@ public class EndGame : MonoBehaviour {
 		int bottom = scores.Min();
 		foreach (string s in names)
 		{
-			string winner = (scores[i] == top) ? " - TOP GUN!" : (scores[i] == bottom) ? " - SHAMEFUL." : "";
-			ss = ss + "  " + s.ToUpper() + ": " + scores[i] + winner + "\n";
+			string winner = (scores[i] == top) ? " - " + GenerateGood() : (scores[i] == bottom) ? " - " + GenerateBad() : "";
+			ss = ss + s.ToUpper() + ": " + scores[i] + winner + "\n";
 			i++;
 		}
 		return ss;
@@ -168,4 +218,94 @@ public class EndGame : MonoBehaviour {
 		}
 	}
 
+	private string Md5Sum(string strToEncrypt)
+	{
+		System.Text.UTF8Encoding ue = new System.Text.UTF8Encoding();
+		byte[] bytes = ue.GetBytes(strToEncrypt);
+	 
+		// encrypt bytes
+		System.Security.Cryptography.MD5CryptoServiceProvider md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+		byte[] hashBytes = md5.ComputeHash(bytes);
+	 
+		// Convert the encrypted bytes back to a string (base 16)
+		string hashString = "";
+	 
+		for (int i = 0; i < hashBytes.Length; i++)
+		{
+			hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
+		}
+ 
+		return hashString.PadLeft(32, '0');
+	}
+	
+    private IEnumerator PostScores(string teamnames, int score, int kills, int deaths)
+    {
+        //This connects to a server side php script that will add the name and score to a MySQL DB.
+        // Supply it with a string representing the players name and the players score.
+        string hash = Md5Sum(name + score + secretKey);
+ 
+        string post_url = addScoreURL + "teamnames=" + WWW.EscapeURL(teamnames) + "&score=" + score + "&kills=" + kills + "&deaths=" + deaths + "&hash=" + hash;
+ 
+        // Post the URL to the site and create a download object to get the result.
+        WWW hs_post = new WWW(post_url);
+        yield return hs_post; // Wait until the download is done
+ 
+        if (hs_post.error != null)
+        {
+            print("There was an error posting the high score: " + hs_post.error);
+        }
+    }
+ 
+    // Get the scores from the MySQL DB to display in a GUIText.
+    // remember to use StartCoroutine when calling this function!
+    private IEnumerator GetScores()
+    {
+        GameObject scoreBox = GameObject.Find ("Scores");
+		scoreBox.guiText.text = "LOADING SCORES...";
+        WWW hs_get = new WWW(highscoreURL);
+        yield return hs_get;
+ 
+        if (hs_get.error != null)
+        {
+            print("SCORES. There was an error, due to an error: " + hs_get.error);
+        }
+        else
+        {
+            scoreBox.guiText.text = hs_get.text.ToUpper(); // this is a GUIText that will display the scores in game.
+        }
+    }
+	
+	IEnumerator GetKills()
+    {
+        GameObject killBox = GameObject.Find ("Kills");
+		killBox.guiText.text = "LOADING KILLS...";
+        WWW hs_get = new WWW(killsURL);
+        yield return hs_get;
+ 
+        if (hs_get.error != null)
+        {
+            print("KILLS. There was an error, due to an error: " + hs_get.error);
+        }
+        else
+        {
+            killBox.guiText.text = hs_get.text.ToUpper(); // this is a GUIText that will display the scores in game.
+        }
+    }
+	
+	IEnumerator GetDeaths()
+    {
+        GameObject deathsBox = GameObject.Find ("Deaths");
+		deathsBox.guiText.text = "LOADING DEATHS...";
+        WWW hs_get = new WWW(deathsURL);
+        yield return hs_get;
+ 
+        if (hs_get.error != null)
+        {
+            print("DEATHS. There was an error, due to an error: " + hs_get.error);
+        }
+        else
+        {
+            deathsBox.guiText.text = hs_get.text.ToUpper(); // this is a GUIText that will display the scores in game.
+        }
+    }
 }

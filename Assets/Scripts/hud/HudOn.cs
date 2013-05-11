@@ -15,13 +15,13 @@ public class HudOn : MonoBehaviour {
 
 	public string[] systemNames;
 
-	private string[] allNames;
-	private int[] allScores;
-
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
     public static int lives, currentLives;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount;
+
+	private string[] allNames;
+	private int[] allScores;
 
 	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
@@ -125,9 +125,8 @@ public class HudOn : MonoBehaviour {
 		}	
 	}
 		
-	IEnumerator headOut() {
-		foreach (int i in allScores) print ("Scores " + i);
-		foreach (string s in allNames) print ("Names " + s);
+	IEnumerator headOut()
+	{
 		EndGame.scores = allScores;
 		EndGame.names = allNames;
 		iTween.CameraFadeAdd();
@@ -136,8 +135,10 @@ public class HudOn : MonoBehaviour {
         Application.LoadLevel ("endgame");
 	}
 
-    IEnumerator KeepScore() {
-        while (!gameOver) {
+    IEnumerator KeepScore()
+	{
+        while (!gameOver)
+		{
             if(Network.isServer) manager.updateScore(1);
             //score += 1;
             yield return new WaitForSeconds(0.1f);
@@ -347,6 +348,10 @@ public class HudOn : MonoBehaviour {
 		//onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
 		
         playercount = GameObject.FindGameObjectsWithTag("Player").Length;
+
+		allNames = new string[playercount];
+		allScores = new int[playercount];
+
 		print ("I think universeN() = "+universeN() );
         manager = GameObject.Find("Character" + manager.universeNumber).GetComponent<PlayerManager>();
       
@@ -477,7 +482,7 @@ public class HudOn : MonoBehaviour {
 			int spacer = 40;
 			PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
-            GUI.Label(new Rect(Screen.width - 900, Screen.height / 2 - leaderboard.height / 2 + 22 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
+            GUI.Label(new Rect(Screen.width - 90, Screen.height / 2 - leaderboard.height / 2 + 22 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
             GUI.Label(new Rect(Screen.width - 125, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), playerFlag);
 			GUI.Label(new Rect(Screen.width - 70, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), "MORTIVERSE");
 			allScores[i-1] = score.getScore();
