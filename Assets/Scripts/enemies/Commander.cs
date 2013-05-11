@@ -236,6 +236,7 @@ public class Commander : MonoBehaviour {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
             activeCharacters = new bool[countUniverse+1];
             activeCharacters[universeN()] = true;
+            Debug.Log(activeCharacters.ToString());
             asteroidCount = new int[countUniverse];
             enemyCount = new int[countUniverse];
             positions = transform.parent.FindChild("OriginManager").GetComponent<Universe>();
@@ -303,8 +304,11 @@ public class Commander : MonoBehaviour {
     }
 
     void RotatePlayers(bool toBehind, int rotUniverse) {
+        Debug.Log("AChars " + universeN() + ": " + activeCharacters); 
         for (int i = 0; i < activeCharacters.Length; i++) {
+            Debug.Log("In univ " + universeN() + " up to " + i);
             if (activeCharacters[i]) {
+                Debug.Log("HE'S ACTIVE");
                 GameObject character = GameObject.Find("Character" + i);
                 PlayerMovement move = character.GetComponent<PlayerMovement>();
                 move.networkView.RPC("RotateCamera", RPCMode.Others, toBehind, i, rotUniverse);

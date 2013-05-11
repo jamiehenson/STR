@@ -39,7 +39,6 @@ public class PlayerMovement : MonoBehaviour {
 		playerManager = gameObject.GetComponent<PlayerManager>();
         firingHandler = GetComponent<FiringHandler>();
         startingPos = gameObject.transform.position;
-        Debug.Log("SPos " + characterNum + ": " + startingPos);
 		camtoggle = false;
 		rottoggle = true;
 	}
