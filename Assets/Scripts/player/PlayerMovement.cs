@@ -96,6 +96,13 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    [RPC]
+    private void FixCharDepth() {
+        if (Network.isServer) {
+            gameObject.transform.position = new Vector3(startingPos.x, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+    }
+
 	public IEnumerator rotateCamera(bool cameraBehind, int universe) 
 	{
         isRotating = true;
@@ -112,11 +119,9 @@ public class PlayerMovement : MonoBehaviour {
             firingHandler.rotated = true;
             //firingHandler.fireDepth = 60;
         }
-        gameObject.transform.position = new Vector3(origin.x, gameObject.transform.position.y, gameObject.transform.position.z);
-
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
-        iTween.MoveTo(gameObject, new Vector3(startingPos.x, gameObject.transform.position.y, gameObject.transform.position.z), 1);
-		yield return new WaitForSeconds(2);
+        gameObject.networkView.RPC("FixCharDepth", RPCMode.Server);
+        yield return new WaitForSeconds(2);
         isRotating = false;
 	}
 
