@@ -22,7 +22,6 @@ public class FiringHandler : MonoBehaviour {
         model = s;
     }
 
-
     private int player;
     private int characterNum;
 
@@ -77,6 +76,7 @@ public class FiringHandler : MonoBehaviour {
                 beam.SetPosition(1, lookAt); 
                 beam.SetPosition(0, gunPosition);
 
+				//GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayTrack("beam");
 
                 if (Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0) {
                     // Can I fire?

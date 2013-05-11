@@ -7,7 +7,7 @@ public class BGMusic : MonoBehaviour
 
 	void Start ()
 	{
-		PlayRandomTrack();
+		//PlayRandomTrack();
 		PlayAmbientTrack();
 	}
 
@@ -32,7 +32,7 @@ public class BGMusic : MonoBehaviour
 		ambientplayer.clip = (AudioClip) clips[Random.Range (0,clips.Length)];
 		ambientplayer.Play();
 		ambientplayer.loop = true;
-		ambientplayer.volume = 0.2f;
+		ambientplayer.volume = 0.14f;
 	}
 
 	public void PlayBossTrack()
@@ -53,4 +53,11 @@ public class BGMusic : MonoBehaviour
 		audioplayer.volume = 1;
 	}
 
+	public void PlayShot(string shotname)
+	{
+		Object[] shot = Resources.LoadAll("sounds/weapons/" + shotname);
+		AudioClip chosenOne = (AudioClip) shot[Random.Range(0,shot.Length)];
+		AudioSource.PlayClipAtPoint(chosenOne,gameObject.transform.position);
+		print ("shot made");
+	}
 }
