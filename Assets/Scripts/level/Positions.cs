@@ -23,19 +23,15 @@ public class Positions : MonoBehaviour {
         // Fix "action" plane at a certain distance away from the camera
 
         if (Network.isClient) {
-            //Debug.Log("Camera found " + cam.name);
             leftBorder = Camera.mainCamera.ViewportToWorldPoint(new Vector3(0, 0, baseZ)).x;
             rightBorder = Camera.mainCamera.ViewportToWorldPoint(new Vector3(1, 0, baseZ)).x;
             rightMovementLimit = Camera.mainCamera.ViewportToWorldPoint(new Vector3(boundProportion, 0, baseZ)).x;
             topBorder = Camera.mainCamera.ViewportToWorldPoint(new Vector3(0, 1, baseZ)).y;
             bottomBorder = Camera.mainCamera.ViewportToWorldPoint(new Vector3(0, 0, baseZ)).y;
-
-            //Debug.Log(leftBorder + " " + rightBorder + " " + rightMovementLimit + " " + topBorder + " " + bottomBorder);
             networkView.RPC("sentPositions", RPCMode.Server, leftBorder, rightBorder, rightMovementLimit, topBorder, bottomBorder);
         }
         if (Network.isServer) {
             print("RPC server ");
-            //networkView.RPC("sentPositions", RPCMode.Server, leftBorder, rightBorder, rightMovementLimit, topBorder, bottomBorder);
         }
     }
 

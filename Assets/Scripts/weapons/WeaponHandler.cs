@@ -79,7 +79,6 @@ public class WeaponHandler : MonoBehaviour {
 }
 
 
-
 public class WeaponStats {
 	public readonly int wepType;
 	public readonly float wepSpeed;

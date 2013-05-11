@@ -107,8 +107,6 @@ public class BossCollisions : MonoBehaviour {
                 manager.updateScore(eManager.killPoints);
                 Network.Destroy(gameObject);
                 PlayerCollisions.Boom(gameObject);
-                //HudOn.score += points;
-                // StartCoroutine(XP("+" + points));
             }
         }
     }

@@ -63,7 +63,6 @@ public class EnemyCollisions : MonoBehaviour {
                     // Do what we want for beam
                     Network.Destroy(collided);
                     PlayerCollisions.WeaponBoom(gameObject, 1);
-                    //beamSmack.Play();
                     health = health - (WeaponHandler.beamDamage);
                     break;
                 case "PlayerCannon":
@@ -119,8 +118,6 @@ public class EnemyCollisions : MonoBehaviour {
                 manager.updateScore(scoreAddition);
                 Network.Destroy(gameObject);
                 PlayerCollisions.Boom(gameObject);
-                //HudOn.score += points;
-                // StartCoroutine(XP("+" + points));
             }
         }
     }

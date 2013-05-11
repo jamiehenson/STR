@@ -22,7 +22,6 @@ public class Bridge : MonoBehaviour {
 			hudon = GameObject.Find("Client Scripts").GetComponent<HudOn>();
 	}
 
-    // Use this for initialization
     void Start() {
         if (Network.isServer) {
             server = GameObject.Find("Network").GetComponent<Server>();

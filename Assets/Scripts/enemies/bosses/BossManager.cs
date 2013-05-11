@@ -3,8 +3,6 @@ using System.Collections;
 
 public class BossManager : MonoBehaviour {
 
-    private Commander commander;
-
     // Enemy stats
     // Enemy type is set ahead of instantiation for next enemy type
     public int enemyType = 1;
@@ -32,7 +30,6 @@ public class BossManager : MonoBehaviour {
     public virtual void Start() {
         if (Network.isServer) {
             gameObject.name = "Boss0";
-            commander = transform.parent.parent.FindChild("Managers/EnemyManager").GetComponent<Commander>();
         }
     }
 

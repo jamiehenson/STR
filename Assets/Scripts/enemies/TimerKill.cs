@@ -7,7 +7,6 @@ public class TimerKill : MonoBehaviour {
 
     IEnumerator timedkill() {
         yield return new WaitForSeconds(time);
-      //  if(Network.isServer)
         {
             Destroy(gameObject);
         }

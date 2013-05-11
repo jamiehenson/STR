@@ -10,7 +10,6 @@ public class MenuGUI : MonoBehaviour {
 		iTween.CameraFadeFrom(1.0f, 2.0f);
 		credz = (Texture2D) Resources.Load ("menu/credz");
 		HudOn.gameOver = false;
-		//HudOn.score = 0;
 	}
 	
 	void OnGUI() {
@@ -25,8 +24,8 @@ public class MenuGUI : MonoBehaviour {
 			if (GUI.Button(new Rect(xButPos,yButPos, 200, 30), "Close")) ShowCredits.credOn = false;
 		}
 
-        if (Input.GetKeyDown("escape") && Exit.goingOut == false){
+        /*if (Input.GetKeyDown("escape") && Exit.goingOut == false){
             Exit.goingOut = true;
-        }
+        }*/
 	}
 }

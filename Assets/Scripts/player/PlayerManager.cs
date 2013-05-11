@@ -213,8 +213,6 @@ public class PlayerManager : MonoBehaviour {
                     energyMultiplier = 1f;
                     bankSize = 7000;
                     energyBank = 0;
-                  //  GameObject.Find("Character1/china_model").SetActive(true);
-
                     break;
                 case "usa":
                     startHP = 1000;
@@ -224,7 +222,6 @@ public class PlayerManager : MonoBehaviour {
                     energyMultiplier = 1.5f;
                     bankSize = 7000;
                     energyBank = 0;
-                  //  GameObject.Find("Character1/usa_model").SetActive(true);
                     break;
                 case "russia":
                     startHP = 750;
@@ -234,7 +231,6 @@ public class PlayerManager : MonoBehaviour {
                     energyMultiplier = 1.25f;
                     bankSize = 5000;
                     energyBank = 0;
-                 //   GameObject.Find("Character1/russia_model").SetActive(true);
                     break;
                 default:
                     startHP = 1000;

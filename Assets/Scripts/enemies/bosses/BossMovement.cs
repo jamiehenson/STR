@@ -20,7 +20,6 @@ public class BossMovement : MonoBehaviour {
     // Helper variables
     public bool inPlane = false;
     private bool waiting = false;
-    private float firingOffset = 1.5f;
     private float typeForceMultiplier;
     private int universeNb;
 

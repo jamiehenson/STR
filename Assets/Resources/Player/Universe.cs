@@ -4,36 +4,32 @@ using System.Collections;
 public class Universe : MonoBehaviour {
 	
 	public Vector3 origin;
-    public float leftBorder;
-    public float rightBorder;
+    public float leftXBorder;
+    public float rightXBorder;
+    public float leftZBorder;
+    public float rightZBorder;
     public float topBorder;
     public float bottomBorder;
     public float rightMovementLimit;
+    public float bottomRotatedBorder;
+    public float topRotatedBorder;
     public float width = 10.0f;
     public float height = 8.0f;
     public float baseZ = 15;
-    public float generationOffset = 5.0f; 
+    public float generationOffset = 5.0f;
 
 	// Use this for initialization
 	void Start () {
-        leftBorder = origin.x - width;
-        rightBorder = origin.x + width - 1;
-        rightMovementLimit = origin.x - 5.0f;
-        bottomBorder = origin.y - height;
-        topBorder = origin.y + height;
+        leftXBorder         = origin.x - 13.2f;
+        rightXBorder        = origin.x + 14.9f;
+        leftZBorder         = 25.0f;
+        rightZBorder        = 5.0f;
+        rightMovementLimit  = origin.x - 5.0f;
+        bottomBorder        = origin.y - 7.0f;
+        topBorder           = origin.y + 4.7f;
+        bottomRotatedBorder = origin.y - 5.0f;
+        topRotatedBorder    = origin.y + 3.1f;
 	}
-
-   /*public void activateUniverse(bool act)
-    {
-        if(Network.isClient) active = act;
-        networkView.RPC("activateUniverse", RPCMode.Server, act);
-    }
-
-    [RPC]
-    void activateUniverse(bool act)
-    {
-        if (Network.isServer) active = act;
-    }*/
 	
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
 		stream.Serialize(ref origin);

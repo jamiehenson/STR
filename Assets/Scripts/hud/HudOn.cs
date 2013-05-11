@@ -28,19 +28,15 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
     public int startLivesNb;
-    private bool initialized =false;
 
-	//private Vector3 charScale;
 	public static Vector3 vortpointOut;
 	private bool showCountdown;
 	public static float score;
 	public static bool gameOver;
 	private static bool gameOverBeenDetected;
 
-    //WeaponHandler weaponHandler;
     public static int countUniverse;
     PlayerManager manager = null;
-	//OnlineClient onlineClient;
 
 	// Toasts
 	private GameObject toast;//, charModel;
@@ -178,17 +174,6 @@ public class HudOn : MonoBehaviour {
             setWeapon(2);
         }
         else if (Input.GetKeyDown("3")) setWeapon(3);
-        // To be implemented
-        /*else if (Input.GetAxis("Mouse ScrollWheel") < 0) {
-            int t = manager.wepType - 1;
-            if (t < 1) t = 3;
-            setWeapon(t);
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") > 0) {
-            int t = manager.wepType + 1;
-            if (t > 3) t = 1;
-            setWeapon(t);
-        }*/
 
         if (energyBank / (bankSize / hudBarSize) >= hudBarSize || true) // Always true, for testing
         {
@@ -297,26 +282,8 @@ public class HudOn : MonoBehaviour {
 			return -1;
 		else
 			return manager.universeNumber;
-		/*
-        int length = transform.name.Length;
-        string num = transform.name.Substring(length - 1, 1);
-		print ("Num = "+num);
-        if ("0123456789".Contains(num)) return (int.Parse(num));
-        else return -1;*/
     }
 
-    /* Can't use it and moved all its contents to Start() as InitialiseStats() is not static anymore
-    void Awake() {
-        if (universeN() != -1)
-        {
-            manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
-            if (manager.activeChar == null) manager.activeChar = "tester";
-            Debug.Log("Hud on" + manager.activeChar);
-            manager.InitialiseStats();
-            StartScore();
-        }
-    }
-    Not being used. Not sure if necessary*/
 
 	void Start () {
 		// Set statics
@@ -332,21 +299,13 @@ public class HudOn : MonoBehaviour {
 		universe = (Texture2D) Resources.Load ("hud/bottomleft");
 		deco = (Font) Resources.Load ("Belgrad");
 
-		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
 		gameOverBeenDetected = false;
 
 		queuedToastMessages = new Queue<string>();
 		StartCoroutine("Toast");
 	}
 
-		//for (int i = 0; i < 4; i++) networkView.RPC("setSystemName",RPCMode.AllBuffered,i,generateSystemNames());
-
-        //manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
-		//onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
-
-	void startWithManager(){
-		//onlineClient = GameObject.Find ("Client Scripts").GetComponent<OnlineClient>();
-		
+	void startWithManager() {		
         playercount = GameObject.FindGameObjectsWithTag("Player").Length;
 
 		allNames = new string[playercount];
@@ -355,12 +314,10 @@ public class HudOn : MonoBehaviour {
 		print ("I think universeN() = "+universeN() );
         manager = GameObject.Find("Character" + manager.universeNumber).GetComponent<PlayerManager>();
       
-        /* Was in Awake() */
         if (manager.activeCharN == null) manager.activeCharN = "tester";
         Debug.Log("Hud on" + manager.activeCharN);
         manager.InitialiseStats();
         StartScore();
-        /* Was in Awake() */
 
 		iTween.CameraFadeAdd();
 		iTween.CameraFadeFrom(1.0f, 2.0f);
@@ -379,11 +336,6 @@ public class HudOn : MonoBehaviour {
 
         if (Network.isClient)
         {
-            //int PlayerNumber = int.Parse(GameObject.FindGameObjectWithTag("MainCamera").name.Substring(GameObject.FindGameObjectWithTag("MainCamera").name.Length - 1, 1));
-            //weaponHandler = GameObject.Find("Character" + PlayerNumber).GetComponent<WeaponHandler>();
-			//charScale = GameObject.Find("Character" + PlayerNumber).transform.localScale;
-			//charModel = GameObject.Find("Character" + PlayerNumber);
-
             setWeapon(1);
         }
 
@@ -541,7 +493,6 @@ public class HudOn : MonoBehaviour {
 		}
 		stopVortices();
 		manager.movement.changeUniverse(vortexLeadsTo);
-		//charModel.transform.localScale = charScale;
 		showCountdown = false;
 	}
 
