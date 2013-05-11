@@ -142,15 +142,12 @@ public class FiringHandler : MonoBehaviour {
             if (angle > 4.91)
             {
                 valX = valX - 1 / Mathf.Cos(angle);
-                Debug.Log(angle);
             }
             else
             {
                 valX = valX - 2 / Mathf.Cos(angle);
-                Debug.Log(angle);
             }
             float valY = Mathf.Sin(angle) * -5.2f + transform.Find("russia").position.y + 2.5f;
-            Debug.Log("bULLET pOSITION " + valX + "  " +valY);
             startP = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
  
         }
