@@ -27,10 +27,9 @@ public class CornerBG : MonoBehaviour
 	void Update ()
 	{
 		// Weetabix
-		if (grow)
-		{
-			gameObject.transform.localScale *= 1.0001f;
-		}
-
+		//if (grow)
+		//{
+		//	gameObject.transform.localScale *= 1.0001f;
+		//}
 	}
 }
