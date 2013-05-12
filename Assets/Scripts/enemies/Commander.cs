@@ -30,6 +30,8 @@ public class Commander : MonoBehaviour {
     private bool levelStarted = false;
     public bool bossDeployed = false;
 
+    Server serv;
+
     private float minAstScale = 0.0f;
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
@@ -230,10 +232,13 @@ public class Commander : MonoBehaviour {
 
         if (Network.isServer)
         {
-            int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
-            activeCharacters = new bool[countUniverse+1];
+            int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length;
+            serv = GameObject.Find("Network").GetComponent<Server>();
+            Debug.Log("CUni: " + countUniverse);
+            // 1 less character than universes (to account for boss universe).....but need to counter for bloody 1 indexing
+            activeCharacters = new bool[countUniverse];
             activeCharacters[universeN()] = true;
-            Debug.Log(activeCharacters.ToString());
+            //Debug.Log(activeCharacters.ToString());
             asteroidCount = new int[countUniverse];
             enemyCount = new int[countUniverse];
             positions = transform.parent.FindChild("OriginManager").GetComponent<Universe>();
@@ -301,11 +306,9 @@ public class Commander : MonoBehaviour {
     }
 
     void RotatePlayers(bool toBehind, int rotUniverse) {
-        Debug.Log("AChars " + universeN() + ": " + activeCharacters); 
-        for (int i = 0; i < activeCharacters.Length; i++) {
+        for (int i = 1; i < serv.playerLocations.Length; i++) {
             Debug.Log("In univ " + universeN() + " up to " + i);
-            if (activeCharacters[i]) {
-                Debug.Log("HE'S ACTIVE");
+            if (serv.playerLocations[i] == universeN()) {
                 GameObject character = GameObject.Find("Character" + i);
                 PlayerMovement move = character.GetComponent<PlayerMovement>();
                 move.networkView.RPC("RotateCamera", RPCMode.Others, toBehind, i, rotUniverse);
@@ -417,7 +420,7 @@ public class Commander : MonoBehaviour {
             bossDeployed = true;
 
             for (int i = 1; i <= c; i++) {
-                if (activeCharacters[i]) {
+                if (serv.playerLocations[i] == universeN()) {
                     GameObject character = GameObject.Find("Character" + i);
                     PlayerMovement move = character.GetComponent<PlayerMovement>();
                     move.networkView.RPC("AnimateWarp", RPCMode.All, i);

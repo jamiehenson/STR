@@ -267,31 +267,21 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 newPosition = newOrigin + diffFromOrigin;
         transform.position = newPosition;
 
+        // UPDATE UNIVERSE HERE!!!!
         bool inEnemies = false;
 
         if (newUniverseNum != 0) inEnemies = GameObject.Find("Universe" + newUniverseNum + "/Managers/EnemyManager").GetComponent<Commander>().inEnemies;
+        GameObject.Find("Network").GetComponent<Server>().SetPlayerLocation(gameObject.GetComponent<PlayerManager>().characterNum, newUniverseNum);
+        networkView.RPC("SetCamVars", RPCMode.Others, inEnemies);
+        playerManager.universeNumber = newUniverseNum;
 
         server.moveCamera(newUniverseNum, info.sender, !inEnemies);
-
-        // Work out and set desired rotation - automatically warps in side-on (enemy wave) view
-        /* SET THESE ON THE CLIENT AS WELL */
-        
-        /* ******************************* */
-        /*bool enWaveCurr = true;
-        if (newUniverseNum != 0) enWaveCurr = GameObject.Find("Universe" + newUniverseNum + "/Managers/EnemyManager").GetComponent<Commander>().inEnemies;
-        Debug.Log("CURR WAVE ENEMIES? " + enWaveCurr);
-        if (!enWaveCurr) {
-            Debug.Log("HITTING HERE");
-            networkView.RPC("RotateCamera", RPCMode.Others, true, characterNum, newUniverseNum);
-        }*/
        
-
         // Update positions var
         positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
         universeNum = newUniverseNum;
-        playerManager.universeNumber = newUniverseNum;
-
-        networkView.RPC("SetCamVars", RPCMode.Others, inEnemies);
+        
+        
     }
 
     [RPC]
