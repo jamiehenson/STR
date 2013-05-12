@@ -19,7 +19,7 @@ public class Commander : MonoBehaviour {
     public static int[] asteroidCount;
     public static int[] enemyCount;
 
-    private int currType = 0;
+    private int currType = 1;
     public GameObject[,] enemyTypes = new GameObject[4, 4];
 	
 	private Object[] enemyPrefabs;
@@ -223,7 +223,7 @@ public class Commander : MonoBehaviour {
         enemyTypes[3,3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
         currType = Random.Range(0, 4);
 
-		networkView.RPC("PlayEnemyTrack", RPCMode.Others, 278);
+		networkView.RPC("PlayEnemyTrack", RPCMode.Others, currType);
 
         int c = GameObject.FindGameObjectsWithTag("Player").Length;
         if (Network.isServer)
@@ -444,7 +444,7 @@ public class Commander : MonoBehaviour {
                 }
             }*/
 			currType = Random.Range(0, 4);
-			networkView.RPC("PlayEnemyTrack", RPCMode.Others, 278);
+			networkView.RPC("PlayEnemyTrack", RPCMode.Others, currType);
         }
     }
 
@@ -458,10 +458,10 @@ public class Commander : MonoBehaviour {
     }
 
 	[RPC]
-	private void PlayEnemyTrack()
+	private void PlayEnemyTrack(int cType)
 	{
 		string trackName = "";
-		switch(currType)
+		switch(cType)
 		{
 			case 0:
 				trackName = "vox";
@@ -472,7 +472,7 @@ public class Commander : MonoBehaviour {
 			case 2:
 				trackName = "merc";
 				break;
-			case3:
+			case 3:
 				trackName = "alien";
 				break;
 			default:

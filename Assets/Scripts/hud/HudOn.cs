@@ -29,6 +29,8 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle bank = new GUIStyle();
     public int startLivesNb;
 
+	private int countdownVal = 6;
+
 	public static Vector3 vortpointOut;
 	private bool showCountdown, showHelp;
 	public static float score;
@@ -248,6 +250,11 @@ public class HudOn : MonoBehaviour {
         }
     }
 
+	public void DisplayCountdown(int num) {
+		// Switch here, show desired image
+		countdownVal = num;
+	}
+
     public void ToastWrapper(string notetext) {
         //StartCoroutine("Toast", notetext);
 		queuedToastMessages.Enqueue(notetext);
@@ -274,14 +281,6 @@ public class HudOn : MonoBehaviour {
 				Destroy(toast);
 			}
 		}
-	}
-
-	IEnumerator ShowHelp()
-	{
-		showHelp = true;
-		yield return new WaitForSeconds(6);
-		showHelp = false;
-		yield return new WaitForSeconds(1);
 	}
 
     private int universeN()
@@ -318,10 +317,11 @@ public class HudOn : MonoBehaviour {
 		gameOverBeenDetected = false;
 
 		helpPic = (Texture2D) Resources.Load ("menu/howtocut");
-		StartCoroutine("ShowHelp");
 
 		queuedToastMessages = new Queue<string>();
 		StartCoroutine("Toast");
+
+		showHelp = true;
 	}
 
 	void startWithManager() {		
@@ -518,9 +518,18 @@ public class HudOn : MonoBehaviour {
 			GUI.Label(new Rect(screenPoint.x,screenPoint.y,10,10), vortexCountdownNum.ToString(), style);
 		}
 
-		if (showHelp) GUI.DrawTexture(new Rect(Screen.width*0.05,Screen.height*0.05,Screen.height*0.9f*1.72f,Screen.height*0.9f),helpPic);
+		if (showHelp) GUI.DrawTexture(new Rect(Screen.width*0.05f,Screen.height*0.05f,Screen.height*0.9f*1.72f,Screen.height*0.9f),helpPic);
 
-	}	
+		if (countdownVal > 0)
+		{
+			Texture2D number = (Texture2D) Resources.Load ("hud/numbers/"+countdownVal);
+			GUI.DrawTexture(new Rect(Screen.width/2-128,Screen.height/2-128,256,256),number);
+		}
+		else
+		{
+			showHelp = false;
+		}
+	}
 	
 	// Vortex logic
 	IEnumerator VortexCountdown()
