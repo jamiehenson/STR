@@ -111,6 +111,7 @@ public class EnemyMovement : MonoBehaviour {
         	networkView.RPC("modifyName", RPCMode.All, gameObject.name);
 		
 		eManager = gameObject.GetComponent<EnemyManager>();
+        //eManager.InitStats();
     }
 
     void setUpEnemy() {     

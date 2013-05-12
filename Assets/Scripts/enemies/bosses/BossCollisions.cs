@@ -6,7 +6,7 @@ public class BossCollisions : MonoBehaviour {
     private EyeBossManager eManager;
     private BossMovement eMove;
 
-    private float health;
+    private float health = 300;
     private float remainingHealth = 1;
 
     public AudioSource beamSmack;

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MediumEnemyManager : EnemyManager {
 
-    public void Start() {
+    public override void InitStats() {
         health = 8;
         weaponPower = 15;
         speed = 1;
