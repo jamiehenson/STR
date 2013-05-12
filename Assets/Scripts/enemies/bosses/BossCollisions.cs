@@ -40,6 +40,18 @@ public class BossCollisions : MonoBehaviour {
         screenX = viewPos.x;
         screenY = Screen.height - (viewPos.y + 1);
         remainingHealth = health / eManager.health;
+        if (remainingHealth < eManager.health * 0.25) {
+            eManager.rotation    = 80f;
+            eManager.firingDelay = 0.2f;
+        }
+        else if (remainingHealth < eManager.health * 0.5) {
+            eManager.rotation    = 40f;
+            eManager.firingDelay = 0.6f;
+        }
+        else if (remainingHealth < eManager.health * 0.75) {
+            eManager.rotation    = 20f;
+            eManager.firingDelay = 1.0f;
+        }
     }
 
     void OnTriggerEnter(Collider other) {
