@@ -46,6 +46,11 @@ public class Bridge : MonoBehaviour {
        hasClientLoaded.Add(player, false);
     }
 
+	[RPC]
+	public void SendCountdownNumber(int num) {
+		hudon.DisplayCountdown(num);
+	}
+
     [RPC]
     public void clientBridgeLoaded(NetworkPlayer player) {
         Debug.Log("ClientBridgeNowLoaded");
@@ -147,15 +152,15 @@ public class Bridge : MonoBehaviour {
         }
     }
 
-	public void moveCamera(int universeNum, NetworkPlayer player) {
+	public void moveCamera(int universeNum, NetworkPlayer player, bool rotated) {
 		if (Network.isServer)
-			networkView.RPC("moveCameraRPC", player, universeNum);
+			networkView.RPC("moveCameraRPC", player, universeNum, rotated);
 	}
 
 	[RPC]
-	public void moveCameraRPC(int universeNum) {
+	public void moveCameraRPC(int universeNum, bool rotated) {
 		if (Network.isClient)
-			client.moveCamera(universeNum);
+			client.moveCamera(universeNum, rotated);
 	}
 
 

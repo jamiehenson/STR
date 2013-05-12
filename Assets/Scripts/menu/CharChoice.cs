@@ -113,9 +113,9 @@ public class CharChoice : MonoBehaviour
                 combatSphere2.renderer.material.color = Color.yellow;
                 energySphere.renderer.material.color = Color.yellow;
                 energySphere2.renderer.material.color = Color.yellow;
-                warpingSphere.renderer.material.color = Color.green;
-                warpingSphere2.renderer.material.color = Color.green;
-                warpingSphere3.renderer.material.color = Color.green;
+                warpingSphere.renderer.material.color = Color.yellow;
+                warpingSphere2.renderer.material.color = Color.yellow;
+                warpingSphere3.renderer.material.color = Color.yellow;
 
                 combatSphere.renderer.enabled = true;
                 combatSphere2.renderer.enabled = true;
@@ -125,7 +125,7 @@ public class CharChoice : MonoBehaviour
                 energySphere3.renderer.enabled = false;
                 warpingSphere.renderer.enabled = true;
                 warpingSphere2.renderer.enabled = true;
-                warpingSphere3.renderer.enabled = true;
+                warpingSphere3.renderer.enabled = false;
                 break;
             default: 
                 break;

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class HudOn : MonoBehaviour {
     public Rect position;
 
-	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard, bossbar, bossthumb;
+	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard, bossbar, bossthumb, helpPic;
 	private Font deco;
 	private string charName, wepName, gearReady, bossname;
 
@@ -29,8 +29,10 @@ public class HudOn : MonoBehaviour {
 	private GUIStyle bank = new GUIStyle();
     public int startLivesNb;
 
+	private int countdownVal = 6;
+
 	public static Vector3 vortpointOut;
-	private bool showCountdown;
+	private bool showCountdown, showHelp;
 	public static float score;
 	public static bool gameOver, bossOn;
 	private static bool gameOverBeenDetected;
@@ -39,7 +41,7 @@ public class HudOn : MonoBehaviour {
     PlayerManager manager = null;
 
 	// Toasts
-	private GameObject toast;//, charModel;
+	private GameObject toast, helppic;//, charModel;
 	private Queue<string> queuedToastMessages;
 	private int toastCountdown;
 	
@@ -78,14 +80,14 @@ public class HudOn : MonoBehaviour {
         lives = c;
 		string[] dieToast = {" K.I.A. "," TOOK IT LIKE A MAN. "," BITES THE DUST. "," DIED LIKE A SPARTAN. "," FAILED AT LIFE "," IS A GONER "," SEGFAULTED "," IS A HPC CADET "};
 		string dieText = dieToast[Random.Range (0,dieToast.Length)];
-        ToastWrapper(s + dieText + lives + " LIVES REMAINING");
+        ToastWrapper(s + dieText + "\n" + lives + " LIVES REMAINING");
     }
 
     public void startLives(int c)
     {
         lives = c;
         startLivesNb = lives;
-        ToastWrapper("You have " + lives + "lives. Keep them hidden, keep them safe!");
+        ToastWrapper("YOUR TEAM HAS " + lives + " LIVES LEFT");
     }
     public void updateName(string s)
     {
@@ -248,6 +250,11 @@ public class HudOn : MonoBehaviour {
         }
     }
 
+	public void DisplayCountdown(int num) {
+		// Switch here, show desired image
+		countdownVal = num;
+	}
+
     public void ToastWrapper(string notetext) {
         //StartCoroutine("Toast", notetext);
 		queuedToastMessages.Enqueue(notetext);
@@ -309,8 +316,12 @@ public class HudOn : MonoBehaviour {
 
 		gameOverBeenDetected = false;
 
+		helpPic = (Texture2D) Resources.Load ("menu/howtocut");
+
 		queuedToastMessages = new Queue<string>();
 		StartCoroutine("Toast");
+
+		showHelp = true;
 	}
 
 	void startWithManager() {		
@@ -467,10 +478,11 @@ public class HudOn : MonoBehaviour {
         {
 			int spacer = 35;
 			PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
+			OnlineClient cli = GameObject.Find ("Client Scripts").GetComponent< OnlineClient>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
             GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 16 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
             GUI.Label(new Rect(Screen.width - 180, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), playerFlag);
-			GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 30 + i*spacer, 100, 35), systemNames[score.universeNumber], coStyle2);
+			GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 30 + i*spacer, 100, 35), systemNames[cli.universeNum-1], coStyle2);
 			allScores[i-1] = score.getScore();
 			allNames[i-1] = score.playerNames[i];
         }
@@ -506,7 +518,18 @@ public class HudOn : MonoBehaviour {
 			GUI.Label(new Rect(screenPoint.x,screenPoint.y,10,10), vortexCountdownNum.ToString(), style);
 		}
 
-	}	
+		if (showHelp) GUI.DrawTexture(new Rect(Screen.width*0.05f,Screen.height*0.05f,Screen.height*0.9f*1.72f,Screen.height*0.9f),helpPic);
+
+		if (countdownVal > 0)
+		{
+			Texture2D number = (Texture2D) Resources.Load ("hud/numbers/"+countdownVal);
+			GUI.DrawTexture(new Rect(Screen.width/2-128,Screen.height/2-128,256,256),number);
+		}
+		else
+		{
+			showHelp = false;
+		}
+	}
 	
 	// Vortex logic
 	IEnumerator VortexCountdown()
