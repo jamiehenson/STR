@@ -31,7 +31,7 @@ public class PlayerCollisions : MonoBehaviour {
         GameObject explosionPrefab = (GameObject)Resources.Load("enemies/ExplosionPrefab");
         GameObject explosionPrefab2 = (GameObject)Resources.Load("enemies/ExplosionPrefab2");
         GameObject explosionPrefab3 = (GameObject)Resources.Load("enemies/ExplosionPrefab3");
-        int randExplosion = Random.Range(1, 4);
+        int randExplosion = Random.Range(1, 3);
         if (Network.isServer)
         {
             if (randExplosion == 1) Network.Instantiate(explosionPrefab, gameObject.transform.position, gameObject.transform.rotation, 0);
@@ -39,6 +39,12 @@ public class PlayerCollisions : MonoBehaviour {
             else if (randExplosion == 3) Network.Instantiate(explosionPrefab3, gameObject.transform.position, gameObject.transform.rotation, 0);
         }
     }
+
+	public static void BossBoom(GameObject gameObject)
+	{
+		GameObject explosionPrefab = (GameObject)Resources.Load("bosses/Prefabs/bossboom");
+		if (Network.isServer) Network.Instantiate(explosionPrefab, gameObject.transform.position, gameObject.transform.rotation, 0);
+	}
 
     public static void WeaponBoom(GameObject gameObject, int wepType)
     {

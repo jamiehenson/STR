@@ -56,8 +56,7 @@ public class BGMusic : MonoBehaviour
 	public void PlayShot(string shotname)
 	{
 		Object[] shot = Resources.LoadAll("sounds/weapons/" + shotname);
-		AudioClip chosenOne = (AudioClip) shot[Random.Range(0,shot.Length)];
-		AudioSource.PlayClipAtPoint(chosenOne,gameObject.transform.position);
-		print ("shot made");
+		AudioClip chosenOne = (AudioClip) shot[Random.Range(0,1)];
+		AudioSource.PlayClipAtPoint(chosenOne,gameObject.transform.position,0.6f);
 	}
 }

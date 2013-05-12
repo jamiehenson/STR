@@ -9,9 +9,9 @@ using System.Collections.Generic;
 public class HudOn : MonoBehaviour {
     public Rect position;
 
-	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard;
+	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard, bossbar, bossthumb;
 	private Font deco;
-	private string charName, wepName, gearReady;
+	private string charName, wepName, gearReady, bossname;
 
 	public string[] systemNames;
 
@@ -32,7 +32,7 @@ public class HudOn : MonoBehaviour {
 	public static Vector3 vortpointOut;
 	private bool showCountdown;
 	public static float score;
-	public static bool gameOver;
+	public static bool gameOver, bossOn;
 	private static bool gameOverBeenDetected;
 
     public static int countUniverse;
@@ -76,7 +76,9 @@ public class HudOn : MonoBehaviour {
     public void updateLives(int c, string s)
     {
         lives = c;
-        ToastWrapper(s +"lost in battle! " + lives + "lives remaining.");
+		string[] dieToast = {" K.I.A. "," TOOK IT LIKE A MAN. "," BITES THE DUST. "," DIED LIKE A SPARTAN. "," FAILED AT LIFE "," IS A GONER "," SEGFAULTED "," IS A HPC CADET "};
+		string dieText = dieToast[Random.Range (0,dieToast.Length)];
+        ToastWrapper(s + dieText + lives + " LIVES REMAINING");
     }
 
     public void startLives(int c)
@@ -291,6 +293,7 @@ public class HudOn : MonoBehaviour {
 		gameOver = false;
 		Instance = this;
 
+		generateBossName();
 
 		gameOverBeenDetected = false;
 		main = (Texture2D) Resources.Load ("hud/topleft");
@@ -298,6 +301,11 @@ public class HudOn : MonoBehaviour {
 		leaderboard = (Texture2D) Resources.Load ("hud/leaderboard");
 		universe = (Texture2D) Resources.Load ("hud/bottomleft");
 		deco = (Font) Resources.Load ("Belgrad");
+		bossbar = (Texture2D) Resources.Load ("hud/bossbar");
+
+		health.normal.background = fillTex(1,1,new Color(0.8f,0f,0f,1f));
+		energy.normal.background = fillTex(1,1,new Color(0f,0f,0.8f,1f));
+		bank.normal.background = fillTex (1,1,new Color(0f,0.8f,0f,1f));
 
 		gameOverBeenDetected = false;
 
@@ -344,10 +352,6 @@ public class HudOn : MonoBehaviour {
         bankSize = manager.getBankSize();
         lives = manager.getLives();
 
-		health.normal.background = fillTex(1,1,new Color(0.8f,0f,0f,1f));
-		energy.normal.background = fillTex(1,1,new Color(0f,0f,0.8f,1f));
-		bank.normal.background = fillTex (1,1,new Color(0f,0.8f,0f,1f));
-
         charName = manager.getPlayerName();
 	}
 
@@ -369,6 +373,14 @@ public class HudOn : MonoBehaviour {
 		hudStyle.normal.textColor = Color.white;
 		hudStyle.fontStyle = FontStyle.Bold;
 		hudStyle.fontSize = 20;
+
+		GUIStyle barStyle = new GUIStyle();
+    	barStyle.font = deco;
+		barStyle.normal.textColor = Color.white;
+		barStyle.fontStyle = FontStyle.Bold;
+		//barStyle.alignment = TextAnchor.MiddleRight;
+		barStyle.fontSize = Screen.height/20;
+		barStyle.fixedWidth = Screen.width/12;
 		
 		GUIStyle coStyle = new GUIStyle();
     	coStyle.font = deco;
@@ -402,6 +414,21 @@ public class HudOn : MonoBehaviour {
 		smallStyle.normal.textColor = Color.white;
 		smallStyle.fontSize = 11;
 		smallStyle.alignment = TextAnchor.MiddleRight;
+
+		// In Boss section
+
+		// REPLACE THIS FOR ACTUAL BOSS HEALTH
+		float bossHealth = 1;
+
+		// THIS IS FOR WHEN A BOSS ARRIVES
+		if (bossOn)
+		{
+			float thumbSize = Screen.width/28;
+			GUI.DrawTexture(new Rect(Screen.width/4, 20, Screen.width/2, Screen.height/8), bossbar);
+			GUI.DrawTexture(new Rect(Screen.width/4 + 14, 18 + Screen.height/38, thumbSize, thumbSize), bossthumb);
+			GUI.Label(new Rect(Screen.width/4 + 18 + thumbSize, 22 + Screen.height/24, Screen.width/2, Screen.height/8), bossname, barStyle);
+			GUI.Label (new Rect (Screen.width/2.75f + thumbSize, 20 + Screen.height/30, (bossHealth*Screen.width/3),Screen.height/16),"",health);
+		}
 
 		// Universe (or rather, star system) name
 		int uniNo = manager.universeNumber;
@@ -478,6 +505,7 @@ public class HudOn : MonoBehaviour {
 
 			GUI.Label(new Rect(screenPoint.x,screenPoint.y,10,10), vortexCountdownNum.ToString(), style);
 		}
+
 	}	
 	
 	// Vortex logic
@@ -534,5 +562,12 @@ public class HudOn : MonoBehaviour {
 		foreach (GameObject vortex in vorties) {
 			Destroy(vortex);
 		}
+	}
+
+	public void generateBossName()
+	{
+		string[] bossnames = {"JAMIE","BEN","ROB","MADDIE","MATT","TOM"};
+		bossname = bossnames[Random.Range (0,bossnames.Length)];
+		bossthumb = (Texture2D) Resources.Load ("hud/thumbs/"+bossname.ToLower());
 	}
 }
