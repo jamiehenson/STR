@@ -23,6 +23,7 @@ public class Server : MonoBehaviour {
     public string takenNames;
     public int lives;
 
+    public int[] playerLocations;
 
     public string[] playerNames;
     public string[] playerFlags;
@@ -60,6 +61,11 @@ public class Server : MonoBehaviour {
             Log.Note("Registered MasterServer");
     }
 
+    public void SetPlayerLocation(int player, int univNum) {
+        playerLocations[player] = univNum;
+        Debug.Log("Loc Update: " + player + " now at " + playerLocations[player]);
+    }
+
     // When server is initalised, set it updoes 
     void OnServerInitialized() {
         Log.Note("Initialized Server" + MasterServer.ipAddress+ MasterServer.port);
@@ -67,6 +73,14 @@ public class Server : MonoBehaviour {
 		// Initalise private memeber variables
         playerNames = new string[countUniverse + 1];
 		playerFlags = new string[countUniverse + 1];
+
+        playerLocations = new int[countUniverse + 1];
+        // Index 0 unused - set to -1
+        playerLocations[0] = -1;
+        for (int i = 1; i < playerLocations.Length; i++) {
+            playerLocations[i] = i;
+        }
+
         finalNumberofPlayers = countUniverse;
         universe = new Transform[countUniverse+2];
         characterView = new NetworkView[countUniverse+1];
@@ -227,8 +241,8 @@ public class Server : MonoBehaviour {
         return finalNumberofPlayers;
     }
 
-	public void moveCamera(int universeNum, NetworkPlayer player){
-		bridge.moveCamera(universeNum, player);
+	public void moveCamera(int universeNum, NetworkPlayer player, bool rotated){
+		bridge.moveCamera(universeNum, player, rotated);
 	}
 
 	public void changeSystemNames(int countUniverse) {

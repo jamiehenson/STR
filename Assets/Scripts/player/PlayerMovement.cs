@@ -46,14 +46,15 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("Start moving");
         startGame = true;
     }
-    public void SetCamForBoss() {
+
+    public void SetCamBehind() {
         camtoggle = true;
         rottoggle = true;
         firingHandler.rotated = true;
         gameObject.networkView.RPC("FixCharDepth", RPCMode.Server);
     }
 
-    public void SetCamAfterBoss() {
+    public void SetCamSide() {
         camtoggle = false;
         rottoggle = true;
         firingHandler.rotated = false;
@@ -84,8 +85,16 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    [RPC]
+    public void SetRotating(bool rot) {
+        if (Network.isServer) {
+            isRotating = rot;
+        }
+    }
+
 	public IEnumerator rotateCamera(bool cameraBehind, int universe) 
 	{
+        networkView.RPC("SetRotating", RPCMode.Server, true);
         isRotating = true;
 		int direction = (cameraBehind) ? 1 : -1;
         Vector3 origin = Universe.PositionOfOrigin(universe);
@@ -101,6 +110,7 @@ public class PlayerMovement : MonoBehaviour {
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
         gameObject.networkView.RPC("FixCharDepth", RPCMode.Server);
         yield return new WaitForSeconds(2);
+        networkView.RPC("SetRotating", RPCMode.Server, false);
         isRotating = false;
 	}
 
@@ -130,6 +140,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         model = s;
     }
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -151,44 +162,44 @@ public class PlayerMovement : MonoBehaviour {
 						
 	        networkView.RPC("moveCharacter", RPCMode.Server, vertDist, horDist, rotation, rottoggle, camtoggle);
 		}
-      else if (Network.isServer)
-      {
-        if (vertDist != 0 || horDist != 0)
+        else if (Network.isServer)
         {
-            positions = GameObject.Find("Universe"+universeNum+"/Managers/OriginManager").GetComponent<Universe>();
+            if (vertDist != 0 || horDist != 0)
+            {
+                positions = GameObject.Find("Universe"+universeNum+"/Managers/OriginManager").GetComponent<Universe>();
             
-			// Stop the lad from going out of bounds - INCOMPLETE
-			// Standard orientation
-			if (rottoggle && !camtoggle) 
-			{
-				gameObject.transform.Translate(horDist, vertDist, 0);
-				gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftXBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
-			}
+			    // Stop the lad from going out of bounds - INCOMPLETE
+			    // Standard orientation
+			    if (rottoggle && !camtoggle) 
+			    {
+				    gameObject.transform.Translate(horDist, vertDist, 0);
+				    gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x, positions.leftXBorder, positions.rightMovementLimit), Mathf.Clamp(transform.position.y, positions.bottomBorder, positions.topBorder), positions.baseZ);
+			    }
 	
-			// When rotated to face into the screen
-			else if (!rottoggle && !camtoggle)
-			{
-				gameObject.transform.Translate(0,vertDist,-horDist);
-                gameObject.transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, positions.bottomRotatedBorder, positions.topRotatedBorder), Mathf.Clamp(transform.position.z, positions.rightZBorder, positions.leftZBorder));
-			}
+			    // When rotated to face into the screen
+			    else if (!rottoggle && !camtoggle)
+			    {
+				    gameObject.transform.Translate(0,vertDist,-horDist);
+                    gameObject.transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, positions.bottomRotatedBorder, positions.topRotatedBorder), Mathf.Clamp(transform.position.z, positions.rightZBorder, positions.leftZBorder));
+			    }
 				
-			else if (rottoggle && camtoggle)
-			{
-				gameObject.transform.Translate(0,vertDist,-horDist);
-                gameObject.transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, positions.bottomRotatedBorder, positions.topRotatedBorder), Mathf.Clamp(transform.position.z, positions.rightZBorder, positions.leftZBorder));
-			}			
+			    else if (rottoggle && camtoggle)
+			    {
+				    gameObject.transform.Translate(0,vertDist,-horDist);
+                    gameObject.transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, positions.bottomRotatedBorder, positions.topRotatedBorder), Mathf.Clamp(transform.position.z, positions.rightZBorder, positions.leftZBorder));
+			    }			
 			
-			else
-			{
-				gameObject.transform.Translate(0,vertDist,-horDist);
-                gameObject.transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, positions.bottomRotatedBorder, positions.topRotatedBorder), Mathf.Clamp(transform.position.z, positions.rightZBorder, positions.leftZBorder));
-			}           
-        }
-		if (rotation)
-		{
-			StartCoroutine("rotateChar",rottoggle);
-		}	
-      }	
+			    else
+			    {
+				    gameObject.transform.Translate(0,vertDist,-horDist);
+                    gameObject.transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, positions.bottomRotatedBorder, positions.topRotatedBorder), Mathf.Clamp(transform.position.z, positions.rightZBorder, positions.leftZBorder));
+			    }           
+            }
+		    if (rotation)
+		    {
+			    StartCoroutine("rotateChar",rottoggle);
+		    }	
+        }	
 	}
 
     [RPC]
@@ -230,6 +241,22 @@ public class PlayerMovement : MonoBehaviour {
             else Instantiate(warpAni, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
         }
     }
+    [RPC]
+    public void SetRotationScheme(bool rotated) {
+        if (Network.isClient && myCharacter) {
+            if (rotated) {
+                camtoggle = true;
+                rottoggle = true;
+                firingHandler.rotated = true;
+            }
+            else {
+                camtoggle = false;
+                rottoggle = true;
+                firingHandler.rotated = false;
+            }
+            networkView.RPC("moveCharacter", RPCMode.Server, 1 + vertDist, horDist, rotation, rottoggle, camtoggle);
+        }
+    }
 
 	public void changeUniverse(int universeNum) {
         Debug.Log("Change universe");
@@ -237,9 +264,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
     IEnumerator ChangeUniverseIE(object[] pars) {
-        Debug.Log("Pre rotation loop");
         while (isRotating) yield return new WaitForSeconds(0.5f);
-        Debug.Log("Post rotation loop");
         UniverseMove(pars);
     }
 
@@ -251,18 +276,39 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
 
         // Move Spaceship
-        Debug.Log("Move Character" + characterNum);
         Vector3 characterPosition = transform.position;
         Vector3 diffFromOrigin = characterPosition - curOrigin;
 
         Vector3 newPosition = newOrigin + diffFromOrigin;
         transform.position = newPosition;
 
-        server.moveCamera(newUniverseNum, info.sender);
+        // UPDATE UNIVERSE HERE!!!!
+        bool inEnemies = false;
+
+        if (newUniverseNum != 0) inEnemies = GameObject.Find("Universe" + newUniverseNum + "/Managers/EnemyManager").GetComponent<Commander>().inEnemies;
+        GameObject.Find("Network").GetComponent<Server>().SetPlayerLocation(gameObject.GetComponent<PlayerManager>().characterNum, newUniverseNum);
+        networkView.RPC("SetCamVars", RPCMode.Others, inEnemies);
+        playerManager.universeNumber = newUniverseNum;
+
+        server.moveCamera(newUniverseNum, info.sender, !inEnemies);
+       
         // Update positions var
         positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
         universeNum = newUniverseNum;
-        playerManager.universeNumber = newUniverseNum;
+        
+        
+    }
+
+    [RPC]
+    private void SetCamVars(bool toSide) {
+        if (Network.isClient && myCharacter) {
+            if (toSide) {
+                SetCamSide();
+            }
+            else {
+                SetCamBehind();
+            }
+        }
     }
 
 	[RPC]
