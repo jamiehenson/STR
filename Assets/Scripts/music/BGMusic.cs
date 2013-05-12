@@ -11,11 +11,6 @@ public class BGMusic : MonoBehaviour
 		PlayAmbientTrack();
 	}
 
-	void Update()
-	{
-		if (!audioplayer.isPlaying) PlayRandomTrack();
-	}
-
 	public void PlayRandomTrack()
 	{
 		Object[] clips = Resources.LoadAll("music/ingame");
@@ -48,6 +43,7 @@ public class BGMusic : MonoBehaviour
 	{
 		Object track = Resources.Load("music/ingame/" + trackname);
 		audioplayer.clip = (AudioClip) track;
+		Debug.Log (track.name);
 		audioplayer.Play();
 		audioplayer.loop = true;
 		audioplayer.volume = 1;

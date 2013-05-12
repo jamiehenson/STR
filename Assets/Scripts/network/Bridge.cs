@@ -46,6 +46,11 @@ public class Bridge : MonoBehaviour {
        hasClientLoaded.Add(player, false);
     }
 
+	[RPC]
+	public void SendCountdownNumber(int num) {
+		hudon.DisplayCountdown(num);
+	}
+
     [RPC]
     public void clientBridgeLoaded(NetworkPlayer player) {
         Debug.Log("ClientBridgeNowLoaded");
