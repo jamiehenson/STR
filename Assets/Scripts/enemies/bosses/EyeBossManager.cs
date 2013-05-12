@@ -37,12 +37,12 @@ public class EyeBossManager : BossManager
             gameObject.name     = "Boss0";
             health              = characters.Length*300;
             beamPower           = 0.01f;
-            cannonPower         = 10f;
-            killPoints          = 10000;
+            cannonPower         = 15f;
+            killPoints          = 5000;
             speed               = 0.3f;
             firingDelay         = 0.4f;
             moveDelay           = 5f;
-            forceMultiplier     = 500;
+            forceMultiplier     = 5000;
             rotation            = 0.0f;
             typeForceMultiplier = 1f;
         }
@@ -59,14 +59,12 @@ public class EyeBossManager : BossManager
                     GameObject cannon     = cannons[index];
                     Vector3 fireDirection = character.transform.position - cannon.transform.position;
                     Vector3 force         = fireDirection.normalized * forceMultiplier * typeForceMultiplier;
-                    fireDirection.y       = Random.Range(fireDirection.y - 2.5f, fireDirection.y + 2.5f);
-                    Debug.Log(cannon.transform.position);
-                    Debug.Log(cannon.transform.localPosition);
+                    fireDirection.y       = Random.Range(fireDirection.y - 5f, fireDirection.y + 5f);
                     Transform bullet = (Transform)Network.Instantiate(bulletPrefab, cannon.transform.position, cannon.transform.rotation, 200);
                     NetworkViewID bulletID = bullet.networkView.viewID;
 
                     // Play the turret animation on all of the clients
-                    //networkView.RPC("turretAnimation", RPCMode.All, index);
+                    networkView.RPC("turretAnimation", RPCMode.All, index);
 
                     NetworkViewID targetID = character.GetComponent<NetworkView>().viewID;
                     networkView.RPC("fireBullet", RPCMode.All, cannon.transform.position, cannon.transform.rotation, targetID, bulletID, fireDirection, force);

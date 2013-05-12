@@ -53,33 +53,40 @@ public class FiringHandler : MonoBehaviour {
         if (universeN() != -1) {
             manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
             timer += Time.deltaTime;
-            // Calculate position just in front of the player's arm
-            float angle = arm.transform.rotation.z * 100;
-            if (angle < 0) angle = 360 + angle;
-            angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
-            float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
-            if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
-            float valY = Mathf.Sin(angle) * 3.2f + transform.position.y + 1.8f;
-            gunPosition = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
-
-            Vector3 mousePos = Input.mousePosition;
-            if (rotated) mousePos.z = gunPosition.z;
-            else mousePos.z = gunPosition.z;
-
-            // Cast a ray from the cursor into the screen
-            Vector3 lookAt; // = Camera.main.ScreenToWorldPoint(mousePos) - gunPosition;
-            Ray ray = new Ray(Camera.main.ScreenToWorldPoint(mousePos), Vector3.right);
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                lookAt = hit.point;
-            }
-            else lookAt = ray.origin;
-            Vector3 dir = lookAt - gunPosition;
 
             if (Network.isClient && myCharacter) {
-                beam.SetPosition(1, lookAt); 
+
+                // Calculate position just in front of the player's arm
+                float angle = arm.transform.rotation.z * 100;
+                if (angle < 0) angle = 360 + angle;
+                angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
+                float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
+                if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
+                float valY = Mathf.Sin(angle) * 3.2f + transform.position.y + 1.8f;
+                gunPosition = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
+                
+                Camera cam = GameObject.Find("Camera " + universeN()).camera;
+                Vector3 lookAt, dir;
+                RaycastHit hit;
+                Ray ray;
+                if (rotated) {
+                    ray = cam.ScreenPointToRay(Input.mousePosition);
+                    ray.origin = gunPosition;
+                    if (Physics.Raycast(ray, out hit, 1000)) lookAt = hit.point;
+                    else lookAt = ray.GetPoint(100);
+                    dir = ray.direction;
+                }
+                else {
+                    Vector3 mousePos = Input.mousePosition;
+                    mousePos.z = gunPosition.z;
+                    ray = new Ray(cam.ScreenToWorldPoint(mousePos), Vector3.right);
+                    Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
+                    if (Physics.Raycast(ray, out hit, 100)) lookAt = hit.point;
+                    else lookAt = ray.origin;
+                    dir = lookAt - gunPosition;
+                }
+
+                beam.SetPosition(1, lookAt);
                 beam.SetPosition(0, gunPosition);
 
                 if (Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0) {
@@ -103,8 +110,7 @@ public class FiringHandler : MonoBehaviour {
 						networkView.RPC("PlayNetworkShot", RPCMode.All, wDir, manager.universeNumber);
 
                         // Send message to fire
-                        networkView.RPC("fireWeapon", RPCMode.Server, lookAt, dir, manager.wepStats.wepType, model);
-                        // Update fire stats
+                        if (dir.x > 0) networkView.RPC("fireWeapon", RPCMode.Server, lookAt, dir, manager.wepStats.wepType, model);
 
                         timer = 0;
 
@@ -156,8 +162,7 @@ public class FiringHandler : MonoBehaviour {
             startP = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
  
         }
-        Debug.Log("Fire");
-		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startP, transform.rotation,200);
+		Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, startP, transform.rotation, 200);
         bullet.name = bullet.name + universeN();
         networkView.RPC("fireAnimation", RPCMode.All, universeN());
 		Physics.IgnoreCollision(bullet.collider, transform.collider);

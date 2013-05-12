@@ -30,15 +30,6 @@ public class BossMovement : MonoBehaviour {
         universeNb = int.Parse(name.Substring(name.Length - 1, 1));
         gameObject.transform.parent = GameObject.Find("Universe" + universeNb + "Enemies").transform;
         bossManager = GetComponent<EyeBossManager>();
-
-        //int enemyType = bossManager.enemyType;
-        //switch (enemyType) {
-        //    case 1: bulletPrefab = lightWeapon; typeForceMultiplier = 2.2f; break;
-        //    case 2: bulletPrefab = mediumWeapon; typeForceMultiplier = 1.5f; break;
-        //    case 3: bulletPrefab = heavyWeapon; typeForceMultiplier = 0.6f; break;
-        //    case 4: bulletPrefab = superheavyWeapon; typeForceMultiplier = 0.3f; break;
-        //    default: break;
-        //}
     }
 
     void Start() {
@@ -55,10 +46,6 @@ public class BossMovement : MonoBehaviour {
             maxY = positions.origin.y + 25;
             
             stopY = 0;
-
-            // NEED to do this not based on position, but on a FIXED stopZ (due to rotation issues)
-            /*GameObject character = GameObject.Find("Character"+universeNb);
-            stopZ = character.transform.position.z;*/
 
             // Check direction
             switch (bossManager.direction) {
@@ -101,7 +88,7 @@ public class BossMovement : MonoBehaviour {
         if (!inPlane) {
             if (transform.position.y < stopY) {
                 rigidbody.velocity = new Vector3(0, 0, 0);
-                rigidbody.AddForce(forceDir * bossManager.forceMultiplier);
+                rigidbody.AddForce(forceDir * 1000);
                 //transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(0, stopY, 0), Time.deltaTime * bossManager.speed);
                 //transform.position = new Vector3(transform.position.x, stopY, transform.position.z);
             }
