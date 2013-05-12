@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class HudOn : MonoBehaviour {
     public Rect position;
 
-	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard, bossbar, bossthumb;
+	private Texture2D main, speed, universe, flag, wepBox1, wepBox2, wepBox3, crossTex, leaderboard, bossbar, bossthumb, helpPic;
 	private Font deco;
 	private string charName, wepName, gearReady, bossname;
 
@@ -30,7 +30,7 @@ public class HudOn : MonoBehaviour {
     public int startLivesNb;
 
 	public static Vector3 vortpointOut;
-	private bool showCountdown;
+	private bool showCountdown, showHelp;
 	public static float score;
 	public static bool gameOver, bossOn;
 	private static bool gameOverBeenDetected;
@@ -39,7 +39,7 @@ public class HudOn : MonoBehaviour {
     PlayerManager manager = null;
 
 	// Toasts
-	private GameObject toast;//, charModel;
+	private GameObject toast, helppic;//, charModel;
 	private Queue<string> queuedToastMessages;
 	private int toastCountdown;
 	
@@ -276,6 +276,14 @@ public class HudOn : MonoBehaviour {
 		}
 	}
 
+	IEnumerator ShowHelp()
+	{
+		showHelp = true;
+		yield return new WaitForSeconds(6);
+		showHelp = false;
+		yield return new WaitForSeconds(1);
+	}
+
     private int universeN()
     {
 		PlayerManager manager = PlayerManager.Instance;
@@ -308,6 +316,9 @@ public class HudOn : MonoBehaviour {
 		bank.normal.background = fillTex (1,1,new Color(0f,0.8f,0f,1f));
 
 		gameOverBeenDetected = false;
+
+		helpPic = (Texture2D) Resources.Load ("menu/howtocut");
+		StartCoroutine("ShowHelp");
 
 		queuedToastMessages = new Queue<string>();
 		StartCoroutine("Toast");
@@ -506,6 +517,8 @@ public class HudOn : MonoBehaviour {
 
 			GUI.Label(new Rect(screenPoint.x,screenPoint.y,10,10), vortexCountdownNum.ToString(), style);
 		}
+
+		if (showHelp) GUI.DrawTexture(new Rect(Screen.width*0.05,Screen.height*0.05,Screen.height*0.9f*1.72f,Screen.height*0.9f),helpPic);
 
 	}	
 	
