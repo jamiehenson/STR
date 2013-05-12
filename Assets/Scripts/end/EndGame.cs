@@ -105,7 +105,8 @@ public class EndGame : MonoBehaviour {
 	{
 		string allname = "";
 		foreach (string name in names) allname = allname + ", " + name;
-		return (allname + " got " + GenerateTeamScore() + " in a game of #STR!").Remove(0,1);
+		string twit = (allname + " got " + GenerateTeamScore() + " in a game of #STR!").Remove(0,1);
+		return twit.Substring(0, Mathf.Min(140, twit.Length));
 	}
 
 	string GenerateTeamScore()
