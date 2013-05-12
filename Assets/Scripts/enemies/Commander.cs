@@ -299,9 +299,15 @@ public class Commander : MonoBehaviour {
     void Update() {
         if (Network.isServer) {
             if (levelStarted) {
-                if (asteroidCount[universeN()] == 0 && enemyCount[universeN()] < 2 && !bossDeployed) {
-                    StopCoroutine("EnemyWaveCountdown");
-                    MakeDeploymentDecision();
+                if (!bossDeployed) {
+                    if (!inEnemies && asteroidCount[universeN()] == 0) {
+                        StopCoroutine("EnemyWaveCountdown");
+                        MakeDeploymentDecision();
+                    }
+                    else if (inEnemies && enemyCount[universeN()] < 2) {
+                        StopCoroutine("EnemyWaveCountdown");
+                        MakeDeploymentDecision();
+                    }
                 }
             }
         }
@@ -309,7 +315,6 @@ public class Commander : MonoBehaviour {
 
     void RotatePlayers(bool toBehind, int rotUniverse) {
         for (int i = 1; i < serv.playerLocations.Length; i++) {
-            Debug.Log("In univ " + universeN() + " up to " + i);
             if (serv.playerLocations[i] == universeN()) {
                 GameObject character = GameObject.Find("Character" + i);
                 PlayerMovement move = character.GetComponent<PlayerMovement>();

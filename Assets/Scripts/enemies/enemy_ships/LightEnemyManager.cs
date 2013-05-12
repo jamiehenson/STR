@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LightEnemyManager : EnemyManager {
 
-    public void Start() {
+    public override void InitStats() {
         health = 4;
         weaponPower = 7;
         speed = 1.5f;
