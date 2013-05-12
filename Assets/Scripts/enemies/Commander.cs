@@ -18,6 +18,9 @@ public class Commander : MonoBehaviour {
     public int c;
     public static int[] asteroidCount;
     public static int[] enemyCount;
+    // true -> enemies
+    // false -> asteroids
+    public bool inEnemies = true;
 
     private int currType = 0;
     public GameObject[,] enemyTypes = new GameObject[4, 4];
@@ -101,6 +104,7 @@ public class Commander : MonoBehaviour {
 
     // ******Asteroid Belt Functions******
     IEnumerator SendAsteroidBelt() {
+        inEnemies = false;
         RotatePlayers(true, universeN());
         GameObject[] asteroidBelts = GameObject.FindGameObjectsWithTag("AsteroidBelt");
         
@@ -138,6 +142,7 @@ public class Commander : MonoBehaviour {
 
     // Sends a wave of enemies, adding to the level of enemyTotalStrength
     void SendEnemyWave() {
+        inEnemies = true;
         RotatePlayers(false, universeN());
         int deployedStrength = enemyTotalStrength;
         while (deployedStrength != 0) {

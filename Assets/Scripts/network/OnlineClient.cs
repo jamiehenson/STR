@@ -92,7 +92,7 @@ public class OnlineClient : MonoBehaviour
         }
     }
 
-	public void moveCamera(int newUniverseNum){
+	public void moveCamera(int newUniverseNum, bool rotated){
 		print ("In moveCameraRPC");
 		Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
         Vector3 camPos;
@@ -104,7 +104,7 @@ public class OnlineClient : MonoBehaviour
         Instantiate(transition, character.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
 
 		// Rotation for BossUniverse
-        if (newUniverseNum == 0) {
+        if (newUniverseNum == 0 || rotated == true) {
             camPos = new Vector3(newOrigin.x - 20, newOrigin.y, newOrigin.z + 15);
             character.transform.position = new Vector3(newOrigin.x - 10, character.transform.position.y, character.transform.position.z);
             rotation = new Vector3(0, 90, 0);

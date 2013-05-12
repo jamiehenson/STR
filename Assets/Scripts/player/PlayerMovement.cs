@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("Start moving");
         startGame = true;
     }
+
     public void SetCamForBoss() {
         camtoggle = true;
         rottoggle = true;
@@ -218,7 +219,9 @@ public class PlayerMovement : MonoBehaviour {
 
     [RPC]
     public void RotateCamera(bool toBehind, int chNum, int uNum) {
+        Debug.Log("RCam");
         if (toBehind != camtoggle && characterNum == chNum) {
+            Debug.Log("ROT NOWWWWW");
             PubRotateCam(uNum);
         }
     }
@@ -231,6 +234,21 @@ public class PlayerMovement : MonoBehaviour {
             else Instantiate(warpAni, gameObject.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
         }
     }
+    [RPC]
+    public void SetRotationScheme(bool rotated) {
+        if (Network.isClient && myCharacter) {
+            if (rotated) {
+                camtoggle = true;
+                rottoggle = true;
+                firingHandler.rotated = true;
+            }
+            else {
+                camtoggle = false;
+                rottoggle = true;
+                firingHandler.rotated = false;
+            }
+        }
+    }
 
 	public void changeUniverse(int universeNum) {
         Debug.Log("Change universe");
@@ -238,9 +256,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
     IEnumerator ChangeUniverseIE(object[] pars) {
-        Debug.Log("Pre rotation loop");
         while (isRotating) yield return new WaitForSeconds(0.5f);
-        Debug.Log("Post rotation loop");
         UniverseMove(pars);
     }
 
@@ -252,14 +268,27 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 newOrigin = Universe.PositionOfOrigin(newUniverseNum);
 
         // Move Spaceship
-        Debug.Log("Move Character" + characterNum);
         Vector3 characterPosition = transform.position;
         Vector3 diffFromOrigin = characterPosition - curOrigin;
 
         Vector3 newPosition = newOrigin + diffFromOrigin;
         transform.position = newPosition;
 
-        server.moveCamera(newUniverseNum, info.sender);
+        server.moveCamera(newUniverseNum, info.sender, !GameObject.Find("Universe" + newUniverseNum + "/Managers/EnemyManager").GetComponent<Commander>().inEnemies);
+
+        // Work out and set desired rotation - automatically warps in side-on (enemy wave) view
+        /* SET THESE ON THE CLIENT AS WELL */
+        
+        /* ******************************* */
+        /*bool enWaveCurr = true;
+        if (newUniverseNum != 0) enWaveCurr = GameObject.Find("Universe" + newUniverseNum + "/Managers/EnemyManager").GetComponent<Commander>().inEnemies;
+        Debug.Log("CURR WAVE ENEMIES? " + enWaveCurr);
+        if (!enWaveCurr) {
+            Debug.Log("HITTING HERE");
+            networkView.RPC("RotateCamera", RPCMode.Others, true, characterNum, newUniverseNum);
+        }*/
+       
+
         // Update positions var
         positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
         universeNum = newUniverseNum;
