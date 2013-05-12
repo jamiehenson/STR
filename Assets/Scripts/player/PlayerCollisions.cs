@@ -42,7 +42,7 @@ public class PlayerCollisions : MonoBehaviour {
 
 	public static void BossBoom(GameObject gameObject)
 	{
-		GameObject explosionPrefab = (GameObject)Resources.Load("bosses/Prefabs/bossboom");
+		GameObject explosionPrefab = (GameObject)Resources.Load("bosses/BossExplosion");
 		if (Network.isServer) Network.Instantiate(explosionPrefab, gameObject.transform.position, gameObject.transform.rotation, 0);
 	}
 
