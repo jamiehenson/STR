@@ -78,14 +78,14 @@ public class HudOn : MonoBehaviour {
         lives = c;
 		string[] dieToast = {" K.I.A. "," TOOK IT LIKE A MAN. "," BITES THE DUST. "," DIED LIKE A SPARTAN. "," FAILED AT LIFE "," IS A GONER "," SEGFAULTED "," IS A HPC CADET "};
 		string dieText = dieToast[Random.Range (0,dieToast.Length)];
-        ToastWrapper(s + dieText + lives + " LIVES REMAINING");
+        ToastWrapper(s + dieText + "\n" + lives + " LIVES REMAINING");
     }
 
     public void startLives(int c)
     {
         lives = c;
         startLivesNb = lives;
-        ToastWrapper("You have " + lives + "lives. Keep them hidden, keep them safe!");
+        ToastWrapper("YOUR TEAM HAS " + lives + " LIVES LEFT");
     }
     public void updateName(string s)
     {
@@ -467,10 +467,11 @@ public class HudOn : MonoBehaviour {
         {
 			int spacer = 35;
 			PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
+			OnlineClient cli = GameObject.Find ("Client Scripts").GetComponent< OnlineClient>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
             GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 16 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
             GUI.Label(new Rect(Screen.width - 180, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), playerFlag);
-			GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 30 + i*spacer, 100, 35), systemNames[score.universeNumber], coStyle2);
+			GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 30 + i*spacer, 100, 35), systemNames[cli.universeNum-1], coStyle2);
 			allScores[i-1] = score.getScore();
 			allNames[i-1] = score.playerNames[i];
         }

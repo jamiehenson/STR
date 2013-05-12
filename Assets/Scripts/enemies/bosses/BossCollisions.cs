@@ -120,7 +120,7 @@ public class BossCollisions : MonoBehaviour {
                     networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), eManager.killPoints);
                 }
                 manager.updateScore(eManager.killPoints);
-				PlayerCollisions.BossBoom(gameObject);
+				//PlayerCollisions.BossBoom(gameObject);
                 Network.Destroy(gameObject);
             }
         }
