@@ -76,7 +76,9 @@ public class HudOn : MonoBehaviour {
     public void updateLives(int c, string s)
     {
         lives = c;
-        ToastWrapper(s +"lost in battle! " + lives + "lives remaining.");
+		string[] dieToast = {" K.I.A. "," TOOK IT LIKE A MAN. "," BITES THE DUST. "," DIED LIKE A SPARTAN. "," FAILED AT LIFE "," IS A GONER "," SEGFAULTED "," IS A HPC CADET "};
+		string dieText = dieToast[Random.Range (0,dieToast.Length)];
+        ToastWrapper(s + dieText + lives + " LIVES REMAINING");
     }
 
     public void startLives(int c)

@@ -40,6 +40,12 @@ public class PlayerCollisions : MonoBehaviour {
         }
     }
 
+	public static void BossBoom(GameObject gameObject)
+	{
+		GameObject explosionPrefab = (GameObject)Resources.Load("bosses/Prefabs/bossboom");
+		if (Network.isServer) Network.Instantiate(explosionPrefab, gameObject.transform.position, gameObject.transform.rotation, 0);
+	}
+
     public static void WeaponBoom(GameObject gameObject, int wepType)
     {
         GameObject beamCrackle = (GameObject)Resources.Load("weapons/beamCrackle");
