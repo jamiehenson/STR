@@ -1,0 +1,128 @@
+fileFormatVersion: 2
+guid: ade41527e49d3464dbbeff0cb4c23d0d
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: backBody
+    100002: backRing
+    100004: body
+    100006: innerRing
+    100008: joinPole2
+    100010: midjoin
+    100012: set2_light:barrel
+    100014: set2_light:barrel1
+    100016: set2_light:barrelMount
+    100018: //RootNode
+    400000: backBody
+    400002: backRing
+    400004: body
+    400006: innerRing
+    400008: joinPole2
+    400010: midjoin
+    400012: set2_light:barrel
+    400014: set2_light:barrel1
+    400016: set2_light:barrelMount
+    400018: //RootNode
+    2300000: backBody
+    2300002: backRing
+    2300004: body
+    2300006: innerRing
+    2300008: joinPole2
+    2300010: midjoin
+    2300012: set2_light:barrel
+    2300014: set2_light:barrel1
+    2300016: set2_light:barrelMount
+    3300000: backBody
+    3300002: backRing
+    3300004: body
+    3300006: innerRing
+    3300008: joinPole2
+    3300010: midjoin
+    3300012: set2_light:barrel
+    3300014: set2_light:barrel1
+    3300016: set2_light:barrelMount
+    4300000: body
+    4300002: innerRing
+    4300004: backBody
+    4300006: backRing
+    4300008: joinPole2
+    4300010: set2_light:barrel
+    4300012: set2_light:barrelMount
+    4300014: set2_light:barrel1
+    4300016: midjoin
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 20
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

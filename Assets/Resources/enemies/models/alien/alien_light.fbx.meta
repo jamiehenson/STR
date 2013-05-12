@@ -1,0 +1,132 @@
+fileFormatVersion: 2
+guid: ac4b1820935049d4da7380464ef09854
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: beam
+    100004: blobLeft
+    100006: blobLower
+    100008: blobRight
+    100010: blobs
+    100012: blobUpper
+    100014: body
+    100016: jawLower
+    100018: jawUpper
+    100020: shell
+    100022: tentacle1
+    100024: tentacle2
+    100026: tentacle3
+    100028: tentacle4
+    100030: tentacles
+    100032: weapon
+    400000: //RootNode
+    400002: beam
+    400004: blobLeft
+    400006: blobLower
+    400008: blobRight
+    400010: blobs
+    400012: blobUpper
+    400014: body
+    400016: jawLower
+    400018: jawUpper
+    400020: shell
+    400022: tentacle1
+    400024: tentacle2
+    400026: tentacle3
+    400028: tentacle4
+    400030: tentacles
+    400032: weapon
+    2300000: beam
+    2300002: blobLeft
+    2300004: blobLower
+    2300006: blobRight
+    2300008: blobUpper
+    2300010: body
+    2300012: jawLower
+    2300014: jawUpper
+    2300016: shell
+    2300018: tentacle1
+    2300020: tentacle2
+    2300022: tentacle3
+    2300024: tentacle4
+    3300000: beam
+    3300002: blobLeft
+    3300004: blobLower
+    3300006: blobRight
+    3300008: blobUpper
+    3300010: body
+    3300012: jawLower
+    3300014: jawUpper
+    3300016: shell
+    3300018: tentacle1
+    3300020: tentacle2
+    3300022: tentacle3
+    3300024: tentacle4
+    4300000: beam
+    4300002: jawUpper
+    4300004: jawLower
+    4300006: shell
+    4300008: body
+    4300010: blobUpper
+    4300012: blobLeft
+    4300014: blobRight
+    4300016: blobLower
+    4300018: tentacle1
+    4300020: tentacle2
+    4300022: tentacle3
+    4300024: tentacle4
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

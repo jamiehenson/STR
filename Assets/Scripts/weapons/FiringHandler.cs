@@ -39,23 +39,21 @@ public class FiringHandler : MonoBehaviour {
         if ("0123456789".Contains(num)) return (int.Parse(num));
         else return -1;
     }
+
+	[RPC]
+	private void PlayNetworkShot(string wDir, int univ) {
+		if (Network.isClient) {
+			if (manager.universeNumber == univ) {
+				GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayShot(wDir);
+			}
+		}
+	}
 	
 	void Update () {
         if (universeN() != -1) {
             manager = GameObject.Find("Character" + universeN()).GetComponent<PlayerManager>();
             timer += Time.deltaTime;
 
-            //Vector3 mousePos = Input.mousePosition;
-            //if (rotated) mousePos.z = gunPosition.z;
-            //else mousePos.z = gunPosition.z;
-
-            // Cast a ray from the cursor into the screen
-            //Vector3 lookAt; // = Camera.main.ScreenToWorldPoint(mousePos) - gunPosition;
-            //Ray ray = new Ray(Camera.main.ScreenToWorldPoint(mousePos), Vector3.right);
-            
-            //else lookAt = ray.origin;
-            //Vector3 dir = lookAt - gunPosition;
-            
             if (Network.isClient && myCharacter) {
 
                 // Calculate position just in front of the player's arm
@@ -94,6 +92,23 @@ public class FiringHandler : MonoBehaviour {
                 if (Input.GetButton("Primary Fire") && timer >= manager.wepStats.wepRate && manager.getEnergyLevel() != 0) {
                     // Can I fire?
                     if (manager.getEnergyLevel() - manager.getSelectedWepDrain() >= 0) {
+						int wType = manager.wepType;
+
+						string wDir = "";
+
+						switch(wType)
+						{
+							case 1: wDir = "beam";
+								break;
+							case 2: wDir = "cannon";
+								break;
+							case 3: wDir = "mine";
+								break;
+							default: wDir = "beam";
+								break;
+						}
+						networkView.RPC("PlayNetworkShot", RPCMode.All, wDir, manager.universeNumber);
+
                         // Send message to fire
                         if (dir.x > 0) networkView.RPC("fireWeapon", RPCMode.Server, lookAt, dir, manager.wepStats.wepType, model);
 

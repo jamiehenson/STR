@@ -1,0 +1,172 @@
+fileFormatVersion: 2
+guid: 579979927ee5a3f4d8db049fc35d9065
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: bigRing
+    100002: body
+    100004: body 1
+    100006: body1
+    100008: body2
+    100010: body3
+    100012: body4
+    100014: body5
+    100016: body6
+    100018: body7
+    100020: innerGun
+    100022: outerRing
+    100024: pCylinder1
+    100026: pCylinder2
+    100028: pCylinder3
+    100030: pCylinder4
+    100032: pCylinder5
+    100034: pCylinder6
+    100036: pTorus2
+    100038: //RootNode
+    400000: bigRing
+    400002: body
+    400004: body 1
+    400006: body1
+    400008: body2
+    400010: body3
+    400012: body4
+    400014: body5
+    400016: body6
+    400018: body7
+    400020: innerGun
+    400022: outerRing
+    400024: pCylinder1
+    400026: pCylinder2
+    400028: pCylinder3
+    400030: pCylinder4
+    400032: pCylinder5
+    400034: pCylinder6
+    400036: pTorus2
+    400038: //RootNode
+    2300000: bigRing
+    2300002: body 1
+    2300004: body1
+    2300006: body2
+    2300008: body3
+    2300010: body4
+    2300012: body5
+    2300014: body6
+    2300016: body7
+    2300018: outerRing
+    2300020: pCylinder1
+    2300022: pCylinder2
+    2300024: pCylinder3
+    2300026: pCylinder4
+    2300028: pCylinder5
+    2300030: pCylinder6
+    2300032: pTorus2
+    3300000: bigRing
+    3300002: body 1
+    3300004: body1
+    3300006: body2
+    3300008: body3
+    3300010: body4
+    3300012: body5
+    3300014: body6
+    3300016: body7
+    3300018: outerRing
+    3300020: pCylinder1
+    3300022: pCylinder2
+    3300024: pCylinder3
+    3300026: pCylinder4
+    3300028: pCylinder5
+    3300030: pCylinder6
+    3300032: pTorus2
+    4300000: outerRing
+    4300002: pCylinder2
+    4300004: pCylinder1
+    4300006: pTorus2
+    4300008: pCylinder3
+    4300010: pCylinder4
+    4300012: pCylinder5
+    4300014: pCylinder6
+    4300016: bigRing
+    4300018: body5
+    4300020: body1
+    4300022: body2
+    4300024: body4
+    4300026: body
+    4300028: body7
+    4300030: body3
+    4300032: body6
+    7400000: rotation
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: rotation
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 65
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

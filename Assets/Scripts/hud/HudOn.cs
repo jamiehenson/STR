@@ -14,10 +14,14 @@ public class HudOn : MonoBehaviour {
 	private string charName, wepName, gearReady;
 
 	public string[] systemNames;
+
 	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
     public static int lives, currentLives;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount;
+
+	private string[] allNames;
+	private int[] allScores;
 
 	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
@@ -117,16 +121,20 @@ public class HudOn : MonoBehaviour {
 		}	
 	}
 		
-	IEnumerator headOut() {
-		EndGame.endIndividualScore = manager.getScore();
+	IEnumerator headOut()
+	{
+		EndGame.scores = allScores;
+		EndGame.names = allNames;
 		iTween.CameraFadeAdd();
 		iTween.CameraFadeTo(1f, 2f);
 		yield return new WaitForSeconds(2);
         Application.LoadLevel ("endgame");
 	}
 
-    IEnumerator KeepScore() {
-        while (!gameOver) {
+    IEnumerator KeepScore()
+	{
+        while (!gameOver)
+		{
             if(Network.isServer) manager.updateScore(1);
             //score += 1;
             yield return new WaitForSeconds(0.1f);
@@ -299,6 +307,10 @@ public class HudOn : MonoBehaviour {
 
 	void startWithManager() {		
         playercount = GameObject.FindGameObjectsWithTag("Player").Length;
+
+		allNames = new string[playercount];
+		allScores = new int[playercount];
+
 		print ("I think universeN() = "+universeN() );
         manager = GameObject.Find("Character" + manager.universeNumber).GetComponent<PlayerManager>();
       
@@ -348,8 +360,8 @@ public class HudOn : MonoBehaviour {
 		deco = (Font) Resources.Load ("Belgrad");
 
 		GUI.Label (new Rect (-130,-20,main.width,main.height), main);
-		GUI.Label (new Rect (Screen.width-speed.width+15,-20,speed.width,speed.height), speed);
-		GUI.Label (new Rect (Screen.width-leaderboard.width+50,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
+		GUI.Label (new Rect (Screen.width-speed.width+15,-10,speed.width,speed.height), speed);
+		GUI.Label (new Rect (Screen.width-leaderboard.width+90,Screen.height/2-leaderboard.height/2,leaderboard.width,leaderboard.height), leaderboard);
 		GUI.DrawTexture (new Rect (2,-2,64,48),flag,ScaleMode.StretchToFill);
 
 		GUIStyle hudStyle = new GUIStyle();
@@ -363,6 +375,12 @@ public class HudOn : MonoBehaviour {
 		coStyle.normal.textColor = Color.white;
 		coStyle.fontStyle = FontStyle.Italic;
 		coStyle.fontSize = 14;
+
+		GUIStyle coStyle2 = new GUIStyle();
+    	coStyle2.font = deco;
+		coStyle2.normal.textColor = Color.white;
+		coStyle2.fontStyle = FontStyle.Italic;
+		coStyle2.fontSize = 12;
 		
 		GUIStyle speedStyle = new GUIStyle();
     	speedStyle.font = deco;
@@ -408,23 +426,26 @@ public class HudOn : MonoBehaviour {
 		GUI.Label (new Rect (115,35,energyLevel/(startEnergy/hudBarSize),10),"",energy);
 		
 		// Power bank
-            GUI.Label(new Rect(115, 45, energyBank / (bankSize / hudBarSize), 10), "", bank);
-		// Speed and gear indicator
-        GUI.Label (new Rect (Screen.width - 140, 10, 200, 50), "" + manager.getScore(), largeStyle);
-		GUI.Label (new Rect (Screen.width - 160, 10, 200, 50), "TEAM LIVES: ", hudStyle);
+        GUI.Label(new Rect(115, 45, energyBank / (bankSize / hudBarSize), 10), "", bank);
+
+		// Score, lives and warp indicator
+        GUI.Label (new Rect (Screen.width - 165, 10, 200, 50), "" + manager.getScore(), largeStyle);
+		GUI.Label (new Rect (Screen.width - 155, 50, 200, 50), "TEAM LIVES:" +  lives.ToString(), coStyle);
 		GUI.Label (new Rect (Screen.width - 240,100,200,40),gearReady,hudStyle);
 		
 		// Scoreboard indicator
-		GUI.Label (new Rect (Screen.width-150,Screen.height/2-leaderboard.height/2+20,200,40),"TEAM SCORES",hudStyle);
+		GUI.Label (new Rect (Screen.width-155,Screen.height/2-leaderboard.height/2+25,200,40),"TEAM SCORES",hudStyle);
 		
         for (int i = 1; i <= playercount; i++)
         {
-			int spacer = 40;
+			int spacer = 35;
 			PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
-            GUI.Label(new Rect(Screen.width - 900, Screen.height / 2 - leaderboard.height / 2 + 22 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
-            GUI.Label(new Rect(Screen.width - 125, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), playerFlag);
-			GUI.Label(new Rect(Screen.width - 70, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), "MORTIVERSE");
+            GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 16 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
+            GUI.Label(new Rect(Screen.width - 180, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), playerFlag);
+			GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 30 + i*spacer, 100, 35), systemNames[score.universeNumber], coStyle2);
+			allScores[i-1] = score.getScore();
+			allNames[i-1] = score.playerNames[i];
         }
 		
 		// Weapons initialisation

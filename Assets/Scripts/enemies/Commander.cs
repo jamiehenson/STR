@@ -223,6 +223,9 @@ public class Commander : MonoBehaviour {
         enemyTypes[3,3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
         currType = Random.Range(0, 4);
 
+		networkView.RPC("PlayEnemyTrack", RPCMode.Others, 278);
+
+        int c = GameObject.FindGameObjectsWithTag("Player").Length;
         if (Network.isServer)
         {
             int countUniverse = GameObject.FindGameObjectsWithTag("Universe").Length + 1;
@@ -257,6 +260,7 @@ public class Commander : MonoBehaviour {
             PlayerMovement move = GameObject.Find("Character" + cameraN()).GetComponent<PlayerMovement>();
             move.changeUniverse(0);
             move.SetCamForBoss();
+			GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayBossTrack();
         }
     }
 
@@ -431,6 +435,16 @@ public class Commander : MonoBehaviour {
     public void BringBackFromBoss() {
         if (Network.isServer) {
             networkView.RPC("moveInitialUniverse", RPCMode.All);
+
+            /*for (int i = 1; i < 5; i++) {
+                if (activeCharacters[i]) {
+                    GameObject character = GameObject.Find("Character" + i);
+                    PlayerMovement move = character.GetComponent<PlayerMovement>();
+                    move.SetCamAfterBoss();
+                }
+            }*/
+			currType = Random.Range(0, 4);
+			networkView.RPC("PlayEnemyTrack", RPCMode.Others, 278);
         }
     }
 
@@ -443,10 +457,33 @@ public class Commander : MonoBehaviour {
         children.ForEach(child => Network.Destroy(child));     
     }
 
+	[RPC]
+	private void PlayEnemyTrack()
+	{
+		string trackName = "";
+		switch(currType)
+		{
+			case 0:
+				trackName = "vox";
+				break;
+			case 1:
+				trackName = "crim";
+				break;
+			case 2:
+				trackName = "merc";
+				break;
+			case3:
+				trackName = "alien";
+				break;
+			default:
+			break;
+		}
+		GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayTrack(trackName);
+	}
+
     public void ResumeGame() {
         bossDeployed = false;
         // Pick a new enemy type
-        currType = Random.Range(0, 4);
     }
 
     /* Notify Server Commander script about post warp positions*/

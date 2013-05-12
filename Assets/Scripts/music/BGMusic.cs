@@ -3,11 +3,17 @@ using System.Collections;
 
 public class BGMusic : MonoBehaviour
 {
-	public AudioSource audioplayer;
+	public AudioSource audioplayer, ambientplayer;
 
 	void Start ()
 	{
-		PlayRandomTrack();
+		//PlayRandomTrack();
+		PlayAmbientTrack();
+	}
+
+	void Update()
+	{
+		if (!audioplayer.isPlaying) PlayRandomTrack();
 	}
 
 	public void PlayRandomTrack()
@@ -15,10 +21,18 @@ public class BGMusic : MonoBehaviour
 		Object[] clips = Resources.LoadAll("music/ingame");
 		audioplayer.clip = (AudioClip) clips[Random.Range (0,clips.Length)];
 		audioplayer.Play();
-		audioplayer.loop = false;
+		audioplayer.loop = true;
 		audioplayer.volume = 1;
 		audioplayer.pitch = 1 + (Random.Range(0,1));
-		if (!audioplayer.isPlaying) PlayRandomTrack();
+	}
+
+	public void PlayAmbientTrack()
+	{
+		Object[] clips = Resources.LoadAll("music/ambient");
+		ambientplayer.clip = (AudioClip) clips[Random.Range (0,clips.Length)];
+		ambientplayer.Play();
+		ambientplayer.loop = true;
+		ambientplayer.volume = 0.14f;
 	}
 
 	public void PlayBossTrack()
@@ -28,7 +42,6 @@ public class BGMusic : MonoBehaviour
 		audioplayer.Play();
 		audioplayer.loop = false;
 		audioplayer.volume = 1;
-		if (!audioplayer.isPlaying) PlayRandomTrack();
 	}
 
 	public void PlayTrack(string trackname)
@@ -38,7 +51,13 @@ public class BGMusic : MonoBehaviour
 		audioplayer.Play();
 		audioplayer.loop = true;
 		audioplayer.volume = 1;
-		audioplayer.pitch = 1 + (Random.Range(0,1));
 	}
 
+	public void PlayShot(string shotname)
+	{
+		Object[] shot = Resources.LoadAll("sounds/weapons/" + shotname);
+		AudioClip chosenOne = (AudioClip) shot[Random.Range(0,shot.Length)];
+		AudioSource.PlayClipAtPoint(chosenOne,gameObject.transform.position);
+		print ("shot made");
+	}
 }

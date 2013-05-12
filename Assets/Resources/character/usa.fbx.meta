@@ -1,0 +1,338 @@
+fileFormatVersion: 2
+guid: 8d2ca2ed0b61be04b9552740f4570dad
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: backJet
+    100002: bandR1
+    100004: bandR1 1
+    100006: bandR2
+    100008: bandR2 1
+    100010: bandR3
+    100012: bandR3 1
+    100014: body
+    100016: cross1
+    100018: cross2
+    100020: elbowL
+    100022: elbowR
+    100024: footR
+    100026: footR 1
+    100028: footR2
+    100030: footR2 1
+    100032: forearmL
+    100034: forearmR
+    100036: gunR
+    100038: head
+    100040: joint1
+    100042: joint2
+    100044: joint3
+    100046: joint4
+    100048: joint5
+    100050: joint6
+    100052: joint7
+    100054: joint7 1
+    100056: joint8
+    100058: joint8 1
+    100060: joint9
+    100062: joint9 1
+    100064: kneeR
+    100066: kneeR 1
+    100068: leftArm
+    100070: leftGun
+    100072: leftGunMain
+    100074: leftLeg
+    100076: LGband1
+    100078: LGband2
+    100080: lowBar
+    100082: lowerLegR
+    100084: lowerLegR 1
+    100086: mainBody
+    100088: mainHead
+    100090: midBar
+    100092: midFrame
+    100094: midpanel
+    100096: pCylinder10
+    100098: pCylinder11
+    100100: pCylinder12
+    100102: pCylinder13
+    100104: pCylinder14
+    100106: pCylinder15
+    100108: pCylinder16
+    100110: pCylinder17
+    100112: rightArm
+    100114: rightLeg
+    100116: shoulderL
+    100118: shoulderR
+    100120: topArmL
+    100122: topArmR
+    100124: topBar
+    100126: topGun
+    100128: topGunHinge1
+    100130: topGunHinge2
+    100132: topGunInner
+    100134: topGunMain
+    100136: topGunSupport
+    100138: topLegR
+    100140: topLegR 1
+    100142: upperLegR
+    100144: upperLegR 1
+    100146: //RootNode
+    100148: vertBar
+    400000: backJet
+    400002: bandR1
+    400004: bandR1 1
+    400006: bandR2
+    400008: bandR2 1
+    400010: bandR3
+    400012: bandR3 1
+    400014: body
+    400016: cross1
+    400018: cross2
+    400020: elbowL
+    400022: elbowR
+    400024: footR
+    400026: footR 1
+    400028: footR2
+    400030: footR2 1
+    400032: forearmL
+    400034: forearmR
+    400036: gunR
+    400038: head
+    400040: joint1
+    400042: joint2
+    400044: joint3
+    400046: joint4
+    400048: joint5
+    400050: joint6
+    400052: joint7
+    400054: joint7 1
+    400056: joint8
+    400058: joint8 1
+    400060: joint9
+    400062: joint9 1
+    400064: kneeR
+    400066: kneeR 1
+    400068: leftArm
+    400070: leftGun
+    400072: leftGunMain
+    400074: leftLeg
+    400076: LGband1
+    400078: LGband2
+    400080: lowBar
+    400082: lowerLegR
+    400084: lowerLegR 1
+    400086: mainBody
+    400088: mainHead
+    400090: midBar
+    400092: midFrame
+    400094: midpanel
+    400096: pCylinder10
+    400098: pCylinder11
+    400100: pCylinder12
+    400102: pCylinder13
+    400104: pCylinder14
+    400106: pCylinder15
+    400108: pCylinder16
+    400110: pCylinder17
+    400112: rightArm
+    400114: rightLeg
+    400116: shoulderL
+    400118: shoulderR
+    400120: topArmL
+    400122: topArmR
+    400124: topBar
+    400126: topGun
+    400128: topGunHinge1
+    400130: topGunHinge2
+    400132: topGunInner
+    400134: topGunMain
+    400136: topGunSupport
+    400138: topLegR
+    400140: topLegR 1
+    400142: upperLegR
+    400144: upperLegR 1
+    400146: //RootNode
+    400148: vertBar
+    2300000: backJet
+    2300002: cross1
+    2300004: cross2
+    2300006: lowBar
+    2300008: mainBody
+    2300010: mainHead
+    2300012: midBar
+    2300014: midFrame
+    2300016: pCylinder10
+    2300018: pCylinder11
+    2300020: pCylinder12
+    2300022: pCylinder13
+    2300024: pCylinder14
+    2300026: pCylinder15
+    2300028: pCylinder16
+    2300030: pCylinder17
+    2300032: topBar
+    2300034: topGunHinge1
+    2300036: topGunHinge2
+    2300038: topGunInner
+    2300040: topGunMain
+    2300042: topGunSupport
+    2300044: vertBar
+    3300000: backJet
+    3300002: cross1
+    3300004: cross2
+    3300006: lowBar
+    3300008: mainBody
+    3300010: mainHead
+    3300012: midBar
+    3300014: midFrame
+    3300016: pCylinder10
+    3300018: pCylinder11
+    3300020: pCylinder12
+    3300022: pCylinder13
+    3300024: pCylinder14
+    3300026: pCylinder15
+    3300028: pCylinder16
+    3300030: pCylinder17
+    3300032: topBar
+    3300034: topGunHinge1
+    3300036: topGunHinge2
+    3300038: topGunInner
+    3300040: topGunMain
+    3300042: topGunSupport
+    3300044: vertBar
+    4300000: topGunInner
+    4300002: topGunSupport
+    4300004: topGunHinge2
+    4300006: topGunHinge1
+    4300008: topGunMain
+    4300010: shoulderL
+    4300012: topArmL
+    4300014: elbowL
+    4300016: forearmL
+    4300018: leftGunMain
+    4300020: LGband1
+    4300022: LGband2
+    4300024: topLegR
+    4300026: upperLegR
+    4300028: lowerLegR
+    4300030: kneeR
+    4300032: footR
+    4300034: footR2
+    4300036: bandR1
+    4300038: bandR2
+    4300040: bandR3
+    4300042: topLegR
+    4300044: upperLegR
+    4300046: lowerLegR
+    4300048: kneeR
+    4300050: footR
+    4300052: footR2
+    4300054: bandR1
+    4300056: bandR2
+    4300058: bandR3
+    4300060: mainBody
+    4300062: backJet
+    4300064: pCylinder10
+    4300066: pCylinder11
+    4300068: pCylinder12
+    4300070: pCylinder13
+    4300072: pCylinder14
+    4300074: pCylinder15
+    4300076: pCylinder16
+    4300078: pCylinder17
+    4300080: midFrame
+    4300082: cross1
+    4300084: cross2
+    4300086: mainHead
+    4300088: topBar
+    4300090: midBar
+    4300092: lowBar
+    4300094: vertBar
+    4300096: topArmR
+    4300098: elbowR
+    4300100: forearmR
+    4300102: gunR
+    4300104: shoulderR
+    7400000: usa
+    9500000: //RootNode
+    13700000: bandR1
+    13700002: bandR1 1
+    13700004: bandR2
+    13700006: bandR2 1
+    13700008: bandR3
+    13700010: bandR3 1
+    13700012: elbowL
+    13700014: elbowR
+    13700016: footR
+    13700018: footR 1
+    13700020: footR2
+    13700022: footR2 1
+    13700024: forearmL
+    13700026: forearmR
+    13700028: gunR
+    13700030: kneeR
+    13700032: kneeR 1
+    13700034: leftGunMain
+    13700036: LGband1
+    13700038: LGband2
+    13700040: lowerLegR
+    13700042: lowerLegR 1
+    13700044: shoulderL
+    13700046: shoulderR
+    13700048: topArmL
+    13700050: topArmR
+    13700052: topLegR
+    13700054: topLegR 1
+    13700056: upperLegR
+    13700058: upperLegR 1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
