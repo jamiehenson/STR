@@ -22,7 +22,7 @@ public class BackgroundGenerator : MonoBehaviour
 			int objY = Random.Range(-80,80);
 			int objZ = Random.Range(70,110);
 					
-			if (diceRoller >= 4)
+			if (diceRoller == 4)
 			{
 				int objChoice = Random.Range (0,objects.Length);
 				Transform spawnObj = (Transform) objects[objChoice];
