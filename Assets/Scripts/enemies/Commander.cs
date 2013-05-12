@@ -261,7 +261,7 @@ public class Commander : MonoBehaviour {
             Debug.Log("Move to Boss universe " + cameraN());
             PlayerMovement move = GameObject.Find("Character" + cameraN()).GetComponent<PlayerMovement>();
             move.changeUniverse(0);
-            move.SetCamForBoss();
+            //move.SetCamForBoss();
         }
     }
 
@@ -272,7 +272,7 @@ public class Commander : MonoBehaviour {
             Debug.Log("Move back to universe " + cameraN());
             PlayerMovement move = GameObject.Find("Character" + cameraN()).GetComponent<PlayerMovement>();
             move.changeUniverse(cameraN());
-            move.SetCamAfterBoss();
+            //move.SetCamAfterBoss();
         }
     }
 
