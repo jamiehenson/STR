@@ -24,7 +24,7 @@ public class EyeBossManager : BossManager
             characters = GameObject.FindGameObjectsWithTag("Player");
             cornea     = GameObject.Find("Cornea");
             bounds     = cornea.GetComponent<MeshRenderer>().renderer.bounds;
-            cannons    = GameObject.FindGameObjectsWithTag("BossCannon");
+            cannons    = GameObject.FindGameObjectsWithTag("BossCannonSpawn");
             initStats();
 
             StartCoroutine(Shoot());
@@ -40,7 +40,7 @@ public class EyeBossManager : BossManager
             cannonPower         = 15f;
             killPoints          = 5000;
             speed               = 0.3f;
-            firingDelay         = 0.4f;
+            firingDelay         = 1.4f;
             moveDelay           = 5f;
             forceMultiplier     = 5000;
             rotation            = 0.0f;
@@ -51,24 +51,7 @@ public class EyeBossManager : BossManager
     public override IEnumerator Shoot() {
         while (true) {
             if (inPlane) {
-                int targetPlayer = PickTarget();
-                if (targetPlayer != -1) {
-                    GameObject character  = GameObject.Find("Character" + targetPlayer);
-                    // Fire from a random cannon each time
-                    int index = Random.Range(0, cannons.Length);
-                    GameObject cannon     = cannons[index];
-                    Vector3 fireDirection = character.transform.position - cannon.transform.position;
-                    Vector3 force         = fireDirection.normalized * forceMultiplier * typeForceMultiplier;
-                    fireDirection.y       = Random.Range(fireDirection.y - 5f, fireDirection.y + 5f);
-                    Transform bullet = (Transform)Network.Instantiate(bulletPrefab, cannon.transform.position, cannon.transform.rotation, 200);
-                    NetworkViewID bulletID = bullet.networkView.viewID;
-
-                    // Play the turret animation on all of the clients
-                    networkView.RPC("turretAnimation", RPCMode.All, index);
-
-                    NetworkViewID targetID = character.GetComponent<NetworkView>().viewID;
-                    networkView.RPC("fireBullet", RPCMode.All, cannon.transform.position, cannon.transform.rotation, targetID, bulletID, fireDirection, force);
-                }
+                for (int i = 0; i < characters.Length; i++) fireTurret();
                 yield return new WaitForSeconds(firingDelay);
             }
             else yield return new WaitForSeconds(1f);
@@ -124,6 +107,27 @@ public class EyeBossManager : BossManager
                 }
             }
             else yield return new WaitForSeconds(1f);
+        }
+    }
+
+    void fireTurret() {
+        int targetPlayer = PickTarget();
+        if (targetPlayer != -1) {
+            GameObject character = GameObject.Find("Character" + targetPlayer);
+            // Fire from a random cannon each time
+            int index = Random.Range(0, cannons.Length);
+            GameObject cannon = cannons[index];
+            Vector3 fireDirection = character.transform.position - cannon.transform.position;
+            Vector3 force = fireDirection.normalized * forceMultiplier * typeForceMultiplier;
+            fireDirection.y = Random.Range(fireDirection.y - 5f, fireDirection.y + 5f);
+            Transform bullet = (Transform)Network.Instantiate(bulletPrefab, cannon.transform.position, cannon.transform.rotation, 200);
+            NetworkViewID bulletID = bullet.networkView.viewID;
+
+            // Play the turret animation on all of the clients
+            //networkView.RPC("turretAnimation", RPCMode.All, index);
+
+            NetworkViewID targetID = character.GetComponent<NetworkView>().viewID;
+            networkView.RPC("fireBullet", RPCMode.All, cannon.transform.position, cannon.transform.rotation, targetID, bulletID, fireDirection, force);
         }
     }
 
