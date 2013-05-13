@@ -12,8 +12,8 @@ public class EndGame : MonoBehaviour {
 	private string secretKey = "blobbo";
     private string addScoreURL = "http://jh47.com/str/addscore.php?";
     private string highscoreURL = "http://jh47.com/str/getscores.php";
-	private string killsURL = "http://jh47.com/str/getkills.php";
-	private string deathsURL = "http://jh47.com/str/getdeaths.php";
+	//private string killsURL = "http://jh47.com/str/getkills.php";
+	///private string deathsURL = "http://jh47.com/str/getdeaths.php";
 
 	// Twitter stuff
     const string PLAYER_PREFS_TWITTER_USER_ID           = "STR_Game";
@@ -35,8 +35,8 @@ public class EndGame : MonoBehaviour {
 		twitstring = GenerateTwitString();
 
 		StartCoroutine(GetScores());
-		StartCoroutine(GetKills());
-		StartCoroutine(GetDeaths());
+		//StartCoroutine(GetKills());
+		//StartCoroutine(GetDeaths());
 
 		GameObject header = GameObject.Find ("Header");
 		header.guiText.text = heading;
@@ -202,12 +202,12 @@ public class EndGame : MonoBehaviour {
 		rightButton.normal.textColor = Color.white;
 		rightButton.alignment = TextAnchor.MiddleRight;
 
-		GUI.Label (new Rect(Screen.width*0.8f + 80, Screen.height*0.33f,100,30),"TELL THE \n WORLD!",endSubHeading2);
+		GUI.Label (new Rect(Screen.width*0.9f, Screen.height*0.33f,100,30),"SCORE SENT \nTO TWITTER!",endSubHeading2);
 
 		if (GUI.Button (new Rect(Screen.width*0.8f,Screen.height*0.3f,64,64),twit))
 		{
-			StartCoroutine(Twitter.API.PostTweet(twitstring, "eEIcGZ2AY6StgnPj793yQ", "mEWCEdNR4eNiKAl3fBQmOipijjuY6N7zh4V2AKSaYQ", m_AccessTokenResponse,
-                           new Twitter.PostTweetCallback(this.OnPostTweet)));
+			//StartCoroutine(Twitter.API.PostTweet(twitstring, "eEIcGZ2AY6StgnPj793yQ", "mEWCEdNR4eNiKAl3fBQmOipijjuY6N7zh4V2AKSaYQ", m_AccessTokenResponse,
+            //               new Twitter.PostTweetCallback(this.OnPostTweet)));
 		}
 		
 		if (GUI.Button(new Rect(100,(Screen.height/1.15f), 200, 50), "PLAY AGAIN")) {
@@ -277,7 +277,8 @@ public class EndGame : MonoBehaviour {
             scoreBox.guiText.text = hs_get.text.ToUpper(); // this is a GUIText that will display the scores in game.
         }
     }
-	
+
+	/*
 	IEnumerator GetKills()
     {
         GameObject killBox = GameObject.Find ("Kills");
@@ -311,4 +312,5 @@ public class EndGame : MonoBehaviour {
             deathsBox.guiText.text = hs_get.text.ToUpper(); // this is a GUIText that will display the scores in game.
         }
     }
+    */
 }

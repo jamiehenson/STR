@@ -34,8 +34,6 @@ public class Names : MonoBehaviour
 		str.Add("Shania Twain Reunion");
 		str.Add("Surf Turtles: Rehab");
 		str.Add("Swindon's Totalitarian Regime");
-		str.Add("Tom Hanks Edition");
-		str.Add ("A Mort Amongst Men");
 		string winner = (string) str[(int) Random.Range(0,str.Count)];
 		return winner.ToUpper();
 	}
