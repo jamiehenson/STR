@@ -202,12 +202,12 @@ public class EndGame : MonoBehaviour {
 		rightButton.normal.textColor = Color.white;
 		rightButton.alignment = TextAnchor.MiddleRight;
 
-		GUI.Label (new Rect(Screen.width*0.9f, Screen.height*0.33f,100,30),"SCORE SENT \nTO TWITTER!",endSubHeading2);
+		GUI.Label (new Rect(Screen.width*0.6f + 80, Screen.height*0.6f+15,100,30),"SCORE SENT \nTO TWITTER\n" +
+			"AT @STR_GAME",endSubHeading2);
 
-		if (GUI.Button (new Rect(Screen.width*0.8f,Screen.height*0.3f,64,64),twit))
+		if (GUI.Button (new Rect(Screen.width*0.6f,Screen.height*0.6f,64,64),twit))
 		{
-			//StartCoroutine(Twitter.API.PostTweet(twitstring, "eEIcGZ2AY6StgnPj793yQ", "mEWCEdNR4eNiKAl3fBQmOipijjuY6N7zh4V2AKSaYQ", m_AccessTokenResponse,
-            //               new Twitter.PostTweetCallback(this.OnPostTweet)));
+			Application.OpenURL ("https://twitter.com/STR_Game");
 		}
 		
 		if (GUI.Button(new Rect(100,(Screen.height/1.15f), 200, 50), "PLAY AGAIN")) {
