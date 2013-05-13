@@ -15,7 +15,7 @@ public class HudOn : MonoBehaviour {
 
 	public string[] systemNames;
 
-	private float hitPoints, energyLevel, energyBank, startHP, startEnergy;
+	private float hitPoints, energyLevel, energyBank, startHP, startEnergy, bossHealth;
     public static int lives, currentLives;
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount;
@@ -366,6 +366,10 @@ public class HudOn : MonoBehaviour {
         charName = manager.getPlayerName();
 	}
 
+    public void BossHealthUpdate(int bHealth) {
+        bossHealth = bHealth;
+    }
+
 	void OnGUI () {
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
@@ -428,9 +432,6 @@ public class HudOn : MonoBehaviour {
 
 		// In Boss section
 
-		// REPLACE THIS FOR ACTUAL BOSS HEALTH
-		float bossHealth = 1;
-
 		// THIS IS FOR WHEN A BOSS ARRIVES
 		if (bossOn)
 		{
@@ -438,7 +439,7 @@ public class HudOn : MonoBehaviour {
 			GUI.DrawTexture(new Rect(Screen.width/4, 20, Screen.width/2, Screen.height/8), bossbar);
 			GUI.DrawTexture(new Rect(Screen.width/4 + 14, 18 + Screen.height/38, thumbSize, thumbSize), bossthumb);
 			GUI.Label(new Rect(Screen.width/4 + 18 + thumbSize, 22 + Screen.height/24, Screen.width/2, Screen.height/8), bossname, barStyle);
-			GUI.Label (new Rect (Screen.width/2.75f + thumbSize, 20 + Screen.height/30, (bossHealth*Screen.width/3),Screen.height/16),"",health);
+			GUI.Label (new Rect (Screen.width/2.75f + thumbSize, 20 + Screen.height/30, (bossHealth*Screen.width/3),Screen.height/16),"", health);
 		}
 
 		// Universe (or rather, star system) name

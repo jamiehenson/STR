@@ -28,6 +28,13 @@ public class BossCollisions : MonoBehaviour {
         enemyBar = HudOn.fillTex(60, 10, new Color(1f, 0f, 0f, 1f));
     }
 
+    [RPC]
+    private void UpdateBossHealth(int health) {
+        if (Network.isClient) {
+            GameObject.Find("Client Scripts").GetComponent<HudOn>().BossHealthUpdate(health);
+        }
+    }
+
     private int universeN() {
         int length = transform.parent.parent.name.Length;
         string num = transform.parent.parent.name.Substring(length - 1, 1);
@@ -40,6 +47,7 @@ public class BossCollisions : MonoBehaviour {
         screenX = viewPos.x;
         screenY = Screen.height - (viewPos.y + 1);
         remainingHealth = health / eManager.health;
+        networkView.RPC("UpdateBossHealth", RPCMode.All, remainingHealth);
         if (health < eManager.health * 0.25) {
             eManager.rotation    = 80f;
             eManager.firingDelay = 0.2f;

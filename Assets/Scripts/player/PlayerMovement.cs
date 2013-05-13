@@ -43,8 +43,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public void updateStartGame()
     {
-        Debug.Log("Start moving");
         startGame = true;
+        firingHandler.playerModel(playerManager.getActiveChar());
     }
 
     public void SetCamBehind() {

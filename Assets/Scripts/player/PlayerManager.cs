@@ -332,7 +332,6 @@ public class PlayerManager : MonoBehaviour {
             if (!bankFull) energyBank += (startEnergy / 1500);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
-			
             networkView.RPC("updatePlayerScore", RPCMode.All, score);
         }
     }
