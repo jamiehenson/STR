@@ -41,17 +41,14 @@ public class BossCollisions : MonoBehaviour {
         screenY = Screen.height - (viewPos.y + 1);
         remainingHealth = health / eManager.health;
         if (health < eManager.health * 0.25) {
-            Debug.Log("Boss health < 25%");
             eManager.rotation    = 80f;
             eManager.firingDelay = 0.2f;
         }
         else if (health < eManager.health * 0.5) {
-            Debug.Log("Boss health < 50%");
             eManager.rotation    = 40f;
             eManager.firingDelay = 0.6f;
         }
         else if (health < eManager.health * 0.75) {
-            Debug.Log("Boss health < 75%");
             eManager.rotation    = 20f;
             eManager.firingDelay = 1.0f;
         }
@@ -73,14 +70,14 @@ public class BossCollisions : MonoBehaviour {
                     Network.Destroy(collided);
                     PlayerCollisions.WeaponBoom(gameObject, 1);
                     //beamSmack.Play();
-                    health = health - (WeaponHandler.beamDamage);
+                    if (eManager.irisOpen) health = health - (WeaponHandler.beamDamage);
                     break;
                 case "PlayerCannon":
                     // Do what we want for cannon
                     Network.Destroy(collided);
                     PlayerCollisions.WeaponBoom(gameObject, 2);
                     //cannonSmack.Play();
-                    health = health - (WeaponHandler.cannonDamage);
+                    if (eManager.irisOpen) health = health - (WeaponHandler.cannonDamage);
                     break;
                 case "PlayerMine":
                     // Do what we want for mine
@@ -98,11 +95,11 @@ public class BossCollisions : MonoBehaviour {
                     }
                     Network.Destroy(collided);
                     beamSmack.Play();
-                    health = health - (WeaponHandler.mineDamage);
+                    if (eManager.irisOpen) health = health - (WeaponHandler.mineDamage);
                     break;
                 case "MineFrag":
                     beamSmack.Play();
-                    health = health - (WeaponHandler.mineFragmentDamage);
+                    if (eManager.irisOpen) health = health - (WeaponHandler.mineFragmentDamage);
                     Network.Destroy(collided);
                     break;
                 case "Enemy":
@@ -120,7 +117,7 @@ public class BossCollisions : MonoBehaviour {
                     networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), eManager.killPoints);
                 }
                 manager.updateScore(eManager.killPoints);
-				//PlayerCollisions.BossBoom(gameObject);
+                PlayerCollisions.BossBoom(gameObject);
                 Network.Destroy(gameObject);
             }
         }

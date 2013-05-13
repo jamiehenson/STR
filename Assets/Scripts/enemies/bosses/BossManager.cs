@@ -11,7 +11,7 @@ public class BossManager : MonoBehaviour {
     public float health              = 4;
     public float weaponPower         = 1;
     public int killPoints            = 100;
-    public float speed               = 10;
+    public float speed               = 20;
     public float firingDelay         = 0.5f;
     public float moveDelay           = 0.5f;
     public Color color               = Color.blue;

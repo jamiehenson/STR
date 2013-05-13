@@ -7,24 +7,25 @@ public class EyeBossManager : BossManager
     public GameObject beamColliderPrefab;
     public Transform bulletPrefab;
     public bool inPlane = false;
+    public bool irisOpen = false;
     private BossMovement bossMovement;
     private GameObject character;
     private GameObject[] characters;
     private GameObject[] cannons;
-    private Vector3 beamPos;
-    private Bounds bounds;
-    private GameObject cornea;
-    private GameObject iris;
+    private GameObject beamCollider;
+    private GameObject beamSpawn;
+    private ParticleSystem chargingBeam;
+    private ParticleSystem chargedBeam;
 
     private float beamPower, cannonPower;
 
     new public void Start() {
         if (Network.isServer) {
             base.Start();
-            characters = GameObject.FindGameObjectsWithTag("Player");
-            cornea     = GameObject.Find("Cornea");
-            bounds     = cornea.GetComponent<MeshRenderer>().renderer.bounds;
-            cannons    = GameObject.FindGameObjectsWithTag("BossCannonSpawn");
+            bossMovement = GetComponent<BossMovement>();
+            characters   = GameObject.FindGameObjectsWithTag("Player");
+            beamSpawn    = GameObject.Find("BeamSpawn");
+            cannons      = GameObject.FindGameObjectsWithTag("BossCannonSpawn");
             initStats();
 
             StartCoroutine(Shoot());
@@ -39,12 +40,26 @@ public class EyeBossManager : BossManager
             beamPower           = 0.01f;
             cannonPower         = 15f;
             killPoints          = 5000;
-            speed               = 0.3f;
+            speed               = 10.0f;
             firingDelay         = 1.4f;
             moveDelay           = 5f;
             forceMultiplier     = 5000;
             rotation            = 0.0f;
             typeForceMultiplier = 1f;
+        }
+    }
+
+    void Update() {
+        if (Network.isServer) {
+            if (chargingBeam != null) {
+                iTween.MoveUpdate(chargingBeam.gameObject, beamSpawn.transform.position, 0.1f);
+            }
+            if (chargedBeam != null) {
+                iTween.MoveUpdate(chargedBeam.gameObject, beamSpawn.transform.position, 0.1f);
+            }
+            if (beamCollider != null) {
+                iTween.MoveUpdate(beamCollider, beamSpawn.transform.position + chargedBeam.transform.forward * 50, 0.1f);
+            }
         }
     }
 
@@ -64,31 +79,35 @@ public class EyeBossManager : BossManager
                 // First open the iris shield
                 networkView.RPC("irisShieldAnimation", RPCMode.All, 0.5f, 0.0f);
                 yield return new WaitForSeconds(animation["Irishield"].length);
+                irisOpen = true;
                 int targetPlayer = PickTarget();
                 if (targetPlayer != -1) {
                     character = GameObject.Find("Character" + targetPlayer);
 
                     // Then instantiate the two beam prefabs at the correct position, just in front of the cornea
-                    beamPos = new Vector3(cornea.transform.position.x - bounds.size.x - 6, cornea.transform.position.y, cornea.transform.position.z);
-                    ParticleSystem chargingBeam = (ParticleSystem)Network.Instantiate(chargingBeamPrefab, beamPos, Quaternion.identity, 100);
-                    ParticleSystem chargedBeam = (ParticleSystem)Network.Instantiate(chargedBeamPrefab, beamPos, Quaternion.identity, 100);
+                    chargingBeam = (ParticleSystem)Network.Instantiate(chargingBeamPrefab, beamSpawn.transform.position, Quaternion.identity, 100);
+                    chargedBeam = (ParticleSystem)Network.Instantiate(chargedBeamPrefab, beamSpawn.transform.position, Quaternion.identity, 100);
                     networkView.RPC("modifyNames", RPCMode.All, chargingBeam.name, chargedBeam.name);
 
                     // Play the charging animation on all of the clients
                     networkView.RPC("chargingAnimation", RPCMode.All);
                     
                     chargingBeam.Play();
+                    //while (chargingBeam.isPlaying) {
+                    //    yield return new WaitForSeconds(0.1f);
+                    //}
+                    yield return new WaitForSeconds(chargingBeam.duration);
+                    Vector3 aimPos = character.transform.position;
+                    iTween.LookTo(chargingBeam.gameObject, aimPos, 2.0f);
+                    iTween.LookTo(gameObject, aimPos, 2.0f);
                     while (chargingBeam.isPlaying) {
                         yield return new WaitForSeconds(0.1f);
                     }
-                    Vector3 aimPos = character.transform.position;
                     chargedBeam.transform.LookAt(aimPos, Vector3.forward);
-                    //networkView.RPC("aimWeapon", RPCMode.All, character);
 
                     networkView.RPC("chargedAnimation", RPCMode.All);
                     chargedBeam.Play();
-                    //GameObject beamCollider = (GameObject)Network.Instantiate(beamColliderPrefab, character.transform.position, Quaternion.identity, 100);
-                    GameObject beamCollider = (GameObject)Network.Instantiate(beamColliderPrefab, aimPos, Quaternion.identity, 100);
+                    beamCollider = (GameObject)Network.Instantiate(beamColliderPrefab, aimPos, Quaternion.identity, 100);
                     beamCollider.name = "BeamCollider";
                     EnemyBulletSettings weaponSettings = beamCollider.GetComponent<EnemyBulletSettings>();
                     weaponSettings.damage = beamPower;
@@ -102,8 +121,11 @@ public class EyeBossManager : BossManager
                     Network.Destroy(chargingBeam.gameObject);
                     Network.Destroy(chargedBeam.gameObject);
                     Network.Destroy(beamCollider);
+                    iTween.LookUpdate(gameObject, Vector3.left, 2);
+                    //iTween.LookTo(gameObject, Vector3.left, 5);
                     networkView.RPC("irisShieldAnimation", RPCMode.All, -0.5f, animation["Irishield"].length);
                     yield return new WaitForSeconds(animation["Irishield"].length * 3f);
+                    irisOpen = false;
                 }
             }
             else yield return new WaitForSeconds(1f);
