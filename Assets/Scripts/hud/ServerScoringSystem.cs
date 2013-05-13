@@ -6,9 +6,9 @@ public class ServerScoringSystem : MonoBehaviour {
     public string[] playerNames;
     public bool initialized;
 
-    private float levelTime = 30; // in seconds
+    private float levelTime = 10; // in seconds
     private int pauseDelay = 2; // in seconds
-    private int stagesBeforeBoss = 3;
+    private int stagesBeforeBoss = 1;
     private LevelManager[] levelManagers;
     private BossLevelManager bossLevelManager;
 

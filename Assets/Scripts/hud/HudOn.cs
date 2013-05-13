@@ -366,10 +366,6 @@ public class HudOn : MonoBehaviour {
         charName = manager.getPlayerName();
 	}
 
-    public void BossHealthUpdate(int bHealth) {
-        bossHealth = bHealth;
-    }
-
 	void OnGUI () {
 		main = (Texture2D) Resources.Load ("hud/topleft");
 		speed = (Texture2D) Resources.Load ("hud/topright");
@@ -436,10 +432,14 @@ public class HudOn : MonoBehaviour {
 		if (bossOn)
 		{
 			float thumbSize = Screen.width/28;
-			GUI.DrawTexture(new Rect(Screen.width/4, 20, Screen.width/2, Screen.height/8), bossbar);
-			GUI.DrawTexture(new Rect(Screen.width/4 + 14, 18 + Screen.height/38, thumbSize, thumbSize), bossthumb);
-			GUI.Label(new Rect(Screen.width/4 + 18 + thumbSize, 22 + Screen.height/24, Screen.width/2, Screen.height/8), bossname, barStyle);
-			GUI.Label (new Rect (Screen.width/2.75f + thumbSize, 20 + Screen.height/30, (bossHealth*Screen.width/3),Screen.height/16),"", health);
+            GUI.DrawTexture(new Rect(Screen.width / 4 + 22, 0, Screen.width / 2, Screen.height / 8), bossbar);
+            GUI.DrawTexture(new Rect(Screen.width / 4 + 36, Screen.height / 38, thumbSize, thumbSize), bossthumb);
+            GUI.Label(new Rect(Screen.width / 4 + 36 + thumbSize, Screen.height / 24, Screen.width / 2, Screen.height / 8), bossname, barStyle);
+            GUI.Label(new Rect(Screen.width / 2.75f + 18 + thumbSize, Screen.height / 30, (bossHealth * Screen.width / 3), Screen.height / 16), "", health);
+            //GUI.DrawTexture(new Rect(Screen.width/4, 20, Screen.width/2, Screen.height/8), bossbar);
+            //GUI.DrawTexture(new Rect(Screen.width/4 + 14, 18 + Screen.height/38, thumbSize, thumbSize), bossthumb);
+            //GUI.Label(new Rect(Screen.width/4 + 18 + thumbSize, 22 + Screen.height/24, Screen.width/2, Screen.height/8), bossname, barStyle);
+            //GUI.Label (new Rect (Screen.width/2.75f + thumbSize, 20 + Screen.height/30, (bossHealth*Screen.width/3),Screen.height/16),"", health);
 		}
 
 		// Universe (or rather, star system) name
@@ -588,10 +588,13 @@ public class HudOn : MonoBehaviour {
 		}
 	}
 
-	public void generateBossName()
-	{
+	public void generateBossName() {
 		string[] bossnames = {"JAMIE","BEN","ROB","MADDIE","MATT","TOM"};
 		bossname = bossnames[Random.Range (0,bossnames.Length)];
 		bossthumb = (Texture2D) Resources.Load ("hud/thumbs/"+bossname.ToLower());
 	}
+
+    public void BossHealthUpdate(float bHealth) {
+        bossHealth = bHealth;
+    }
 }

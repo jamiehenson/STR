@@ -26,12 +26,13 @@ public class BossCollisions : MonoBehaviour {
         eMove    = GetComponent<BossMovement>();
         health   = eManager.health;
         enemyBar = HudOn.fillTex(60, 10, new Color(1f, 0f, 0f, 1f));
+        HudOn.bossOn = true;
     }
 
     [RPC]
-    private void UpdateBossHealth(int health) {
+    private void UpdateBossHealth(float rHealth) {
         if (Network.isClient) {
-            GameObject.Find("Client Scripts").GetComponent<HudOn>().BossHealthUpdate(health);
+            GameObject.Find("Client Scripts").GetComponent<HudOn>().BossHealthUpdate(rHealth);
         }
     }
 
@@ -47,7 +48,7 @@ public class BossCollisions : MonoBehaviour {
         screenX = viewPos.x;
         screenY = Screen.height - (viewPos.y + 1);
         remainingHealth = health / eManager.health;
-        networkView.RPC("UpdateBossHealth", RPCMode.All, remainingHealth);
+        networkView.RPC("UpdateBossHealth", RPCMode.Others, remainingHealth);
         if (health < eManager.health * 0.25) {
             eManager.rotation    = 80f;
             eManager.firingDelay = 0.2f;
@@ -68,7 +69,6 @@ public class BossCollisions : MonoBehaviour {
         if (universeN() != -1) {
 
             GameObject collided = other.gameObject;
-            // Need to switch from name-based system to tag-based
             string collidedTag = collided.tag;
             string characterNum = collided.name.Substring(collided.name.Length - 1, 1);
             if ("0123456789".Contains(characterNum)) manager = GameObject.Find("Character" + characterNum).GetComponent<PlayerManager>();
@@ -129,7 +129,7 @@ public class BossCollisions : MonoBehaviour {
                 if (Network.isServer) {
                     Network.Instantiate(explosionPrefab, transform.position, transform.rotation, 0);
                     Network.Destroy(gameObject);
-                }
+                } 
             }
         }
     }
@@ -147,23 +147,18 @@ public class BossCollisions : MonoBehaviour {
         iTween.FadeTo(xp, 0f, 2f);
         yield return new WaitForSeconds(2.5f);
         Destroy(xp);
-        yield return new WaitForSeconds(2f);
-    }
-
-    void OnGUI() {
-        if (remainingHealth != 1) GUI.Label(new Rect(screenX - 30, screenY - 30, remainingHealth * 60, 30), enemyBar);
+        yield return new WaitForSeconds(5f);
     }
 
     [RPC]
     void scoreXP(int camNum, int score) {
         if (Network.isClient && GameObject.Find("Camera " + camNum)) {
             StartCoroutine(XP("+" + score));
-
         }
-
     }
 
     void OnDestroy() {
+        HudOn.bossOn = false;
         if (Network.isServer) {
             GameObject.Find("Universe" + (0) + "/Managers/LevelManager").GetComponent<BossLevelManager>().BossDestroyed();
         }

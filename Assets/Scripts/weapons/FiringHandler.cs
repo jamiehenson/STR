@@ -8,7 +8,7 @@ public class FiringHandler : MonoBehaviour {
 
     PlayerManager manager;
     LineRenderer beam;
-    Transform arm, spawn;
+    Transform arm, spawn, lSpawn, rSpawn;
     private Vector3 spawnPosition;
 
 	private float timer = 0;
@@ -22,7 +22,10 @@ public class FiringHandler : MonoBehaviour {
         arm = transform.Find(model + "/rightArm");
         if      (arm != null && model == "usa")    spawn = arm.Find("gunR/LeftCannonSpawn");
         else if (arm != null && model == "russia") spawn = arm.Find("right_hand_gun/RightCannonSpawn");
-        else if (arm != null && model == "china") spawn = arm.Find("pCylinder27/LeftCannonSpawn");
+        else if (arm != null && model == "china") {
+            lSpawn = arm.Find("pCylinder27/LeftCannonSpawn");
+            rSpawn = arm.Find("pCylinder12/RightCannonSpawn");
+        }
     }
 
     private int player;
@@ -59,16 +62,8 @@ public class FiringHandler : MonoBehaviour {
 
             if (Network.isClient && myCharacter) {
 
-                // Calculate position just in front of the player's arm
-                //float angle = arm.transform.rotation.z * 100;
-                //if (angle < 0) angle = 360 + angle;
-                //angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
-                //float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
-                //if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
-                //float valY = Mathf.Sin(angle) * 3.2f + transform.position.y + 1.8f;
-                //gunPosition = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
-
-                spawnPosition = spawn.position;
+                if (model == "china") spawnPosition = Random.value > 0.5 ? lSpawn.position : rSpawn.position;
+                else spawnPosition = spawn.position;
                 
                 Camera cam = GameObject.Find("Camera " + universeN()).camera;
                 Vector3 lookAt, dir;
@@ -136,36 +131,6 @@ public class FiringHandler : MonoBehaviour {
 	void fireWeapon(Vector3 lookAt, Vector3 fireDirection, Vector3 spawnPosition, int bulletType)
 	{
         manager.updateEnergyLevel(-manager.getSelectedWepDrain());
-
-        //Transform arm = transform.Find(m+"/rightArm");
-        //Vector3 startP = arm.Find("LeftCannonSpawn").transform.position;
-        //if (m == "usa") {
-            //startP = arm.Find("LeftCannonSpawn").transform.position;
-            //float angle = arm.transform.rotation.z * 100;
-            //if (angle < 0) angle = 360 + angle;
-            //angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
-            //float valX = Mathf.Cos(angle) + transform.position.x + 2.2f;
-            //if (angle > 4.71) valX = valX - 1 / Mathf.Cos(angle);
-            //float valY = Mathf.Sin(angle) * 3.2f + transform.position.y + 1.8f;
-            //startP = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
-        //}
-        //else
-        //{
-            //float angle = arm.transform.rotation.z * 100;
-            //if (angle < 0) angle = 360 + angle;
-            //angle = Mathf.Floor(Mathf.Abs(360 - angle)) * Mathf.PI / 180f;
-            //float valX = Mathf.Cos(angle) + transform.position.x + 3.2f;
-            //if (angle > 4.91)
-            //{
-            //    valX = valX - 1 / Mathf.Cos(angle);
-            //}
-            //else
-            //{
-            //    valX = valX - 2 / Mathf.Cos(angle);
-            //}
-            //float valY = Mathf.Sin(angle) * -5.2f + transform.Find("russia").position.y + 2.5f;
-            //startP = new Vector3(Mathf.Abs(valX), valY, arm.transform.position.z);
-        //}
 
         Transform bullet = (Transform)Network.Instantiate(manager.wepStats.wepPrefab, spawnPosition, transform.rotation, 200);
         bullet.name = bullet.name + universeN();
