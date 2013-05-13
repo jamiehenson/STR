@@ -157,10 +157,10 @@ public class Server : MonoBehaviour {
 
 	private IEnumerator SetGameGoing() {
 		int countdown = 5;
-		/*for (int i = countdown; i > 0; i--) {
-			bridge.networkView.RPC("SendCountdownNumber",RPCMode.Others,i);
-			yield return new WaitForSeconds(1);
-		}*/
+        for (int i = countdown; i > 0; i--) {
+            bridge.networkView.RPC("SendCountdownNumber",RPCMode.Others,i);
+            yield return new WaitForSeconds(1);
+        }
 		bridge.networkView.RPC("SendCountdownNumber",RPCMode.Others,-1);
 		lives = countUniverse * 3;
         startGame = true;
