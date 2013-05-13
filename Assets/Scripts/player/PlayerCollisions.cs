@@ -42,7 +42,7 @@ public class PlayerCollisions : MonoBehaviour {
 
 	public static void BossBoom(GameObject gameObject)
 	{
-		GameObject explosionPrefab = (GameObject)Resources.Load("bosses/Prefabs/bossboom");
+		GameObject explosionPrefab = (GameObject)Resources.Load("bosses/BossExplosion");
 		if (Network.isServer) Network.Instantiate(explosionPrefab, gameObject.transform.position, gameObject.transform.rotation, 0);
 	}
 
@@ -69,11 +69,6 @@ public class PlayerCollisions : MonoBehaviour {
                     EnemyBulletSettings bulletSettings = collided.GetComponent<EnemyBulletSettings>();
                     manager.updateHitPoints(-bulletSettings.damage);
                     break;
-                case "BossBeam":
-                    Debug.Log("BossBeam collided!");
-                    EnemyBulletSettings ebs = collided.GetComponent<EnemyBulletSettings>();
-                    manager.updateHitPoints(manager.getHitPoints() * -ebs.damage);
-                    break;
                 default:
                     break;
             }
@@ -81,6 +76,7 @@ public class PlayerCollisions : MonoBehaviour {
     }
 
     void OnCollisionStay(Collision collision) {
+        if (Network.isServer) {
             GameObject collided = collision.collider.gameObject;
 
             switch (collided.tag) {
@@ -91,6 +87,7 @@ public class PlayerCollisions : MonoBehaviour {
                 default:
                     break;
             }
+        }
     }
 
     IEnumerator DeathTimeout() {

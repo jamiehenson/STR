@@ -13,6 +13,7 @@ public class BossMovement : MonoBehaviour {
     private float maxY;
     private float stop = 5;
     private float stopY;
+    private Vector3 pivot;
     private Vector3 forceDir;
     public Vector3 startPos;
     public Vector3 randPos;
@@ -30,15 +31,6 @@ public class BossMovement : MonoBehaviour {
         universeNb = int.Parse(name.Substring(name.Length - 1, 1));
         gameObject.transform.parent = GameObject.Find("Universe" + universeNb + "Enemies").transform;
         bossManager = GetComponent<EyeBossManager>();
-
-        //int enemyType = bossManager.enemyType;
-        //switch (enemyType) {
-        //    case 1: bulletPrefab = lightWeapon; typeForceMultiplier = 2.2f; break;
-        //    case 2: bulletPrefab = mediumWeapon; typeForceMultiplier = 1.5f; break;
-        //    case 3: bulletPrefab = heavyWeapon; typeForceMultiplier = 0.6f; break;
-        //    case 4: bulletPrefab = superheavyWeapon; typeForceMultiplier = 0.3f; break;
-        //    default: break;
-        //}
     }
 
     void Start() {
@@ -49,16 +41,12 @@ public class BossMovement : MonoBehaviour {
             bossManager = GetComponent<EyeBossManager>();
 
             // Set movement variables
-            minZ = positions.origin.z - 25;
-            maxZ = positions.origin.z + 25;
-            minY = positions.origin.y - 25;
-            maxY = positions.origin.y + 25;
-            
-            stopY = 0;
-
-            // NEED to do this not based on position, but on a FIXED stopZ (due to rotation issues)
-            /*GameObject character = GameObject.Find("Character"+universeNb);
-            stopZ = character.transform.position.z;*/
+            minZ = -15f;
+            maxZ = 15f;
+            minY = -5f;
+            maxY = 5f;
+            stopY = 0f;
+            pivot = new Vector3(transform.position.x, stopY, transform.position.z);
 
             // Check direction
             switch (bossManager.direction) {
@@ -81,27 +69,51 @@ public class BossMovement : MonoBehaviour {
                 default:
                     break;
             }
-            //StartCoroutine(LerpEnemy());
+            iTween.MoveTo(gameObject, new Vector3(transform.position.x, stopY+10.0f, transform.position.z), 8.0f);
+            inPlane = true;
+            bossManager.inPlane = true;
+            bossManager.rotation = 10f;
+            StartCoroutine(Spin());
+            //StartCoroutine(Move());
         }
     }
 
-    IEnumerator LerpEnemy() {
-        startPos = transform.position;
-        randPos = new Vector3(positions.origin.x + 100, Random.Range(minY, maxY), Random.Range(minZ, maxZ));
-        waiting = true;
-        yield return new WaitForSeconds(bossManager.moveDelay);
-        waiting = false;
+    IEnumerator Spin() {
+        while (true) {
+            transform.RotateAround(pivot, Vector3.left, Time.deltaTime * Random.Range(bossManager.speed/2, bossManager.speed*2));
+            transform.RotateAround(transform.position, transform.forward, Time.deltaTime * bossManager.rotation);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
-    void move(float startMarker, float endMarker) {
+    IEnumerator Move() {
+        while (true) {
+            randPos = new Vector3(transform.position.x, Random.Range(minY, maxY), Random.Range(minZ, maxZ));
+            iTween.MoveTo(gameObject, randPos, 3.0f);
+            //waiting = true;
+            yield return new WaitForSeconds(bossManager.moveDelay);
+            //waiting = false;
+        }
+    }
+
+    void move(float startPos, float endPos, float time) {
         //if (minMove > maxMove && transform.position.y > stopY) {
         //    rigidbody.velocity = new Vector3(0, 0, 0);
         //    rigidbody.AddForce(new Vector3(0, -1, 0) * bossManager.force);
         //}
         if (!inPlane) {
             if (transform.position.y < stopY) {
-                rigidbody.velocity = new Vector3(0, 0, 0);
-                rigidbody.AddForce(forceDir * bossManager.forceMultiplier);
+
+                float i = 0.0f;
+                float rate = 1.0f / 5.0f;
+                Vector3 stopPos = new Vector3(transform.position.x, stopY, transform.position.y);
+                while (i < 1.0f) {
+                    i += Time.deltaTime * rate;
+                    transform.position = Vector3.Lerp(transform.position, stopPos, i);
+                }
+                //rigidbody.velocity = new Vector3(0, 0, 0);
+                //rigidbody.AddForce(forceDir * 1000);
+                
                 //transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(0, stopY, 0), Time.deltaTime * bossManager.speed);
                 //transform.position = new Vector3(transform.position.x, stopY, transform.position.z);
             }
@@ -116,27 +128,6 @@ public class BossMovement : MonoBehaviour {
             transform.RotateAround(transform.position, transform.forward, Time.deltaTime * bossManager.rotation);
         //    if (waiting) transform.position = Vector3.Lerp(transform.position, randPos, Time.deltaTime * bossManager.speed);
         //    else StartCoroutine(LerpEnemy());
-        }
-    }
-
-    void Update() {
-        if (Network.isServer) {
-            switch (bossManager.direction) {
-                case 1:
-                    move(transform.position.z, stop);
-                    break;
-                case 2:
-                    move(stop, transform.position.y);
-                    break;
-                case 3:
-                    move(stop, transform.position.z);
-                    break;
-                case 4:
-                    move(transform.position.y, stop);
-                    break;
-                default:
-                    break;
-            }
         }
     }
 }

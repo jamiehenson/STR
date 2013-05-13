@@ -22,8 +22,10 @@ public class EnemyCollisions : MonoBehaviour {
 
     void Start() {
         eManager = gameObject.GetComponent<EnemyManager>();
+        eManager.InitStats();
         eMove = gameObject.GetComponent<EnemyMovement>();
         health = eManager.health;
+        Debug.Log("HEALTH: " + health);
         enemyBar = HudOn.fillTex(60, 10, new Color(1f, 0f, 0f, 1f));
     }
 
@@ -51,7 +53,6 @@ public class EnemyCollisions : MonoBehaviour {
             return;
         if (universeN() != -1)
         {
-            
             GameObject collided = other.gameObject;
             // Need to switch from name-based system to tag-based
             string collidedTag = collided.tag;

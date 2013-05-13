@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SuperheavyEnemyManager : EnemyManager {
 
-    public void Start() {
+    public override void InitStats() {
         health = 30;
         weaponPower = 30;
         speed = 0.3f;

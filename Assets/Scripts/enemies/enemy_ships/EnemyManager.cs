@@ -20,4 +20,7 @@ public class EnemyManager : MonoBehaviour {
     // 3 - From Right
     // 4 - From Bottom
     public int direction = 1;
+
+    public virtual void Start() { }
+    public virtual void InitStats() { }
 }
