@@ -117,8 +117,11 @@ public class BossCollisions : MonoBehaviour {
                     networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), eManager.killPoints);
                 }
                 manager.updateScore(eManager.killPoints);
-                PlayerCollisions.BossBoom(gameObject);
-                Network.Destroy(gameObject);
+                GameObject explosionPrefab = (GameObject)Resources.Load("enemies/bosses/BossExplosion");
+                if (Network.isServer) {
+                    Network.Instantiate(explosionPrefab, transform.position, transform.rotation, 0);
+                    Network.Destroy(gameObject);
+                }
             }
         }
     }
