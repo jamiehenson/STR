@@ -16,7 +16,6 @@ public class Vortex : MonoBehaviour {
 
     public static IEnumerator shrink(GameObject vortex)
     {
-
 		labelIsSet = false;
 		float x = 1;
         while (x > 0)
@@ -33,8 +32,6 @@ public class Vortex : MonoBehaviour {
 		label = lab;
 		labelIsSet = true;
 	}
-
-
 
 	public void OnGUI()
 	{

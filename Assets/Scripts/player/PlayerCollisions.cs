@@ -41,6 +41,28 @@ public class PlayerCollisions : MonoBehaviour {
 		
     }
 
+    public static void PlayerBoom(GameObject gameObject) {
+        GameObject[] expPrefabs = new GameObject[3]; 
+
+        expPrefabs[0] = (GameObject)Resources.Load("enemies/ExplosionPrefab");
+        expPrefabs[1] = (GameObject)Resources.Load("enemies/ExplosionPrefab2");
+        expPrefabs[2] = (GameObject)Resources.Load("enemies/ExplosionPrefab3");
+        float pX = gameObject.transform.position.x;
+        float pY = gameObject.transform.position.y;
+        float pZ = gameObject.transform.position.z;
+        float expDist = 1.5f;
+        int randExplosion = Random.Range(0, 3);
+        if (Network.isServer) {
+            Network.Instantiate(expPrefabs[randExplosion], gameObject.transform.position, gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX + expDist, pY, pZ), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX - expDist, pY, pZ), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX, pY + expDist, pZ), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX, pY - expDist, pZ), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX, pY, pZ + expDist), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX, pY, pZ - expDist), gameObject.transform.rotation, 0);
+        }
+    }
+
     public static void WeaponBoom(GameObject gameObject, int wepType)
     {
         GameObject beamCrackle = (GameObject)Resources.Load("weapons/beamCrackle");
@@ -85,11 +107,13 @@ public class PlayerCollisions : MonoBehaviour {
         }
     }
 
-    IEnumerator DeathTimeout() {
+    /*IEnumerator DeathTimeout() {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(3);
-        gameObject.SetActive(true);
-        networkView.RPC("ChangePlayerActiveState", RPCMode.Others, true);
-    }
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        //gameObject.SetActive(true);
+        //networkView.RPC("ChangePlayerActiveState", RPCMode.Others, true);
+    }*/
 
     [RPC]
     void ChangePlayerActiveState(bool active) {

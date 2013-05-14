@@ -20,6 +20,8 @@ public class HudOn : MonoBehaviour {
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount;
 
+    public bool canWarp = true;
+
 	private string[] allNames;
 	private int[] allScores;
 
@@ -184,7 +186,7 @@ public class HudOn : MonoBehaviour {
 			manager.resetEnergyBank(manager.getBankSize());
             gearReady = "WARP DRIVE READY!";
             PlayerManager.bankFull = true;
-            if (Input.GetKeyDown("space"))
+            if (Input.GetKeyDown("space") && canWarp)
             {
 				stopVortices(); // Kill the current vortices
 

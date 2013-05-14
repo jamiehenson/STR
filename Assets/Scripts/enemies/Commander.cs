@@ -270,6 +270,8 @@ public class Commander : MonoBehaviour {
             PlayerMovement move = GameObject.Find("Character" + cameraN()).GetComponent<PlayerMovement>();
             move.changeUniverse(0);
 			GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayBossTrack();
+            GameObject.Find("Client Scripts").GetComponent<HudOn>().stopVortices();
+            GameObject.Find("Client Scripts").GetComponent<HudOn>().canWarp = false;
         }
     }
 
@@ -280,6 +282,7 @@ public class Commander : MonoBehaviour {
             Debug.Log("Move back to universe " + cameraN());
             PlayerMovement move = GameObject.Find("Character" + cameraN()).GetComponent<PlayerMovement>();
             move.changeUniverse(cameraN());
+            GameObject.Find("Client Scripts").GetComponent<HudOn>().canWarp = true;
         }
     }
 
