@@ -589,7 +589,7 @@ public class HudOn : MonoBehaviour {
 	}
 
 	public void generateBossName() {
-		string[] bossnames = {"iBoss","DDS","BIG LAD","I2I"};
+		string[] bossnames = {"iBOSS","ADMIRAL","BIG DADDY","EYEBALL\nPAUL","MORTO","KEVIN","MORTEYE","iMORT","McBALL"};
 		bossname = bossnames[Random.Range (0,bossnames.Length)];
 		bossthumb = (Texture2D) Resources.Load ("hud/boss");
 	}
