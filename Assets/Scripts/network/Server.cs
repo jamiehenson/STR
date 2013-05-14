@@ -178,7 +178,8 @@ public class Server : MonoBehaviour {
         //playersJoined = playersJoined + "Character " + nextPlayerID + ": " + playername + " has left the game...\n";
 		if (Network.connections.Length == 1) { // Go back to menu
 			Misc.CleanStatics();
-			Application.LoadLevel("menu");
+			//Application.LoadLevel("menu");
+            Application.Quit();
 		}
     }
 
