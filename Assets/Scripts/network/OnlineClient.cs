@@ -101,7 +101,7 @@ public class OnlineClient : MonoBehaviour
 		// MAKE SHIT GO DOWN
 		GameObject transition = (GameObject) Resources.Load ("bg/trans");
 		GameObject character = GameObject.Find("Character" + characterNum);
-        Instantiate(transition, character.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+        //Instantiate(transition, character.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
 
 		// Rotation for BossUniverse
         if (newUniverseNum == 0 || rotated == true) {
