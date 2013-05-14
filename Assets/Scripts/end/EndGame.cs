@@ -9,9 +9,9 @@ public class EndGame : MonoBehaviour {
 	public static string[] names;
 
 	// Website stuff
-	private string secretKey = "blobbo";
-    private string addScoreURL = "http://jh47.com/str/addscore.php?";
-    private string highscoreURL = "http://jh47.com/str/getscores.php";
+	//private string secretKey = "blobbo";
+    //private string addScoreURL = "http://jh47.com/str/addscore.php?";
+    //private string highscoreURL = "http://jh47.com/str/getscores.php";
 	//private string killsURL = "http://jh47.com/str/getkills.php";
 	///private string deathsURL = "http://jh47.com/str/getdeaths.php";
 
@@ -34,7 +34,7 @@ public class EndGame : MonoBehaviour {
 		indvscores = GenerateIndvScores();
 		twitstring = GenerateTwitString();
 
-		StartCoroutine(GetScores());
+		//StartCoroutine(GetScores());
 		//StartCoroutine(GetKills());
 		//StartCoroutine(GetDeaths());
 
@@ -48,7 +48,7 @@ public class EndGame : MonoBehaviour {
 		youscore.guiText.text = "INDIVIDUAL SCORES... \n  " + indvscores;
 
 		// Post to website
-		for (int i = 0; i < names.Length; i++) StartCoroutine(PostScores(names[i],scores[i],0,0));
+		//for (int i = 0; i < names.Length; i++) StartCoroutine(PostScores(names[i],scores[i],0,0));
 
 		// Sort twitter out
 		LoadTwitterUserInfo();
@@ -202,22 +202,25 @@ public class EndGame : MonoBehaviour {
 		rightButton.normal.textColor = Color.white;
 		rightButton.alignment = TextAnchor.MiddleRight;
 
-		GUI.Label (new Rect(Screen.width*0.6f + 80, Screen.height*0.6f+15,100,30),"SCORE SENT \nTO TWITTER\n" +
+		GUI.Label (new Rect(Screen.width*0.6f + 80, Screen.height*0.4f+15,100,30),"SCORE SENT \nTO TWITTER\n" +
 			"AT @STR_GAME",endSubHeading2);
 
-		if (GUI.Button (new Rect(Screen.width*0.6f,Screen.height*0.6f,64,64),twit))
+		if (GUI.Button (new Rect(Screen.width*0.6f,Screen.height*0.4f,64,64),twit))
 		{
 			Application.OpenURL ("https://twitter.com/STR_Game");
 		}
-		
+
+		/*
 		if (GUI.Button(new Rect(100,(Screen.height/1.15f), 200, 50), "PLAY AGAIN")) {
 			HudOn.gameOver = false;
 			Application.LoadLevel("plane");
 		}
-		if (GUI.Button(new Rect(Screen.width-300,(Screen.height/1.15f), 200, 50), "BACK TO MENU")) {
+		 */
+
+		if (GUI.Button(new Rect(Screen.width-300,(Screen.height/1.15f), 200, 50), "EXIT THE GAME")) {
 			HudOn.gameOver = false;
 			Misc.CleanStatics();
-			Application.LoadLevel("menu");
+			Application.Quit();
 		}
 	}
 
@@ -240,7 +243,8 @@ public class EndGame : MonoBehaviour {
  
 		return hashString.PadLeft(32, '0');
 	}
-	
+
+	/*
     private IEnumerator PostScores(string teamnames, int score, int kills, int deaths)
     {
         //This connects to a server side php script that will add the name and score to a MySQL DB.
@@ -278,7 +282,6 @@ public class EndGame : MonoBehaviour {
         }
     }
 
-	/*
 	IEnumerator GetKills()
     {
         GameObject killBox = GameObject.Find ("Kills");

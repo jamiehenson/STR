@@ -111,7 +111,8 @@ public class EnemyCollisions : MonoBehaviour {
             }
             if (health <= 0)
             {
-                int scoreAddition = (int)(100 * transform.localScale.x);
+				networkView.RPC("PlayEnemyBoom", RPCMode.Others);
+				int scoreAddition = (int)(100 * transform.localScale.x);
                 if ("0123456789".Contains(characterNum))
                 {
                     networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), scoreAddition);
@@ -122,6 +123,14 @@ public class EnemyCollisions : MonoBehaviour {
             }
         }
     }
+
+	[RPC]
+	private void PlayEnemyBoom() {
+		if (Network.isClient)
+		{
+			GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayBoom(false);
+		}
+	}
 
     IEnumerator XP(string points) {
         xp = new GameObject("XP");
