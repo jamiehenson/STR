@@ -72,7 +72,6 @@ public class PlayerMovement : MonoBehaviour {
         myCharacter = true;
         characterNum = charNum;
         universeNum = univNum;
-        Debug.Log("Activate Character f " + characterNum + universeNum);
         networkView.RPC("updateUniverse", RPCMode.Server, universeNum, characterNum);
     }
 	

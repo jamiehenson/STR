@@ -30,16 +30,18 @@ public class PlayerManager : MonoBehaviour {
 
     // Character-centric player stats
     public string activeCharN;
+    private string activeModel;
     public static string activeChar;
     public int wepType;
 	public WeaponStats wepStats;
     public static float damageMultiplier;
     public static float energyMultiplier;
 	public static PlayerManager Instance;
-
+    private bool setModel= false;
     //Scoring System variables
     private bool myCharacter;
     public int characterNum;
+
 	
 	public void changeWeapon(int type){
 		wepStats = WeaponHandler.GetWeaponStats(activeChar, type);
@@ -84,6 +86,7 @@ public class PlayerManager : MonoBehaviour {
 			playerFlags = new string[Server.numberOfPlayers() + 1];
             networkView.RPC("instantiatePlayerFlags", RPCMode.AllBuffered, Server.numberOfPlayers() + 1);
         }
+
 	}
 
     public float getEnergyLevel()
@@ -190,7 +193,7 @@ public class PlayerManager : MonoBehaviour {
         myCharacter = true;
         universeNumber = charNum;
         characterNum = charNum;
-        networkView.RPC("updateCharacterNum", RPCMode.Server, charNum);
+        networkView.RPC("updateCharacterNum", RPCMode.OthersBuffered, charNum);
 		HudOn.Instance.setManager(this);
 		Instance = this;
     }
@@ -244,18 +247,25 @@ public class PlayerManager : MonoBehaviour {
             }
             if (activeChar == null) activeChar = "tester";
             Debug.Log("Active " + activeCharN);
+            activeModel = activeChar;
+            networkView.RPC("updateActiveChar", RPCMode.OthersBuffered, activeModel);
             hitPoints = startHP;
             energyLevel = startEnergy;
             score = 0;
             WeaponHandler.ScaleDamages(damageMultiplier);
-            networkView.RPC("updateCharacterModel", RPCMode.All, activeChar, characterNum);  
             networkView.RPC("updateStartEnergy", RPCMode.Server, startEnergy);
 			networkView.RPC("updateStartHP", RPCMode.Server, startHP);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
           
         }
+    }
 
+    [RPC]
+    void updateActiveChar(string model)
+    {
+        activeModel = model;
+        Debug.Log("Active character " + characterNum + " " + activeModel);
     }
  
     [RPC]
@@ -272,11 +282,37 @@ public class PlayerManager : MonoBehaviour {
         else GameObject.Find("Character" + characterN + "/russia").SetActive(false);
     }
 
+    void updateCharacterModelClient(string activeC, int characterN)
+    {
+        Debug.Log("Activate " + "Character" + characterN + "/" + activeC);
+        if (activeC == "china") GameObject.Find("Character" + characterN + "/" + activeC).SetActive(true);
+        else GameObject.Find("Character" + characterN + "/china").SetActive(false);
+
+        if (activeC == "usa") GameObject.Find("Character" + characterN + "/" + activeC).SetActive(true);
+        else GameObject.Find("Character" + characterN + "/usa").SetActive(false);
+
+        if (activeC == "russia") GameObject.Find("Character" + characterN + "/" + activeC).SetActive(true);
+        else GameObject.Find("Character" + characterN + "/russia").SetActive(false);
+    }
+
     void Update()
     {
+
         
+        if (movement.startGame && !setModel && !myCharacter)
+        {
+            Debug.Log("Active character model " + characterNum + " " + activeModel);
+            updateCharacterModelClient(activeModel, characterNum);
+            setModel = true;
+        }
 		if (Network.isClient && myCharacter)
         {
+            if (!setModel)
+            {
+                updateCharacterModelClient(activeModel, characterNum);
+                setModel = true;
+            }
+            //networkView.RPC("updateCharacterModel", RPCMode.Server, activeChar, characterNum);  
             switch (wepType)
             {
                 case 1:
