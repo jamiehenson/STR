@@ -20,6 +20,8 @@ public class HudOn : MonoBehaviour {
 	public int wepType, bankSize;
 	private int hudBarSize = 150, playercount;
 
+    public bool canWarp = true;
+
 	private string[] allNames;
 	private int[] allScores;
 
@@ -177,14 +179,14 @@ public class HudOn : MonoBehaviour {
         {
             setWeapon(2);
         }
-        else if (Input.GetKeyDown("3")) setWeapon(3);
+        //else if (Input.GetKeyDown("3")) setWeapon(3);
 
         if (energyBank / (bankSize / hudBarSize) >= hudBarSize || true) // Always true, for testing
         {
 			manager.resetEnergyBank(manager.getBankSize());
             gearReady = "WARP DRIVE READY!";
             PlayerManager.bankFull = true;
-            if (Input.GetKeyDown("space"))
+            if (Input.GetKeyDown("space") && canWarp)
             {
 				stopVortices(); // Kill the current vortices
 
@@ -390,7 +392,7 @@ public class HudOn : MonoBehaviour {
 		barStyle.normal.textColor = Color.white;
 		barStyle.fontStyle = FontStyle.Bold;
 		//barStyle.alignment = TextAnchor.MiddleRight;
-		barStyle.fontSize = Screen.height/24;
+		barStyle.fontSize = Screen.height/26;
 		barStyle.fixedWidth = Screen.width/12;
 		
 		GUIStyle coStyle = new GUIStyle();
@@ -481,7 +483,7 @@ public class HudOn : MonoBehaviour {
 			PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
 			OnlineClient cli = GameObject.Find ("Client Scripts").GetComponent< OnlineClient>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
-            GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 16 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
+            GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 16 + i*spacer, 50, 30), score.playerNames[i] + ":"  + score.getScore(), coStyle);
             GUI.Label(new Rect(Screen.width - 180, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), playerFlag);
 			GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 30 + i*spacer, 100, 35), systemNames[cli.universeNum-1], coStyle2);
 			allScores[i-1] = score.getScore();
@@ -589,9 +591,9 @@ public class HudOn : MonoBehaviour {
 	}
 
 	public void generateBossName() {
-		string[] bossnames = {"JAMIE","BEN","ROB","MADDIE","MATT","TOM"};
+		string[] bossnames = {"iBOSS","ADMIRAL","BIG DADDY","EYEBALL\nPAUL","MORTO","KEVIN","MORTEYE","iMORT","McBALL","POPEYE"};
 		bossname = bossnames[Random.Range (0,bossnames.Length)];
-		bossthumb = (Texture2D) Resources.Load ("hud/thumbs/"+bossname.ToLower());
+		bossthumb = (Texture2D) Resources.Load ("hud/boss");
 	}
 
     public void BossHealthUpdate(float bHealth) {

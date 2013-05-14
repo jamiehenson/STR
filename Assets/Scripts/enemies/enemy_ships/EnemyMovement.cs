@@ -10,6 +10,7 @@ public class EnemyMovement : MonoBehaviour {
     private Commander commander;
 
     private float stop = 5;
+    public Server serv;
 
     private bool inPlane = false;
     private bool waiting = false;
@@ -108,8 +109,10 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     void Start() {
-		if (Network.isServer) networkView.RPC("modifyName", RPCMode.All, gameObject.name);
-
+        if (Network.isServer) {
+            networkView.RPC("modifyName", RPCMode.All, gameObject.name);
+            serv = GameObject.Find("Network").GetComponent<Server>();
+        }
         spawn = transform.Find("BulletSpawn");
 		eManager = gameObject.GetComponent<EnemyManager>();
         //eManager.InitStats();
@@ -121,8 +124,8 @@ public class EnemyMovement : MonoBehaviour {
 
     int PickTarget() {
         ArrayList activeChars = new ArrayList();
-        for (int i = 0; i < commander.activeCharacters.Length; i++) {
-            if (commander.activeCharacters[i] == true) {
+        for (int i = 1; i < serv.playerLocations.Length; i++) {
+            if (serv.playerLocations[i] == universeNb) {
                 activeChars.Add(i);
             }
         }
@@ -130,6 +133,13 @@ public class EnemyMovement : MonoBehaviour {
         int index = Random.Range(0, activeChars.Count);
         return (int) activeChars[index];
     }
+
+	[RPC]
+	private void PlayEnemyFire(string wDir) {
+		if (Network.isClient) {
+			GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayShot(wDir);
+		}
+	}
 
     // Used for firing
     IEnumerator Shoot() {
@@ -145,6 +155,7 @@ public class EnemyMovement : MonoBehaviour {
 					Transform bullet = (Transform)Network.Instantiate(bulletPrefab, spawn.position, gameObject.transform.rotation, 200);
 					NetworkViewID bulletID = bullet.networkView.viewID;
 					networkView.RPC("fireBullet", RPCMode.All, gameObject.transform.position, gameObject.transform.rotation, targetID, bulletID, fireDirection, force);
+					networkView.RPC("PlayEnemyFire", RPCMode.All, "beam/beam6");
                 }
                 yield return new WaitForSeconds(eManager.firingDelay);
             }

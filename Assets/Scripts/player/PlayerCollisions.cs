@@ -31,12 +31,35 @@ public class PlayerCollisions : MonoBehaviour {
         GameObject explosionPrefab = (GameObject)Resources.Load("enemies/ExplosionPrefab");
         GameObject explosionPrefab2 = (GameObject)Resources.Load("enemies/ExplosionPrefab2");
         GameObject explosionPrefab3 = (GameObject)Resources.Load("enemies/ExplosionPrefab3");
-        int randExplosion = Random.Range(1, 3);
+        int randExplosion = Random.Range(1, 4);
         if (Network.isServer)
         {
             if (randExplosion == 1) Network.Instantiate(explosionPrefab, gameObject.transform.position, gameObject.transform.rotation, 0);
             else if (randExplosion == 2) Network.Instantiate(explosionPrefab2, gameObject.transform.position, gameObject.transform.rotation, 0);
             else if (randExplosion == 3) Network.Instantiate(explosionPrefab3, gameObject.transform.position, gameObject.transform.rotation, 0);
+        }
+		
+    }
+
+    public static void PlayerBoom(GameObject gameObject) {
+        GameObject[] expPrefabs = new GameObject[3]; 
+
+        expPrefabs[0] = (GameObject)Resources.Load("enemies/ExplosionPrefab");
+        expPrefabs[1] = (GameObject)Resources.Load("enemies/ExplosionPrefab2");
+        expPrefabs[2] = (GameObject)Resources.Load("enemies/ExplosionPrefab3");
+        float pX = gameObject.transform.position.x;
+        float pY = gameObject.transform.position.y;
+        float pZ = gameObject.transform.position.z;
+        float expDist = 1.5f;
+        int randExplosion = Random.Range(0, 3);
+        if (Network.isServer) {
+            Network.Instantiate(expPrefabs[randExplosion], gameObject.transform.position, gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX + expDist, pY, pZ), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX - expDist, pY, pZ), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX, pY + expDist, pZ), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX, pY - expDist, pZ), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX, pY, pZ + expDist), gameObject.transform.rotation, 0);
+            Network.Instantiate(expPrefabs[randExplosion], new Vector3(pX, pY, pZ - expDist), gameObject.transform.rotation, 0);
         }
     }
 
@@ -84,11 +107,13 @@ public class PlayerCollisions : MonoBehaviour {
         }
     }
 
-    IEnumerator DeathTimeout() {
+    /*IEnumerator DeathTimeout() {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
         yield return new WaitForSeconds(3);
-        gameObject.SetActive(true);
-        networkView.RPC("ChangePlayerActiveState", RPCMode.Others, true);
-    }
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        //gameObject.SetActive(true);
+        //networkView.RPC("ChangePlayerActiveState", RPCMode.Others, true);
+    }*/
 
     [RPC]
     void ChangePlayerActiveState(bool active) {

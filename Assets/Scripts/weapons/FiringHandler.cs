@@ -98,13 +98,13 @@ public class FiringHandler : MonoBehaviour {
 
 						switch(wType)
 						{
-							case 1: wDir = "beam";
+							case 1: wDir = "beam/beam2";
 								break;
-							case 2: wDir = "cannon";
+							case 2: wDir = "cannon/cannon";
 								break;
-							case 3: wDir = "mine";
+							case 3: wDir = "mine/mine";
 								break;
-							default: wDir = "beam";
+							default: wDir = "beam/beam2";
 								break;
 						}
 						networkView.RPC("PlayNetworkShot", RPCMode.All, wDir, manager.universeNumber);

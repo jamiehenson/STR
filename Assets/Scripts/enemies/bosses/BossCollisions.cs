@@ -82,14 +82,14 @@ public class BossCollisions : MonoBehaviour {
                 case "PlayerBeam":
                     // Do what we want for beam
                     Network.Destroy(collided);
-                    PlayerCollisions.WeaponBoom(gameObject, 1);
+                    PlayerCollisions.WeaponBoom(gameObject, 2);
                     //beamSmack.Play();
                     if (eManager.irisOpen) health = health - (WeaponHandler.beamDamage);
                     break;
                 case "PlayerCannon":
                     // Do what we want for cannon
                     Network.Destroy(collided);
-                    PlayerCollisions.WeaponBoom(gameObject, 2);
+                    PlayerCollisions.WeaponBoom(gameObject, 3);
                     //cannonSmack.Play();
                     if (eManager.irisOpen) health = health - (WeaponHandler.cannonDamage);
                     break;
@@ -127,6 +127,7 @@ public class BossCollisions : MonoBehaviour {
                     break;
             }
             if (health <= 0) {
+				networkView.RPC("PlayBossBoom", RPCMode.Others);
                 if ("0123456789".Contains(characterNum)) {
                     networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), eManager.killPoints);
                 }
@@ -139,6 +140,14 @@ public class BossCollisions : MonoBehaviour {
             }
         }
     }
+
+	[RPC]
+	private void PlayBossBoom() {
+		if (Network.isClient)
+		{
+			GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayBoom(true);
+		}
+	}
 
     IEnumerator XP(string points) {
         xp = new GameObject("XP");

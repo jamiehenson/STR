@@ -35,7 +35,7 @@ public class BGMusic : MonoBehaviour
 		Object[] clips = Resources.LoadAll("music/boss");
 		audioplayer.clip = (AudioClip) clips[Random.Range (0,clips.Length)];
 		audioplayer.Play();
-		audioplayer.loop = false;
+		audioplayer.loop = true;
 		audioplayer.volume = 1;
 	}
 
@@ -46,13 +46,39 @@ public class BGMusic : MonoBehaviour
 		Debug.Log (track.name);
 		audioplayer.Play();
 		audioplayer.loop = true;
-		audioplayer.volume = 1;
+		audioplayer.volume = 0.85f;
+		if (track.name == "vox") audioplayer.volume = 0.7f;
+	}
+
+	public void PlayBoom(bool boss)
+	{
+		Object[] clips = Resources.LoadAll("sounds/explosions");
+		AudioClip chosenOne = (!boss) ? (AudioClip) clips[Random.Range (0,clips.Length)] : (AudioClip) Resources.Load ("sounds/explosions/bossexp");
+		PlayClipAt(chosenOne,gameObject.transform.position,1);
 	}
 
 	public void PlayShot(string shotname)
 	{
-		Object[] shot = Resources.LoadAll("sounds/weapons/" + shotname);
-		AudioClip chosenOne = (AudioClip) shot[Random.Range(0,1)];
-		AudioSource.PlayClipAtPoint(chosenOne,gameObject.transform.position,0.6f);
+		AudioClip shot = (AudioClip) Resources.Load("sounds/weapons/" + shotname);
+		PlayClipAt(shot,gameObject.transform.position,0.4f);
+	}
+
+	public void PlayBossFire()
+	{
+		AudioClip shot = (AudioClip) Resources.Load("sounds/boss/bossfire");
+		PlayClipAt(shot,gameObject.transform.position,1f);
+	}
+
+	AudioSource PlayClipAt(AudioClip clip, Vector3 pos, float vol)
+	{
+		GameObject tempGO = new GameObject("AudioShot");
+		tempGO.transform.position = pos;
+		AudioSource aSource = tempGO.AddComponent<AudioSource>();
+		aSource.clip = clip;
+		aSource.Play();
+		aSource.maxDistance = 2000;
+		aSource.volume = 0.6f;
+		Destroy(tempGO, clip.length);
+		return aSource;
 	}
 }
