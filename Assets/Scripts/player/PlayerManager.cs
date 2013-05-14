@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour {
 	public PlayerMovement movement;
     public FiringHandler firingHandler;
     private string myPlayerName;
+    private bool isDead = false;
 	
 	public int universeNumber;
 
@@ -336,41 +337,69 @@ public class PlayerManager : MonoBehaviour {
             if (energyLevel > 0 && energyLevel <= startEnergy && Time.timeScale != 0) energyLevel += (startEnergy / 800);
             if (energyLevel <= 0) energyLevel = 1;
 			// Update number of lives
-            if (lives == 1 && hitPoints<0)
+            if (lives == 1 && hitPoints < 0)
             {
                 Debug.Log("GAME END");
                 networkView.RPC("endGame", RPCMode.Others);
             }
-            if (hitPoints < 0 && lives>1)
-				{
-                    loser = playerNames[characterNum];
-					hitPoints = startHP;
-					lives--;
-                    Debug.Log("Remaining lives " + lives);
-                    networkView.RPC("updateLives", RPCMode.Others, lives, loser);
-                    /*if (lives < playerNames.Length-1)
+            if (hitPoints < 0 && lives > 1)
+			{
+                PlayerCollisions.PlayerBoom(gameObject);
+                loser = playerNames[characterNum];
+				lives--;
+                hitPoints = startHP;
+                Debug.Log("Remaining lives " + lives);
+                networkView.RPC("updateLives", RPCMode.Others, lives, loser);
+                //StartCoroutine("DeathTimeout");
+                /*if (lives < playerNames.Length-1)
+                {
+                    Debug.Log("Restrict universe. Remaining lives : " + lives + " " + playerNames.Length);
+                    remainingUni[characterNum] = false;
+                    for (int i = 1; i <= GameObject.FindGameObjectsWithTag("Player").Length; i++)
                     {
-                        Debug.Log("Restrict universe. Remaining lives : " + lives + " " + playerNames.Length);
-                        remainingUni[characterNum] = false;
-                        for (int i = 1; i <= GameObject.FindGameObjectsWithTag("Player").Length; i++)
+                        if (remainingUni[i])
                         {
-                            if (remainingUni[i])
-                            {
-                                Debug.Log("Warp to universe " + i + ".Lives " + lives);
-                                networkView.RPC("restrictUniverses", RPCMode.Others, i, characterNum);
-                                break;
-                            }
-                                
+                            Debug.Log("Warp to universe " + i + ".Lives " + lives);
+                            networkView.RPC("restrictUniverses", RPCMode.Others, i, characterNum);
+                            break;
                         }
+                                
                     }
-                     */
-				}
+                }*/
+			}
             
             if (!bankFull) energyBank += (startEnergy / 1500);
             networkView.RPC("updateEnergy", RPCMode.All, energyLevel);
             networkView.RPC("updateHitP", RPCMode.All, hitPoints);
             networkView.RPC("updatePlayerScore", RPCMode.All, score);
         }
+    }
+
+    [RPC]
+    private void ChangePlayerVisibility(bool to) {
+        //gameObject.GetComponent<MeshRenderer>().enabled = to;
+        //Debug.Log("VIS: " + gameObject.GetComponent<MeshRenderer>().enabled);
+        Vector3 newScale;
+        if (to) {
+            newScale = transform.localScale * 0.01f;          
+        }
+        else {
+            newScale = transform.localScale * 100;
+        }
+        gameObject.transform.localScale = newScale;
+        hitPoints = startHP;
+    }
+
+    IEnumerator DeathTimeout() {
+        networkView.RPC("ChangePlayerVisibility", RPCMode.Others, false);
+        PlayerCollisions.Boom(gameObject);
+        isDead = true;
+        yield return new WaitForSeconds(3);
+        isDead = false;
+        hitPoints = startHP;
+        networkView.RPC("ChangePlayerVisibility", RPCMode.Others, true);
+        //gameObject.SetActive(true);
+        //networkView.RPC("ChangePlayerActiveState", RPCMode.Others, true);
     }
 
     [RPC]
