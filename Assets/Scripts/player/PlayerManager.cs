@@ -209,17 +209,17 @@ public class PlayerManager : MonoBehaviour {
             switch (activeChar)
             {
                 case "china":
-                    startHP = 500;
+                    startHP = 1000;
                     startEnergy = 1000;
                     speed = 15.0f;
                     damageMultiplier = 0.5f;
-                    energyMultiplier = 1f;
+                    energyMultiplier = 1.1f;
                     bankSize = 7000;
                     energyBank = 0;
                     break;
                 case "usa":
-                    startHP = 1000;
-                    startEnergy = 500;
+                    startHP = 2000;
+                    startEnergy = 600;
                     speed = 5.0f;
                     damageMultiplier = 1.5f;
                     energyMultiplier = 1.5f;
@@ -227,8 +227,8 @@ public class PlayerManager : MonoBehaviour {
                     energyBank = 0;
                     break;
                 case "russia":
-                    startHP = 750;
-                    startEnergy = 750;
+                    startHP = 1500;
+                    startEnergy = 800;
                     speed = 10.0f;
                     damageMultiplier = 1.0f;
                     energyMultiplier = 1.25f;

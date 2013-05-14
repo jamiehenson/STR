@@ -481,7 +481,7 @@ public class HudOn : MonoBehaviour {
 			PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
 			OnlineClient cli = GameObject.Find ("Client Scripts").GetComponent< OnlineClient>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
-            GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 16 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
+            GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 16 + i*spacer, 50, 30), score.playerNames[i] + ":"  + score.getScore(), coStyle);
             GUI.Label(new Rect(Screen.width - 180, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), playerFlag);
 			GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 30 + i*spacer, 100, 35), systemNames[cli.universeNum-1], coStyle2);
 			allScores[i-1] = score.getScore();
@@ -589,7 +589,7 @@ public class HudOn : MonoBehaviour {
 	}
 
 	public void generateBossName() {
-		string[] bossnames = {"iBOSS","ADMIRAL","BIG DADDY","EYEBALL\nPAUL","MORTO","KEVIN","MORTEYE","iMORT","McBALL"};
+		string[] bossnames = {"iBOSS","ADMIRAL","BIG DADDY","EYEBALL\nPAUL","MORTO","KEVIN","MORTEYE","iMORT","McBALL","POPEYE"};
 		bossname = bossnames[Random.Range (0,bossnames.Length)];
 		bossthumb = (Texture2D) Resources.Load ("hud/boss");
 	}

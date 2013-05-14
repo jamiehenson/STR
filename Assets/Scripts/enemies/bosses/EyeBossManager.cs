@@ -73,6 +73,14 @@ public class EyeBossManager : BossManager
         }
     }
 
+	[RPC]
+	private void PlayBossFire() {
+		if (Network.isClient)
+		{
+			GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayBossFire();
+		}
+	}
+
     IEnumerator Beam() {
         while (true) {
             if (inPlane) {
@@ -91,6 +99,9 @@ public class EyeBossManager : BossManager
 
                     // Play the charging animation on all of the clients
                     networkView.RPC("chargingAnimation", RPCMode.All);
+
+					// Play charging noise on all clients
+					networkView.RPC("PlayBossFire", RPCMode.All);
                     
                     chargingBeam.Play();
                     //while (chargingBeam.isPlaying) {

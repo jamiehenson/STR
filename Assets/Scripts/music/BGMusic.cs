@@ -46,8 +46,8 @@ public class BGMusic : MonoBehaviour
 		Debug.Log (track.name);
 		audioplayer.Play();
 		audioplayer.loop = true;
-		audioplayer.volume = 0.8f;
-		if (track.name == "vox") audioplayer.volume = 0.6f;
+		audioplayer.volume = 0.85f;
+		if (track.name == "vox") audioplayer.volume = 0.7f;
 	}
 
 	public void PlayBoom(bool boss)
@@ -60,7 +60,13 @@ public class BGMusic : MonoBehaviour
 	public void PlayShot(string shotname)
 	{
 		AudioClip shot = (AudioClip) Resources.Load("sounds/weapons/" + shotname);
-		PlayClipAt(shot,gameObject.transform.position,0.6f);
+		PlayClipAt(shot,gameObject.transform.position,0.4f);
+	}
+
+	public void PlayBossFire()
+	{
+		AudioClip shot = (AudioClip) Resources.Load("sounds/boss/bossfire");
+		PlayClipAt(shot,gameObject.transform.position,1f);
 	}
 
 	AudioSource PlayClipAt(AudioClip clip, Vector3 pos, float vol)

@@ -36,7 +36,7 @@ public class Commander : MonoBehaviour {
     private float maxAstScale = 1.5f;
     private int fadeWait = 2;
     private float beltGap = 2f;
-    private int astProb = 3;
+    private int astProb = 5;
 
     private float leftMoveLimit;
 
@@ -48,9 +48,9 @@ public class Commander : MonoBehaviour {
     /*0*/
     private int beltLevels = 3;
     /*1a*/
-    private int minAstsInBelt = 3;
+    private int minAstsInBelt = 5;
     /*1b*/
-    private int maxAstsInBelt = 5;
+    private int maxAstsInBelt = 7;
     /*2*/
     private int enemyTotalStrength = 5;
     /*3*/
@@ -337,24 +337,24 @@ public class Commander : MonoBehaviour {
                     // Change min asts (unless can't)
                     if (minAstsInBelt == maxAstsInBelt || minAstsInBelt == hardestMinAstsInBelt) {
                         // Can't increment, so change max instead
-                        maxAstsInBelt++;
+                        maxAstsInBelt += 2;
                     }
-                    else minAstsInBelt++;
+                    else minAstsInBelt += 2;
                 }
                 else {
                     // Change max asts (unless can't)
                     if (maxAstsInBelt == hardestMaxAstsInBelt) {
                         // Can't increment, so change min instead
-                        minAstsInBelt++;
+                        minAstsInBelt += 2;
                     }
-                    else maxAstsInBelt++;
+                    else maxAstsInBelt += 2;
                 }
                 // Check if needs to be removed from master list (both hit hardest)
                 if (minAstsInBelt == hardestMinAstsInBelt && maxAstsInBelt == hardestMaxAstsInBelt) masterDiffStats.Remove(varNum);
                 break;
             case 2:
                 // Alter enemyTotalStrength
-                enemyTotalStrength++;
+                enemyTotalStrength += 2;
                 break;
             case 3:
                 // Alter minEnemyClearanceTime or maxEnemyClearanceTime
