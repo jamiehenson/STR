@@ -111,7 +111,8 @@ public class EnemyCollisions : MonoBehaviour {
             }
             if (health <= 0)
             {
-                int scoreAddition = (int)(100 * transform.localScale.x);
+                int scoreAddition = eManager.reward;
+                
                 if ("0123456789".Contains(characterNum))
                 {
                     networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), scoreAddition);

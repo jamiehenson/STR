@@ -11,5 +11,6 @@ public class MediumEnemyManager : EnemyManager {
         moveDelay = 1.5f;
         killPoints = 2000;
         enemyType = 2;
+        reward = 200;
     }
 }

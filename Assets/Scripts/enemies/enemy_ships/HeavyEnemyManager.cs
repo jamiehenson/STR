@@ -11,5 +11,6 @@ public class HeavyEnemyManager : EnemyManager {
         moveDelay = 2f;
         killPoints = 4000;
         enemyType = 3;
+        reward = 300;
     }
 }

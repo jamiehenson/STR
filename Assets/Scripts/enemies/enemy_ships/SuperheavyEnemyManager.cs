@@ -11,5 +11,6 @@ public class SuperheavyEnemyManager : EnemyManager {
         moveDelay = 5f;
         killPoints = 8000;
         enemyType = 4;
+        reward = 400;
     }
 }
