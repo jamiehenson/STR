@@ -179,7 +179,7 @@ public class HudOn : MonoBehaviour {
         {
             setWeapon(2);
         }
-        else if (Input.GetKeyDown("3")) setWeapon(3);
+        //else if (Input.GetKeyDown("3")) setWeapon(3);
 
         if (energyBank / (bankSize / hudBarSize) >= hudBarSize || true) // Always true, for testing
         {
