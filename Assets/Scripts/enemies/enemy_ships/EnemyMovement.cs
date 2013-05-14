@@ -10,6 +10,7 @@ public class EnemyMovement : MonoBehaviour {
     private Commander commander;
 
     private float stop = 5;
+    public Server serv;
 
     private bool inPlane = false;
     private bool waiting = false;
@@ -108,8 +109,10 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     void Start() {
-		if (Network.isServer) networkView.RPC("modifyName", RPCMode.All, gameObject.name);
-
+        if (Network.isServer) {
+            networkView.RPC("modifyName", RPCMode.All, gameObject.name);
+            serv = GameObject.Find("Network").GetComponent<Server>();
+        }
         spawn = transform.Find("BulletSpawn");
 		eManager = gameObject.GetComponent<EnemyManager>();
         //eManager.InitStats();
@@ -121,8 +124,8 @@ public class EnemyMovement : MonoBehaviour {
 
     int PickTarget() {
         ArrayList activeChars = new ArrayList();
-        for (int i = 0; i < commander.activeCharacters.Length; i++) {
-            if (commander.activeCharacters[i] == true) {
+        for (int i = 1; i < serv.playerLocations.Length; i++) {
+            if (serv.playerLocations[i] == universeNb) {
                 activeChars.Add(i);
             }
         }
