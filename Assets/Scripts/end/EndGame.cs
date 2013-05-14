@@ -9,7 +9,7 @@ public class EndGame : MonoBehaviour {
 	public static string[] names;
 
 	// Website stuff
-	private string secretKey = "blobbo";
+	//private string secretKey = "blobbo";
     //private string addScoreURL = "http://jh47.com/str/addscore.php?";
     //private string highscoreURL = "http://jh47.com/str/getscores.php";
 	//private string killsURL = "http://jh47.com/str/getkills.php";
