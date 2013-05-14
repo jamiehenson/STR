@@ -339,6 +339,7 @@ public class PlayerManager : MonoBehaviour {
 			// Update number of lives
             if (lives == 1 && hitPoints < 0)
             {
+                PlayerCollisions.PlayerBoom(gameObject);
                 Debug.Log("GAME END");
                 networkView.RPC("endGame", RPCMode.Others);
             }

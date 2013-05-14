@@ -49,7 +49,7 @@ public class PlayerCollisions : MonoBehaviour {
         float pX = gameObject.transform.position.x;
         float pY = gameObject.transform.position.y;
         float pZ = gameObject.transform.position.z;
-        float expDist = 1f;
+        float expDist = 1.5f;
         int randExplosion = Random.Range(0, 3);
         if (Network.isServer) {
             Network.Instantiate(expPrefabs[randExplosion], gameObject.transform.position, gameObject.transform.rotation, 0);
