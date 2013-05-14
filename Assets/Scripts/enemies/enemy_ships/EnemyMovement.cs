@@ -26,7 +26,8 @@ public class EnemyMovement : MonoBehaviour {
     private float maxY;
     private float stopZ;
 
-    // Firing offset
+    // Bullet spawn transform and firing offset
+    private Transform spawn;
     private float firingOffset = 1.5f;
 
     private float typeForceMultiplier;
@@ -107,9 +108,9 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     void Start() {
-		if (Network.isServer)
-        	networkView.RPC("modifyName", RPCMode.All, gameObject.name);
-		
+		if (Network.isServer) networkView.RPC("modifyName", RPCMode.All, gameObject.name);
+
+        spawn = transform.Find("BulletSpawn");
 		eManager = gameObject.GetComponent<EnemyManager>();
         //eManager.InitStats();
     }
@@ -138,10 +139,10 @@ public class EnemyMovement : MonoBehaviour {
                 if (targetPlayer != -1) {
 					GameObject character = GameObject.Find("Character" + targetPlayer);
 					NetworkViewID targetID = character.GetComponent<NetworkView>().viewID;
-					Vector3 fireDirection = character.transform.position - transform.position;
+					Vector3 fireDirection = character.transform.position - spawn.position;
 					Vector3 force = fireDirection.normalized * eManager.force * 2 * typeForceMultiplier;
         			fireDirection.y = Random.Range(fireDirection.y - firingOffset, fireDirection.y + firingOffset);
-					Transform bullet = (Transform)Network.Instantiate(bulletPrefab, gameObject.transform.position - new Vector3(-10,0,0), gameObject.transform.rotation, 200);
+					Transform bullet = (Transform)Network.Instantiate(bulletPrefab, spawn.position, gameObject.transform.rotation, 200);
 					NetworkViewID bulletID = bullet.networkView.viewID;
 					networkView.RPC("fireBullet", RPCMode.All, gameObject.transform.position, gameObject.transform.rotation, targetID, bulletID, fireDirection, force);
                 }
