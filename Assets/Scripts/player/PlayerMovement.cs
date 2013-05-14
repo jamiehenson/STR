@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour {
 	
 	
     public void PubRotateCam(int universe) {
-        if (Network.isClient && myCharacter) {
+        if (Network.isClient && myCharacter) {   
             StartCoroutine(rotateCamera(camtoggle, universe));
             camtoggle = !camtoggle;
             networkView.RPC("moveCharacter", RPCMode.Server, 1 + vertDist, horDist, rotation, rottoggle, camtoggle);
@@ -113,6 +113,7 @@ public class PlayerMovement : MonoBehaviour {
         else {
             iTween.MoveTo(Camera.main.gameObject, new Vector3(origin.x - 20, origin.y, origin.z + 15), 2);
             firingHandler.rotated = true;
+            GameObject.Find("Client Scripts").GetComponent<HudOn>().stopVortices();
         }
         iTween.RotateBy(Camera.main.gameObject, new Vector3(0, direction * -0.25f, 0), 2);
         gameObject.networkView.RPC("FixCharDepth", RPCMode.Server);
@@ -312,9 +313,7 @@ public class PlayerMovement : MonoBehaviour {
        
         // Update positions var
         positions = GameObject.Find("Universe" + newUniverseNum + "/Managers/OriginManager").GetComponent<Universe>();
-        universeNum = newUniverseNum;
-        
-        
+        universeNum = newUniverseNum;    
     }
 
     [RPC]
