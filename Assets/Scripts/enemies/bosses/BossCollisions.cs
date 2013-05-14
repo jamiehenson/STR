@@ -47,21 +47,24 @@ public class BossCollisions : MonoBehaviour {
         Vector3 viewPos = Camera.main.WorldToScreenPoint(transform.position);
         screenX = viewPos.x;
         screenY = Screen.height - (viewPos.y + 1);
-        remainingHealth = health / eManager.health;
-        networkView.RPC("UpdateBossHealth", RPCMode.Others, remainingHealth);
+
+        if (Network.isServer) {
+            remainingHealth = health / eManager.health;
+            networkView.RPC("UpdateBossHealth", RPCMode.Others, remainingHealth);
+        }
         if (health < eManager.health * 0.25) {
             eManager.rotation    = 80f;
-            eManager.firingDelay = 0.2f;
+            eManager.firingDelay = 0.4f;
             eManager.speed = 25f;
         }
         else if (health < eManager.health * 0.5) {
             eManager.rotation    = -40f;
-            eManager.firingDelay = 0.6f;
+            eManager.firingDelay = 0.8f;
             eManager.speed = -20f;
         }
         else if (health < eManager.health * 0.75) {
             eManager.rotation    = 20f;
-            eManager.firingDelay = 1.0f;
+            eManager.firingDelay = 1.2f;
             eManager.speed = 15f;
         }
     }

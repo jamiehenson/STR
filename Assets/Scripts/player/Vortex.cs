@@ -85,18 +85,17 @@ public class Vortex : MonoBehaviour {
         }
 	}
 
-    void OnCollisionEnter(Collision collision)
-    {
-		GameObject obj = collision.gameObject;
-		if (obj.tag == "Player" && obj.GetComponent<PlayerMovement>().myCharacter)
-			HudOn.Instance.enteredVortex(leadsToUniverse);
-			HudOn.vortpointOut = gameObject.transform.position;
+    void OnTriggerEnter(Collider other) {
+        GameObject collided = other.gameObject;
+        if (collided.tag == "Player" && collided.GetComponent<PlayerMovement>().myCharacter) {
+            HudOn.Instance.enteredVortex(leadsToUniverse);
+            HudOn.vortpointOut = gameObject.transform.position;
+        }
     }
-	
-	void OnCollisionExit(Collision collision)
-    {
-		GameObject obj = collision.gameObject;
-		if (obj.tag == "Player" && obj.GetComponent<PlayerMovement>().myCharacter)
-			HudOn.Instance.leftVortex();
+
+    void OnTriggerExit(Collider other) {
+        GameObject collided = other.gameObject;
+        if (collided.tag == "Player" && collided.GetComponent<PlayerMovement>().myCharacter)
+            HudOn.Instance.leftVortex();
     }
 }
