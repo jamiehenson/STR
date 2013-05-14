@@ -66,7 +66,7 @@ public class BGMusic : MonoBehaviour
 	public void PlayBossFire()
 	{
 		AudioClip shot = (AudioClip) Resources.Load("sounds/boss/bossfire");
-		PlayClipAt(shot,gameObject.transform.position,1f);
+		PlayClipAt(shot,gameObject.transform.position,0.8f);
 	}
 
 	AudioSource PlayClipAt(AudioClip clip, Vector3 pos, float vol)
@@ -77,7 +77,7 @@ public class BGMusic : MonoBehaviour
 		aSource.clip = clip;
 		aSource.Play();
 		aSource.maxDistance = 2000;
-		aSource.volume = 0.6f;
+		aSource.volume = vol;
 		Destroy(tempGO, clip.length);
 		return aSource;
 	}
