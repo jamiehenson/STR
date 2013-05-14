@@ -35,7 +35,7 @@ public class BGMusic : MonoBehaviour
 		Object[] clips = Resources.LoadAll("music/boss");
 		audioplayer.clip = (AudioClip) clips[Random.Range (0,clips.Length)];
 		audioplayer.Play();
-		audioplayer.loop = false;
+		audioplayer.loop = true;
 		audioplayer.volume = 1;
 	}
 
