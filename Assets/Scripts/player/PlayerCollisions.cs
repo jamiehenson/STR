@@ -38,6 +38,7 @@ public class PlayerCollisions : MonoBehaviour {
             else if (randExplosion == 2) Network.Instantiate(explosionPrefab2, gameObject.transform.position, gameObject.transform.rotation, 0);
             else if (randExplosion == 3) Network.Instantiate(explosionPrefab3, gameObject.transform.position, gameObject.transform.rotation, 0);
         }
+		
     }
 
     public static void PlayerBoom(GameObject gameObject) {
