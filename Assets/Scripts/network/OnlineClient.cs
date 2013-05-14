@@ -29,7 +29,7 @@ public class OnlineClient : MonoBehaviour
     // Called in Bridge.cs
     public void setUniverse(int num)
     {
-        Log.Note("Universe Sent");
+        Debug.Log("Universe Sent " + num);
         universeNum = num;
 
         // Get the origin of the set Universe
@@ -105,12 +105,15 @@ public class OnlineClient : MonoBehaviour
 
 		// Rotation for BossUniverse
         if (newUniverseNum == 0 || rotated == true) {
+
+            Debug.Log("It shouldn't reach here2");
             camPos = new Vector3(newOrigin.x - 20, newOrigin.y, newOrigin.z + 15);
             character.transform.position = new Vector3(newOrigin.x - 10, character.transform.position.y, character.transform.position.z);
             rotation = new Vector3(0, 90, 0);
         }
         // Rotation for all other universes
         else {
+            Debug.Log("It shouldn't reach here1");
             camPos = new Vector3(newOrigin.x, newOrigin.y, newOrigin.z + 0.1f);
             rotation = new Vector3(0, 0, 0);
         }

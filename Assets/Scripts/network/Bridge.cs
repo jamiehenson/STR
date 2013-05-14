@@ -84,7 +84,7 @@ public class Bridge : MonoBehaviour {
     public void setUniverse(int num) {
         if (Network.isClient) {
             client.setUniverse(num);
-            Debug.Log("Bridge Client Set Universe RPC");
+            Debug.Log("Bridge Client Set Universe RPC " + num);
         }
     }
 
