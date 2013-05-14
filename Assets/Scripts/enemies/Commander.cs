@@ -163,7 +163,7 @@ public class Commander : MonoBehaviour {
         // 2 - From Top
         // 3 - From Right
         // 4 - From Bottom
-        int dir = Random.Range(1, 5);
+        int dir = Random.Range(2, 5);
         float x = 0, y = 0, z = 0;
         float genZ = positions.baseZ;
         switch (dir) {
