@@ -152,6 +152,8 @@ public class Server : MonoBehaviour {
         if (nextPlayerID == (countUniverse))
         {
             StartCoroutine("SetGameGoing");
+
+     
         }
     }
 
@@ -202,6 +204,8 @@ public class Server : MonoBehaviour {
 
         // Enable timing
         GameObject.Find("Main Camera").GetComponent<ServerScoringSystem>().StartTimer();
+
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Player")) g.GetComponent<PlayerMovement>().updateStartGame();
     }
 
     void OnGUI()

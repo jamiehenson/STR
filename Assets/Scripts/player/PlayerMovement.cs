@@ -17,8 +17,9 @@ public class PlayerMovement : MonoBehaviour {
     public bool isRotating = false;
 
 	private Vector3 camStartingPos;
-    public static bool startGame= false;
+    public  bool startGame= false;
     public string model = "";
+    private bool activate = false;
 
     // Indicator for how far from the universe position the player needs to be when rotated
     private int baseRotDepth = -8;
@@ -44,9 +45,15 @@ public class PlayerMovement : MonoBehaviour {
     public void updateStartGame()
     {
         startGame = true;
+        networkView.RPC("updateStartGameClient", RPCMode.All);
         firingHandler.playerModel(playerManager.getActiveChar());
     }
 
+    [RPC]
+    void updateStartGameClient()
+    {
+        startGame = true;
+    }
     public void SetCamBehind() {
         camtoggle = true;
         rottoggle = true;
@@ -146,28 +153,37 @@ public class PlayerMovement : MonoBehaviour {
 	{
 	    if (Network.isClient && myCharacter)  
 		{
+
 	        float vertDist = PlayerManager.speed * Input.GetAxis("Vertical") * Time.deltaTime;
 	        float horDist = PlayerManager.speed * Input.GetAxis("Horizontal") * Time.deltaTime;
             /* Rotate arm */
-            Transform arm = transform.Find(model +"/rightArm");
-            Vector3 mouse_pos = Input.mousePosition;
-            mouse_pos.z = 15;
-            Vector3 object_pos = Camera.main.WorldToScreenPoint(arm.transform.position);
-            mouse_pos.x = mouse_pos.x - object_pos.x;
-            mouse_pos.y = mouse_pos.y - object_pos.y;
-            // Calculate rotation angle
-            float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-            networkView.RPC("rotateArm", RPCMode.All, angle, model);
-            /*End arm rotation*/
-						
-	        networkView.RPC("moveCharacter", RPCMode.Server, vertDist, horDist, rotation, rottoggle, camtoggle);
+
+           
+                Transform arm = transform.Find(model + "/rightArm");
+                Vector3 mouse_pos = Input.mousePosition;
+                mouse_pos.z = 15;
+                Vector3 object_pos = Camera.main.WorldToScreenPoint(arm.transform.position);
+                mouse_pos.x = mouse_pos.x - object_pos.x;
+                mouse_pos.y = mouse_pos.y - object_pos.y;
+                // Calculate rotation angle
+                float angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+                networkView.RPC("rotateArm", RPCMode.All, angle, model);
+                /*End arm rotation*/
+                if (startGame)
+                {
+                    if (!activate)
+                    {
+                        networkView.RPC("updateUniverse", RPCMode.Server, universeNum, characterNum);
+                        activate = true;
+                    }
+                    networkView.RPC("moveCharacter", RPCMode.Server, vertDist, horDist, rotation, rottoggle, camtoggle);
+            }
 		}
-        else if (Network.isServer)
+        else if (Network.isServer && startGame)
         {
             if (vertDist != 0 || horDist != 0)
             {
                 positions = GameObject.Find("Universe"+universeNum+"/Managers/OriginManager").GetComponent<Universe>();
-            
 			    // Stop the lad from going out of bounds - INCOMPLETE
 			    // Standard orientation
 			    if (rottoggle && !camtoggle) 
@@ -222,6 +238,8 @@ public class PlayerMovement : MonoBehaviour {
         {
             GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().updateActiveChar(character, false);
             universeNum = univNum;
+            characterNum = character;
+            Debug.Log("Universe " + universeNum + " Character " + characterNum);
             GameObject.Find("Universe" + universeNum + "/Managers/EnemyManager").GetComponent<Commander>().updateActiveChar(character, true);
         }
     }
