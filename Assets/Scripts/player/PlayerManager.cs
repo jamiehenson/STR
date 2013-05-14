@@ -348,7 +348,7 @@ public class PlayerManager : MonoBehaviour {
 					lives--;
                     Debug.Log("Remaining lives " + lives);
                     networkView.RPC("updateLives", RPCMode.Others, lives, loser);
-                    if (lives < playerNames.Length-1)
+                    /*if (lives < playerNames.Length-1)
                     {
                         Debug.Log("Restrict universe. Remaining lives : " + lives + " " + playerNames.Length);
                         remainingUni[characterNum] = false;
@@ -363,6 +363,7 @@ public class PlayerManager : MonoBehaviour {
                                 
                         }
                     }
+                     */
 				}
             
             if (!bankFull) energyBank += (startEnergy / 1500);
