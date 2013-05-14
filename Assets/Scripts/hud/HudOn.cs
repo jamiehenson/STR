@@ -390,7 +390,7 @@ public class HudOn : MonoBehaviour {
 		barStyle.normal.textColor = Color.white;
 		barStyle.fontStyle = FontStyle.Bold;
 		//barStyle.alignment = TextAnchor.MiddleRight;
-		barStyle.fontSize = Screen.height/20;
+		barStyle.fontSize = Screen.height/24;
 		barStyle.fixedWidth = Screen.width/12;
 		
 		GUIStyle coStyle = new GUIStyle();
