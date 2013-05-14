@@ -53,6 +53,19 @@ public class BGMusic : MonoBehaviour
 	{
 		Object[] shot = Resources.LoadAll("sounds/weapons/" + shotname);
 		AudioClip chosenOne = (AudioClip) shot[Random.Range(0,1)];
-		AudioSource.PlayClipAtPoint(chosenOne,gameObject.transform.position,0.6f);
+		PlayClipAt(chosenOne,gameObject.transform.position);
+	}
+
+	AudioSource PlayClipAt(AudioClip clip, Vector3 pos)
+	{
+		GameObject tempGO = new GameObject("AudioShot");
+		tempGO.transform.position = pos;
+		AudioSource aSource = tempGO.AddComponent<AudioSource>();
+		aSource.clip = clip;
+		aSource.Play();
+		aSource.maxDistance = 1000;
+		aSource.volume = 0.6f;
+		Destroy(tempGO, clip.length);
+		return aSource;
 	}
 }
