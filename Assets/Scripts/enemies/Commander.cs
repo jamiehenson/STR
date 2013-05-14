@@ -26,6 +26,7 @@ public class Commander : MonoBehaviour {
     public GameObject[,] enemyTypes = new GameObject[4, 4];
 	
 	private Object[] enemyPrefabs;
+    private Object[] asteroidMats;
     public Transform asteroidPrefab;
     private bool levelStarted = false;
     public bool bossDeployed = false;
@@ -133,6 +134,7 @@ public class Commander : MonoBehaviour {
         float y = Random.Range(positions.bottomBorder, positions.topBorder);
         Vector3 astPosition = new Vector3(positions.rightXBorder + positions.generationOffset + Random.Range(-astXOffsetRange, astXOffsetRange), y, Random.Range(positions.baseZ + 5, positions.baseZ - 5));
         Transform asteroid = (Transform)Network.Instantiate(asteroidPrefab, astPosition, new Quaternion(0, 0, 0, 0), 100+universeN());
+        asteroid.FindChild("pSphere3").renderer.material = (Material)asteroidMats[Random.Range(0, asteroidMats.Length)];
         asteroid.name = "Asteroid" + universeN();
         asteroid.transform.parent = transform.parent.parent.FindChild("Enemies");
         float sf = Random.Range(minAstScale, maxAstScale);
@@ -228,6 +230,7 @@ public class Commander : MonoBehaviour {
         enemyTypes[3,1] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_medium", typeof(GameObject));
         enemyTypes[3,2] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_heavy", typeof(GameObject));
         enemyTypes[3,3] = (GameObject)Resources.Load("enemies/enemytypes/alien/alien_superheavy", typeof(GameObject));
+        asteroidMats = Resources.LoadAll("enemies/asteroids/Materials", typeof(Material));
         currType = Random.Range(0, 4);
 
 		networkView.RPC("PlayEnemyTrack", RPCMode.Others, currType);
