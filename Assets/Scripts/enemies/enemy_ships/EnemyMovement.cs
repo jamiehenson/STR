@@ -132,7 +132,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 
 	[RPC]
-	private void PlayNetworkShot(string wDir) {
+	private void PlayEnemyFire(string wDir) {
 		if (Network.isClient) {
 			GameObject.Find("Client Scripts").GetComponent<BGMusic>().PlayShot(wDir);
 		}
@@ -152,7 +152,7 @@ public class EnemyMovement : MonoBehaviour {
 					Transform bullet = (Transform)Network.Instantiate(bulletPrefab, spawn.position, gameObject.transform.rotation, 200);
 					NetworkViewID bulletID = bullet.networkView.viewID;
 					networkView.RPC("fireBullet", RPCMode.All, gameObject.transform.position, gameObject.transform.rotation, targetID, bulletID, fireDirection, force);
-					networkView.RPC("PlayNetworkShot", RPCMode.All, "beam/beam6");
+					networkView.RPC("PlayEnemyFire", RPCMode.All, "beam/beam6");
                 }
                 yield return new WaitForSeconds(eManager.firingDelay);
             }

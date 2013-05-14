@@ -390,7 +390,7 @@ public class HudOn : MonoBehaviour {
 		barStyle.normal.textColor = Color.white;
 		barStyle.fontStyle = FontStyle.Bold;
 		//barStyle.alignment = TextAnchor.MiddleRight;
-		barStyle.fontSize = Screen.height/24;
+		barStyle.fontSize = Screen.height/26;
 		barStyle.fixedWidth = Screen.width/12;
 		
 		GUIStyle coStyle = new GUIStyle();
@@ -589,9 +589,9 @@ public class HudOn : MonoBehaviour {
 	}
 
 	public void generateBossName() {
-		string[] bossnames = {"JAMIE","BEN","ROB","MADDIE","MATT","TOM","MORT"};
+		string[] bossnames = {"iBoss","DDS","BIG LAD","I2I"};
 		bossname = bossnames[Random.Range (0,bossnames.Length)];
-		bossthumb = (Texture2D) Resources.Load ("hud/thumbs/"+bossname.ToLower());
+		bossthumb = (Texture2D) Resources.Load ("hud/boss");
 	}
 
     public void BossHealthUpdate(float bHealth) {

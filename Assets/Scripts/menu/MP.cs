@@ -164,7 +164,7 @@ public class MP : MonoBehaviour
 			{
 				GUI.Label (new Rect(0,0,Screen.width,Screen.height),bgTex);
 				GUI.Label (new Rect(Screen.width/2-90,Screen.height/4+10,200,40),"WHAT'S YOUR NAME?",exitStyleBig);
-				playerName = GUI.TextField(new Rect((Screen.width / 2)-(Screen.width / 5), Screen.height / 4 + (Screen.width / 18), Screen.width/2.5f, Screen.width/12), playerName, 10, field);
+				playerName = GUI.TextField(new Rect((Screen.width / 2)-(Screen.width / 5), Screen.height / 4 + (Screen.width / 18), Screen.width/2.5f, Screen.width/12), playerName.Replace("\n", "").Replace("\r", ""), 10, field);
 				playerName = playerName.ToUpper();
 				if (GUI.Button(new Rect(Screen.width/2-Screen.width/8,Screen.height*0.65f,Screen.width/4,Screen.height/10),"DONE",field2)) openBox = false;
 			}

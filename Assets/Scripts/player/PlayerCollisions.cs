@@ -31,7 +31,7 @@ public class PlayerCollisions : MonoBehaviour {
         GameObject explosionPrefab = (GameObject)Resources.Load("enemies/ExplosionPrefab");
         GameObject explosionPrefab2 = (GameObject)Resources.Load("enemies/ExplosionPrefab2");
         GameObject explosionPrefab3 = (GameObject)Resources.Load("enemies/ExplosionPrefab3");
-        int randExplosion = Random.Range(1, 3);
+        int randExplosion = Random.Range(1, 4);
         if (Network.isServer)
         {
             if (randExplosion == 1) Network.Instantiate(explosionPrefab, gameObject.transform.position, gameObject.transform.rotation, 0);
