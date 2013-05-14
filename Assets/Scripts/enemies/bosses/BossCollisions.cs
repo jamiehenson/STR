@@ -52,14 +52,17 @@ public class BossCollisions : MonoBehaviour {
         if (health < eManager.health * 0.25) {
             eManager.rotation    = 80f;
             eManager.firingDelay = 0.2f;
+            eManager.speed = 25f;
         }
         else if (health < eManager.health * 0.5) {
-            eManager.rotation    = 40f;
+            eManager.rotation    = -40f;
             eManager.firingDelay = 0.6f;
+            eManager.speed = -20f;
         }
         else if (health < eManager.health * 0.75) {
             eManager.rotation    = 20f;
             eManager.firingDelay = 1.0f;
+            eManager.speed = 15f;
         }
     }
 
