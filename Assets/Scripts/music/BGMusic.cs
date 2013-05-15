@@ -60,7 +60,7 @@ public class BGMusic : MonoBehaviour
 	public void PlayShot(string shotname)
 	{
 		AudioClip shot = (AudioClip) Resources.Load("sounds/weapons/" + shotname);
-		PlayClipAt(shot,gameObject.transform.position,0.4f);
+		PlayClipAt(shot,gameObject.transform.position,0.3f);
 	}
 
 	public void PlayBossFire()

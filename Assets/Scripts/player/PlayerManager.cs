@@ -212,27 +212,27 @@ public class PlayerManager : MonoBehaviour {
                 case "china":
                     startHP = 1000;
                     startEnergy = 800;
-                    speed = 9.0f;
+                    speed = 10.0f;
                     damageMultiplier = 0.5f;
-                    energyMultiplier = 1.7f;
+                    energyMultiplier = 1.1f;
                     bankSize = 7000;
                     energyBank = 0;
                     break;
                 case "usa":
                     startHP = 2000;
                     startEnergy = 400;
-                    speed = 3.0f;
+                    speed = 5.0f;
                     damageMultiplier = 1.5f;
-                    energyMultiplier = 2.3f;
+                    energyMultiplier = 1.5f;
                     bankSize = 7000;
                     energyBank = 0;
                     break;
                 case "russia":
                     startHP = 1500;
                     startEnergy = 600;
-                    speed = 6.0f;
+                    speed = 7.5f;
                     damageMultiplier = 1.0f;
-                    energyMultiplier = 2f;
+                    energyMultiplier = 1.3f;
                     bankSize = 5000;
                     energyBank = 0;
                     break;
