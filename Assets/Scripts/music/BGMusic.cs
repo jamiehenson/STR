@@ -46,7 +46,7 @@ public class BGMusic : MonoBehaviour
 		Debug.Log (track.name);
 		audioplayer.Play();
 		audioplayer.loop = true;
-		audioplayer.volume = 0.85f;
+		audioplayer.volume = 0.9f;
 		if (track.name == "vox") audioplayer.volume = 0.7f;
 	}
 

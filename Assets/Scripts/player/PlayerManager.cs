@@ -211,8 +211,8 @@ public class PlayerManager : MonoBehaviour {
             {
                 case "china":
                     startHP = 1000;
-                    startEnergy = 1000;
-                    speed = 15.0f;
+                    startEnergy = 800;
+                    speed = 9.0f;
                     damageMultiplier = 0.5f;
                     energyMultiplier = 1.1f;
                     bankSize = 7000;
@@ -220,8 +220,8 @@ public class PlayerManager : MonoBehaviour {
                     break;
                 case "usa":
                     startHP = 2000;
-                    startEnergy = 600;
-                    speed = 5.0f;
+                    startEnergy = 400;
+                    speed = 3.0f;
                     damageMultiplier = 1.5f;
                     energyMultiplier = 1.5f;
                     bankSize = 7000;
@@ -229,8 +229,8 @@ public class PlayerManager : MonoBehaviour {
                     break;
                 case "russia":
                     startHP = 1500;
-                    startEnergy = 800;
-                    speed = 10.0f;
+                    startEnergy = 600;
+                    speed = 6.0f;
                     damageMultiplier = 1.0f;
                     energyMultiplier = 1.25f;
                     bankSize = 5000;
