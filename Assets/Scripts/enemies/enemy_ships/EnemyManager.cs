@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour {
     public float moveDelay = 0.5f;
     public float force = 500;
     public int enemyType = 1;
+    public int reward = 100;
 
     // Randomised, doesn't depend on type
     // Directions:

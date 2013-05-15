@@ -25,7 +25,6 @@ public class EnemyCollisions : MonoBehaviour {
         eManager.InitStats();
         eMove = gameObject.GetComponent<EnemyMovement>();
         health = eManager.health;
-        Debug.Log("HEALTH: " + health);
         enemyBar = HudOn.fillTex(60, 10, new Color(1f, 0f, 0f, 1f));
     }
 
@@ -112,7 +111,7 @@ public class EnemyCollisions : MonoBehaviour {
             if (health <= 0)
             {
 				networkView.RPC("PlayEnemyBoom", RPCMode.Others);
-				int scoreAddition = (int)(100 * transform.localScale.x);
+                int scoreAddition = eManager.reward;
                 if ("0123456789".Contains(characterNum))
                 {
                     networkView.RPC("scoreXP", RPCMode.All, int.Parse(characterNum), scoreAddition);

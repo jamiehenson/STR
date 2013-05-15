@@ -11,5 +11,6 @@ public class LightEnemyManager : EnemyManager {
         moveDelay = 1f;
         killPoints = 1000;
         enemyType = 1;
+        reward = 100;
     }
 }
