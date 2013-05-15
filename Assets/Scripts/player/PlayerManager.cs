@@ -214,7 +214,7 @@ public class PlayerManager : MonoBehaviour {
                     startEnergy = 800;
                     speed = 9.0f;
                     damageMultiplier = 0.5f;
-                    energyMultiplier = 1.1f;
+                    energyMultiplier = 1.7f;
                     bankSize = 7000;
                     energyBank = 0;
                     break;
@@ -223,7 +223,7 @@ public class PlayerManager : MonoBehaviour {
                     startEnergy = 400;
                     speed = 3.0f;
                     damageMultiplier = 1.5f;
-                    energyMultiplier = 1.5f;
+                    energyMultiplier = 2.3f;
                     bankSize = 7000;
                     energyBank = 0;
                     break;
@@ -232,7 +232,7 @@ public class PlayerManager : MonoBehaviour {
                     startEnergy = 600;
                     speed = 6.0f;
                     damageMultiplier = 1.0f;
-                    energyMultiplier = 1.25f;
+                    energyMultiplier = 2f;
                     bankSize = 5000;
                     energyBank = 0;
                     break;

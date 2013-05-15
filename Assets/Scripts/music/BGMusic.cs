@@ -54,7 +54,7 @@ public class BGMusic : MonoBehaviour
 	{
 		Object[] clips = Resources.LoadAll("sounds/explosions");
 		AudioClip chosenOne = (!boss) ? (AudioClip) clips[Random.Range (0,clips.Length)] : (AudioClip) Resources.Load ("sounds/explosions/bossexp");
-		PlayClipAt(chosenOne,gameObject.transform.position,1);
+		PlayClipAt(chosenOne,gameObject.transform.position,0.7f);
 	}
 
 	public void PlayShot(string shotname)

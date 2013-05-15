@@ -4,7 +4,7 @@ using System.Collections;
 public class AsteroidCollisions : MonoBehaviour {
 
     private float asteroidDamage = 30f;
-    private float health = 5;
+    private float health = 3;
 
     private float force = 500;
     public Transform MineFrag;

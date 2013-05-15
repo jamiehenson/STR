@@ -20,7 +20,7 @@ public class AchievementSystem : MonoBehaviour {
 	}
 
 	private static void Setup() {
-		DirectoryInfo dirInfo = new DirectoryInfo("Assets/Resources/Acheivments");
+		/*DirectoryInfo dirInfo = new DirectoryInfo("Assets/Resources/Acheivments");
 
 		foreach(System.IO.FileSystemInfo fileInfo in dirInfo.GetFiles()) {
 			string endOfPath = fileInfo.FullName.Substring(fileInfo.FullName.Length - 5);
@@ -29,7 +29,7 @@ public class AchievementSystem : MonoBehaviour {
 				AddFile(fileInfo);
 		}
 
-		beenSetup = true;
+		beenSetup = true;*/
 	}
 
 
