@@ -147,6 +147,7 @@ public class Commander : MonoBehaviour {
         inEnemies = true;
         RotatePlayers(false, universeN());
         int deployedStrength = enemyTotalStrength;
+
         while (deployedStrength != 0) {
             // Send a random enemy from the possibles still permitted
             int enemyType = Random.Range(1, Mathf.Min(deployedStrength, 5));
@@ -154,6 +155,14 @@ public class Commander : MonoBehaviour {
             deployedStrength -= enemyType;
         }
         StartCoroutine("EnemyWaveCountdown");
+    }
+
+    [RPC]
+    void levelUp(int i)
+    {
+
+        Debug.Log("Level up " + universeN());
+         GameObject.FindGameObjectWithTag("Camera").GetComponent<HudOn>().ToastWrapper("Level up!");
     }
 
     // Creates an enemy of the given type
@@ -285,6 +294,9 @@ public class Commander : MonoBehaviour {
 
     void MakeDeploymentDecision() {
         int choice = Random.Range(0, astProb);
+        //Debug.Log("Level up " + universeN());
+        //for (int i = 1; i < activeCharacters.Length; i++)
+        //    networkView.RPC("levelUp", RPCMode.Others, universeN(), i);
         if (choice == (astProb - 1)) {
             // Deploy asteroid belt
             StartCoroutine("SendAsteroidBelt");

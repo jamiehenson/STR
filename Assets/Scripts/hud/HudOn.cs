@@ -22,13 +22,14 @@ public class HudOn : MonoBehaviour {
 
 	private string[] allNames;
 	private int[] allScores;
-
+    private bool sAlert;
 	private GameObject[] vortexRegister;
 	private GUIStyle health = new GUIStyle();
 	private GUIStyle energy = new GUIStyle();
 	private GUIStyle bank = new GUIStyle();
+    private GUIStyle[] alert;
     public int startLivesNb;
-
+    private Color color;
 	private int countdownVal = 6;
 
 	public static Vector3 vortpointOut;
@@ -313,7 +314,7 @@ public class HudOn : MonoBehaviour {
 		health.normal.background = fillTex(1,1,new Color(0.8f,0f,0f,1f));
 		energy.normal.background = fillTex(1,1,new Color(0f,0f,0.8f,1f));
 		bank.normal.background = fillTex (1,1,new Color(0f,0.8f,0f,1f));
-
+        
 		gameOverBeenDetected = false;
 
 		helpPic = (Texture2D) Resources.Load ("menu/howtocut");
@@ -330,6 +331,12 @@ public class HudOn : MonoBehaviour {
 		allNames = new string[playercount];
 		allScores = new int[playercount];
 
+        alert = new GUIStyle[playercount+1];
+        for (int i = 1; i <= playercount; i++)
+        {
+            alert[i] = new GUIStyle();
+            alert[i].normal.background = fillTex(1, 1, new Color(0.8f, 0f, 0f, 0f));
+        }
 		print ("I think universeN() = "+universeN() );
         manager = GameObject.Find("Character" + manager.universeNumber).GetComponent<PlayerManager>();
       
@@ -481,9 +488,11 @@ public class HudOn : MonoBehaviour {
 			PlayerManager score = GameObject.Find("Character" + i).GetComponent<PlayerManager>();
 			OnlineClient cli = GameObject.Find ("Client Scripts").GetComponent< OnlineClient>();
 			Texture2D playerFlag = (Texture2D) Resources.Load ("menu/flags/"+score.playerFlags[i]);
+ 
             GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 16 + i*spacer, 50, 30), score.playerNames[i] + " :"  + score.getScore(), coStyle);
             GUI.Label(new Rect(Screen.width - 180, Screen.height / 2 - leaderboard.height / 2 + 10 + i*spacer, 35, 35), playerFlag);
 			GUI.Label(new Rect(Screen.width - 145, Screen.height / 2 - leaderboard.height / 2 + 30 + i*spacer, 100, 35), systemNames[cli.universeNum-1], coStyle2);
+
 			allScores[i-1] = score.getScore();
 			allNames[i-1] = score.playerNames[i];
         }
@@ -531,7 +540,18 @@ public class HudOn : MonoBehaviour {
 			showHelp = false;
 		}
 	}
-	
+
+
+        IEnumerator FadeOutAfterTime()
+        {
+            yield return new WaitForSeconds(3);
+            while (color.a < 1)
+            {
+                color.a += Time.deltaTime;
+                yield return new WaitForSeconds(1/15);
+            }
+        }
+ 
 	// Vortex logic
 	IEnumerator VortexCountdown()
 	{
